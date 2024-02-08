@@ -1,3 +1,7 @@
+### copy and paste each packages ###
+
+# 1- Django packages
+
 pip install django
 pip install djangorestframework
 pip install django-cors-headers
@@ -6,13 +10,19 @@ pip install django-cors-headers
 pip install psycopg2
 #python -m pip install psycopg2
 
-
-
 #python -m django startproject project_backend
 
-#python manage.py startapp wareQ
+#python manage.py startapp warQ
  
+ # 2- React packeges 
 
+npm install react-scripts --save #for react workframe
+
+# 2.1- React packeges if the upper one didn't work
+
+#npm cache clean --force
+#npm rebuild
+#npm install
 
 
 
