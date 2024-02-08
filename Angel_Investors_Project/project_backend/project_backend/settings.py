@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'project_backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'wareQ',
+        'NAME': 'warQ',
         'USER': 'admin',
         'PASSWORD': 'asd123',
     }
