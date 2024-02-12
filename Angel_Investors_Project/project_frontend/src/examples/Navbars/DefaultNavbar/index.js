@@ -92,27 +92,56 @@ function DefaultNavbar({ transparent, light, action }) {
         })}
       >
         <SoftBox component={Link} to="/" py={transparent ? 1.5 : 0.75} lineHeight={1}>
-          <SoftTypography variant="button" fontWeight="bold" color={light ? "white" : "dark"}>
-            Soft UI Dashboard
+          <SoftTypography
+            variant="Body 1"
+            fontWeight="bold"
+            fontSize="large"
+            color={light ? "white" : "info"}
+          >
+            warQ
+          </SoftTypography>
+          <SoftTypography
+            variant="Body 1"
+            fontWeight="light"
+            fontSize="small"
+            style={{ marginLeft: "10px" }}
+            sx={{
+              color: ({ palette: { white, secondary } }) => (light ? white.main : secondary.main),
+              verticalAlign: "middle",
+            }}
+          >
+            Angel Investors platform
           </SoftTypography>
         </SoftBox>
+
         <SoftBox color="inherit" display={{ xs: "none", lg: "flex" }} m={0} p={0}>
-          <DefaultNavbarLink icon="donut_large" name="dashboard" route="/dashboard" light={light} />
-          <DefaultNavbarLink icon="person" name="profile" route="/profile" light={light} />
-          <DefaultNavbarLink
-            icon="account_circle"
-            name="sign up"
-            route="/authentication/sign-up"
-            light={light}
-          />
+          {/* <DefaultNavbarLink icon="donut_large" name="dashboard" route="/dashboard" light={light} />
+          <DefaultNavbarLink icon="person" name="profile" route="/profile" light={light} /> */}
           <DefaultNavbarLink
             icon="key"
             name="sign in"
             route="/authentication/sign-in"
             light={light}
           />
+          {/*           <DefaultNavbarLink
+            icon="account_circle"
+            name="sign up"
+            route="/authentication/sign-up"
+            light={light}
+          /> */}
+          <SoftBox
+            display={{ xs: "none", lg: "inline-block" }}
+            component={Link}
+            to="/authentication/sign-up"
+          >
+            <SoftButton variant="gradient" color="info" size="medium" circular>
+              sign up&nbsp;
+              <Icon>account_circle</Icon>
+            </SoftButton>
+          </SoftBox>
         </SoftBox>
-        {action &&
+
+        {/* {action &&
           (action.type === "internal" ? (
             <SoftBox display={{ xs: "none", lg: "inline-block" }}>
               <SoftButton
@@ -123,7 +152,7 @@ function DefaultNavbar({ transparent, light, action }) {
                 size="small"
                 circular
               >
-                {action.label}
+               {action.label} 
               </SoftButton>
             </SoftBox>
           ) : (
@@ -141,7 +170,7 @@ function DefaultNavbar({ transparent, light, action }) {
                 {action.label}
               </SoftButton>
             </SoftBox>
-          ))}
+          ))} */}
         <SoftBox
           display={{ xs: "inline-block", lg: "none" }}
           lineHeight={0}
