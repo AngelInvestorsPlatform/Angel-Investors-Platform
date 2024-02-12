@@ -36,7 +36,8 @@ Coded by www.creative-tim.com
 */
 
 // Soft UI Dashboard React layouts
-import Dashboard from "layouts/dashboard";
+import Dashboard from "layouts/landing";
+// import Dashboard from "layouts/dashboard";
 import Tables from "layouts/tables";
 import Billing from "layouts/billing";
 import VirtualReality from "layouts/virtual-reality";
@@ -61,6 +62,15 @@ const routes = [
     name: "Dashboard",
     key: "dashboard",
     route: "/dashboard",
+    icon: <Shop size="12px" />,
+    component: <Dashboard />,
+    noCollapse: true,
+  },
+  {
+    type: "collapse",
+    name: "Landing",
+    key: "landing",
+    route: "/landing",
     icon: <Shop size="12px" />,
     component: <Dashboard />,
     noCollapse: true,
