@@ -39,7 +39,7 @@ function BuildByDevelopers() {
                 </SoftTypography>
               </SoftBox>
               <SoftTypography variant="h5" fontWeight="bold" gutterBottom>
-                Warq
+                warQ
               </SoftTypography>
               <SoftBox mb={6}>
                 <SoftTypography variant="body2" color="text">
