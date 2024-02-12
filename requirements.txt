@@ -7,14 +7,22 @@ pip install djangorestframework
 pip install django-cors-headers
 #python -m pip install django-cors-headers
 
+pip install Pillow # Python Imaging Library
+
+
+#python -m django startproject project_backend
+#Commands To Start new applications in Django
+#python manage.py startapp warQ
+
+
+# 2- database packages
+
 pip install psycopg2
 #python -m pip install psycopg2
 
-#python -m django startproject project_backend
 
-#python manage.py startapp warQ
- 
- # 2- React packeges 
+
+ # 3- React packeges 
 
 npm install react-scripts --save #for react workframe
 

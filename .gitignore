@@ -1,3 +1,4 @@
 # compiled bytecode files
 .pyc
 \__pycache__
+\migrations
