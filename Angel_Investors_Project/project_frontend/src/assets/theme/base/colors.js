@@ -21,7 +21,7 @@ Coded by www.creative-tim.com
 
 const colors = {
   background: {
-    default: "#f8f9fa",
+    default: "#fdfcf8",
   },
 
   text: {
@@ -55,8 +55,8 @@ const colors = {
   },
 
   info: {
-    main: "#17c1e8",
-    focus: "#3acaeb",
+    main: "#363062",
+    focus: "#B67AA6",
   },
 
   success: {
@@ -108,8 +108,8 @@ const colors = {
     },
 
     info: {
-      main: "#2152ff",
-      state: "#21d4fd",
+      main: "#363062",
+      state: "#B67AA6",
     },
 
     success: {
