@@ -44,7 +44,7 @@ function BasicLayout({ title, description, image, children }) {
       />
       <SoftBox
         width="calc(100% - 2rem)"
-        minHeight="50vh"
+        minHeight="30vh"
         borderRadius="lg"
         mx={2}
         my={2}
@@ -54,8 +54,8 @@ function BasicLayout({ title, description, image, children }) {
           backgroundImage: ({ functions: { linearGradient, rgba }, palette: { gradients } }) =>
             image &&
             `${linearGradient(
-              rgba(gradients.dark.main, 0.6),
-              rgba(gradients.dark.state, 0.6)
+              rgba(gradients.dark.main, 0.2),
+              rgba(gradients.dark.state, 0.5)
             )}, url(${image})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
@@ -63,23 +63,24 @@ function BasicLayout({ title, description, image, children }) {
         }}
       >
         <Grid container spacing={3} justifyContent="center" sx={{ textAlign: "center" }}>
-          <Grid item xs={10} lg={4}>
-            <SoftBox mt={6} mb={1}>
-              <SoftTypography variant="h1" color="white" fontWeight="bold">
+          <Grid item xs={10} lg={10} Align="left" >
+            <SoftBox mt={15} mb={1}>
+              <SoftTypography variant="h1" color="info" fontWeight="bold" Align="left"  textGradient>
                 {title}
               </SoftTypography>
             </SoftBox>
             <SoftBox mb={2}>
-              <SoftTypography variant="body2" color="white" fontWeight="regular">
+              <SoftTypography variant="h3" color="white" fontWeight="regular">
                 {description}
               </SoftTypography>
             </SoftBox>
           </Grid>
         </Grid>
       </SoftBox>
-      <SoftBox mt={{ xs: -26, lg: -24 }} px={1} width="calc(100% - 2rem)" mx="auto">
+
+      <SoftBox mt={{ xs: 5, lg: 5 }} px={1} width="calc(100% - 2rem)" mx="auto">
         <Grid container spacing={1} justifyContent="center">
-          <Grid item xs={11} sm={9} md={5} lg={4} xl={3}>
+          <Grid item xs={11} sm={10} md={6} lg={8} xl={6}>
             {children}
           </Grid>
         </Grid>

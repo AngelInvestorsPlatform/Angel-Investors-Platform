@@ -79,7 +79,7 @@ function BasicLayout({ title, description, image, children }) {
       </SoftBox>
       <SoftBox mt={{ xs: -26, lg: -24 }} px={1} width="calc(100% - 2rem)" mx="auto">
         <Grid container spacing={1} justifyContent="center">
-          <Grid item xs={11} sm={9} md={5} lg={4} xl={3}>
+          <Grid item xs={11} sm={9} md={5} lg={4} xl={4}>
             {children}
           </Grid>
         </Grid>
