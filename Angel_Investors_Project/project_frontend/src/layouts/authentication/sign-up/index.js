@@ -38,6 +38,8 @@ import curved6 from "assets/images/curved-images/curved14.jpg";
 
 function SignUp() {
   const [agreement, setAgremment] = useState(true);
+  const googleUrl = '/auth/google_oauth2/with_callback?callback=/venture/user_management/continue_after_oauth%3Fprovider%3Dgoogle_oauth2';
+
 
   const handleSetAgremment = () => setAgremment(!agreement);
 
@@ -59,16 +61,41 @@ function SignUp() {
         <Separator /> */}
         <SoftBox pt={2} pb={3} px={3}>
           <SoftBox component="form" role="form">
-            <SoftBox mb={2}>
+            {/*<SoftBox mb={2}>
               <SoftInput placeholder="Name" />
-            </SoftBox>
+      </SoftBox>*/}
             <SoftBox mb={2}>
               <SoftInput type="email" placeholder="Email" />
             </SoftBox>
             <SoftBox mb={2}>
               <SoftInput type="password" placeholder="Password" />
             </SoftBox>
-            <SoftBox display="flex" alignItems="center">
+            {/*<SoftBox mb={2}>
+              <SoftInput type="password" placeholder="repat the Password" />
+    </SoftBox>*/}
+
+             <SoftBox mb={2} display="flex" alignItems="center">
+             <SoftTypography
+                variant="button"
+                fontWeight="regular"
+                onClick={googleUrl}
+                sx={{ cursor: "poiner", userSelect: "none" }}
+              >
+                &nbsp;&nbsp;You can also sign in with&nbsp;
+                </SoftTypography>
+              <SoftTypography
+                component="a"
+                href="googleUrl"
+                variant="button"
+                fontWeight="bold"
+                textGradient
+              >
+                Google
+              </SoftTypography>
+            </SoftBox>
+
+
+            <SoftBox  display="flex" alignItems="center">
               <Checkbox checked={agreement} onChange={handleSetAgremment} />
               <SoftTypography
                 variant="button"
@@ -76,7 +103,7 @@ function SignUp() {
                 onClick={handleSetAgremment}
                 sx={{ cursor: "poiner", userSelect: "none" }}
               >
-                &nbsp;&nbsp;I agree the&nbsp;
+                &nbsp;&nbsp;I agree on the&nbsp;
               </SoftTypography>
               <SoftTypography
                 component="a"
