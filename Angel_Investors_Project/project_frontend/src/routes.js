@@ -36,7 +36,7 @@ Coded by www.creative-tim.com
 */
 
 // Soft UI Dashboard React layouts
-import Dashboard from "layouts/landing";
+import Landing from "layouts/landing";
 // import Dashboard from "layouts/dashboard";
 import Tables from "layouts/tables";
 import Billing from "layouts/billing";
@@ -45,6 +45,8 @@ import RTL from "layouts/rtl";
 import Profile from "layouts/profile";
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
+import Investor_form from "layouts/registers_forms/investor_form";
+import Startups_form from  "layouts/registers_forms/startups_form"
 
 // Soft UI Dashboard React icons
 import Shop from "examples/Icons/Shop";
@@ -57,7 +59,7 @@ import CreditCard from "examples/Icons/CreditCard";
 import Cube from "examples/Icons/Cube";
 
 const routes = [
-  {
+  /*{
     type: "collapse",
     name: "Dashboard",
     key: "dashboard",
@@ -65,14 +67,14 @@ const routes = [
     icon: <Shop size="12px" />,
     component: <Dashboard />,
     noCollapse: true,
-  },
+  },*/
   {
     type: "collapse",
     name: "Landing",
     key: "landing",
     route: "/landing",
     icon: <Shop size="12px" />,
-    component: <Dashboard />,
+    component: <Landing />,
     noCollapse: true,
   },
   {
@@ -139,6 +141,24 @@ const routes = [
     component: <SignUp />,
     noCollapse: true,
   },
+  {
+    type: "collapse",
+    name: "Investor_form",
+    key: "investor_form",
+    route: "/registers_forms/investor_form",
+    icon: <Document size="12px" />,
+    component: <Investor_form />,
+    noCollapse: true,
+  },
+  {
+    type: "collapse",
+    name: "Startups_form ",
+    key: "startups_form ",
+    route: "/registers_forms/startups_form ",
+    icon: <SpaceShip size="12px" />,
+    component: <Startups_form />,
+    noCollapse: true,
+  }
 ];
 
 export default routes;

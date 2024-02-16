@@ -28,7 +28,7 @@ import SoftInput from "components/SoftInput";
 import SoftButton from "components/SoftButton";
 
 // Authentication layout components
-import CoverLayout from "layouts/registers-forms/components/CoverLayout";
+import CoverLayout from "layouts/registers_forms/components/CoverLayout";
 
 // Images
 import curved9 from "assets/images/curved-images/white-curved.jpeg";
