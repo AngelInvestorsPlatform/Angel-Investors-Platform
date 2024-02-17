@@ -1,11 +1,11 @@
-import * as React from 'react';
+import * as React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
 // import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
+import CardContent from "@mui/material/CardContent";
 // import CardCover from '@mui/material/CardCover';
 import SoftButton from "components/SoftButton";
 
@@ -17,142 +17,83 @@ import SoftTypography from "components/SoftTypography";
 import SelectionLayout from "../components/SelectionLayout";
 // import curved6 from "assets/images/curved-images/curved14.jpg";
 
-
 function choose() {
-    const [agreement, setAgremment] = useState(true);
+  const [agreement, setAgremment] = useState(true);
 
-    const handleSetAgremment = () => setAgremment(!agreement);
+  const handleSetAgremment = () => setAgremment(!agreement);
 
-    return ( <
-        SelectionLayout
+  return (
+    <SelectionLayout
+      title=" Are you new to the platform? "
+      description="Lets work together to help you get the most out of your experience.!"
 
-        title = " Are you new to the platform? "
-        description = "Lets work together to help you get the most out of your experience.!"
-
-        // image={curved6}
-
+      // image={curved6}
+    >
+      <Box component="ul" sx={{ display: "flex", gap: 2, flexWrap: "wrap", p: 0, m: 0 }}>
+        <Card
+          component="li"
+          sx={{ maxWidth: 400, flexGrow: 1 }}
+          style={{ backgroundColor: "#633974" }}
         >
-
-        <
-        Box component = "ul"
-        sx = {
-            { display: 'flex', gap: 2, flexWrap: 'wrap', p: 0, m: 0 } }
-
-        >
-
-        <
-        Card component = "li"
-        sx = {
-            { maxWidth: 400, flexGrow: 1 } }
-        style = {
-            { backgroundColor: "#633974" } } >
-        <
-        SoftBox mb = { 2 } > < /SoftBox> <
-        CardContent >
-        <
-        SoftBox mb = { 2 }
-        ml = { 0.5 } >
-
-        <
-        SoftTypography variant = "h3"
-        component = "div"
-        color = "white" >
-        Start as Startup <
-        /SoftTypography> <
-        /SoftBox> <
-        SoftTypography variant = "body2"
-        sx = {
-            { fontSize: 20 } }
-        color = "white" >
-        Log in now to discover exclusive opportunities,
-        connect with investors,
-        and take your startup journey to the next level.
-
-        <
-        /SoftTypography>
-
-        <
-        SoftBox mb = { 6 } >
-        <
-        /SoftBox>
-
-        <
-        SoftTypography level = "body-lg"
-        fontWeight = "lg"
-        color = "info" >
-        <
-        SoftButton
-        //  variant = "gradient"
-        color = "white"
-        style = {
-            { width: '50%' } }
-        circular component = { Link }
-        to = "registers_forms/startups_form" > { /* here put start up form */ }
-
-        Get Started
-
-        <
-        Icon sx = {
-            { fontWeight: "bold" } } > arrow_forward < /Icon> 
-
-        <
-        /SoftButton>
-
-        <
-        /SoftTypography> <
-        /CardContent>  <
-        /Card>  <
-        Card component = "li"
-        sx = {
-            { maxWidth: 400, flexGrow: 1 } } >
-        <
-        SoftBox mb = { 2 } > < /SoftBox> <
-        CardContent >
-        <
-        SoftBox mb = { 2 }
-        ml = { 0.5 } >
-        <
-        SoftTypography variant = "h3"
-        component = "div"
-        color = "info"
-        textGradient >
-        Start as Investor <
-        /SoftTypography> <
-        /SoftBox>  <
-        SoftTypography variant = "body2"
-        sx = {
-            { fontSize: 20 } }
-        color = "text.secondary" >
-        Join our club, meet other investors and start looking
-        for exciting startups to invest in
-        <
-        /SoftTypography>
-
-        <
-        SoftBox mb = { 10 } >
-        <
-        /SoftBox>
-
-
-        <
-        SoftButton variant = "gradient"
-        color = "info"
-        style = {
-            { width: '50%' } }
-        circular component = { Link }
-        to = "registers_forms/investor_form" > { /* here put link path to investor form */ }
-        Get Started < Icon sx = {
-            { fontWeight: "bold" } } > arrow_forward < /Icon>  </SoftButton >
-
-
-        <
-        /CardContent>  <
-        /Card>  <
-        /Box>  <
-        SoftBox mb = { 20 } >
-        <
-        /SoftBox>  <
-        /SelectionLayout>
-    );
+          <SoftBox mb={2}> </SoftBox>{" "}
+          <CardContent>
+            <SoftBox mb={2} ml={0.5}>
+              <SoftTypography variant="h3" component="div" color="white">
+                Start as Startup{" "}
+              </SoftTypography>{" "}
+            </SoftBox>{" "}
+            <SoftTypography variant="body2" sx={{ fontSize: 20 }} color="white">
+              Log in now to discover exclusive opportunities, connect with investors, and take your
+              startup journey to the next level.
+            </SoftTypography>
+            <SoftBox mb={6}></SoftBox>
+            <SoftTypography level="body-lg" fontWeight="lg" color="info">
+              <SoftButton
+                //  variant = "gradient"
+                color="white"
+                style={{ width: "50%" }}
+                circular
+                component={Link}
+                to="registers_forms/startups_form"
+              >
+                {" "}
+                {/* here put start up form */}
+                Get Started
+                <Icon sx={{ fontWeight: "bold" }}> arrow_forward </Icon>
+              </SoftButton>
+            </SoftTypography>{" "}
+          </CardContent>{" "}
+        </Card>{" "}
+        <Card component="li" sx={{ maxWidth: 400, flexGrow: 1 }}>
+          <SoftBox mb={2}> </SoftBox>{" "}
+          <CardContent>
+            <SoftBox mb={2} ml={0.5}>
+              <SoftTypography variant="h3" component="div" color="info" textGradient>
+                Start as Investor{" "}
+              </SoftTypography>{" "}
+            </SoftBox>{" "}
+            <SoftTypography variant="body2" sx={{ fontSize: 20 }} color="text.secondary">
+              Join our club, meet other investors and start looking for exciting startups to invest
+              in
+            </SoftTypography>
+            <SoftBox mb={10}></SoftBox>
+            <SoftButton
+              variant="gradient"
+              color="info"
+              style={{ width: "50%" }}
+              circular
+              component={Link}
+              to="registers_forms/investor_form"
+            >
+              {" "}
+              {/* here put link path to investor form */}
+              Get Started <Icon sx={{ fontWeight: "bold" }}> arrow_forward </Icon>{" "}
+            </SoftButton>
+          </CardContent>{" "}
+        </Card>{" "}
+      </Box>{" "}
+      <SoftBox mb={20}></SoftBox>{" "}
+    </SelectionLayout>
+  );
 }
 export default choose;
