@@ -164,7 +164,7 @@ const routes = [
         type: "collapse",
         name: "Startups_form ",
         key: "startups_form ",
-        route: "/registers_forms/startups_form ",
+        route: "/registers_forms/startups_form",
         icon: < SpaceShip size = "12px" / > ,
         component: < Startups_form / > ,
         noCollapse: true,
