@@ -20,37 +20,66 @@ import Grid from "@mui/material/Grid";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
-import PinterestIcon from "@mui/icons-material/Pinterest";
+//import PinterestIcon from "@mui/icons-material/Pinterest";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
 // Soft UI Dashboard React components
 import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
+import logo from "assets/images/logo-ct.png";
 
 function Footer() {
   return (
-    <SoftBox component="footer" py={6}>
+    <SoftBox component="footer" py={10}>
+      <Grid item xs={10} lg={8}>
+        <SoftBox display="flex" justifyContent="center" flexWrap="wrap" mb={3}>
+          <SoftBox justifyContent="center" component="img" src={logo} alt="warQ" width="25%" />
+        </SoftBox>
+      </Grid>
+
+      <Grid container justifyContent="center">
+        <Grid item xs={6} lg={7}>
+          <SoftBox display="flex" sx={{ textAlign: "center" }} flexWrap="wrap" mb={2}>
+            <SoftTypography component="a" variant="body2" color="black" justifyContent="center">
+              warQ in an Angel investor platform that simplifies communication and financing between
+              investors and startups. The platform will enable startups to showcase their innovative
+              ideas and facilitate direct communication and collaboration with interested investors.
+            </SoftTypography>
+          </SoftBox>
+        </Grid>
+      </Grid>
+
       <Grid container justifyContent="center">
         <Grid item xs={10} lg={8}>
           <SoftBox display="flex" justifyContent="center" flexWrap="wrap" mb={3}>
             <SoftBox mr={{ xs: 2, lg: 3, xl: 6 }}>
-              <SoftTypography component="a" href="#" variant="body2" color="secondary">
-                Company
+              <SoftTypography
+                component="a"
+                href="/authentication/Selection"
+                variant="body2"
+                color="secondary"
+              >
+                Get started
               </SoftTypography>
             </SoftBox>
             <SoftBox mr={{ xs: 2, lg: 3, xl: 6 }}>
-              <SoftTypography component="a" href="#" variant="body2" color="secondary">
+              <SoftTypography component="a" href="/landing" variant="body2" color="secondary">
+                Support
+              </SoftTypography>
+            </SoftBox>
+            <SoftBox mr={{ xs: 2, lg: 3, xl: 6 }}>
+              <SoftTypography component="a" href="/landing" variant="body2" color="secondary">
                 About Us
               </SoftTypography>
             </SoftBox>
             <SoftBox mr={{ xs: 0, lg: 3, xl: 6 }}>
               <SoftTypography component="a" href="#" variant="body2" color="secondary">
-                Team
+                Privacy Policy
               </SoftTypography>
             </SoftBox>
             <SoftBox mr={{ xs: 2, lg: 3, xl: 6 }}>
               <SoftTypography component="a" href="#" variant="body2" color="secondary">
-                Product
+                Terms & Conditions
               </SoftTypography>
             </SoftBox>
             <SoftBox mr={{ xs: 2, lg: 3, xl: 6 }}>
@@ -58,36 +87,29 @@ function Footer() {
                 Blog
               </SoftTypography>
             </SoftBox>
-            <SoftBox>
-              <SoftTypography component="a" href="#" variant="body2" color="secondary">
-                Pricing
-              </SoftTypography>
-            </SoftBox>
           </SoftBox>
         </Grid>
+      </Grid>
+
+      <Grid container justifyContent="center">
         <Grid item xs={12} lg={8}>
           <SoftBox display="flex" justifyContent="center" mt={1} mb={3}>
             <SoftBox mr={3} color="secondary">
-              <FacebookIcon fontSize="small" />
+              <FacebookIcon fontSize="large" />
             </SoftBox>
             <SoftBox mr={3} color="secondary">
-              <TwitterIcon fontSize="small" />
+              <TwitterIcon fontSize="large" />
             </SoftBox>
             <SoftBox mr={3} color="secondary">
-              <InstagramIcon fontSize="small" />
-            </SoftBox>
-            <SoftBox mr={3} color="secondary">
-              <PinterestIcon fontSize="small" />
+              <InstagramIcon fontSize="large" />
             </SoftBox>
             <SoftBox color="secondary">
-              <LinkedInIcon fontSize="small" />
+              <LinkedInIcon fontSize="large" />
             </SoftBox>
           </SoftBox>
         </Grid>
         <Grid item xs={12} lg={8} sx={{ textAlign: "center" }}>
-          <SoftTypography variant="body2" color="secondary">
-           {/*  Copyright &copy; 2021 Soft by Creative Tim. */}
-          </SoftTypography>
+          <SoftTypography variant="body2" color="secondary"></SoftTypography>
         </Grid>
       </Grid>
     </SoftBox>
