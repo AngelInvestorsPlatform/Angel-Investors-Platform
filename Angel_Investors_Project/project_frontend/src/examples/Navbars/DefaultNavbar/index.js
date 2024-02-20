@@ -18,6 +18,12 @@ import { useState, useEffect } from "react";
 // react-router components
 import { Link } from "react-router-dom";
 
+//for API
+import axios from "axios";
+
+//for user auth global context
+import { useAuthUser } from "context/authContext";
+
 // prop-types is a library for typechecking of props.
 import PropTypes from "prop-types";
 
@@ -36,6 +42,7 @@ import DefaultNavbarMobile from "examples/Navbars/DefaultNavbar/DefaultNavbarMob
 
 // Soft UI Dashboard React base styles
 import breakpoints from "assets/theme/base/breakpoints";
+import SoftAlert from "components/SoftAlert";
 
 function DefaultNavbar({ transparent, light, action }) {
   const [mobileNavbar, setMobileNavbar] = useState(false);
@@ -43,6 +50,10 @@ function DefaultNavbar({ transparent, light, action }) {
 
   const openMobileNavbar = ({ currentTarget }) => setMobileNavbar(currentTarget.parentNode);
   const closeMobileNavbar = () => setMobileNavbar(false);
+
+  const { userData, setUserData, isLoggedIn, setIsLoggedIn } = useAuthUser();
+  const [logError, setLogError] = useState("");
+  const [logConfirm, setLogConfirm] = useState("");
 
   useEffect(() => {
     // A function that sets the display state for the DefaultNavbarMobile.
@@ -68,6 +79,23 @@ function DefaultNavbar({ transparent, light, action }) {
     // Remove event listener on cleanup
     return () => window.removeEventListener("resize", displayMobileNavbar);
   }, []);
+
+  const handleLogout = async () => {
+    try {
+      const logoutResponse = await axios.post(`${process.env.REACT_APP_DJANGO_API}auth/logout`, {});
+
+      if (logoutResponse.status === 200) {
+        setLogConfirm("successfully logged Out");
+
+        setUserData(null); // Clear user data
+        setIsLoggedIn(false); // Set login status to false
+        
+      } else setLogError("Error : not logged out");
+    } catch (errorX) {
+      // Handle error, display appropriate message
+      setLogError(" Logout Failed: " + errorX.message);
+    }
+  };
 
   return (
     <Container>
@@ -114,32 +142,74 @@ function DefaultNavbar({ transparent, light, action }) {
           </SoftTypography>
         </SoftBox>
 
-        <SoftBox color="inherit" display={{ xs: "none", lg: "flex" }} m={0} p={0}>
-          {/* <DefaultNavbarLink icon="donut_large" name="dashboard" route="/dashboard" light={light} />
+        {isLoggedIn ? (
+          <>
+            <SoftBox color="inherit" display={{ xs: "none", lg: "flex" }} m={0} p={0}>
+              <DefaultNavbarLink
+                icon="donut_large"
+                name="dashboard"
+                route="/dashboard"
+                light={light}
+              />
+              <DefaultNavbarLink icon="person" name="profile" route="/profile" light={light} />
+            </SoftBox>
+            <SoftBox display={{ xs: "none", lg: "inline-block" }}>
+              <SoftTypography color={light} variant="button" fontWeight="regular" m={3}>
+                Welcome, {userData.username}!
+              </SoftTypography>
+              <SoftButton
+                variant="gradient"
+                color="info"
+                size="medium"
+                circular
+                onClick={handleLogout}
+              >
+                Log out &nbsp;
+                <Icon> logout</Icon>
+              </SoftButton>
+              {/*if logout Success*/}
+              {logConfirm && (
+                <SoftAlert fontSize="small" color="success" mt={2} dismissible>
+                  {logConfirm}
+                </SoftAlert>
+              )}
+
+              {/*if logout Fail*/}
+              {logError && (
+                <SoftAlert fontSize="small" color="error" mt={2} dismissible>
+                  {logError}
+                </SoftAlert>
+              )}
+            </SoftBox>
+          </>
+        ) : (
+          <SoftBox color="inherit" display={{ xs: "none", lg: "flex" }} m={0} p={0}>
+            {/* <DefaultNavbarLink icon="donut_large" name="dashboard" route="/dashboard" light={light} />
           <DefaultNavbarLink icon="person" name="profile" route="/profile" light={light} /> */}
-          <DefaultNavbarLink
-            icon="key"
-            name="sign in"
-            route="/authentication/sign-in"
-            light={light}
-          />
-          {/*           <DefaultNavbarLink
+            <DefaultNavbarLink
+              icon="key"
+              name="sign in"
+              route="/authentication/sign-in"
+              light={light}
+            />
+            {/*           <DefaultNavbarLink
             icon="account_circle"
             name="sign up"
             route="/authentication/sign-up"
             light={light}
           /> */}
-          <SoftBox
-            display={{ xs: "none", lg: "inline-block" }}
-            component={Link}
-            to="/authentication/sign-up"
-          >
-            <SoftButton variant="gradient" color="info" size="medium" circular>
-              sign up&nbsp;
-              <Icon>account_circle</Icon>
-            </SoftButton>
+            <SoftBox
+              display={{ xs: "none", lg: "inline-block" }}
+              component={Link}
+              to="/authentication/sign-up"
+            >
+              <SoftButton variant="gradient" color="info" size="medium" circular>
+                sign up&nbsp;
+                <Icon>account_circle</Icon>
+              </SoftButton>
+            </SoftBox>
           </SoftBox>
-        </SoftBox>
+        )}
 
         {/* {action &&
           (action.type === "internal" ? (

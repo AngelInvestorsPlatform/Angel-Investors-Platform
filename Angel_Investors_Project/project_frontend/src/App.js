@@ -44,6 +44,8 @@ import routes from "routes";
 
 // Soft UI Dashboard React contexts
 import { useSoftUIController, setMiniSidenav, setOpenConfigurator } from "context";
+//users auth contexts 
+import { AuthProvider } from "context/authContext";
 
 // Images
 import brand from "assets/images/logo-ct.png";
@@ -135,6 +137,7 @@ export default function App() {
   return direction === "rtl" ? (
     <CacheProvider value={rtlCache}>
       <ThemeProvider theme={themeRTL}>
+        <AuthProvider>
         <CssBaseline />
         {layout === "landing" && (
           <>
@@ -155,10 +158,12 @@ export default function App() {
           {getRoutes(routes)}
           <Route path="*" element={<Navigate to="/landing" />} />
         </Routes>
+        </AuthProvider>
       </ThemeProvider>
     </CacheProvider>
   ) : (
     <ThemeProvider theme={theme}>
+      <AuthProvider>
       <CssBaseline />
       {layout === "landing" && (
         <>
@@ -179,6 +184,7 @@ export default function App() {
         {getRoutes(routes)}
         <Route path="*" element={<Navigate to="/landing" />} />
       </Routes>
+      </AuthProvider>
     </ThemeProvider>
   );
 }

@@ -32,5 +32,6 @@ npm install react-scripts --save #for react workframe
 #npm rebuild
 #npm install
 
+#npm install axios
 
 

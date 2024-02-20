@@ -16,7 +16,17 @@ Coded by www.creative-tim.com
 import { useState } from "react";
 
 // react-router-dom components
+import { Navigate  } from 'react-router-dom';
 import { Link } from "react-router-dom";
+
+//axios package for linking with API URLS
+import axios from "axios";
+
+
+//for user auth global context
+import { useAuthUser } from "context/authContext";
+
+import PropTypes from "prop-types";
 
 // @mui material components
 import Card from "@mui/material/Card";
@@ -27,6 +37,7 @@ import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
 import SoftInput from "components/SoftInput";
 import SoftButton from "components/SoftButton";
+import SoftAlert from "components/SoftAlert";
 
 // Authentication layout components
 import BasicLayout from "layouts/authentication/components/BasicLayout";
@@ -37,11 +48,131 @@ import Separator from "layouts/authentication/components/Separator";
 import curved6 from "assets/images/curved-images/curved14.jpg";
 
 function SignUp() {
-  const [agreement, setAgremment] = useState(true);
-  const googleUrl = '/auth/google_oauth2/with_callback?callback=/venture/user_management/continue_after_oauth%3Fprovider%3Dgoogle_oauth2';
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordConfirmation, setPasswordConfirmation] = useState("");
+  const [agreement, setAgreement] = useState(false);
+  const [error, setError] = useState("");
+  const [registerError, setRegError] = useState("");
+  const [registerConfirm, setRegConfirm] = useState("");
+  const [redirectToSelect, setRedirectToSelect] = useState(false);
+  const { userData, setUserData, isLoggedIn, setIsLoggedIn } = useAuthUser();
 
+  if (redirectToSelect) {
+    return <Navigate to="/authentication/Selection" />;
+  }
 
-  const handleSetAgremment = () => setAgremment(!agreement);
+  //The following codes to handle input validity using JavaScript
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+  };
+
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+  };
+
+  const handlePasswordConfirmationChange = (event) => {
+    setPasswordConfirmation(event.target.value);
+  };
+
+  const handleAgreementChange = () => {
+    setAgreement(!agreement);
+  };
+
+  //on submit
+  const handleSignUp = async () => {
+    try {
+      const DJANGO_API = process.env.REACT_APP_DJANGO_API;
+  
+      // Verify if email is correct
+      if (!validateEmail(email)) {
+        setError("Please enter a valid email address.");
+        return;
+      }
+  
+      // Verify if password meets requirements
+      if (!validatePassword(password)) {
+        setError(
+          "Password must contain at least 8 characters, including uppercase, lowercase, and numbers."
+        );
+        return;
+      }
+  
+      // Verify if password confirmation matches password
+      if (password !== passwordConfirmation) {
+        setError("Passwords do not match.");
+        return;
+      }
+  
+      // Verify if terms agreement is checked
+      if (!agreement) {
+        setError("Must agree to the terms and conditions to start.");
+        return;
+      }
+  
+      // If all conditions are met, proceed with registration
+      const response = await axios.post(`${DJANGO_API}auth/register`, {
+        email: email,
+        username: username, // Setting username same as email
+        password: password,
+      });
+  
+      // If registration is successful, set user status to true
+      if (response.status === 201) {
+        setRegConfirm("successfully registered");
+  
+        // After registration, login with the same credentials
+        const loginResponse = await axios.post(`${DJANGO_API}auth/login`, {
+          email: email,
+          username: username, // Setting username same as email
+          password: password,
+        });
+  
+        if (loginResponse.status === 200) {
+          // If login is successful, set user data and LoggedIn
+          setUserData({ email, username });
+          setIsLoggedIn(true);
+  
+          // Redirect to Select
+          setRedirectToSelect(true);
+        } else {
+          let errorMessage = "Login failed. Please try again later.";
+  
+          // Check if the response contains detailed error messages
+          if (loginResponse.data && loginResponse.data.username) {
+            // Extract the first error message for username field
+            errorMessage = loginResponse.data.username[0];
+          }
+  
+          setRegError(errorMessage);
+        }
+      } else {
+        let errorMessage = "Registration failed. Please try again later.";
+  
+        // Check if the response contains detailed error messages
+        if (response.data && response.data.username) {
+          // Extract the first error message for username field
+          errorMessage = response.data.username[0];
+        }
+  
+        setRegError(errorMessage);
+      }
+    } catch (errorX) {
+      setRegError("Failed: " + errorX.message);
+    }
+  };
+  
+
+  const validateEmail = (email) => {
+    const re = /\S+@\S+\.\S+/;
+    return re.test(email);
+  };
+
+  const validatePassword = (password) => {
+    const re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+    return re.test(password);
+  };
 
   return (
     <BasicLayout
@@ -49,40 +180,84 @@ function SignUp() {
       description="Join our community today and start exploring!"
       image={curved6}
     >
+      {/*if register Success*/}
+      {registerConfirm && (
+        <SoftAlert fontSize="small" color="success" mt={2} dismissible>
+          {registerConfirm}
+        </SoftAlert>
+      )}
+
+      {/*if register Fail*/}
+      {registerError && (
+        <SoftAlert fontSize="small" color="error" mt={2} dismissible>
+          {registerError}
+        </SoftAlert>
+      )}
       <Card>
         <SoftBox p={3} mb={1} mt={1} textAlign="center">
           <SoftTypography variant="h5" fontWeight="medium">
             Register Now
           </SoftTypography>
         </SoftBox>
-{/*         <SoftBox mb={2}>
+        {/*         <SoftBox mb={2}>
           <Socials />
         </SoftBox>
         <Separator /> */}
         <SoftBox pt={2} pb={3} px={3}>
           <SoftBox component="form" role="form">
-            {/*<SoftBox mb={2}>
-              <SoftInput placeholder="Name" />
-      </SoftBox>*/}
             <SoftBox mb={2}>
-              <SoftInput type="email" placeholder="Email" />
+              <SoftInput
+                type="text"
+                placeholder="Username"
+                name ="username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
             </SoftBox>
             <SoftBox mb={2}>
-              <SoftInput type="password" placeholder="Password" />
+              <SoftInput
+                type="email"
+                placeholder="Email"
+                name="email"
+                value={email}
+                onChange={handleEmailChange}
+                success={email && validateEmail(email)}
+                error={email && !validateEmail(email)}
+              />
             </SoftBox>
-            {/*<SoftBox mb={2}>
-              <SoftInput type="password" placeholder="repat the Password" />
-    </SoftBox>*/}
 
-             <SoftBox mb={2} display="flex" alignItems="center">
-             <SoftTypography
+            <SoftBox mb={2}>
+              <SoftInput
+                type="password"
+                placeholder="Password"
+                name="password"
+                value={password}
+                onChange={handlePasswordChange}
+                success={password && validatePassword(password)}
+                error={password && !validatePassword(password)}
+              />
+            </SoftBox>
+            <SoftBox mb={2}>
+              <SoftInput
+                type="password"
+                placeholder="Re-type Password"
+                name="passwordConfirmation"
+                value={passwordConfirmation}
+                onChange={handlePasswordConfirmationChange}
+                success={passwordConfirmation && password == passwordConfirmation}
+                error={passwordConfirmation && password !== passwordConfirmation}
+              />
+            </SoftBox>
+
+            {/*<SoftBox mb={2} display="flex" alignItems="center">
+              <SoftTypography
                 variant="button"
                 fontWeight="regular"
                 onClick={googleUrl}
                 sx={{ cursor: "poiner", userSelect: "none" }}
               >
                 &nbsp;&nbsp;You can also sign in with&nbsp;
-                </SoftTypography>
+              </SoftTypography>
               <SoftTypography
                 component="a"
                 href="googleUrl"
@@ -92,16 +267,15 @@ function SignUp() {
               >
                 Google
               </SoftTypography>
-            </SoftBox>
+            </SoftBox> */}
 
-
-            <SoftBox  display="flex" alignItems="center">
-              <Checkbox checked={agreement} onChange={handleSetAgremment} />
+            <SoftBox display="flex" alignItems="center">
+              <Checkbox checked={agreement} onChange={handleAgreementChange} />
               <SoftTypography
                 variant="button"
                 fontWeight="regular"
-                onClick={handleSetAgremment}
-                sx={{ cursor: "poiner", userSelect: "none" }}
+                onClick={handleAgreementChange}
+                sx={{ cursor: "pointer", userSelect: "none" }}
               >
                 &nbsp;&nbsp;I agree on the&nbsp;
               </SoftTypography>
@@ -115,11 +289,20 @@ function SignUp() {
                 Terms and Conditions
               </SoftTypography>
             </SoftBox>
+
+            {/*error text*/}
+            {error && (
+              <SoftTypography fontSize="small" color="error" mt={2} dismissible>
+                {error}
+              </SoftTypography>
+            )}
+
             <SoftBox mt={4} mb={1}>
-              <SoftButton variant="gradient" color="info" fullWidth>
+              <SoftButton variant="gradient" color="info" fullWidth onClick={handleSignUp}>
                 sign up
               </SoftButton>
             </SoftBox>
+
             <SoftBox mt={3} textAlign="center">
               <SoftTypography variant="button" color="text" fontWeight="regular">
                 Already have an account?&nbsp;
@@ -139,7 +322,7 @@ function SignUp() {
         </SoftBox>
       </Card>
     </BasicLayout>
-  );;
+  );
 }
 
 export default SignUp;
