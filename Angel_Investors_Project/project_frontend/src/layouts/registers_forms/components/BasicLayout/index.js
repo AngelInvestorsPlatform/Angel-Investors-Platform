@@ -28,7 +28,7 @@ import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import PageLayout from "examples/LayoutContainers/PageLayout";
 
 // Authentication layout components
-import Footer from "layouts/authentication/components/Footer";
+import Footer from "layouts/register_forms/components/Footer";
 
 function BasicLayout({ title, description, image, children }) {
   return (

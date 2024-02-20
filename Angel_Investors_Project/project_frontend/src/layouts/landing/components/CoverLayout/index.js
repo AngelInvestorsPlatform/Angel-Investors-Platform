@@ -28,7 +28,7 @@ import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import PageLayout from "examples/LayoutContainers/PageLayout";
 
 // Authentication layout components
-import Footer from "layouts/authentication/components/Footer";
+import Footer from "layouts/landing/components/Footer";
 
 function CoverLayout({ color, header, title, description, image, top, children }) {
   return (
