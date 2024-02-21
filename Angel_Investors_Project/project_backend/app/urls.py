@@ -19,6 +19,6 @@ urlpatterns = [
     path('Startup/', views.StartupApi, name='startup_api'),
     path('Startup/<int:id>',views.StartupApi, name='startup_api'),
 
-    path('Startup/img', views.SaveFile),
+    # path('Startup/img', views.SaveFile),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

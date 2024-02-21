@@ -2,11 +2,11 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
+from rest_framework import serializers
 
 from django.core.files.storage import default_storage
 
-
-from app.models import Investors, Startup
+from app.models import Investor, Startup
 from app.serializers import InvestorsSerializer, StartupSerializer
 
 """ In this part used to handle the request from the URL 
@@ -30,7 +30,7 @@ DELETE = to delete data """
 @csrf_exempt
 def InvestorsApi (request, id=0):
     if request.method=='GET':
-        investors = Investors.objects.all()
+        investors = Investor.objects.all()
         investors_serializer = InvestorsSerializer (investors, many=True)
         return JsonResponse (investors_serializer.data, safe=False)
     
@@ -40,11 +40,11 @@ def InvestorsApi (request, id=0):
         if investors_serializer.is_valid():
             investors_serializer.save()
             return JsonResponse ("Added Successfully!!", safe=False)
-        return JsonResponse("Failed to Add.", safe=False)
+        return JsonResponse(investors_serializer.errors, safe=False)
     
     elif request.method=='PUT':
         investors_data = JSONParser ().parse(request)
-        investors = Investors.objects.get (InvestorsId=investors_data[ 'InvestorsId'])
+        investors = Investor.objects.get (InvestorsId=investors_data[ 'InvestorsId'])
         investors_serializer=InvestorsSerializer (investors, data=investors_data)
         if investors_serializer.is_valid():
             investors_serializer.save()
@@ -52,7 +52,7 @@ def InvestorsApi (request, id=0):
         return JsonResponse ("Failed to Update.", safe=False)
     
     elif request.method == 'DELETE':
-        investors = Investors.objects.get(InvestorsId=id)  
+        investors = Investor.objects.get(InvestorsId=id)  
         investors.delete()
         return JsonResponse("Deleted Successfully!!", safe=False)
 
@@ -72,7 +72,7 @@ def StartupApi(request, id=0):
         if startup_serializer.is_valid():
             startup_serializer.save()
             return JsonResponse("Added Successfully!!", safe=False)
-        return JsonResponse("Failed to Add.", safe=False)
+        return JsonResponse(startup_serializer.errors, safe=False)
     
     elif request.method == 'PUT':
         startup_data = JSONParser().parse(request)
