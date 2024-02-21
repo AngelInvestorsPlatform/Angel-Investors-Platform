@@ -50,11 +50,7 @@ function InvestorForm() {
   const handleIncomeChange = (e) => setIncome(e.target.value);
 
   return (
-    <CoverLayout
-      title="Investor Form"
-      description="Let's get to know you better!"
-      image={investor}
-    >
+    <CoverLayout title="Investor Form" description="Let's get to know you better!" image={investor}>
       <SoftBox component="form" role="form" width="100" display="flex" flexWrap="wrap">
         {/* First Column */}
         <SoftBox flex="0 0 48%" mr={2} mb={3}>
@@ -97,7 +93,7 @@ function InvestorForm() {
                 backgroundColor: "#f4f4f4",
                 color: "#888",
                 border: "none",
-                borderRadius: "8px"
+                borderRadius: "8px",
               }}
             >
               <option value="">Select your country</option>
@@ -134,7 +130,7 @@ function InvestorForm() {
                 backgroundColor: "#f4f4f4",
                 color: "#888",
                 border: "none",
-                borderRadius: "8px"
+                borderRadius: "8px",
               }}
             >
               <option value="">Select your sector</option>
@@ -165,7 +161,7 @@ function InvestorForm() {
                 backgroundColor: "#f4f4f4",
                 color: "#888",
                 border: "none",
-                borderRadius: "8px"
+                borderRadius: "8px",
               }}
             >
               <option value="">Select your experience</option>
@@ -191,7 +187,7 @@ function InvestorForm() {
                 backgroundColor: "#f4f4f4",
                 color: "#888",
                 border: "none",
-                borderRadius: "8px"
+                borderRadius: "8px",
               }}
             >
               <option value="">Select your income</option>
@@ -207,7 +203,14 @@ function InvestorForm() {
         </SoftBox>
       </SoftBox>
       <SoftBox mt={4} mb={1}>
-        <SoftButton variant="gradient" color="info" fullWidth>
+        <SoftButton
+          variant="gradient"
+          color="info"
+          fullWidth
+          circular
+          component={Link}
+          to="/investor"
+        >
           Join Now
         </SoftButton>
       </SoftBox>
