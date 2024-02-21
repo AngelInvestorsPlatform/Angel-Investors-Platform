@@ -27,3 +27,7 @@ class UserSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = UserModel
 		fields = ('email', 'username')
+
+
+class SetPermissionsSerializer(serializers.Serializer):
+    permission_type = serializers.ChoiceField(choices=['investor', 'startup'])
