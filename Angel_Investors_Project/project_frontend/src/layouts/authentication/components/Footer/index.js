@@ -32,8 +32,8 @@ function Footer() {
   return (
     <SoftBox component="footer" py={10}>
       <Grid item xs={10} lg={8}>
-        <SoftBox display="flex" justifyContent="center" flexWrap="wrap" mb={3}>
-          <SoftBox justifyContent="center" component="img" src={logo} alt="warQ" width="25%" />
+        <SoftBox display="flex" justifyContent="center" flexWrap="wrap" mb={3}  mt={3}>
+          <SoftBox justifyContent="center" component="img" src={logo} alt="warQ" width="15%" />
         </SoftBox>
       </Grid>
 
@@ -55,7 +55,7 @@ function Footer() {
             <SoftBox mr={{ xs: 2, lg: 3, xl: 6 }}>
               <SoftTypography
                 component="a"
-                href="/authentication/Selection"
+                href="/authentication/sign-up"
                 variant="body2"
                 color="secondary"
               >
