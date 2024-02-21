@@ -38,3 +38,8 @@ class AppUser(AbstractBaseUser):
 	objects = AppUserManager()
 	def __str__(self):
 		return self.username
+	
+
+	class UserRole(models.Model):  
+		class Meta:
+			permissions = (("is_startup", "can be a startup"),("is_investor", "can be an investor"))
