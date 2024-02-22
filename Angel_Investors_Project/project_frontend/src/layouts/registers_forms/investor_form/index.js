@@ -15,8 +15,12 @@ Coded by www.creative-tim.com
 
 import { useState } from "react";
 
+//for API
+import axios from "axios";
+
 // react-router-dom components
 import { Link } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 // @mui material components
 import Switch from "@mui/material/Switch";
@@ -27,20 +31,25 @@ import SoftTypography from "components/SoftTypography";
 import SoftInput from "components/SoftInput";
 import SoftButton from "components/SoftButton";
 
-
-// Authentication layout components
-import CoverLayout from "layouts/authentication/components/CoverLayout";
+// registers_forms layout components
+import CoverLayout from "layouts/registers_forms/components/CoverLayout";
 
 // Images
 import investor from "assets/images/investor.jpg.webp";
+import SoftAlert from "components/SoftAlert";
 
 function InvestorForm() {
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [country, setCountry] = useState("");
-  const [sector, setSector] = useState("");
-  const [experience, setExperience] = useState("");
-  const [income, setIncome] = useState("");
+  const [investor_name, setName] = useState("");
+  const [investor_phone, setPhone] = useState("");
+  const [investor_country, setCountry] = useState("");
+  const [investor_sector, setSector] = useState("");
+  const [investor_experience, setExperience] = useState("");
+  const [investor_income, setIncome] = useState("");
+
+  //for error alert
+  const [Confirm, setConfirm]= useState("");
+  const [Error, setError]= useState("");
+  const [RedirectToDashboard, setRedirectToDashboard] = useState(false);
 
   const handleNameChange = (e) => setName(e.target.value);
   const handlePhoneChange = (e) => setPhone(e.target.value);
@@ -49,8 +58,52 @@ function InvestorForm() {
   const handleExperienceChange = (e) => setExperience(e.target.value);
   const handleIncomeChange = (e) => setIncome(e.target.value);
 
+  if (RedirectToDashboard) {
+    return <Navigate to="/investor" />;
+    //It needs to be modified according to the role type of the user
+  }
+
+  const handleInvestorForm = async () => {
+    try {
+      const Response = await axios.post(`${process.env.REACT_APP_DJANGO_API}form/Investors/`, {
+        investor_name,
+        investor_phone,
+        investor_country,
+        investor_sector,
+        investor_experience,
+        investor_income,
+      });
+      if (Response.status === 200) {
+          setConfirm("Data add successfully ");
+          // Redirect to dashboard
+          setRedirectToDashboard(true);
+        
+      } else {
+        setError("Failed");  }
+      } catch (errorX) {
+      // Handle error, display appropriate message
+      setError(" Add Failed: " + errorX.message);
+    }
+  };
+
   return (
     <CoverLayout title="Investor Form" description="Let's get to know you better!" image={investor}>
+      {/* Alert Box */}
+      <SoftBox>
+       {/*if Success*/}
+       {Confirm && (
+          <SoftAlert fontSize="small" color="success" mt={2} dismissible>
+            {Confirm}
+          </SoftAlert>
+        )}
+
+        {/*if Fail*/}
+        {Error && (
+          <SoftAlert fontSize="small" color="error" mt={2} dismissible>
+            {Error}
+          </SoftAlert>
+        )}
+        </SoftBox>
       <SoftBox component="form" role="form" width="100" display="flex" flexWrap="wrap">
         {/* First Column */}
         <SoftBox flex="0 0 48%" mr={2} mb={3}>
@@ -61,7 +114,7 @@ function InvestorForm() {
             <SoftInput
               type="text"
               placeholder="Enter your full name"
-              value={name}
+              value={investor_name}
               onChange={handleNameChange}
               required
               minLength={10}
@@ -74,7 +127,7 @@ function InvestorForm() {
             <SoftInput
               type="tel"
               placeholder="Enter your phone number"
-              value={phone}
+              value={investor_phone}
               onChange={handlePhoneChange}
             />
           </SoftBox>
@@ -83,7 +136,7 @@ function InvestorForm() {
               Country
             </SoftTypography>
             <select
-              value={country}
+              value={investor_country}
               onChange={handleCountryChange}
               required
               style={{
@@ -120,7 +173,7 @@ function InvestorForm() {
               Sector
             </SoftTypography>
             <select
-              value={sector}
+              value={investor_sector}
               onChange={handleSectorChange}
               required
               style={{
@@ -151,7 +204,7 @@ function InvestorForm() {
               Experience
             </SoftTypography>
             <select
-              value={experience}
+              value={investor_experience}
               onChange={handleExperienceChange}
               required
               style={{
@@ -177,7 +230,7 @@ function InvestorForm() {
               Income
             </SoftTypography>
             <select
-              value={income}
+              value={investor_income}
               onChange={handleIncomeChange}
               required
               style={{
@@ -208,8 +261,7 @@ function InvestorForm() {
           color="info"
           fullWidth
           circular
-          component={Link}
-          to="/investor"
+          onClick={handleInvestorForm}
         >
           Join Now
         </SoftButton>
