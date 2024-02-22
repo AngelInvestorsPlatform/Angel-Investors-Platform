@@ -11,28 +11,43 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [userData, setUserData] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userRole, setUserRole]= useState(null);
+  const [sessionId, setSessionId] = useState(null);
+  const [csrfToken, setCsrfToken] = useState(null);
 
 
    // Load authentication state from localStorage on component mount
    useEffect(() => {
     const storedUserData = localStorage.getItem('userData');
     const storedIsLoggedIn = localStorage.getItem('isLoggedIn');
+    const storedUserRole = localStorage.getItem('userRole');
+    const sessionId = localStorage.getItem('sessionId');
+    const csrfToken = localStorage.getItem('csrfToken');
 
-    if (storedUserData && storedIsLoggedIn) {
+
+    if (storedUserData && storedIsLoggedIn  && storedUserRole) {
       setUserData(JSON.parse(storedUserData));
       setIsLoggedIn(JSON.parse(storedIsLoggedIn));
+      setUserRole(JSON.parse(storedUserRole));
     }
+
+
   }, []);
 
   // Update localStorage when userData or isLoggedIn changes
   useEffect(() => {
     localStorage.setItem('userData', JSON.stringify(userData));
     localStorage.setItem('isLoggedIn', JSON.stringify(isLoggedIn));
-  }, [userData, isLoggedIn]);
+    localStorage.setItem('userRole', JSON.stringify(userRole));
+    localStorage.setItem('sessionId', sessionId);
+    localStorage.setItem('csrfToken', csrfToken)
+    
+    
+  }, [userData, isLoggedIn, userRole, sessionId, csrfToken]);
 
 
   return (
-    <AuthContext.Provider value={{ userData, setUserData, isLoggedIn, setIsLoggedIn }}>
+    <AuthContext.Provider value={{ userData, setUserData, isLoggedIn, setIsLoggedIn , userRole, setUserRole, sessionId, setSessionId, csrfToken }}>
       {children}
     </AuthContext.Provider>
   );
