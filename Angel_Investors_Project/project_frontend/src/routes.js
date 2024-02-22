@@ -37,7 +37,7 @@ Coded by www.creative-tim.com
 
 // Soft UI Dashboard React layouts
 import Landing from "layouts/landing";
-// import Dashboard from "layouts/dashboard";
+import Dashboard from "layouts/dashboard";
 import Tables from "layouts/tables";
 import Billing from "layouts/billing";
 import VirtualReality from "layouts/virtual-reality";
@@ -48,6 +48,9 @@ import SignUp from "layouts/authentication/sign-up";
 import Selection from "layouts/authentication/Selection";
 import Investor_form from "layouts/registers_forms/investor_form";
 import Startups_form from "layouts/registers_forms/startups_form"
+import Startup from "layouts/startup"
+import Investor from "layouts/investor"
+
 
 // Soft UI Dashboard React icons
 import Shop from "examples/Icons/Shop";
@@ -60,7 +63,7 @@ import CreditCard from "examples/Icons/CreditCard";
 import Cube from "examples/Icons/Cube";
 
 const routes = [
-    /*{
+    {
       type: "collapse",
       name: "Dashboard",
       key: "dashboard",
@@ -68,7 +71,7 @@ const routes = [
       icon: <Shop size="12px" />,
       component: <Dashboard />,
       noCollapse: true,
-    },*/
+    },
     {
         type: "collapse",
         name: "Landing",
@@ -147,7 +150,7 @@ const routes = [
         name: "Selection",
         key: "selection",
         route: "/authentication/Selection",
-        icon: < Shop size = "12px" / > ,
+        icon: < SpaceShip size = "12px" / > ,
         component: < Selection / > ,
         noCollapse: true,
     },
@@ -167,6 +170,26 @@ const routes = [
         route: "/registers_forms/startups_form",
         icon: < SpaceShip size = "12px" / > ,
         component: < Startups_form / > ,
+        noCollapse: true,
+    },
+    {
+        type: "collapse",
+        name: "startup ",
+        key: "startup",
+        route: "/startup",
+        icon: < SpaceShip size = "12px" / > ,
+        component: < Startup / > ,
+        noCollapse: true,
+    },
+
+
+{
+        type: "collapse",
+        name: "investor ",
+        key: "investor",
+        route: "/investor",
+        icon: < Shop size = "12px" / > ,
+        component: < Investor / > ,
         noCollapse: true,
     },
 ];
