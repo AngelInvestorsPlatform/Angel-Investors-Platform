@@ -24,7 +24,7 @@ import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
 
 // Soft UI Dashboard React examples
-import DefaultNavbar from "examples/Navbars/DefaultNavbar";
+import BlankNavbar from "examples/Navbars/BlankNavbar";
 import PageLayout from "examples/LayoutContainers/PageLayout";
 
 // Authentication layout components
@@ -33,11 +33,11 @@ import Footer from "layouts/registers_forms/components/Footer";
 function CoverLayout({ color, header, title, description, image, top, children }) {
   return (
     <PageLayout background="white">
-      <DefaultNavbar
+      <BlankNavbar
         action={{
           type: "external",
-          route: "https://creative-tim.com/product/soft-ui-dashboard-react",
-          label: "free download",
+          route: "https://",
+          label: "",
           color: "dark",
         }}
       />
@@ -49,7 +49,7 @@ function CoverLayout({ color, header, title, description, image, top, children }
           margin: 0,
         }}
       >
-        <Grid item xs={11} sm={8} md={5} xl={3}>
+        <Grid item xs={12} sm={12} md={9} xl={6} xxl={5}>
           <SoftBox mt={top}>
             <SoftBox pt={3} px={3}>
               {!header ? (

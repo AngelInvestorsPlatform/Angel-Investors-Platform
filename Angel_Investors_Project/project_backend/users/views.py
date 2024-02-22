@@ -3,7 +3,7 @@ from django.shortcuts import render
 # users/views.py
 from django.contrib.auth import get_user_model, login, logout
 from django.contrib.auth.models import Permission
-from rest_framework.authentication import SessionAuthentication
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers import UserRegisterSerializer, UserLoginSerializer, UserSerializer, SetPermissionsSerializer
@@ -25,7 +25,7 @@ class UserRegister(APIView):
 
 class UserLogin(APIView):
 	permission_classes = (permissions.AllowAny,)
-	authentication_classes = (SessionAuthentication,)
+	authentication_classes = (SessionAuthentication,BasicAuthentication)
 	##
 	def post(self, request):
 		data = request.data
@@ -48,7 +48,7 @@ class UserLogout(APIView):
 
 class UserView(APIView):
 	permission_classes = (permissions.IsAuthenticated,)
-	authentication_classes = (SessionAuthentication,)
+	authentication_classes = (SessionAuthentication,BasicAuthentication)
 	##
 	def get(self, request):
 		serializer = UserSerializer(request.user)
@@ -59,7 +59,7 @@ class UserView(APIView):
 	
 class SetPermissions(APIView):
 	permission_classes = (permissions.IsAuthenticated,)
-	authentication_classes = (SessionAuthentication,)
+	authentication_classes = (SessionAuthentication,BasicAuthentication)
 
 	def post(self, request):
 		serializer = SetPermissionsSerializer(data=request.data)
@@ -85,7 +85,7 @@ class SetPermissions(APIView):
 	
 class GetPermissions(APIView):
 	permission_classes = (permissions.IsAuthenticated,)
-	authentication_classes = (SessionAuthentication,)
+	authentication_classes = (SessionAuthentication,BasicAuthentication)
 
 	def get(self, request):
 		has_investor_permission = request.user.has_perm('users.is_investor')

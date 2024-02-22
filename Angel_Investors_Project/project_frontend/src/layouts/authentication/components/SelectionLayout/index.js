@@ -6,25 +6,26 @@ import Grid from "@mui/material/Grid";
 // Soft UI Dashboard React components
 import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
+import SoftAlert from "components/SoftAlert";
 
 // Soft UI Dashboard React examples
-import DefaultNavbar from "examples/Navbars/DefaultNavbar";
+import BlankNavbar from "examples/Navbars/BlankNavbar";
 import PageLayout from "examples/LayoutContainers/PageLayout";
 
 // Authentication layout components
 import Footer from "layouts/authentication/components/Footer";
 
-function SelectionLayout({ title, description, image, children }) {
+function SelectionLayout({ title, description, image, alertBox, children }) {
   return (
     <PageLayout>
-      <DefaultNavbar
+      <BlankNavbar
         action={{
           type: "external",
-          route: "https://creative-tim.com/product/soft-ui-dashboard-react",
-          label: "free download",
+          route: "https://goolge.com",
+          label: "search",
           color: "info",
         }}
-      />{" "}
+      />
       <SoftBox
         width="calc(100% - 2rem)"
         minHeight="30vh"
@@ -46,36 +47,36 @@ function SelectionLayout({ title, description, image, children }) {
         }}
       >
         <Grid container spacing={3} justifyContent="center" sx={{ textAlign: "center" }}>
-          <Grid item xs={10} lg={10} Align="center">
+          <Grid item xs={10} lg={10} align="center">
             <SoftBox mt={15} mb={1}>
               <SoftTypography
                 variant="h1"
                 color="info"
                 fontWeight="bold"
-                Align="center"
+                align="center"
                 textGradient
               >
-                {" "}
-                {title}{" "}
-              </SoftTypography>{" "}
-            </SoftBox>{" "}
+                {title}
+              </SoftTypography>
+            </SoftBox>
             <SoftBox>
               <SoftTypography variant="h3" color="info" fontWeight="regular" textGradient>
-                {" "}
-                {description}{" "}
-              </SoftTypography>{" "}
-            </SoftBox>{" "}
-          </Grid>{" "}
-        </Grid>{" "}
+                {description}
+              </SoftTypography>
+            </SoftBox>
+          </Grid>
+        </Grid>
       </SoftBox>
-      <SoftBox mt={{ xs: 5, lg: 5 }} px={1} width="calc(100% - 2rem)" mx="auto">
+      <SoftBox mb={5} px={22}>
+        {alertBox}
+      </SoftBox>
+      <SoftBox mt={{ xs: 5, lg: 5 }} px={10} width="100%" mx="auto">
         <Grid container spacing={1} justifyContent="center">
-          <Grid item xs={11} sm={10} md={6} lg={8} xl={6}>
-            {" "}
-            {children}{" "}
-          </Grid>{" "}
-        </Grid>{" "}
-      </SoftBox>{" "}
+          <Grid item xs={7} sm={7} md={9} lg={9} xl={10}>
+            {children}
+          </Grid>
+        </Grid>
+      </SoftBox>
       <Footer />
     </PageLayout>
   );
@@ -93,6 +94,7 @@ SelectionLayout.propTypes = {
   title: PropTypes.string,
   description: PropTypes.string,
   image: PropTypes.string.isRequired,
+  alertBox: PropTypes.element,
   children: PropTypes.node.isRequired,
 };
 

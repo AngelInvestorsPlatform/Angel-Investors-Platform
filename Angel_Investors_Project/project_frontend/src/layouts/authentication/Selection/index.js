@@ -1,6 +1,13 @@
 import * as React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { Navigate } from "react-router-dom";
+
+//for API
+import axios from "axios";
+
+//for user auth global context
+import { useAuthUser } from "context/authContext";
 
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
@@ -15,24 +22,99 @@ import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
 
 import SelectionLayout from "../components/SelectionLayout";
-// import curved6 from "assets/images/curved-images/curved14.jpg";
+import SoftAlert from "components/SoftAlert";
+
+ 
 
 function choose() {
+  const { userRole, setUserRole, sessionId, csrfToken } = useAuthUser();
+  const [logError, setLogError] = useState("");
+  const [errorM, setError]= useState("");
+  const [logConfirm, setLogConfirm] = useState("");
+  const [RedirectToUserForm, setRedirectToUserForm] = useState(false);
+
   const [agreement, setAgremment] = useState(true);
 
   const handleSetAgremment = () => setAgremment(!agreement);
+
+
+  if (RedirectToUserForm) {
+    if (userRole == "startup") 
+      return <Navigate to="/registers_forms/startups_form" />;
+    elif(userRole == "investor");
+    return <Navigate to="/registers_forms/investor_form" />;
+  }
+
+  const handleStartup = async () => {
+    try {
+      const loginResponse = await axios.post(
+        `${process.env.REACT_APP_DJANGO_API}auth/set_permissions`,
+        {
+          "permission_type": "Startup",
+        },        
+      );
+
+      if (loginResponse.status === 200) {
+        setUserRole("investor");
+        setLogConfirm("The user role has been added successfully login");
+
+        setRedirectToUserForm(true);
+      } else {
+        setLogError("server request Failed ");
+      }
+    } catch (errorX) {
+      // Handle error, display appropriate message
+      setLogError(" Failed: " + errorX.message);
+    }
+  };
+  const handleInvestor = async () => {
+    try {
+      const loginResponse = await axios.post(
+        `${process.env.REACT_APP_DJANGO_API}auth/set_permissions`,
+        {
+          "permission_type": "investor",
+        },        
+      );
+
+      if (loginResponse.status === 200) {
+        setUserRole("investor");
+        setLogConfirm("The user role has been added successfully login");
+
+        setRedirectToUserForm(true);
+      } else {
+        setLogError("server request Failed ");
+      }
+    } catch (errorX) {
+      // Handle error, display appropriate message
+      setLogError(" Failed: " + errorX.message);
+    }
+  };
 
   return (
     <SelectionLayout
       title=" Are you new to the platform? "
       description="Lets work together to help you get the most out of your experience.!"
-
-      // image={curved6}
+      alertBox={<SoftBox>
+                {/*if Success*/}
+                {logConfirm && (
+                  <SoftAlert fontSize="small" color="success" mt={2} dismissible>
+                    {logConfirm}
+                  </SoftAlert>
+                )}
+        
+                {/*if Fail*/}
+                {logError && (
+                  <SoftAlert fontSize="small" color="error" mt={2} dismissible>
+                    {logError}
+                  </SoftAlert>
+                )}
+                </SoftBox>
+      }
     >
-      <Box component="ul" sx={{ display: "flex", gap: 2, flexWrap: "wrap", p: 0, m: 0 }}>
+      <Box component="ul" sx={{ display: "flex", flexDirection: "row", gap: 2, p: 0, m: 0 }}>
         <Card
           component="li"
-          sx={{ maxWidth: 400, flexGrow: 1 }}
+          sx={{ width: "50%", flexGrow: 1 }}
           style={{ backgroundColor: "#633974" }}
         >
           <SoftBox mb={2}> </SoftBox>{" "}
@@ -53,8 +135,7 @@ function choose() {
                 color="white"
                 style={{ width: "50%" }}
                 circular
-                component={Link}
-                to="registers_forms/startups_form"
+                onClick={handleStartup}
               >
                 {" "}
                 {/* here put start up form */}
@@ -64,7 +145,7 @@ function choose() {
             </SoftTypography>{" "}
           </CardContent>{" "}
         </Card>{" "}
-        <Card component="li" sx={{ maxWidth: 400, flexGrow: 1 }}>
+        <Card component="li" sx={{ width: "50%", flexGrow: 1 }}>
           <SoftBox mb={2}> </SoftBox>{" "}
           <CardContent>
             <SoftBox mb={2} ml={0.5}>
@@ -82,8 +163,7 @@ function choose() {
               color="info"
               style={{ width: "50%" }}
               circular
-              component={Link}
-              to="registers_forms/investor_form"
+              onClick={handleInvestor}
             >
               {" "}
               {/* here put link path to investor form */}
