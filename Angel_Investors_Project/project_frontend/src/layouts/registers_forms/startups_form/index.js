@@ -257,7 +257,7 @@ function startup_form() {
         </SoftBox>
       </SoftBox>
       <SoftBox mt={4} mb={1}>
-        <SoftButton variant="gradient" color="info" fullWidth onClick={handleStartupForm}>
+        <SoftButton variant="gradient" color="info" circular fullWidth onClick={handleStartupForm}>
           Submit
         </SoftButton>
       </SoftBox>

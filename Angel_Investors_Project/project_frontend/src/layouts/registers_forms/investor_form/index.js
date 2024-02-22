@@ -248,7 +248,7 @@ function InvestorForm() {
           circular
           onClick={handleInvestorForm}
         >
-          Join Now
+          submit
         </SoftButton>
       </SoftBox>
     </CoverLayout>

@@ -41,53 +41,23 @@ function choose() {
   if (RedirectToUserForm) {
     if (userRole == "startup") 
       return <Navigate to="/registers_forms/startups_form" />;
-    elif(userRole == "investor");
+      else if(userRole == "investor");
     return <Navigate to="/registers_forms/investor_form" />;
   }
 
   const handleStartup = async () => {
-    try {
-      const loginResponse = await axios.post(
-        `${process.env.REACT_APP_DJANGO_API}auth/set_permissions`,
-        {
-          "permission_type": "Startup",
-        },        
-      );
 
-      if (loginResponse.status === 200) {
-        setUserRole("investor");
-        setLogConfirm("The user role has been added successfully login");
+    setUserRole("srartup");
+    setLogConfirm("The user role has been added successfully login");
 
-        setRedirectToUserForm(true);
-      } else {
-        setLogError("server request Failed ");
-      }
-    } catch (errorX) {
-      // Handle error, display appropriate message
-      setLogError(" Failed: " + errorX.message);
-    }
+    setRedirectToUserForm(true);
   };
   const handleInvestor = async () => {
-    try {
-      const loginResponse = await axios.post(
-        `${process.env.REACT_APP_DJANGO_API}auth/set_permissions`,
-        {
-          "permission_type": "investor",
-        },        
-      );
 
-      if (loginResponse.status === 200) {
         setUserRole("investor");
         setLogConfirm("The user role has been added successfully login");
 
         setRedirectToUserForm(true);
-      } else {
-        setLogError("server request Failed ");
-      }
-    } catch (errorX) {
-      // Handle error, display appropriate message
-      setLogError(" Failed: " + errorX.message);
-    }
   };
 
   return (

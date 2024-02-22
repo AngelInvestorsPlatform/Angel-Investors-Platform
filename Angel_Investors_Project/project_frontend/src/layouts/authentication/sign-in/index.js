@@ -54,10 +54,10 @@ function SignIn() {
 
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
 
-  if (RedirectToDashboard) {
-    return <Navigate to="/authentication/Dashboard" />;
-    //It needs to be modified according to the role type of the user
-  }
+    if (RedirectToDashboard) {
+      return <Navigate to="/investor" />;
+      //It needs to be modified according to the role type of the user
+    }
 
   const handleSignIn = async () => {
     try {

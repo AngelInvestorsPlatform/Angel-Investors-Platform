@@ -30,7 +30,7 @@ import PageLayout from "examples/LayoutContainers/PageLayout";
 // Authentication layout components
 import Footer from "layouts/registers_forms/components/Footer";
 
-function CoverLayout({ color, header, title, description, image, top, children }) {
+function CoverLayout({ color, header, title, description, image, children }) {
   return (
     <PageLayout background="white">
       <BlankNavbar
@@ -50,7 +50,7 @@ function CoverLayout({ color, header, title, description, image, top, children }
         }}
       >
         <Grid item xs={12} sm={12} md={9} xl={6} xxl={5}>
-          <SoftBox mt={top}>
+          <SoftBox mt={16}>
             <SoftBox pt={3} px={3}>
               {!header ? (
                 <>
