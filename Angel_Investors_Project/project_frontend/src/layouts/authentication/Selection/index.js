@@ -24,61 +24,60 @@ import SoftTypography from "components/SoftTypography";
 import SelectionLayout from "../components/SelectionLayout";
 import SoftAlert from "components/SoftAlert";
 
- 
-
 function choose() {
   const { userRole, setUserRole, sessionId, csrfToken } = useAuthUser();
   const [logError, setLogError] = useState("");
-  const [errorM, setError]= useState("");
+  const [errorM, setError] = useState("");
   const [logConfirm, setLogConfirm] = useState("");
   const [RedirectToUserForm, setRedirectToUserForm] = useState(false);
+  const [RedirectToUserIForm, setRedirectToUserIForm] = useState(false);
+  const [RedirectToUserSForm, setRedirectToUserSForm] = useState(false);
 
   const [agreement, setAgremment] = useState(true);
 
   const handleSetAgremment = () => setAgremment(!agreement);
 
+  if (RedirectToUserIForm) {
+    return <Navigate to="/registers_forms/startups_form" />;
+  }
 
-  if (RedirectToUserForm) {
-    if (userRole == "startup") 
-      return <Navigate to="/registers_forms/startups_form" />;
-      else if(userRole == "investor");
+  if (RedirectToUserSForm) {
     return <Navigate to="/registers_forms/investor_form" />;
   }
 
   const handleStartup = async () => {
-
     setUserRole("srartup");
     setLogConfirm("The user role has been added successfully login");
+    setRedirectToUserIForm(true);
 
-    setRedirectToUserForm(true);
+    return <Navigate to="/registers_forms/startups_form" />;
   };
   const handleInvestor = async () => {
-
-        setUserRole("investor");
-        setLogConfirm("The user role has been added successfully login");
-
-        setRedirectToUserForm(true);
+    setUserRole("investor");
+    setLogConfirm("The user role has been added successfully login");
+    setRedirectToUserSForm(true);
   };
 
   return (
     <SelectionLayout
       title=" Are you new to the platform? "
       description="Lets work together to help you get the most out of your experience.!"
-      alertBox={<SoftBox>
-                {/*if Success*/}
-                {logConfirm && (
-                  <SoftAlert fontSize="small" color="success" mt={2} dismissible>
-                    {logConfirm}
-                  </SoftAlert>
-                )}
-        
-                {/*if Fail*/}
-                {logError && (
-                  <SoftAlert fontSize="small" color="error" mt={2} dismissible>
-                    {logError}
-                  </SoftAlert>
-                )}
-                </SoftBox>
+      alertBox={
+        <SoftBox>
+          {/*if Success*/}
+          {logConfirm && (
+            <SoftAlert fontSize="small" color="success" mt={2} dismissible>
+              {logConfirm}
+            </SoftAlert>
+          )}
+
+          {/*if Fail*/}
+          {logError && (
+            <SoftAlert fontSize="small" color="error" mt={2} dismissible>
+              {logError}
+            </SoftAlert>
+          )}
+        </SoftBox>
       }
     >
       <Box component="ul" sx={{ display: "flex", flexDirection: "row", gap: 2, p: 0, m: 0 }}>
