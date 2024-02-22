@@ -44,7 +44,7 @@ import {
 } from "layouts/virtual-reality/components/BaseLayout/styles";
 
 // Images
-import brand from "assets/images/logo-ct.png";
+import brand from "assets/images/logo-ct.svg";
 
 function BaseLayout({ children }) {
   const [controller, dispatch] = useSoftUIController();

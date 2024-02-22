@@ -26,7 +26,7 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 // Soft UI Dashboard React components
 import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
-import logo from "assets/images/logo-ct.png";
+import logo from "assets/images/logo-ct.svg";
 
 function Footer() {
   return (

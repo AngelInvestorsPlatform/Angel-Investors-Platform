@@ -48,7 +48,7 @@ import { useSoftUIController, setMiniSidenav, setOpenConfigurator } from "contex
 import { AuthProvider } from "context/authContext";
 
 // Images
-import brand from "assets/images/logo-ct.png";
+import brand from "assets/images/logo-ct.svg";
 
 export default function App() {
   const [controller, dispatch] = useSoftUIController();

@@ -96,8 +96,8 @@ Within the download you'll find the following directories and files:
 ```
 soft-ui-dashboard-react
     ├── public
-    │   ├── apple-icon.png
-    │   ├── favicon.png
+    │   ├── apple-icon.svg
+    │   ├── favicon.svg
     │   ├── index.html
     │   ├── manifest.json
     │   └── robots.txt
