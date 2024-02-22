@@ -10,10 +10,10 @@ with this same structure """
 
 # The Conestants
 
-# For The Investor
+
 COUNTRY_CHOICES = [
-    ('United States', 'United States'),
-    ('United Kingdom', 'United Kingdom'),
+    ('USA', 'United States'),
+    ('UK', 'United Kingdom'),
     ('Canada', 'Canada'),
     ('Saudi Arabia', 'Saudi Arabia'),
     ('Kuwait', 'Kuwait'),
@@ -26,6 +26,7 @@ COUNTRY_CHOICES = [
     ('Other', 'Other'),
 ]
 
+# For The Investor
 IN_SECTORS_CHOICES = [
     ('Biotech', 'Biotech'),
     ('Adtech', 'Adtech'),
