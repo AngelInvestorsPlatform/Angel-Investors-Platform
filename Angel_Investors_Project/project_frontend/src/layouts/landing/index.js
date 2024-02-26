@@ -54,7 +54,7 @@ function Welcome() {
         <SoftBox p={1}  sx={{ textAlign: "center" }}>
         <SoftBox mt={4} mb={5} >
               <SoftButton variant="gradient" color="info"  style={{ width: '50%' }} circular component={Link}
-            to="/authentication/sign-up">
+            to="/authentication/Selection">
               Get Started! 
               </SoftButton> { /*we can add here the link to the choose page (to choose if they are investors or a startups) */}
             </SoftBox>

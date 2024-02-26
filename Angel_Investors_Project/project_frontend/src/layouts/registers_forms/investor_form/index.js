@@ -10,6 +10,9 @@ import { Navigate } from "react-router-dom";
 // @mui material components
 import Switch from "@mui/material/Switch";
 
+//for user auth global context
+import { useAuthUser } from "context/authContext";
+
 // Soft UI Dashboard React components
 import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
@@ -24,6 +27,131 @@ import investor from "assets/images/investor.jpg.webp";
 import SoftAlert from "components/SoftAlert";
 
 function InvestorForm() {
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordConfirmation, setPasswordConfirmation] = useState("");
+  const [agreement, setAgreement] = useState(false);
+  const [error, setError] = useState("");
+  const [registerError, setRegError] = useState("");
+  const [registerConfirm, setRegConfirm] = useState("");
+  const [redirectToSelect, setRedirectToSelect] = useState(false);
+  const { userData, setUserData, isLoggedIn, setIsLoggedIn } = useAuthUser();
+
+  if (redirectToSelect) {
+    return <Navigate to="/investor" />;
+  }
+
+  //The following codes to handle input validity using JavaScript
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+  };
+
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+  };
+
+  const handlePasswordConfirmationChange = (event) => {
+    setPasswordConfirmation(event.target.value);
+  };
+
+  const handleAgreementChange = () => {
+    setAgreement(!agreement);
+  };
+
+  //on submit
+  const handleSignUp = async () => {
+    try {
+      const DJANGO_API = process.env.REACT_APP_DJANGO_API;
+
+      // Verify if email is correct
+      if (!validateEmail(email)) {
+        setError("Please enter a valid email address.");
+        return;
+      }
+
+      // Verify if password meets requirements
+      if (!validatePassword(password)) {
+        setError(
+          "Password must contain at least 8 characters, including uppercase, lowercase, and numbers."
+        );
+        return;
+      }
+
+      // Verify if password confirmation matches password
+      if (password !== passwordConfirmation) {
+        setError("Passwords do not match.");
+        return;
+      }
+
+      // Verify if terms agreement is checked
+      if (!agreement) {
+        setError("Must agree to the terms and conditions to start.");
+        return;
+      }
+
+      // If all conditions are met, proceed with registration
+      const response = await axios.post(`${DJANGO_API}auth/register`, {
+        email: email,
+        username: username, // Setting username same as email
+        password: password,
+      });
+
+      // If registration is successful, set user status to true
+      if (response.status === 201) {
+        setRegConfirm("successfully registered");
+
+        // After registration, login with the same credentials
+        const loginResponse = await axios.post(`${DJANGO_API}auth/login`, {
+          email: email,
+          username: username, // Setting username same as email
+          password: password,
+        });
+
+        if (loginResponse.status === 200) {
+          // If login is successful, set user data and LoggedIn
+          setUserData({ email, username });
+          setIsLoggedIn(true);
+
+          // Redirect to Select
+          setRedirectToSelect(true);
+        } else {
+          let errorMessage = "Login failed. Please try again later.";
+
+          // Check if the response contains detailed error messages
+          if (loginResponse.data && loginResponse.data.username) {
+            // Extract the first error message for username field
+            errorMessage = loginResponse.data.username[0];
+          }
+
+          setRegError(errorMessage);
+        }
+      } else {
+        let errorMessage = "Registration failed. Please try again later.";
+
+        // Check if the response contains detailed error messages
+        if (response.data && response.data.username) {
+          // Extract the first error message for username field
+          errorMessage = response.data.username[0];
+        }
+
+        setRegError(errorMessage);
+      }
+    } catch (errorX) {
+      setRegError("Failed: " + errorX.message);
+    }
+  };
+
+  const validateEmail = (email) => {
+    const re = /\S+@\S+\.\S+/;
+    return re.test(email);
+  };
+
+  const validatePassword = (password) => {
+    const re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+    return re.test(password);
+  };
+
   const [investor_name, setName] = useState("");
   const [investor_phone, setPhone] = useState("");
   const [investor_country, setCountry] = useState("");
@@ -33,7 +161,6 @@ function InvestorForm() {
 
   //for error alert
   const [Confirm, setConfirm]= useState("");
-  const [Error, setError]= useState("");
   const [RedirectToDashboard, setRedirectToDashboard] = useState(false);
 
   const handleNameChange = (e) => setName(e.target.value);
@@ -92,6 +219,33 @@ function InvestorForm() {
       <SoftBox component="form" role="form" width="100" display="flex" flexWrap="wrap">
         {/* First Column */}
         <SoftBox flex="0 0 48%" mr={2} mb={3}>
+        <SoftBox mb={2}>
+            <SoftTypography component="label" variant="caption" fontWeight="bold">
+              Username
+            </SoftTypography>
+            <SoftInput
+              type="text"
+              placeholder="Username"
+              name="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          </SoftBox>
+          <SoftBox mb={2}>
+            <SoftTypography component="label" variant="caption" fontWeight="bold">
+              Email
+            </SoftTypography>
+            <SoftInput
+              type="email"
+              placeholder="Email"
+              name="email"
+              value={email}
+              onChange={handleEmailChange}
+              success={email && validateEmail(email)}
+              error={email && !validateEmail(email)}
+            />
+          </SoftBox>
+
           <SoftBox mb={2}>
             <SoftTypography component="label" variant="caption" fontWeight="bold">
               Name
@@ -237,6 +391,34 @@ function InvestorForm() {
               <option value="800k-900k">800k-900k</option>
               <option value="More than 900k">More than 900k</option>
             </select>
+          </SoftBox>
+          <SoftBox mb={2}>
+            <SoftTypography component="label" variant="caption" fontWeight="bold">
+              Password
+            </SoftTypography>
+            <SoftInput
+              type="password"
+              placeholder="Password"
+              name="password"
+              value={password}
+              onChange={handlePasswordChange}
+              success={password && validatePassword(password)}
+              error={password && !validatePassword(password)}
+            />
+          </SoftBox>
+          <SoftBox mb={2}>
+            <SoftTypography component="label" variant="caption" fontWeight="bold">
+              Re-type Password
+            </SoftTypography>
+            <SoftInput
+              type="password"
+              placeholder="Re-type Password"
+              name="passwordConfirmation"
+              value={passwordConfirmation}
+              onChange={handlePasswordConfirmationChange}
+              success={passwordConfirmation && password == passwordConfirmation}
+              error={passwordConfirmation && password !== passwordConfirmation}
+            />
           </SoftBox>
         </SoftBox>
       </SoftBox>
