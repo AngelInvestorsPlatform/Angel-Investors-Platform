@@ -17,10 +17,14 @@ import { useState } from "react";
 
 // react-router-dom components
 import { Link } from "react-router-dom";
-
+import { Navigate } from "react-router-dom";
 // @mui material components
 import Card from "@mui/material/Card";
 import Checkbox from "@mui/material/Checkbox";
+import Grid from "@mui/material/Grid";
+
+//for user auth global context
+import { useAuthUser } from "context/authContext";
 
 // Soft UI Dashboard React components
 import SoftBox from "components/SoftBox";
@@ -28,6 +32,11 @@ import SoftTypography from "components/SoftTypography";
 import SoftInput from "components/SoftInput";
 import SoftButton from "components/SoftButton";
 import MultiAuthorsCard from "examples/Cards/BlogCards/MultiAuthorsCard";
+import Box from "@mui/material/Box";
+import CardContent from "@mui/material/CardContent";
+
+
+import Icon from "@mui/material/Icon";
 
 // Authentication layout components
 import BasicLayout from "layouts/landing/components/BasicLayout";
@@ -36,9 +45,27 @@ import BasicLayout from "layouts/landing/components/BasicLayout";
 import curved6 from "assets/images/curved-images/curved-city.png";
 
 function Welcome() {
-  const [agreement, setAgremment] = useState(true);
+  const { userRole, setUserRole, sessionId, csrfToken } = useAuthUser();
+  const [RedirectToUserIForm, setRedirectToUserIForm] = useState(false);
+  const [RedirectToUserSForm, setRedirectToUserSForm] = useState(false);
 
-  const handleSetAgremment = () => setAgremment(!agreement);
+  if (RedirectToUserIForm) {
+    return <Navigate to="/registers_forms/startups_form" />;
+  }
+
+  if (RedirectToUserSForm) {
+    return <Navigate to="/registers_forms/investor_form" />;
+  }
+
+  const handleStartup = async () => {
+    setUserRole("srartup");
+    setRedirectToUserIForm(true);
+
+  };
+  const handleInvestor = async () => {
+    setUserRole("investor");
+    setRedirectToUserSForm(true);
+  };
 
   return (
     <BasicLayout
@@ -52,11 +79,98 @@ function Welcome() {
           </SoftTypography>
         </SoftBox>
         <SoftBox p={1}  sx={{ textAlign: "center" }}>
-        <SoftBox mt={4} mb={5} >
-              <SoftButton variant="gradient" color="info"  style={{ width: '50%' }} circular component={Link}
+        <SoftBox mt={4} mb={5} id ="getStarted" >
+
+
+        <Grid container spacing={3} justifyContent="center" sx={{ textAlign: "center" }}>
+          <Grid item xs={10} lg={10} mb={8} align="center">
+            <SoftBox mt={10} mb={1}>
+              <SoftTypography
+                variant="h1"
+                color="info"
+                fontWeight="bold"
+                align="center"
+                textGradient
+              >
+                Are you new to the platform? 
+              </SoftTypography>
+            </SoftBox>
+            <SoftBox>
+              <SoftTypography variant="h3" color="info" fontWeight="regular" textGradient>
+              Lets work together to help you get the most out of your experience.!
+              </SoftTypography>
+            </SoftBox>
+          </Grid>
+        </Grid>
+
+        <Box component="ul" Align="left" sx={{ display: "flex", flexDirection: "row", gap: 2, p: 0, m: 0 }}>
+        <Card
+          component="li"
+          sx={{ width: "50%", flexGrow: 1 }}
+          style={{ backgroundColor: "#633974" }}
+        >
+          <SoftBox mb={2}> </SoftBox>{" "}
+          <CardContent>
+            <SoftBox mb={2} ml={0.5}>
+              <SoftTypography variant="h3" component="div" color="white">
+                Start as Startup{" "}
+              </SoftTypography>{" "}
+            </SoftBox>{" "}
+            <SoftTypography variant="body2" sx={{ fontSize: 20 }} color="white">
+              Log in now to discover exclusive opportunities, connect with investors, and take your
+              startup journey to the next level.
+            </SoftTypography>
+            <SoftBox mb={6}></SoftBox>
+            <SoftTypography level="body-lg" fontWeight="lg" color="info">
+              <SoftButton
+                //  variant = "gradient"
+                color="white"
+                style={{ width: "50%" }}
+                circular
+                onClick={handleStartup}
+              >
+                {" "}
+                {/* here put start up form */}
+                Get Started
+                <Icon sx={{ fontWeight: "bold" }}> arrow_forward </Icon>
+              </SoftButton>
+            </SoftTypography>{" "}
+          </CardContent>{" "}
+        </Card>{" "}
+        <Card component="li" sx={{ width: "50%", flexGrow: 1 }}>
+          <SoftBox mb={2}> </SoftBox>{" "}
+          <CardContent>
+            <SoftBox mb={2} ml={0.5}>
+              <SoftTypography variant="h3" component="div" color="info" textGradient>
+                Start as Investor{" "}
+              </SoftTypography>{" "}
+            </SoftBox>{" "}
+            <SoftTypography variant="body2" sx={{ fontSize: 20 }} color="text.secondary">
+              Join our club, meet other investors and start looking for exciting startups to invest
+              in
+            </SoftTypography>
+            <SoftBox mb={10}></SoftBox>
+            <SoftButton
+              variant="gradient"
+              color="info"
+              style={{ width: "50%" }}
+              circular
+              onClick={handleInvestor}
+            >
+              {" "}
+              {/* here put link path to investor form */}
+              Get Started <Icon sx={{ fontWeight: "bold" }}> arrow_forward </Icon>{" "}
+            </SoftButton>
+          </CardContent>{" "}
+        </Card>{" "}
+      </Box>{" "}
+      <SoftBox mb={20}></SoftBox>{" "}
+
+
+{/*               <SoftButton  variant="gradient" color="info"  style={{ width: '50%' }} circular component={Link}
             to="/authentication/Selection">
               Get Started! 
-              </SoftButton> { /*we can add here the link to the choose page (to choose if they are investors or a startups) */}
+              </SoftButton>*/}
             </SoftBox>
             </SoftBox>
 
