@@ -17,7 +17,7 @@ import { useState } from "react";
 
 // react-router-dom components
 import { Navigate  } from 'react-router-dom';
-import { Link } from "react-router-dom";
+import { HashLink as Link } from 'react-router-hash-link';
 
 //axios package for linking with API URLS
 import axios from "axios";
@@ -60,7 +60,7 @@ function SignUp() {
   const { userData, setUserData, isLoggedIn, setIsLoggedIn } = useAuthUser();
 
   if (redirectToSelect) {
-    return <Navigate to="/authentication/Selection" />;
+    return <Navigate to="/investor" />;
   }
 
   //The following codes to handle input validity using JavaScript
@@ -176,8 +176,8 @@ function SignUp() {
 
   return (
     <BasicLayout
-      title="Sign Up"
-      description="Join our community today and start exploring!"
+      title="Welcome back"
+      description="Enter your email and password to sign in"
       image={curved6}
     >
       {/*if register Success*/}
@@ -196,7 +196,7 @@ function SignUp() {
       <Card>
         <SoftBox p={3} mb={1} mt={1} textAlign="center">
           <SoftTypography variant="h5" fontWeight="medium">
-            Register Now
+          Sign In
           </SoftTypography>
         </SoftBox>
         {/*         <SoftBox mb={2}>
@@ -237,17 +237,7 @@ function SignUp() {
                 error={password && !validatePassword(password)}
               />
             </SoftBox>
-            <SoftBox mb={2}>
-              <SoftInput
-                type="password"
-                placeholder="Re-type Password"
-                name="passwordConfirmation"
-                value={passwordConfirmation}
-                onChange={handlePasswordConfirmationChange}
-                success={passwordConfirmation && password == passwordConfirmation}
-                error={passwordConfirmation && password !== passwordConfirmation}
-              />
-            </SoftBox>
+
 
             {/*<SoftBox mb={2} display="flex" alignItems="center">
               <SoftTypography
@@ -299,22 +289,22 @@ function SignUp() {
 
             <SoftBox mt={4} mb={1}>
               <SoftButton variant="gradient" color="info" fullWidth onClick={handleSignUp}>
-                sign up
+                sign In
               </SoftButton>
             </SoftBox>
 
             <SoftBox mt={3} textAlign="center">
               <SoftTypography variant="button" color="text" fontWeight="regular">
-                Already have an account?&nbsp;
+                Don not have an account ?&nbsp;
                 <SoftTypography
                   component={Link}
-                  to="/authentication/sign-in"
+                  to="/landing#getStarted"
                   variant="button"
                   color="dark"
                   fontWeight="bold"
                   textGradient
                 >
-                  Sign in
+                  Sign Up
                 </SoftTypography>
               </SoftTypography>
             </SoftBox>
