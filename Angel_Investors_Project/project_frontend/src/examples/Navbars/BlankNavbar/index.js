@@ -42,7 +42,7 @@ import BlankNavbarMobile from "examples/Navbars/BlankNavbar/BlankNavbarMobile";
 
 // Soft UI Dashboard React base styles
 import breakpoints from "assets/theme/base/breakpoints";
-import SoftAlert from "components/SoftAlert";
+import logoName from "assets/images/logo-name.svg";
 
 function BlankNavbar({ transparent, light, action }) {
   const [mobileNavbar, setMobileNavbar] = useState(false);
@@ -119,27 +119,22 @@ function BlankNavbar({ transparent, light, action }) {
           backdropFilter: transparent ? "none" : `saturate(200%) blur(30px)`,
         })}
       >
-        <SoftBox component={Link} to="/" py={transparent ? 1.5 : 0.75} lineHeight={1}>
-          <SoftTypography
-            variant="Body 1"
-            fontWeight="bold"
-            fontSize="large"
-            color={light ? "white" : "info"}
-          >
-            warQ
-          </SoftTypography>
-          <SoftTypography
-            variant="Body 1"
-            fontWeight="light"
-            fontSize="small"
-            style={{ marginLeft: "10px" }}
-            sx={{
-              color: ({ palette: { white, secondary } }) => (light ? white.main : secondary.main),
-              verticalAlign: "middle",
-            }}
-          >
-            Angel Investors platform
-          </SoftTypography>
+        <SoftBox component={Link} to="/" py={transparent ? 1.5 : 0.75} lineHeight={1}  display="flex" flexWrap="wrap">
+          <SoftBox justifyContent="center" component="img" src={logoName} alt="warQ" width="20%" />
+          <SoftBox mt={.5}>
+            <SoftTypography
+              variant="Body 1"
+              fontWeight="light"
+              fontSize="small"
+              style={{ marginLeft: "15px" }}
+              sx={{
+                color: ({ palette: { white, secondary } }) => (light ? white.main : secondary.main),
+                verticalAlign: "middle",
+              }}
+            >
+              Angel Investors platform
+            </SoftTypography>
+          </SoftBox>
         </SoftBox>
 
         {isLoggedIn ? (
@@ -161,7 +156,7 @@ function BlankNavbar({ transparent, light, action }) {
         )}
 
   
-        <SoftBox
+{/*         <SoftBox
           display={{ xs: "inline-block", lg: "none" }}
           lineHeight={0}
           py={1.5}
@@ -171,7 +166,7 @@ function BlankNavbar({ transparent, light, action }) {
           onClick={openMobileNavbar}
         >
           <Icon fontSize="Default">{mobileNavbar ? "close" : "menu"}</Icon>
-        </SoftBox>
+        </SoftBox> */}
       </SoftBox>
     </Container>
   );

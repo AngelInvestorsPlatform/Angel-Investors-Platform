@@ -14,7 +14,8 @@ Coded by www.creative-tim.com
 */
 
 // react-router-dom components
-import { Link } from "react-router-dom";
+// react-router components
+import { HashLink as Link } from 'react-router-hash-link';
 
 // prop-types is a library for typechecking of props
 import PropTypes from "prop-types";

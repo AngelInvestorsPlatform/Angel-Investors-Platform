@@ -18,15 +18,21 @@ import PropTypes from "prop-types";
 
 // @mui material components
 import Menu from "@mui/material/Menu";
-// import Grid from "@mui/material/Grid";
+// import Grid from "@mui/material/Grid"
+
+
 
 // Soft UI Dashboard React components
 import SoftBox from "components/SoftBox";
+
+//for user auth global context
+import { useAuthUser } from "context/authContext";
 
 // Soft UI Dashboard React examples
 import DefaultNavbarLink from "examples/Navbars/DefaultNavbar/DefaultNavbarLink";
 
 function DefaultNavbarMobile({ open, close }) {
+  const { userData, setUserData, isLoggedIn, setIsLoggedIn } = useAuthUser();
   const { width } = open && open.getBoundingClientRect();
 
   return (
@@ -46,10 +52,18 @@ function DefaultNavbarMobile({ open, close }) {
       MenuListProps={{ style: { width: `calc(${width}px - 4rem)` } }}
     >
       <SoftBox px={0.5}>
-        <DefaultNavbarLink icon="donut_large" name="dashboard" route="/dashboard" />
+      {isLoggedIn ? (
+        <>
+        <DefaultNavbarLink icon="donut_large" name="dashboard" route="/investor" />
         <DefaultNavbarLink icon="person" name="profile" route="/profile" />
-        <DefaultNavbarLink icon="account_circle" name="sign up" route="/authentication/sign-up" />
-        <DefaultNavbarLink icon="key" name="sign in" route="/authentication/sign-in" />
+        </>
+        ) : (
+          <>
+        <DefaultNavbarLink icon="account_circle" name="sign up" route="/landing#getStarted" />
+        <DefaultNavbarLink icon="key" name="sign in" route="/authentication/sign-up" />
+          </>
+
+        )}
       </SoftBox>
     </Menu>
   );

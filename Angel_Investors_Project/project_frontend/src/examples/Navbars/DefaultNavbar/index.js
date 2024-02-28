@@ -16,7 +16,7 @@ Coded by www.creative-tim.com
 import { useState, useEffect } from "react";
 
 // react-router components
-import { Link } from "react-router-dom";
+import { HashLink as Link } from 'react-router-hash-link';
 
 //for API
 import axios from "axios";
@@ -43,6 +43,7 @@ import DefaultNavbarMobile from "examples/Navbars/DefaultNavbar/DefaultNavbarMob
 // Soft UI Dashboard React base styles
 import breakpoints from "assets/theme/base/breakpoints";
 import SoftAlert from "components/SoftAlert";
+import logoName from "assets/images/logo-name.svg";
 
 function DefaultNavbar({ transparent, light, action }) {
   const [mobileNavbar, setMobileNavbar] = useState(false);
@@ -89,7 +90,6 @@ function DefaultNavbar({ transparent, light, action }) {
 
         setUserData(null); // Clear user data
         setIsLoggedIn(false); // Set login status to false
-        
       } else setLogError("Error : not logged out");
     } catch (errorX) {
       // Handle error, display appropriate message
@@ -119,27 +119,22 @@ function DefaultNavbar({ transparent, light, action }) {
           backdropFilter: transparent ? "none" : `saturate(200%) blur(30px)`,
         })}
       >
-        <SoftBox component={Link} to="/" py={transparent ? 1.5 : 0.75} lineHeight={1}>
-          <SoftTypography
-            variant="Body 1"
-            fontWeight="bold"
-            fontSize="large"
-            color={light ? "white" : "info"}
-          >
-            warQ
-          </SoftTypography>
-          <SoftTypography
-            variant="Body 1"
-            fontWeight="light"
-            fontSize="small"
-            style={{ marginLeft: "10px" }}
-            sx={{
-              color: ({ palette: { white, secondary } }) => (light ? white.main : secondary.main),
-              verticalAlign: "middle",
-            }}
-          >
-            Angel Investors platform
-          </SoftTypography>
+        <SoftBox component={Link} to="/" py={transparent ? 1.5 : 0.75} lineHeight={1}  display="flex" flexWrap="wrap">
+          <SoftBox justifyContent="center" component="img" src={logoName} alt="warQ" width="20%" />
+          <SoftBox mt={.5}>
+            <SoftTypography
+              variant="Body 1"
+              fontWeight="light"
+              fontSize="small"
+              style={{ marginLeft: "15px" }}
+              sx={{
+                color: ({ palette: { white, secondary } }) => (light ? white.main : secondary.main),
+                verticalAlign: "middle",
+              }}
+            >
+              Angel Investors platform
+            </SoftTypography>
+          </SoftBox>
         </SoftBox>
 
         {isLoggedIn ? (
@@ -189,7 +184,7 @@ function DefaultNavbar({ transparent, light, action }) {
             <DefaultNavbarLink
               icon="key"
               name="sign in"
-              route="/authentication/sign-in"
+              route="/authentication/sign-up"
               light={light}
             />
             {/*           <DefaultNavbarLink
@@ -201,10 +196,10 @@ function DefaultNavbar({ transparent, light, action }) {
             <SoftBox
               display={{ xs: "none", lg: "inline-block" }}
               component={Link}
-              to="/authentication/sign-up"
+              to="/landing#getStarted"
             >
               <SoftButton variant="gradient" color="info" size="medium" circular>
-                sign up&nbsp;
+                Get Started &nbsp;
                 <Icon>account_circle</Icon>
               </SoftButton>
             </SoftBox>
