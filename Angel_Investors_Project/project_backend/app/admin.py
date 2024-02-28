@@ -1,3 +1,7 @@
+# username: warQ
+# email: warQ@gmail.com
+# password: W17q9-3 
+
 from django.contrib import admin
 
 from .models import Investor, Startup
@@ -15,3 +19,6 @@ It can be accessed via the URL '/admin'
 
 admin.site.register(Investor)
 admin.site.register(Startup)
+
+
+
