@@ -9,7 +9,7 @@ from rest_framework.authtoken.models import Token
 class User(AbstractUser):
     ROLE_CHOICES = (
         ('investor', 'Investor'),
-        ('startup', 'sStartup'),  
+        ('startup', 'Startup'),  
     )
 
     role = models.CharField(max_length=15, choices=ROLE_CHOICES)
