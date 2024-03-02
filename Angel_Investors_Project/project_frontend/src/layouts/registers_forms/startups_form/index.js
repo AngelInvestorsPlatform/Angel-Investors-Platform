@@ -130,7 +130,7 @@ function startup_form() {
       });
   
       // If registration is successful, set user status to true
-      if (response1.status === 201) {
+      if (response1.status === 201 || response1.status === 200) {
         const Response2 = await axios.post(`${process.env.REACT_APP_DJANGO_API}form/Startup/`, {
           startup_name,
           startup_phone,
@@ -141,7 +141,7 @@ function startup_form() {
           startup_city,
           startup_web,
         });
-            if (Response2.status === 200) {
+            if (Response2.status === 200 || Response2.status === 201) {
                 setRegConfirm("successfully registered");
                 window.scrollTo({ top: 0, behavior: "smooth" });
               } else {
@@ -172,6 +172,12 @@ function startup_form() {
   const validatePassword = (password) => {
     const re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
     return re.test(password);
+  };
+
+  const validateURL = (url) => {
+    // Regular expression to check URL format
+    const urlPattern = /^(https?:\/\/)?([\w\-]+\.)*[\w\-]+[\.][A-Za-z]{2,63}(\/\S*)?$/;
+    return urlPattern.test(url);
   };
 
 
@@ -348,13 +354,13 @@ function startup_form() {
             <SoftTypography component="label" variant="caption" fontWeight="bold">
               Startup Stage <span style={{ color: "red" }}>*</span>
             </SoftTypography>
-            <SoftInput
+{/*             <SoftInput
               type="startup_stage"
               placeholder="Pre-seed, Seed, Series A or Series B ..."
               value={startup_stage}
               onChange={handleStartupStageChange}
-            />
-            {/* <select
+            /> */}
+             <select
               value={startup_stage}
               onChange={handleStartupStageChange}
               style={{
@@ -372,7 +378,7 @@ function startup_form() {
               <option value="Seed">Seed</option>
               <option value="Series A">Series A</option>
               <option value="Series B">Series B</option>
-            </select> */}
+            </select>
           </SoftBox>
           <SoftBox mb={2}>
             <SoftTypography component="label" variant="caption" fontWeight="bold">
@@ -419,14 +425,24 @@ function startup_form() {
             />
           </SoftBox>
           <SoftBox mb={2}>
+          <SoftBox mt={4} display="flex" justifyContent="space-between">
             <SoftTypography component="label" variant="caption" fontWeight="bold">
               Website
             </SoftTypography>
+            <Tooltip
+                title="should be valid website URL."
+                placement="right-start"
+              >
+                <Icon>error_outline</Icon>
+              </Tooltip>
+              </SoftBox>
             <SoftInput
-              type="text"
-              placeholder="www.website.com"
+              type="url"
+              placeholder="https://www.web.com/"
               value={startup_web}
               onChange={handleWebsiteChange}
+              success={startup_web && validateURL(startup_web)}
+              error={startup_web && !validateURL(startup_web)}
             />
           </SoftBox>
         </SoftBox>
