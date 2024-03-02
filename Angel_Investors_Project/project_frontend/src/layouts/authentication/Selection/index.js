@@ -25,7 +25,7 @@ import SelectionLayout from "../components/SelectionLayout";
 import SoftAlert from "components/SoftAlert";
 
 function choose() {
-  const { userRole, setUserRole, sessionId, csrfToken } = useAuthUser();
+  const { role, setrole, sessionId, csrfToken } = useAuthUser();
   const [logError, setLogError] = useState("");
   const [errorM, setError] = useState("");
   const [logConfirm, setLogConfirm] = useState("");
@@ -46,14 +46,14 @@ function choose() {
   }
 
   const handleStartup = async () => {
-    setUserRole("srartup");
+    setrole("srartup");
     setLogConfirm("The user role has been added successfully login");
     setRedirectToUserIForm(true);
 
     return <Navigate to="/registers_forms/startups_form" />;
   };
   const handleInvestor = async () => {
-    setUserRole("investor");
+    setrole("investor");
     setLogConfirm("The user role has been added successfully login");
     setRedirectToUserSForm(true);
   };

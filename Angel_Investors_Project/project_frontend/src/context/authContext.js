@@ -11,7 +11,7 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [userData, setUserData] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userRole, setUserRole]= useState(null);
+  const [role, setrole]= useState(null);
   const [sessionId, setSessionId] = useState(null);
   const [csrfToken, setCsrfToken] = useState(null);
 
@@ -20,15 +20,15 @@ export const AuthProvider = ({ children }) => {
    useEffect(() => {
     const storedUserData = localStorage.getItem('userData');
     const storedIsLoggedIn = localStorage.getItem('isLoggedIn');
-    const storedUserRole = localStorage.getItem('userRole');
+    const storedrole = localStorage.getItem('role');
     const sessionId = localStorage.getItem('sessionId');
     const csrfToken = localStorage.getItem('csrfToken');
 
 
-    if (storedUserData && storedIsLoggedIn  && storedUserRole) {
+    if (storedUserData && storedIsLoggedIn  && storedrole) {
       setUserData(JSON.parse(storedUserData));
       setIsLoggedIn(JSON.parse(storedIsLoggedIn));
-      setUserRole(JSON.parse(storedUserRole));
+      setrole(JSON.parse(storedrole));
     }
 
 
@@ -38,16 +38,16 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     localStorage.setItem('userData', JSON.stringify(userData));
     localStorage.setItem('isLoggedIn', JSON.stringify(isLoggedIn));
-    localStorage.setItem('userRole', JSON.stringify(userRole));
+    localStorage.setItem('role', JSON.stringify(role));
     localStorage.setItem('sessionId', sessionId);
     localStorage.setItem('csrfToken', csrfToken)
     
     
-  }, [userData, isLoggedIn, userRole, sessionId, csrfToken]);
+  }, [userData, isLoggedIn, role, sessionId, csrfToken]);
 
 
   return (
-    <AuthContext.Provider value={{ userData, setUserData, isLoggedIn, setIsLoggedIn , userRole, setUserRole, sessionId, setSessionId, csrfToken }}>
+    <AuthContext.Provider value={{ userData, setUserData, isLoggedIn, setIsLoggedIn , role, setrole, sessionId, setSessionId, csrfToken }}>
       {children}
     </AuthContext.Provider>
   );

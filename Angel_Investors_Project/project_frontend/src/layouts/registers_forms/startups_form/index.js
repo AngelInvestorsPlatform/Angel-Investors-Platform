@@ -18,6 +18,8 @@ import PropTypes from "prop-types";
 // @mui material components
 import Card from "@mui/material/Card";
 import Checkbox from "@mui/material/Checkbox";
+import Tooltip from "@mui/material/Tooltip";
+import Icon from "@mui/material/Icon";
 
 // Soft UI Dashboard React components
 import SoftBox from "components/SoftBox";
@@ -32,124 +34,133 @@ import CoverLayout from "layouts/registers_forms/components/CoverLayout";
 // Authentication layout components
 import BasicLayout from "layouts/authentication/components/BasicLayout";
 import Socials from "layouts/authentication/components/Socials";
-import Separator from "layouts/authentication/components/Separator";
+import Separator from "layouts/registers_forms/components/Separator";
 
 // Images
 import startup from "assets/images/curved-images/curved-city.png";
+import { Info } from "@mui/icons-material";
+import { dark } from "@mui/material/styles/createPalette";
 
 function startup_form() {
+  //form Data variables
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
-  const [agreement, setAgreement] = useState(false);
+  const [startup_name, setStartupName] = useState("");
+  const [startup_sector, setStartupSector] = useState("");
+  const [startup_stage, setStartupStage] = useState("");
+  const [startup_phone, setPhone] = useState("");
+  const [startup_team, setTeamSize] = useState("");
+  const [startup_country, setCountry] = useState("");
+  const [startup_city, setCity] = useState("");
+  const [startup_web, setWebsite] = useState("");
+
+  //error handling variables
+
   const [error, setError] = useState("");
   const [registerError, setRegError] = useState("");
   const [registerConfirm, setRegConfirm] = useState("");
-  const [redirectToSelect, setRedirectToSelect] = useState(false);
-  const { userData, setUserData, isLoggedIn, setIsLoggedIn } = useAuthUser();
+  const [errorMessage, setErrorMessage] =useState("");
 
-  if (redirectToSelect) {
+  //redirect variable
+  const [redirect, setRedirect] = useState(false);
+
+  // auth variables saving
+  const { userData, setUserData, isLoggedIn, setIsLoggedIn ,  role, setrole} = useAuthUser();
+
+  if (redirect) {
+    //Redirect To Dashboard
     return <Navigate to="/startup" />;
   }
 
   //The following codes to handle input validity using JavaScript
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
+  const handleEmailChange = (event) => setEmail(event.target.value);
+  const handlePasswordChange = (event) => setPassword(event.target.value);
+  const handlePasswordConfirmationChange = (event) =>setPasswordConfirmation(event.target.value);
 
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
-  };
-
-  const handlePasswordConfirmationChange = (event) => {
-    setPasswordConfirmation(event.target.value);
-  };
-
-  const handleAgreementChange = () => {
-    setAgreement(!agreement);
-  };
+  const handleStartupNameChange = (e) => setStartupName(e.target.value);
+  const handleStartupSectorChange = (e) => setStartupSector(e.target.value);
+  const handleStartupStageChange = (e) => setStartupStage(e.target.value);
+  const handlePhoneChange = (e) => setPhone(e.target.value);
+  const handleTeamSizeChange = (e) => setTeamSize(e.target.value);
+  const handleCountryChange = (e) => setCountry(e.target.value);
+  const handleCityChange = (e) => setCity(e.target.value);
+  const handleWebsiteChange = (e) => setWebsite(e.target.value);
 
   //on submit
-  const handleSignUp = async () => {
+  const handleSubmit = async () => {
     try {
       const DJANGO_API = process.env.REACT_APP_DJANGO_API;
-
+      setrole("startup")
+  
+      // Validate if all required fields are filled out
+      if (!email || !username || !password || !passwordConfirmation ||
+          !startup_name || !startup_sector || !startup_stage ||
+          !startup_team || !startup_country ) {
+        setError("fields are required.");
+        return;
+      }
+  
       // Verify if email is correct
       if (!validateEmail(email)) {
         setError("Please enter a valid email address.");
         return;
       }
-
+  
       // Verify if password meets requirements
       if (!validatePassword(password)) {
-        setError(
-          "Password must contain at least 8 characters, including uppercase, lowercase, and numbers."
-        );
+        setError("Password must contain at least 8 characters, including uppercase, lowercase, and numbers.");
         return;
       }
-
+  
       // Verify if password confirmation matches password
       if (password !== passwordConfirmation) {
         setError("Passwords do not match.");
         return;
       }
-
-      // Verify if terms agreement is checked
-      if (!agreement) {
-        setError("Must agree to the terms and conditions to start.");
-        return;
-      }
-
+      
+      setError("");
       // If all conditions are met, proceed with registration
-      const response = await axios.post(`${DJANGO_API}auth/register`, {
-        email: email,
-        username: username, // Setting username same as email
-        password: password,
+      const response1 = await axios.post(`${DJANGO_API}auth/register`, {
+         username,
+         email,
+         password,
+         role
       });
-
+  
       // If registration is successful, set user status to true
-      if (response.status === 201) {
-        setRegConfirm("successfully registered");
-
-        // After registration, login with the same credentials
-        const loginResponse = await axios.post(`${DJANGO_API}auth/login`, {
-          email: email,
-          username: username, // Setting username same as email
-          password: password,
+      if (response1.status === 201) {
+        const Response2 = await axios.post(`${process.env.REACT_APP_DJANGO_API}form/Startup/`, {
+          startup_name,
+          startup_phone,
+          startup_sector,
+          startup_stage,
+          startup_team,
+          startup_country,
+          startup_city,
+          startup_web,
         });
-
-        if (loginResponse.status === 200) {
-          // If login is successful, set user data and LoggedIn
-          setUserData({ email, username });
-          setIsLoggedIn(true);
-
-          // Redirect to Select
-          setRedirectToSelect(true);
-        } else {
-          let errorMessage = "Login failed. Please try again later.";
-
-          // Check if the response contains detailed error messages
-          if (loginResponse.data && loginResponse.data.username) {
-            // Extract the first error message for username field
-            errorMessage = loginResponse.data.username[0];
-          }
-
-          setRegError(errorMessage);
-        }
+            if (Response2.status === 200) {
+                setRegConfirm("successfully registered");
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              } else {
+              let errorMessageY = "Registration failed. Please try again later.";
+              setErrorMessage(errorMessageY);}
+            // Check if the response contains detailed error messages
       } else {
-        let errorMessage = "Registration failed. Please try again later.";
-
-        // Check if the response contains detailed error messages
-        if (response.data && response.data.username) {
           // Extract the first error message for username field
-          errorMessage = response.data.username[0];
+          //400 58
+        if (response1.data.username) {
+          // Extract the first error message for username field
+          let errorMessageX = response1.data.username[0];
+          setErrorMessage(errorMessageX)
         }
-
-        setRegError(errorMessage);
+        
       }
     } catch (errorX) {
-      setRegError("Failed: " + errorX.message);
+      setRegError( "Failed: " + errorX.message);
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
 
@@ -163,64 +174,14 @@ function startup_form() {
     return re.test(password);
   };
 
-  const [startup_name, setStartupName] = useState("");
-  const [startup_sector, setStartupSector] = useState("");
-  const [startup_stage, setStartupStage] = useState("");
-  const [startup_phone, setPhone] = useState("");
-  const [startup_team, setTeamSize] = useState("");
-  const [startup_country, setCountry] = useState("");
-  const [startup_city, setCity] = useState("");
-  const [startup_web, setWebsite] = useState("");
-
-  //for error alert
-  const [Confirm, setConfirm] = useState("");
-  const [RedirectToDashboard, setRedirectToDashboard] = useState(false);
-
-  const handleStartupNameChange = (e) => setStartupName(e.target.value);
-  const handleStartupSectorChange = (e) => setStartupSector(e.target.value);
-  const handleStartupStageChange = (e) => setStartupStage(e.target.value);
-  const handlePhoneChange = (e) => setPhone(e.target.value);
-  const handleTeamSizeChange = (e) => setTeamSize(e.target.value);
-  const handleCountryChange = (e) => setCountry(e.target.value);
-  const handleCityChange = (e) => setCity(e.target.value);
-  const handleWebsiteChange = (e) => setWebsite(e.target.value);
-
-  if (RedirectToDashboard) {
-    return <Navigate to="/startup" />;
-    //It needs to be modified according to the role type of the user
-  }
-
-  const handleStartupForm = async () => {
-    try {
-      const Response = await axios.post(`${process.env.REACT_APP_DJANGO_API}form/Startup/`, {
-        startup_name,
-        startup_phone,
-        startup_sector,
-        startup_stage,
-        startup_team,
-        startup_country,
-        startup_city,
-        startup_web,
-      });
-      if (Response.status === 200) {
-        setConfirm("Data add successfully ");
-        // Redirect to dashboard
-        setRedirectToDashboard(true);
-      } else {
-        setError("Failed");
-      }
-    } catch (errorX) {
-      // Handle error, display appropriate message
-      setError(" Add Failed: " + errorX.message);
-    }
-  };
 
   return (
     <CoverLayout
-      title="Startup Resgistration"
+      title="Startup Registration"
       description="Let's get to know you better!"
       image={startup}
     >
+      {/* Alert Box */}
       {/*if register Success*/}
       {registerConfirm && (
         <SoftAlert fontSize="small" color="success" mt={2} dismissible>
@@ -235,29 +196,15 @@ function startup_form() {
         </SoftAlert>
       )}
 
-      {/* Alert Box */}
-      <SoftBox>
-        {/*if Success*/}
-        {Confirm && (
-          <SoftAlert fontSize="small" color="success" mt={2} dismissible>
-            {Confirm}
-          </SoftAlert>
-        )}
-
-        {/*if Fail*/}
-        {Error && (
-          <SoftAlert fontSize="small" color="error" mt={2} dismissible>
-            {Error}
-          </SoftAlert>
-        )}
-      </SoftBox>
-
+      
+      <Separator title="User Data " />
       <SoftBox component="form" role="form" width="100" display="flex" flex="row" flexWrap="wrap">
         {/* First Column */}
+
         <SoftBox flex="0 0 48%" mr={2} mb={3}>
           <SoftBox mb={2}>
             <SoftTypography component="label" variant="caption" fontWeight="bold">
-              Username
+              Username <span style={{ color: "red" }}>*</span>
             </SoftTypography>
             <SoftInput
               type="text"
@@ -269,7 +216,7 @@ function startup_form() {
           </SoftBox>
           <SoftBox mb={2}>
             <SoftTypography component="label" variant="caption" fontWeight="bold">
-              Email
+              Email <span style={{ color: "red" }}>*</span>
             </SoftTypography>
             <SoftInput
               type="email"
@@ -281,10 +228,55 @@ function startup_form() {
               error={email && !validateEmail(email)}
             />
           </SoftBox>
-
+        </SoftBox>
+        {/* Second Column */}
+        <SoftBox flex="0 0 48%" mb={3}>
+          <SoftBox mb={2}>
+            <SoftBox mt={2} display="flex" justifyContent="space-between">
+              <SoftTypography component="label" variant="caption" fontWeight="bold">
+                Password <span style={{ color: "red" }}>*</span>
+              </SoftTypography>
+              <Tooltip
+                title="Password must contain at least 8 characters, including uppercase, lowercase, and numbers."
+                placement="right-start"
+              >
+                <Icon>error_outline</Icon>
+              </Tooltip>
+            </SoftBox>
+            <SoftInput
+              type="password"
+              placeholder="Password"
+              name="password"
+              value={password}
+              onChange={handlePasswordChange}
+              success={password && validatePassword(password)}
+              error={password && !validatePassword(password)}
+            />
+          </SoftBox>
           <SoftBox mb={2}>
             <SoftTypography component="label" variant="caption" fontWeight="bold">
-              Startup Name
+              Re-type Password <span style={{ color: "red" }}>*</span>
+            </SoftTypography>
+            <SoftInput
+              type="password"
+              placeholder="Re-type Password"
+              name="passwordConfirmation"
+              value={passwordConfirmation}
+              onChange={handlePasswordConfirmationChange}
+              success={passwordConfirmation && password == passwordConfirmation}
+              error={passwordConfirmation && password !== passwordConfirmation}
+            />
+          </SoftBox>
+        </SoftBox>
+      </SoftBox>
+
+      <Separator title="Startup Company Data " />
+      <SoftBox component="form" role="form" width="100" display="flex" flex="row" flexWrap="wrap">
+        {/* third Column */}
+        <SoftBox flex="0 0 48%" mr={2} mb={3}>
+          <SoftBox mb={2}>
+            <SoftTypography component="label" variant="caption" fontWeight="bold">
+              Startup Name <span style={{ color: "red" }}>*</span>
             </SoftTypography>
             <SoftInput
               type="text"
@@ -297,7 +289,7 @@ function startup_form() {
           </SoftBox>
           <SoftBox mb={2}>
             <SoftTypography component="label" variant="caption" fontWeight="bold">
-              Team Size
+              Team Size <span style={{ color: "red" }}>*</span>
             </SoftTypography>
             <SoftInput
               type="text"
@@ -319,7 +311,7 @@ function startup_form() {
           </SoftBox>
           <SoftBox mb={2}>
             <SoftTypography component="label" variant="caption" fontWeight="bold">
-              Startup Sector
+              Startup Sector <span style={{ color: "red" }}>*</span>
             </SoftTypography>
             <select
               value={startup_sector}
@@ -350,12 +342,11 @@ function startup_form() {
           </SoftBox>
         </SoftBox>
 
-        {/* Second Column */}
+        {/* forth Column */}
         <SoftBox flex="0 0 48%" mb={3}>
-      
           <SoftBox mb={2}>
             <SoftTypography component="label" variant="caption" fontWeight="bold">
-              Startup Stage
+              Startup Stage <span style={{ color: "red" }}>*</span>
             </SoftTypography>
             <SoftInput
               type="startup_stage"
@@ -385,7 +376,7 @@ function startup_form() {
           </SoftBox>
           <SoftBox mb={2}>
             <SoftTypography component="label" variant="caption" fontWeight="bold">
-              Country
+              Country <span style={{ color: "red" }}>*</span>
             </SoftTypography>
             <select
               value={startup_country}
@@ -438,43 +429,12 @@ function startup_form() {
               onChange={handleWebsiteChange}
             />
           </SoftBox>
-          <SoftBox mb={2}>
-            <SoftTypography component="label" variant="caption" fontWeight="bold">
-              Password
-            </SoftTypography>
-            <SoftInput
-              type="password"
-              placeholder="Password"
-              name="password"
-              value={password}
-              onChange={handlePasswordChange}
-              success={password && validatePassword(password)}
-              error={password && !validatePassword(password)}
-            />
-          </SoftBox>
-          <SoftBox mb={2}>
-            <SoftTypography component="label" variant="caption" fontWeight="bold">
-              Re-type Password
-            </SoftTypography>
-            <SoftInput
-              type="password"
-              placeholder="Re-type Password"
-              name="passwordConfirmation"
-              value={passwordConfirmation}
-              onChange={handlePasswordConfirmationChange}
-              success={passwordConfirmation && password == passwordConfirmation}
-              error={passwordConfirmation && password !== passwordConfirmation}
-            />
-          </SoftBox>
         </SoftBox>
       </SoftBox>
-      <SoftBox mt={4} mb={1}>
-        <SoftButton 
-        variant="gradient" 
-        color="info" 
-        circular 
-        fullWidth 
-        onClick={handleStartupForm}>
+      {error && (<SoftTypography component="label" variant="caption" fontWeight="regular" color="error">* {error}</SoftTypography>)}
+      
+      <SoftBox  mt={4} mb={1}>
+        <SoftButton variant="gradient" color="info" circular fullWidth onClick={handleSubmit}>
           Submit
         </SoftButton>
       </SoftBox>

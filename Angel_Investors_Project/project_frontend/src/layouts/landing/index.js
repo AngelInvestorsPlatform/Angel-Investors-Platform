@@ -45,7 +45,7 @@ import BasicLayout from "layouts/landing/components/BasicLayout";
 import curved6 from "assets/images/curved-images/curved-city.png";
 
 function Welcome() {
-  const { userRole, setUserRole, sessionId, csrfToken } = useAuthUser();
+  const { role, setrole, sessionId, csrfToken } = useAuthUser();
   const [RedirectToUserIForm, setRedirectToUserIForm] = useState(false);
   const [RedirectToUserSForm, setRedirectToUserSForm] = useState(false);
 
@@ -58,12 +58,12 @@ function Welcome() {
   }
 
   const handleStartup = async () => {
-    setUserRole("srartup");
+    setrole("srartup");
     setRedirectToUserIForm(true);
 
   };
   const handleInvestor = async () => {
-    setUserRole("investor");
+    setrole("investor");
     setRedirectToUserSForm(true);
   };
 

@@ -13,6 +13,10 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
+
+// prop-types is a library for typechecking of props
+import PropTypes from "prop-types";
+
 // @mui material components
 import Divider from "@mui/material/Divider";
 
@@ -20,7 +24,7 @@ import Divider from "@mui/material/Divider";
 import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
 
-function Separator() {
+function Separator({title}) {
   return (
     <SoftBox position="relative" py={0.25}>
       <Divider />
@@ -34,11 +38,19 @@ function Separator() {
         sx={{ transform: "translate(-50%, -60%)" }}
       >
         <SoftTypography variant="button" fontWeight="medium" color="secondary">
-          or
+        {title}
         </SoftTypography>
       </SoftBox>
     </SoftBox>
   );
 }
+
+Separator.defaultProps = {
+  title: "",
+};
+
+Separator.propTypes = {
+  title: PropTypes.string,
+};
 
 export default Separator;

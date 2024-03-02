@@ -9,6 +9,8 @@ import { Navigate } from "react-router-dom";
 
 // @mui material components
 import Switch from "@mui/material/Switch";
+import Tooltip from "@mui/material/Tooltip";
+import Icon from "@mui/material/Icon";
 
 //for user auth global context
 import { useAuthUser } from "context/authContext";
@@ -21,48 +23,75 @@ import SoftButton from "components/SoftButton";
 
 // registers_forms layout components
 import CoverLayout from "layouts/registers_forms/components/CoverLayout";
+import Separator from "layouts/registers_forms/components/Separator";
 
 // Images
 import investor from "assets/images/investor.jpg.webp";
 import SoftAlert from "components/SoftAlert";
 
 function InvestorForm() {
+  //form Data variables
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
-  const [agreement, setAgreement] = useState(false);
+  const [investor_name, setName] = useState("");
+  const [investor_phone, setPhone] = useState("");
+  const [investor_country, setCountry] = useState("");
+  const [investor_sector, setSector] = useState("");
+  const [investor_experience, setExperience] = useState("");
+  const [investor_income, setIncome] = useState("");
+
+  //error handling variables
+
   const [error, setError] = useState("");
   const [registerError, setRegError] = useState("");
   const [registerConfirm, setRegConfirm] = useState("");
-  const [redirectToSelect, setRedirectToSelect] = useState(false);
-  const { userData, setUserData, isLoggedIn, setIsLoggedIn } = useAuthUser();
+  const [errorMessage, setErrorMessage] = useState("");
 
-  if (redirectToSelect) {
+  //redirect variable
+  const [redirect, setRedirect] = useState(false);
+
+  // auth variables saving
+  const { userData, setUserData, isLoggedIn, setIsLoggedIn, role, setrole } = useAuthUser();
+
+  if (redirect) {
+    //Redirect To Dashboard
     return <Navigate to="/investor" />;
   }
 
   //The following codes to handle input validity using JavaScript
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
+  const handleEmailChange = (event) => setEmail(event.target.value);
+  const handlePasswordChange = (event) => setPassword(event.target.value);
+  const handlePasswordConfirmationChange = (event) => setPasswordConfirmation(event.target.value);
 
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
-  };
-
-  const handlePasswordConfirmationChange = (event) => {
-    setPasswordConfirmation(event.target.value);
-  };
-
-  const handleAgreementChange = () => {
-    setAgreement(!agreement);
-  };
+  const handleNameChange = (e) => setName(e.target.value);
+  const handlePhoneChange = (e) => setPhone(e.target.value);
+  const handleCountryChange = (e) => setCountry(e.target.value);
+  const handleSectorChange = (e) => setSector(e.target.value);
+  const handleExperienceChange = (e) => setExperience(e.target.value);
+  const handleIncomeChange = (e) => setIncome(e.target.value);
 
   //on submit
-  const handleSignUp = async () => {
+  const handleSubmit = async () => {
     try {
       const DJANGO_API = process.env.REACT_APP_DJANGO_API;
+      setrole("investor");
+
+      // Validate if all required fields are filled out
+      if (
+        !email ||
+        !username ||
+        !password ||
+        !passwordConfirmation ||
+        !investor_name ||
+        !investor_sector ||
+        !investor_experience ||
+        !investor_income
+      ) {
+        setError("fields are required.");
+        return;
+      }
 
       // Verify if email is correct
       if (!validateEmail(email)) {
@@ -84,61 +113,45 @@ function InvestorForm() {
         return;
       }
 
-      // Verify if terms agreement is checked
-      if (!agreement) {
-        setError("Must agree to the terms and conditions to start.");
-        return;
-      }
-
+      setError("");
       // If all conditions are met, proceed with registration
-      const response = await axios.post(`${DJANGO_API}auth/register`, {
-        email: email,
-        username: username, // Setting username same as email
-        password: password,
+      const response1 = await axios.post(`${DJANGO_API}auth/register`, {
+        username,
+        email,
+        password,
+        role,
       });
 
       // If registration is successful, set user status to true
-      if (response.status === 201) {
-        setRegConfirm("successfully registered");
-
-        // After registration, login with the same credentials
-        const loginResponse = await axios.post(`${DJANGO_API}auth/login`, {
-          email: email,
-          username: username, // Setting username same as email
-          password: password,
+      if (response1.status === 201) {
+        const Response2 = await axios.post(`${process.env.REACT_APP_DJANGO_API}form/Investors/`, {
+          investor_name,
+          investor_phone,
+          investor_country,
+          investor_sector,
+          investor_experience,
+          investor_income,
         });
-
-        if (loginResponse.status === 200) {
-          // If login is successful, set user data and LoggedIn
-          setUserData({ email, username });
-          setIsLoggedIn(true);
-
-          // Redirect to Select
-          setRedirectToSelect(true);
+        if (Response2.status === 200) {
+          setRegConfirm("successfully registered");
+          window.scrollTo({ top: 0, behavior: "smooth" });
         } else {
-          let errorMessage = "Login failed. Please try again later.";
-
-          // Check if the response contains detailed error messages
-          if (loginResponse.data && loginResponse.data.username) {
-            // Extract the first error message for username field
-            errorMessage = loginResponse.data.username[0];
-          }
-
-          setRegError(errorMessage);
+          let errorMessageY = "Registration failed. Please try again later.";
+          setErrorMessage(errorMessageY);
         }
-      } else {
-        let errorMessage = "Registration failed. Please try again later.";
-
         // Check if the response contains detailed error messages
-        if (response.data && response.data.username) {
+      } else {
+        // Extract the first error message for username field
+        //400 58
+        if (response1.data.username) {
           // Extract the first error message for username field
-          errorMessage = response.data.username[0];
+          let errorMessageX = response1.data.username[0];
+          setErrorMessage(errorMessageX);
         }
-
-        setRegError(errorMessage);
       }
     } catch (errorX) {
       setRegError("Failed: " + errorX.message);
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
 
@@ -152,76 +165,29 @@ function InvestorForm() {
     return re.test(password);
   };
 
-  const [investor_name, setName] = useState("");
-  const [investor_phone, setPhone] = useState("");
-  const [investor_country, setCountry] = useState("");
-  const [investor_sector, setSector] = useState("");
-  const [investor_experience, setExperience] = useState("");
-  const [investor_income, setIncome] = useState("");
-
-  //for error alert
-  const [Confirm, setConfirm]= useState("");
-  const [RedirectToDashboard, setRedirectToDashboard] = useState(false);
-
-  const handleNameChange = (e) => setName(e.target.value);
-  const handlePhoneChange = (e) => setPhone(e.target.value);
-  const handleCountryChange = (e) => setCountry(e.target.value);
-  const handleSectorChange = (e) => setSector(e.target.value);
-  const handleExperienceChange = (e) => setExperience(e.target.value);
-  const handleIncomeChange = (e) => setIncome(e.target.value);
-
-  if (RedirectToDashboard) {
-    return <Navigate to="/investor" />;
-    //It needs to be modified according to the role type of the user
-  }
-
-  const handleInvestorForm = async () => {
-    try {
-      const Response = await axios.post(`${process.env.REACT_APP_DJANGO_API}form/Investors/`, {
-        investor_name,
-        investor_phone,
-        investor_country,
-        investor_sector,
-        investor_experience,
-        investor_income,
-      });
-      if (Response.status === 200) {
-          setConfirm("Data add successfully ");
-          // Redirect to dashboard
-          setRedirectToDashboard(true);
-        
-      } else {
-        setError("Failed");  }
-      } catch (errorX) {
-      // Handle error, display appropriate message
-      setError(" Add Failed: " + errorX.message);
-    }
-  };
-
   return (
-    <CoverLayout title="Investor Form" description="Let's get to know you better!" image={investor}>
+    <CoverLayout title="Investor Registration" description="Let's get to know you better!" image={investor}>
       {/* Alert Box */}
-      <SoftBox>
-       {/*if Success*/}
-       {Confirm && (
-          <SoftAlert fontSize="small" color="success" mt={2} dismissible>
-            {Confirm}
-          </SoftAlert>
-        )}
+      {/*if register Success*/}
+      {registerConfirm && (
+        <SoftAlert fontSize="small" color="success" mt={2} dismissible>
+          {registerConfirm}
+        </SoftAlert>
+      )}
 
-        {/*if Fail*/}
-        {Error && (
-          <SoftAlert fontSize="small" color="error" mt={2} dismissible>
-            {Error}
-          </SoftAlert>
-        )}
-        </SoftBox>
+      {/*if register Fail*/}
+      {registerError && (
+        <SoftAlert fontSize="small" color="error" mt={2} dismissible>
+          {registerError}
+        </SoftAlert>
+      )}
+      <Separator title="User Data " />
       <SoftBox component="form" role="form" width="100" display="flex" flexWrap="wrap">
         {/* First Column */}
         <SoftBox flex="0 0 48%" mr={2} mb={3}>
-        <SoftBox mb={2}>
+          <SoftBox mb={2}>
             <SoftTypography component="label" variant="caption" fontWeight="bold">
-              Username
+              Username <span style={{ color: "red" }}>*</span>
             </SoftTypography>
             <SoftInput
               type="text"
@@ -233,7 +199,7 @@ function InvestorForm() {
           </SoftBox>
           <SoftBox mb={2}>
             <SoftTypography component="label" variant="caption" fontWeight="bold">
-              Email
+              Email <span style={{ color: "red" }}>*</span>
             </SoftTypography>
             <SoftInput
               type="email"
@@ -245,10 +211,56 @@ function InvestorForm() {
               error={email && !validateEmail(email)}
             />
           </SoftBox>
+        </SoftBox>
+        {/* Second Column */}
 
+        <SoftBox flex="0 0 48%" mb={3}>
+          <SoftBox mb={2}>
+            <SoftBox mt={2} display="flex" justifyContent="space-between">
+              <SoftTypography component="label" variant="caption" fontWeight="bold">
+                Password <span style={{ color: "red" }}>*</span>
+              </SoftTypography>
+              <Tooltip
+                title="Password must contain at least 8 characters, including uppercase, lowercase, and numbers."
+                placement="right-start"
+              >
+                <Icon>error_outline</Icon>
+              </Tooltip>
+            </SoftBox>
+            <SoftInput
+              type="password"
+              placeholder="Password"
+              name="password"
+              value={password}
+              onChange={handlePasswordChange}
+              success={password && validatePassword(password)}
+              error={password && !validatePassword(password)}
+            />
+          </SoftBox>
           <SoftBox mb={2}>
             <SoftTypography component="label" variant="caption" fontWeight="bold">
-              Name
+              Re-type Password <span style={{ color: "red" }}>*</span>
+            </SoftTypography>
+            <SoftInput
+              type="password"
+              placeholder="Re-type Password"
+              name="passwordConfirmation"
+              value={passwordConfirmation}
+              onChange={handlePasswordConfirmationChange}
+              success={passwordConfirmation && password == passwordConfirmation}
+              error={passwordConfirmation && password !== passwordConfirmation}
+            />
+          </SoftBox>
+        </SoftBox>
+      </SoftBox>
+
+      <Separator title="Investor Data " />
+      <SoftBox component="form" role="form" width="100" display="flex" flex="row" flexWrap="wrap">
+        {/* third Column */}
+        <SoftBox flex="0 0 48%" mr={2} mb={3}>
+          <SoftBox mb={2}>
+            <SoftTypography component="label" variant="caption" fontWeight="bold">
+              Name <span style={{ color: "red" }}>*</span>
             </SoftTypography>
             <SoftInput
               type="text"
@@ -305,11 +317,11 @@ function InvestorForm() {
           </SoftBox>
         </SoftBox>
 
-        {/* Second Column */}
+        {/* forth Column */}
         <SoftBox flex="0 0 48%" mb={3}>
           <SoftBox mb={2}>
             <SoftTypography component="label" variant="caption" fontWeight="bold">
-              Sector
+              Sector <span style={{ color: "red" }}>*</span>
             </SoftTypography>
             <select
               value={investor_sector}
@@ -340,7 +352,7 @@ function InvestorForm() {
           </SoftBox>
           <SoftBox mb={2}>
             <SoftTypography component="label" variant="caption" fontWeight="bold">
-              Experience
+              Experience <span style={{ color: "red" }}>*</span>
             </SoftTypography>
             <select
               value={investor_experience}
@@ -366,7 +378,7 @@ function InvestorForm() {
           </SoftBox>
           <SoftBox mb={2}>
             <SoftTypography component="label" variant="caption" fontWeight="bold">
-              Income
+              Income <span style={{ color: "red" }}>*</span>
             </SoftTypography>
             <select
               value={investor_income}
@@ -392,44 +404,16 @@ function InvestorForm() {
               <option value="More than 900k">More than 900k</option>
             </select>
           </SoftBox>
-          <SoftBox mb={2}>
-            <SoftTypography component="label" variant="caption" fontWeight="bold">
-              Password
-            </SoftTypography>
-            <SoftInput
-              type="password"
-              placeholder="Password"
-              name="password"
-              value={password}
-              onChange={handlePasswordChange}
-              success={password && validatePassword(password)}
-              error={password && !validatePassword(password)}
-            />
-          </SoftBox>
-          <SoftBox mb={2}>
-            <SoftTypography component="label" variant="caption" fontWeight="bold">
-              Re-type Password
-            </SoftTypography>
-            <SoftInput
-              type="password"
-              placeholder="Re-type Password"
-              name="passwordConfirmation"
-              value={passwordConfirmation}
-              onChange={handlePasswordConfirmationChange}
-              success={passwordConfirmation && password == passwordConfirmation}
-              error={passwordConfirmation && password !== passwordConfirmation}
-            />
-          </SoftBox>
         </SoftBox>
       </SoftBox>
+      {error && (
+        <SoftTypography component="label" variant="caption" fontWeight="regular" color="error">
+          * {error}
+        </SoftTypography>
+      )}
+
       <SoftBox mt={4} mb={1}>
-        <SoftButton
-          variant="gradient"
-          color="info"
-          fullWidth
-          circular
-          onClick={handleInvestorForm}
-        >
+        <SoftButton variant="gradient" color="info" fullWidth circular onClick={handleSubmit}>
           submit
         </SoftButton>
       </SoftBox>
