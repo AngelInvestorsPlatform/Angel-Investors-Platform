@@ -52,6 +52,13 @@ import Startup from "layouts/startup"
 import Investor from "layouts/investor"
 
 
+//import investor page component 
+import YourSyndicate from "layouts/investor/pageComponents/YourSyndicates";
+import YourDeals from "layouts/investor/pageComponents/YourDeals";
+import ExploreSyndicate from "layouts/investor/pageComponents/ExploreSyndicate";
+import InvestorProfile from "layouts/investor/InvestorProfile";
+
+
 // Soft UI Dashboard React icons
 import Shop from "examples/Icons/Shop";
 import Office from "examples/Icons/Office";
@@ -192,6 +199,42 @@ const routes = [
         component: < Investor / > ,
         noCollapse: true,
     },
+    {
+    type: "collapse",
+    name: "Your Syndicates",
+    key: "YourSyndicates",
+    route:"/investor/yourSyndicates",
+    icon: <Shop size="12px"/>,
+    component: < YourSyndicate />,
+    noCollapse: true,
+  },
+    {
+    type: "collapse",
+    name: "Your Deals",
+    key: "YourDeals",
+    route: "/investor/YourDeals",
+    icon: <Document size="12px" />,
+    component: < YourDeals />,
+    noCollapse: true,
+  },
+  {
+    type: "collapse",
+    name: "Explore Syndicate",
+    key: "ExploreSyndicate",
+    route: "/investor/ExploreSyndicate",
+    icon: <SpaceShip size="12px" />,
+    component: < ExploreSyndicate />,
+    noCollapse: true,
+  },
+    {
+    type: "collapse",
+    name: "Investor Profile",
+    key: "InvestorProfile",
+    route: "/investor/profile",
+    icon: <CustomerSupport size="12px" />,
+    component: < InvestorProfile />,
+    noCollapse: true,
+  },
 ];
 
 export default routes;

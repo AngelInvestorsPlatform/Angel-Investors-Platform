@@ -43,7 +43,7 @@ import sidenavLogoLabel from "examples/Sidenav/styles/sidenav";
 // Soft UI Dashboard React context
 import { useSoftUIController, setMiniSidenav } from "context";
 
-function Sidenav({ color, brand, brandName, routes, ...rest }) {
+function Sidenav({ color, mainPage, brand, brandName, routes, ...rest }) {
   const [controller, dispatch] = useSoftUIController();
   const { miniSidenav, transparentSidenav } = controller;
   const location = useLocation();
@@ -113,7 +113,7 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
           textTransform="uppercase"
           opacity={0.6}
           pl={3}
-          mt={2}
+          mt={10}
           mb={1}
           ml={1}
         >
@@ -143,13 +143,13 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
             <Icon sx={{ fontWeight: "bold" }}>close</Icon>
           </SoftTypography>
         </SoftBox>
-        <SoftBox component={NavLink} to="/" display="flex" alignItems="center">
-          {brand && <SoftBox component="img" src={brand} alt="Soft UI Logo" width="2rem" />}
+        <SoftBox component={NavLink} to={mainPage} display="flex" alignItems="center">
+          {brand && <SoftBox component="img" src={brand} alt="UI Logo" width="4rem" />}
           <SoftBox
             width={!brandName && "100%"}
             sx={(theme) => sidenavLogoLabel(theme, { miniSidenav })}
           >
-            <SoftTypography component="h6" variant="button" fontWeight="medium">
+            <SoftTypography component="h6" variant="button" fontWeight="medium" sx={{ fontSize: "0.8rem"  }}>
               {brandName}
             </SoftTypography>
           </SoftBox>
@@ -181,12 +181,14 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
 Sidenav.defaultProps = {
   color: "info",
   brand: "",
+  mainPage: "/"
 };
 
 // Typechecking props for the Sidenav
 Sidenav.propTypes = {
   color: PropTypes.oneOf(["primary", "secondary", "info", "success", "warning", "error", "dark"]),
   brand: PropTypes.string,
+  mainPage: PropTypes.string,
   brandName: PropTypes.string.isRequired,
   routes: PropTypes.arrayOf(PropTypes.object).isRequired,
 };

@@ -11,7 +11,10 @@ Coded by www.creative-tim.com
  =========================================================
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
+**/
+
+
+import { NavLink } from 'react-router-dom'; 
 
 // @mui material components
 import Grid from "@mui/material/Grid";
@@ -23,7 +26,7 @@ import SoftTypography from "components/SoftTypography";
 
 // Soft UI Dashboard React examples
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-import DashboardNavbar from "examples/Navbars/DashboardNavbar";
+import DashboardNavbar from 'examples/Navbars/DashboardNavbar';
 import Footer from "examples/Footer";
 import MiniStatisticsCard from "examples/Cards/StatisticsCards/MiniStatisticsCard";
 import ReportsBarChart from "examples/Charts/BarCharts/ReportsBarChart";
@@ -32,24 +35,27 @@ import GradientLineChart from "examples/Charts/LineCharts/GradientLineChart";
 // Soft UI Dashboard React base styles
 import typography from "assets/theme/base/typography";
 
-// Dashboard layout components
+// Investor layout components
 import BuildByDevelopers from "layouts/investor/components/BuildByDevelopers";
 import WorkWithTheRockets from "layouts/investor/components/WorkWithTheRockets";
 import Projects from "layouts/investor/components/Projects";
 import OrderOverview from "layouts/investor/components/OrderOverview";
-// import DashboardNavbar from "layouts/investor/components/Navbars/DashboardNavbar";
+import InvestorNavbar from 'layouts/investor/components/InvestorNavbar';
 
 // Data
 import reportsBarChartData from "layouts/investor/data/reportsBarChartData";
 import gradientLineChartData from "layouts/investor/data/gradientLineChartData";
 
-function Dashboard() {
+
+
+function InvestorDashboard() {
   const { size } = typography;
   const { chart, items } = reportsBarChartData;
 
   return (
     <DashboardLayout>
-      <DashboardNavbar />
+    <DashboardNavbar/>
+     <InvestorNavbar/>
       <SoftBox py={3}>
         <SoftBox mb={3}>
           <Grid container spacing={3}>
@@ -150,4 +156,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+export default InvestorDashboard;
