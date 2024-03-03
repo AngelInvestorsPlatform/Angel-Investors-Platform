@@ -154,7 +154,7 @@ function startup_form() {
         if (response1.data.username) {
           // Extract the first error message for username field
           let errorMessageX = response1.data.username[0];
-          setErrorMessage(errorMessageX)
+          setErrorMessage(errorMessageX);
         }
         
       }
@@ -276,7 +276,7 @@ function startup_form() {
         </SoftBox>
       </SoftBox>
 
-      <Separator title="Startup Company Data " />
+      <Separator title="Your Startup Data " />
       <SoftBox component="form" role="form" width="100" display="flex" flex="row" flexWrap="wrap">
         {/* third Column */}
         <SoftBox flex="0 0 48%" mr={2} mb={3}>
@@ -310,7 +310,7 @@ function startup_form() {
             </SoftTypography>
             <SoftInput
               type="tel"
-              placeholder="(966) 514326789"
+              placeholder="0514326789"
               value={startup_phone}
               onChange={handlePhoneChange}
             />
@@ -354,13 +354,13 @@ function startup_form() {
             <SoftTypography component="label" variant="caption" fontWeight="bold">
               Startup Stage <span style={{ color: "red" }}>*</span>
             </SoftTypography>
-{/*             <SoftInput
+            <SoftInput
               type="startup_stage"
               placeholder="Pre-seed, Seed, Series A or Series B ..."
               value={startup_stage}
               onChange={handleStartupStageChange}
-            /> */}
-             <select
+            /> 
+             {/* <select
               value={startup_stage}
               onChange={handleStartupStageChange}
               style={{
@@ -378,7 +378,7 @@ function startup_form() {
               <option value="Seed">Seed</option>
               <option value="Series A">Series A</option>
               <option value="Series B">Series B</option>
-            </select>
+            </select> */}
           </SoftBox>
           <SoftBox mb={2}>
             <SoftTypography component="label" variant="caption" fontWeight="bold">
@@ -419,7 +419,7 @@ function startup_form() {
             </SoftTypography>
             <SoftInput
               type="text"
-              placeholder="Saudi Arabia"
+              placeholder="Riyadh"
               value={startup_city}
               onChange={handleCityChange}
             />

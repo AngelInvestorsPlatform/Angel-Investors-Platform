@@ -76,7 +76,7 @@ function InvestorForm() {
   const handleSubmit = async () => {
     try {
       const DJANGO_API = process.env.REACT_APP_DJANGO_API;
-      setrole("investor");
+      setrole("investor")
 
       // Validate if all required fields are filled out
       if (
@@ -123,7 +123,7 @@ function InvestorForm() {
       });
 
       // If registration is successful, set user status to true
-      if (response1.status === 201) {
+      if (response1.status === 201 || response1.status === 200) {
         const Response2 = await axios.post(`${process.env.REACT_APP_DJANGO_API}form/Investors/`, {
           investor_name,
           investor_phone,
@@ -132,7 +132,7 @@ function InvestorForm() {
           investor_experience,
           investor_income,
         });
-        if (Response2.status === 200) {
+        if (Response2.status === 200 || Response2.status === 201) {
           setRegConfirm("successfully registered");
           window.scrollTo({ top: 0, behavior: "smooth" });
         } else {
@@ -264,7 +264,7 @@ function InvestorForm() {
             </SoftTypography>
             <SoftInput
               type="text"
-              placeholder="Enter your full name"
+              placeholder="Your full name"
               value={investor_name}
               onChange={handleNameChange}
               required
@@ -277,7 +277,7 @@ function InvestorForm() {
             </SoftTypography>
             <SoftInput
               type="tel"
-              placeholder="Enter your phone number"
+              placeholder="0514326789"
               value={investor_phone}
               onChange={handlePhoneChange}
             />

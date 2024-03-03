@@ -58,7 +58,7 @@ function Welcome() {
   }
 
   const handleStartup = async () => {
-    setrole("srartup");
+    setrole("startup");
     setRedirectToUserIForm(true);
 
   };

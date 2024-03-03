@@ -46,7 +46,7 @@ function choose() {
   }
 
   const handleStartup = async () => {
-    setrole("srartup");
+    setrole("startup");
     setLogConfirm("The user role has been added successfully login");
     setRedirectToUserIForm(true);
 
