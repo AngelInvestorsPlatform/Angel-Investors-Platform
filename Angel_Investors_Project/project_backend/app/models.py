@@ -73,13 +73,6 @@ ST_SECTORS_CHOICES = [
     ('LegalTech', 'LegalTech'),
 ]
 
-STAGE_CHOICES = [
-    ('Pre-seed', 'Pre-seed'),
-    ('Seed', 'Seed'),
-    ('Series A', 'Series A'),
-    ('Series B', 'Series B'),
-]
-
 class Investor(models.Model):
     """Represents an investor in the platform."""
 
@@ -106,7 +99,7 @@ class Startup(models.Model):
     startup_name = models.CharField(max_length=100, null=False)
     startup_phone = models.CharField(max_length=20, null=False, blank=True)
     startup_sector = models.CharField(max_length=50, choices=ST_SECTORS_CHOICES, default='', blank=True)
-    startup_stage = models.CharField(max_length=20, choices=STAGE_CHOICES, default='', blank=True)
+    startup_stage = models.CharField(max_length=20,  null=False, blank=True)
     startup_team = models.CharField(max_length=2000, null=False, blank=True)
     startup_country = models.CharField(max_length=20, choices=COUNTRY_CHOICES, default='SA')
     startup_city = models.CharField(max_length=50, null=True, blank=True)
