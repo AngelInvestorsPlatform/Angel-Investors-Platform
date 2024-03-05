@@ -37,7 +37,7 @@ import Socials from "layouts/authentication/components/Socials";
 import Separator from "layouts/registers_forms/components/Separator";
 
 // Images
-import startup from "assets/images/curved-images/curved-city.png";
+import startup from "assets/images/backgraund-images/startup-backgraund2.svg";
 import { Info } from "@mui/icons-material";
 import { dark } from "@mui/material/styles/createPalette";
 

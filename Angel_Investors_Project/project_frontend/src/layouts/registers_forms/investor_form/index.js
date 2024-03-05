@@ -26,7 +26,7 @@ import CoverLayout from "layouts/registers_forms/components/CoverLayout";
 import Separator from "layouts/registers_forms/components/Separator";
 
 // Images
-import investor from "assets/images/investor.jpg.webp";
+import investor from "assets/images/backgraund-images/investor-backgraund2.svg";
 import SoftAlert from "components/SoftAlert";
 
 function InvestorForm() {
