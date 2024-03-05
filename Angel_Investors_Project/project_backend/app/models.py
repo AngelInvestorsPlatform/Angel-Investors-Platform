@@ -77,12 +77,12 @@ class Investor(models.Model):
     """Represents an investor in the platform."""
 
     investor_id = models.AutoField(primary_key=True)
-    investor_name = models.CharField(max_length=100, null=False)
+    investor_name = models.CharField(max_length=100, default='', null=False)
     investor_phone = models.CharField(max_length=20, null=True, blank=True)
-    investor_country = models.CharField(max_length=20, choices=COUNTRY_CHOICES, default='SA')
-    investor_sector = models.CharField(max_length=50, choices=IN_SECTORS_CHOICES, default='', blank=True)
-    investor_experience = models.CharField(max_length=20, choices=EXPERIENCE_CHOICES, default='', blank=True)
-    investor_income = models.CharField(choices=INCOME_CHOICES, default=0, blank=True)
+    investor_country = models.CharField(max_length=20, choices=COUNTRY_CHOICES, default='SA', null=True, blank=True)
+    investor_sector = models.CharField(max_length=50, choices=IN_SECTORS_CHOICES, default='', null=True, blank=True)
+    investor_experience = models.CharField(max_length=50, choices=EXPERIENCE_CHOICES, default='', null=True, blank=True)
+    investor_income = models.CharField(choices=INCOME_CHOICES, default='', null=True, blank=True)
 
     def __str__(self):
         return self.investor_name

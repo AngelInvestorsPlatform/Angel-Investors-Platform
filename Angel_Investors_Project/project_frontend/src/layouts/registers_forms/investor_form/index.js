@@ -368,12 +368,12 @@ function InvestorForm() {
                 borderRadius: "8px",
               }}
             >
-              <option value="">Select your experience</option>
-              <option value="less than 1 year">less than 1 year</option>
+              <option value="">Select your Experience</option>
+              <option value="Less than 1 year">Less than 1 year</option>
               <option value="1-2 years">1-2 years</option>
               <option value="3-5 years">3-5 years</option>
               <option value="6-10 years">6-10 years</option>
-              <option value="more than 10 years">more than 10 years</option>
+              <option value="More than 10 years">More than 10 years</option>
             </select>
           </SoftBox>
           <SoftBox mb={2}>
