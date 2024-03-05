@@ -21,11 +21,33 @@ function MultiAuthorsCard({ image, category, title, description, author, author2
         <SoftBox mt={2} mx={2}>
           {action.type === "internal" ? (
             <Link to={action.route}>
-              <SoftBox component="img" src={image} alt={title} width="100%" borderRadius="lg" />
+              <SoftBox
+                component="img"
+                src={image}
+                alt={title}
+                width="90%"
+                sx={{
+                  display: "block",
+                  margin: "auto",
+                  marginTop: "30px",
+                  borderRadius: "lg",
+                }}
+              />
             </Link>
           ) : (
             <MuiLink href={action.route} target="_blank" rel="noreferrer">
-              <SoftBox component="img" src={image} alt={title} width="100%" borderRadius="lg" />
+              <SoftBox
+                component="img"
+                src={image}
+                alt={title}
+                width="90%"
+                sx={{
+                  display: "block",
+                  margin: "auto",
+                  marginTop: "30px",
+                  borderRadius: "lg",
+                }}
+              />
             </MuiLink>
           )}
         </SoftBox>
@@ -69,14 +91,19 @@ function MultiAuthorsCard({ image, category, title, description, author, author2
           <SoftTypography variant="body2" component="p" color="text">
             {description}
           </SoftTypography>
-  
+
           <SoftBox mt={3}>
             <Grid container spacing={3} justifyContent="center" sx={{ textAlign: "center" }}>
               {author && (
                 <SoftBox display="flex" alignItems="center" mt={3}>
                   <SoftAvatar variant="rounded" src={author.image} alt={author.name} shadow="md" />
                   <SoftBox p={2} lineHeight={0}>
-                    <SoftTypography component="body1" variant="button" fontWeight="medium" gutterBottom>
+                    <SoftTypography
+                      component="body1"
+                      variant="button"
+                      fontWeight="medium"
+                      gutterBottom
+                    >
                       {author.name}
                     </SoftTypography>
                   </SoftBox>
@@ -84,9 +111,19 @@ function MultiAuthorsCard({ image, category, title, description, author, author2
               )}
               {author2 && (
                 <SoftBox display="flex" alignItems="center" mt={3}>
-                  <SoftAvatar variant="rounded" src={author2.image} alt={author2.name} shadow="md" />
+                  <SoftAvatar
+                    variant="rounded"
+                    src={author2.image}
+                    alt={author2.name}
+                    shadow="md"
+                  />
                   <SoftBox p={2} lineHeight={0}>
-                    <SoftTypography component="body1" variant="button" fontWeight="medium" gutterBottom>
+                    <SoftTypography
+                      component="body1"
+                      variant="button"
+                      fontWeight="medium"
+                      gutterBottom
+                    >
                       {author2.name}
                     </SoftTypography>
                   </SoftBox>
@@ -94,9 +131,19 @@ function MultiAuthorsCard({ image, category, title, description, author, author2
               )}
               {author3 && (
                 <SoftBox display="flex" alignItems="center" mt={3}>
-                  <SoftAvatar variant="rounded" src={author3.image} alt={author3.name} shadow="md" />
+                  <SoftAvatar
+                    variant="rounded"
+                    src={author3.image}
+                    alt={author3.name}
+                    shadow="md"
+                  />
                   <SoftBox p={2} lineHeight={0}>
-                    <SoftTypography component="body1" variant="button" fontWeight="medium" gutterBottom>
+                    <SoftTypography
+                      component="body1"
+                      variant="button"
+                      fontWeight="medium"
+                      gutterBottom
+                    >
                       {author3.name}
                     </SoftTypography>
                   </SoftBox>
@@ -104,9 +151,19 @@ function MultiAuthorsCard({ image, category, title, description, author, author2
               )}
               {author4 && (
                 <SoftBox display="flex" alignItems="center" mt={3}>
-                  <SoftAvatar variant="rounded" src={author4.image} alt={author4.name} shadow="md" />
+                  <SoftAvatar
+                    variant="rounded"
+                    src={author4.image}
+                    alt={author4.name}
+                    shadow="md"
+                  />
                   <SoftBox p={2} lineHeight={0}>
-                    <SoftTypography component="body1" variant="button" fontWeight="medium" gutterBottom>
+                    <SoftTypography
+                      component="body1"
+                      variant="button"
+                      fontWeight="medium"
+                      gutterBottom
+                    >
                       {author4.name}
                     </SoftTypography>
                   </SoftBox>
@@ -114,9 +171,19 @@ function MultiAuthorsCard({ image, category, title, description, author, author2
               )}
               {author5 && (
                 <SoftBox display="flex" alignItems="center" mt={3}>
-                  <SoftAvatar variant="rounded" src={author5.image} alt={author5.name} shadow="md" />
+                  <SoftAvatar
+                    variant="rounded"
+                    src={author5.image}
+                    alt={author5.name}
+                    shadow="md"
+                  />
                   <SoftBox p={2} lineHeight={0}>
-                    <SoftTypography component="body1" variant="button" fontWeight="medium" gutterBottom>
+                    <SoftTypography
+                      component="body1"
+                      variant="button"
+                      fontWeight="medium"
+                      gutterBottom
+                    >
                       {author5.name}
                     </SoftTypography>
                   </SoftBox>
@@ -155,7 +222,7 @@ MultiAuthorsCard.defaultProps = {
       PropTypes.bool,
     ]),
     title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
+    description: PropTypes.elementType.isRequired,
     author: PropTypes.oneOfType([
       PropTypes.shape({
         image: PropTypes.string.isRequired,
