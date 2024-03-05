@@ -47,6 +47,7 @@ function InvestorForm() {
   const [error, setError] = useState("");
   const [registerError, setRegError] = useState("");
   const [registerConfirm, setRegConfirm] = useState("");
+  const [formMessage , setFormMessage]= useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
   //redirect variable
@@ -134,6 +135,9 @@ function InvestorForm() {
         });
         if (Response2.status === 200 || Response2.status === 201) {
           setRegConfirm("successfully registered");
+          const { data } = Response2;
+          setFormMessage(data);
+
           window.scrollTo({ top: 0, behavior: "smooth" });
         } else {
           let errorMessageY = "Registration failed. Please try again later.";
@@ -166,7 +170,11 @@ function InvestorForm() {
   };
 
   return (
-    <CoverLayout title="Investor Registration" description="Let's get to know you better!" image={investor}>
+    <CoverLayout
+      title="Investor Registration"
+      description="Let's get to know you better!"
+      image={investor}
+    >
       {/* Alert Box */}
       {/*if register Success*/}
       {registerConfirm && (
@@ -179,6 +187,12 @@ function InvestorForm() {
       {registerError && (
         <SoftAlert fontSize="small" color="error" mt={2} dismissible>
           {registerError}
+        </SoftAlert>
+      )}
+      {/*if from has a message*/}
+      {formMessage && (
+        <SoftAlert fontSize="small" color="Secondary" mt={2} dismissible>
+          {formMessage}
         </SoftAlert>
       )}
       <Separator title="User Data " />

@@ -61,6 +61,7 @@ function startup_form() {
   const [error, setError] = useState("");
   const [registerError, setRegError] = useState("");
   const [registerConfirm, setRegConfirm] = useState("");
+  const [formMessage , setFormMessage]= useState("");
   const [errorMessage, setErrorMessage] =useState("");
 
   //redirect variable
@@ -143,6 +144,9 @@ function startup_form() {
         });
             if (Response2.status === 200 || Response2.status === 201) {
                 setRegConfirm("successfully registered");
+                const { data } = Response2;
+                setFormMessage(data);
+
                 window.scrollTo({ top: 0, behavior: "smooth" });
               } else {
               let errorMessageY = "Registration failed. Please try again later.";
@@ -151,15 +155,15 @@ function startup_form() {
       } else {
           // Extract the first error message for username field
           //400 58
-        if (response1.data.username) {
+        if (response1) {
           // Extract the first error message for username field
-          let errorMessageX = response1.data.username[0];
+          let errorMessageX = response1;
           setErrorMessage(errorMessageX);
         }
         
       }
     } catch (errorX) {
-      setRegError( "Failed: " + errorX.message);
+      setRegError( "Failed: " + errorX.message + "\n" + errorMessage);
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
@@ -201,8 +205,13 @@ function startup_form() {
           {registerError}
         </SoftAlert>
       )}
+      {/*if from has a message*/}
+      {formMessage && (
+        <SoftAlert fontSize="small" color="Secondary" mt={2} dismissible>
+          {formMessage}
+        </SoftAlert>
+      )}
 
-      
       <Separator title="User Data " />
       <SoftBox component="form" role="form" width="100" display="flex" flex="row" flexWrap="wrap">
         {/* First Column */}
@@ -359,8 +368,8 @@ function startup_form() {
               placeholder="Pre-seed, Seed, Series A or Series B ..."
               value={startup_stage}
               onChange={handleStartupStageChange}
-            /> 
-             {/* <select
+            />
+            {/* <select
               value={startup_stage}
               onChange={handleStartupStageChange}
               style={{
@@ -425,17 +434,14 @@ function startup_form() {
             />
           </SoftBox>
           <SoftBox mb={2}>
-          <SoftBox mt={4} display="flex" justifyContent="space-between">
-            <SoftTypography component="label" variant="caption" fontWeight="bold">
-              Website
-            </SoftTypography>
-            <Tooltip
-                title="should be valid website URL."
-                placement="right-start"
-              >
+            <SoftBox mt={4} display="flex" justifyContent="space-between">
+              <SoftTypography component="label" variant="caption" fontWeight="bold">
+                Website
+              </SoftTypography>
+              <Tooltip title="should be valid website URL." placement="right-start">
                 <Icon>error_outline</Icon>
               </Tooltip>
-              </SoftBox>
+            </SoftBox>
             <SoftInput
               type="url"
               placeholder="https://www.web.com/"
@@ -447,9 +453,13 @@ function startup_form() {
           </SoftBox>
         </SoftBox>
       </SoftBox>
-      {error && (<SoftTypography component="label" variant="caption" fontWeight="regular" color="error">* {error}</SoftTypography>)}
-      
-      <SoftBox  mt={4} mb={1}>
+      {error && (
+        <SoftTypography component="label" variant="caption" fontWeight="regular" color="error">
+          * {error}
+        </SoftTypography>
+      )}
+
+      <SoftBox mt={4} mb={1}>
         <SoftButton variant="gradient" color="info" circular fullWidth onClick={handleSubmit}>
           Submit
         </SoftButton>
