@@ -26,9 +26,7 @@ import SoftTypography from "components/SoftTypography";
 // Soft UI Dashboard React examples
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import PageLayout from "examples/LayoutContainers/PageLayout";
-
-// Authentication layout components
-import Footer from "layouts/authentication/components/Footer";
+import Footer from "examples/FooterLanding";
 
 function BasicLayout({ title, description, image, children }) {
   return (

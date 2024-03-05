@@ -26,9 +26,7 @@ import SoftTypography from "components/SoftTypography";
 // Soft UI Dashboard React examples
 import BlankNavbar from "examples/Navbars/BlankNavbar";
 import PageLayout from "examples/LayoutContainers/PageLayout";
-
-// Authentication layout components
-import Footer from "layouts/registers_forms/components/Footer";
+import Footer from "examples/FooterLanding";
 
 function CoverLayout({ color, header, title, description, image, children }) {
   return (
@@ -84,12 +82,13 @@ function CoverLayout({ color, header, title, description, image, children }) {
             }}
           >
             <SoftBox
-              ml={-8}
+              ml={-12}
               height="100%"
               sx={{
                 backgroundImage: `url(${image})`,
                 backgroundSize: "cover",
                 transform: "skewX(10deg)",
+                backgroundRepeat: "no-repeat",
               }}
             />
           </SoftBox>
