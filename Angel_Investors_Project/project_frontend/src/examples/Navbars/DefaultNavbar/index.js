@@ -52,9 +52,12 @@ function DefaultNavbar({ transparent, light, action }) {
   const openMobileNavbar = ({ currentTarget }) => setMobileNavbar(currentTarget.parentNode);
   const closeMobileNavbar = () => setMobileNavbar(false);
 
-  const { userData, setUserData, isLoggedIn, setIsLoggedIn } = useAuthUser();
+  const { userData, setUserData, isLoggedIn, setIsLoggedIn, role } = useAuthUser();
   const [logError, setLogError] = useState("");
   const [logConfirm, setLogConfirm] = useState("");
+
+    // Set the route based on the role
+    const route = role === 'startup' ? '/startup' : role === 'investor' ? '/investor' : '/dashboard';
 
   useEffect(() => {
     // A function that sets the display state for the DefaultNavbarMobile.
@@ -143,14 +146,14 @@ function DefaultNavbar({ transparent, light, action }) {
               <DefaultNavbarLink
                 icon="donut_large"
                 name="dashboard"
-                route="/dashboard"
+                route={route}
                 light={light}
               />
               <DefaultNavbarLink icon="person" name="profile" route="/profile" light={light} />
             </SoftBox>
             <SoftBox display={{ xs: "none", lg: "inline-block" }}>
               <SoftTypography color={light} variant="button" fontWeight="regular" m={3}>
-                Welcome, {userData.username}!
+                Welcome, {userData.first_name}
               </SoftTypography>
               <SoftButton
                 variant="gradient"
