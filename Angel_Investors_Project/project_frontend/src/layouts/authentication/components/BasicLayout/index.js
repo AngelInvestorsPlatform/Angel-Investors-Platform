@@ -67,7 +67,7 @@ function BasicLayout({ title, description, image, children }) {
                 {title}
               </SoftTypography>
             </SoftBox>
-            <SoftBox mb={2}>
+            <SoftBox mb={0}>
               <SoftTypography variant="body2" color="white" fontWeight="regular">
                 {description}
               </SoftTypography>
@@ -77,7 +77,7 @@ function BasicLayout({ title, description, image, children }) {
       </SoftBox>
       <SoftBox mt={{ xs: -26, lg: -24 }} px={1} width="calc(100% - 2rem)" mx="auto">
         <Grid container spacing={1} justifyContent="center">
-          <Grid item xs={11} sm={9} md={5} lg={4} xl={4}>
+          <Grid item xs={11} sm={9} md={5} lg={4} xl={4} xxl={3}>
             {children}
           </Grid>
         </Grid>

@@ -16,12 +16,11 @@ Coded by www.creative-tim.com
 import { useState } from "react";
 
 // react-router-dom components
-import { Navigate  } from 'react-router-dom';
-import { HashLink as Link } from 'react-router-hash-link';
+import { Navigate } from "react-router-dom";
+import { HashLink as Link } from "react-router-hash-link";
 
 //axios package for linking with API URLS
 import axios from "axios";
-
 
 //for user auth global context
 import { useAuthUser } from "context/authContext";
@@ -45,124 +44,79 @@ import Socials from "layouts/authentication/components/Socials";
 import Separator from "layouts/authentication/components/Separator";
 
 // Images
-import curved6 from "assets/images/curved-images/curved14.jpg";
+import curved6 from "assets/images/curved-images/curved-city.png";
 
-function SignUp() {
+function LogIn() {
+  //form Data variables
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [passwordConfirmation, setPasswordConfirmation] = useState("");
-  const [agreement, setAgreement] = useState(false);
+
+  //error handling variables
   const [error, setError] = useState("");
   const [registerError, setRegError] = useState("");
   const [registerConfirm, setRegConfirm] = useState("");
-  const [redirectToSelect, setRedirectToSelect] = useState(false);
-  const { userData, setUserData, isLoggedIn, setIsLoggedIn } = useAuthUser();
 
-  if (redirectToSelect) {
-    return <Navigate to="/investor" />;
+  // auth variables saving
+  const { userData, setUserData, role, setrole, isLoggedIn, setIsLoggedIn } = useAuthUser();
+
+  //redirect variable
+  const [RedirectToUserPage, setRedirectToUserPage] = useState(false);
+
+  if (RedirectToUserPage) {
+    if (role == "startup") {
+      return <Navigate to="/startup" />;
+    } else if (role == "investor") {
+      return <Navigate to="/investor" />;
+    }
   }
 
   //The following codes to handle input validity using JavaScript
+  //Set the email and user name to be the same value
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
+    setUsername(event.target.value);
   };
 
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
   };
 
-  const handlePasswordConfirmationChange = (event) => {
-    setPasswordConfirmation(event.target.value);
-  };
-
-  const handleAgreementChange = () => {
-    setAgreement(!agreement);
-  };
-
   //on submit
-  const handleSignUp = async () => {
+  const handleLogIn = async () => {
     try {
       const DJANGO_API = process.env.REACT_APP_DJANGO_API;
-  
+
       // Verify if email is correct
       if (!validateEmail(email)) {
         setError("Please enter a valid email address.");
         return;
       }
-  
-      // Verify if password meets requirements
-      if (!validatePassword(password)) {
-        setError(
-          "Password must contain at least 8 characters, including uppercase, lowercase, and numbers."
-        );
-        return;
-      }
-  
-      // Verify if password confirmation matches password
-      if (password !== passwordConfirmation) {
-        setError("Passwords do not match.");
-        return;
-      }
-  
-      // Verify if terms agreement is checked
-      if (!agreement) {
-        setError("Must agree to the terms and conditions to start.");
-        return;
-      }
-  
-      // If all conditions are met, proceed with registration
-      const response = await axios.post(`${DJANGO_API}auth/register`, {
-        email: email,
-        username: username, // Setting username same as email
+      // After registration, login with the same credentials
+
+      const loginResponse = await axios.post(`${DJANGO_API}auth/login`, {
+        username: username, // Sending username same as email
         password: password,
       });
-  
-      // If registration is successful, set user status to true
-      if (response.status === 201) {
-        setRegConfirm("successfully registered");
-  
-        // After registration, login with the same credentials
-        const loginResponse = await axios.post(`${DJANGO_API}auth/login`, {
-          email: email,
-          username: username, // Setting username same as email
-          password: password,
-        });
-  
-        if (loginResponse.status === 200) {
-          // If login is successful, set user data and LoggedIn
-          setUserData({ email, username });
-          setIsLoggedIn(true);
-  
-          // Redirect to Select
-          setRedirectToSelect(true);
-        } else {
-          let errorMessage = "Login failed. Please try again later.";
-  
-          // Check if the response contains detailed error messages
-          if (loginResponse.data && loginResponse.data.username) {
-            // Extract the first error message for username field
-            errorMessage = loginResponse.data.username[0];
-          }
-  
-          setRegError(errorMessage);
-        }
+
+      if (loginResponse.status === 200) {
+        // If login is successful, extract user data from response body
+        const { token, first_name, email, role } = loginResponse.data;
+        // Set user data and login status
+        setUserData({ email, first_name, role, token });
+        setrole(role);
+        setIsLoggedIn(true);
+
+        // Redirect to Select
+        setRedirectToUserPage(true);
       } else {
-        let errorMessage = "Registration failed. Please try again later.";
-  
-        // Check if the response contains detailed error messages
-        if (response.data && response.data.username) {
-          // Extract the first error message for username field
-          errorMessage = response.data.username[0];
-        }
-  
-        setRegError(errorMessage);
+        setRegError("Login failed: ", loginResponse);
       }
-    } catch (errorX) {
-      setRegError("Failed: " + errorX.message);
+    } catch (error) {
+      // Handle network or other errors
+      setRegError("Error occurred while logging in: ", error.message);
     }
   };
-  
 
   const validateEmail = (email) => {
     const re = /\S+@\S+\.\S+/;
@@ -194,26 +148,21 @@ function SignUp() {
         </SoftAlert>
       )}
       <Card>
-        <SoftBox p={3} mb={1} mt={1} textAlign="center">
-          <SoftTypography variant="h5" fontWeight="medium">
-          Sign In
-          </SoftTypography>
-        </SoftBox>
         {/*         <SoftBox mb={2}>
           <Socials />
         </SoftBox>
         <Separator /> */}
         <SoftBox pt={2} pb={3} px={3}>
           <SoftBox component="form" role="form">
-            <SoftBox mb={2}>
-              <SoftInput
+            {/*<SoftBox mb={2}>
+               <SoftInput
                 type="text"
                 placeholder="Username"
                 name ="username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
               />
-            </SoftBox>
+            </SoftBox> */}
             <SoftBox mb={2}>
               <SoftInput
                 type="email"
@@ -233,11 +182,9 @@ function SignUp() {
                 name="password"
                 value={password}
                 onChange={handlePasswordChange}
-                success={password && validatePassword(password)}
-                error={password && !validatePassword(password)}
+                required
               />
             </SoftBox>
-
 
             {/*<SoftBox mb={2} display="flex" alignItems="center">
               <SoftTypography
@@ -259,7 +206,7 @@ function SignUp() {
               </SoftTypography>
             </SoftBox> */}
 
-            <SoftBox display="flex" alignItems="center">
+            {/*             <SoftBox display="flex" alignItems="center">
               <Checkbox checked={agreement} onChange={handleAgreementChange} />
               <SoftTypography
                 variant="button"
@@ -278,7 +225,7 @@ function SignUp() {
               >
                 Terms and Conditions
               </SoftTypography>
-            </SoftBox>
+            </SoftBox> */}
 
             {/*error text*/}
             {error && (
@@ -288,8 +235,8 @@ function SignUp() {
             )}
 
             <SoftBox mt={4} mb={1}>
-              <SoftButton variant="gradient" color="info" fullWidth onClick={handleSignUp}>
-                sign In
+              <SoftButton variant="gradient" color="info" fullWidth onClick={handleLogIn}>
+                Login
               </SoftButton>
             </SoftBox>
 
@@ -315,4 +262,4 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export default LogIn;
