@@ -58,6 +58,13 @@ import YourDeals from "layouts/investor/pageComponents/YourDeals";
 import ExploreSyndicate from "layouts/investor/pageComponents/ExploreSyndicate";
 import InvestorProfile from "layouts/investor/InvestorProfile";
 
+//import page component 
+import StartUpDeals from "layouts/startup/pageComponents/StartUpDeals";
+import StartUpHome from "layouts/startup/pageComponents/StartUpHome";
+// import StartUpPanding from "layouts/startup/pageComponents/StartUpPanding";
+// import StartUpRejected from "layouts/startup/pageComponents/StartUpRejected";
+
+import startupProfile from "layouts/startup/startupProfile";
 
 // Soft UI Dashboard React icons
 import Shop from "examples/Icons/Shop";
@@ -79,6 +86,7 @@ const routes = [
       component: <Dashboard />,
       noCollapse: true,
     },
+    
     {
         type: "collapse",
         name: "Landing",
@@ -88,6 +96,7 @@ const routes = [
         component: < Landing / > ,
         noCollapse: true,
     },
+    
     {
         type: "collapse",
         name: "Tables",
@@ -188,7 +197,37 @@ const routes = [
         component: < Startup / > ,
         noCollapse: true,
     },
+    {
+    type: "collapse",
+    name: "Startup Home",
+    key: "StartUpHome",
+    route: "/startup/StartUpHome",
+    icon: <Document size="12px" />,
+    component: < StartUpHome />,
+    noCollapse: true,
+  },
+  
 
+
+  {
+    type: "collapse",
+    name: "Startup Deals",
+    key: "StartUpDeals",
+    route: "/startup/StartUpDeals",
+    icon: <Shop size="12px" />,
+    component: <StartUpDeals />,
+    noCollapse: true,
+  },
+
+  {
+    type: "collapse",
+    name: "startup Profile",
+    key: "startupProfile",
+    route: "/startup/startupProfile",
+    icon: <CustomerSupport size="12px" />,
+    component: < startupProfile />,
+    noCollapse: true,
+  },
 
 {
         type: "collapse",
@@ -238,3 +277,4 @@ const routes = [
 ];
 
 export default routes;
+

@@ -13,6 +13,10 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
+// home page same in index file of startup (احتياط)
+//
+//
+
 // @mui material components
 import Grid from "@mui/material/Grid";
 import Icon from "@mui/material/Icon";
@@ -42,8 +46,6 @@ import OrderOverview from "layouts/dashboard/components/OrderOverview";
 import StartUpNavbar from 'layouts/startup/components/StartUpNavbar';
 
 
-
-
 // Data
 import reportsBarChartData from "layouts/dashboard/data/reportsBarChartData";
 import gradientLineChartData from "layouts/dashboard/data/gradientLineChartData";
@@ -54,16 +56,16 @@ function StartupHome() {
 
   return (
     <DashboardLayout>
-       <DashboardNavbar/>
+      <DashboardNavbar/>
    <StartUpNavbar />
+
    <SoftBox mb={3}>
 <SoftTypography variant="h3" color="info" fontWeight="regular" textGradient>
      Equity  Overview
                 </SoftTypography>
                 </SoftBox>
   
-   <SoftBox py={3}> 
-
+   <SoftBox py={3}>
         <SoftBox mb={3}>
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6} xl={3}>
