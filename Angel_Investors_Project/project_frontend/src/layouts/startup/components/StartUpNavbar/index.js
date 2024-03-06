@@ -32,31 +32,31 @@ import Office from "examples/Icons/Office";
 import Settings from "examples/Icons/Settings";
 import { Home } from "@mui/icons-material";
 
-const routes = [ 
+const routes = [
     { type: "title", title: "Home", key: "Home" },
-     {
-    type: "collapse",
-    name: "Equity Overview",
-    key: "StartUpHome",
-    route: "/startup/StartUpHome",
-    icon: <Homed size="12px" />,
-    component: < StartUpHome />,
-    noCollapse: true,
-  },
-  {type : "divider"},
-  { type: "title", title: "Deals", key: "Deals" },
-  
+    {
+        type: "collapse",
+        name: "Equity Overview",
+        key: "StartUpHome",
+        route: "/startup/StartUpHome",
+        icon: < Home size = "12px" / > ,
+        component: < StartUpHome / > ,
+        noCollapse: true,
+    },
+    { type: "divider" },
+    { type: "title", title: "Deals", key: "Deals" },
 
 
-  {
-    type: "collapse",
-    name: "Your Deals",
-    key: "StartUpDeals",
-    route: "/startup/StartUpDeals",
-    icon: <Document size="12px" />,
-    component: <StartUpDeals />,
-    noCollapse: true,
-    
+
+    {
+        type: "collapse",
+        name: "Your Deals",
+        key: "StartUpDeals",
+        route: "/startup/StartUpDeals",
+        icon: < Document size = "12px" / > ,
+        component: < StartUpDeals / > ,
+        noCollapse: true,
+
         // {
         //     type: "collapse",
         //     name: "StartUp Panding",
@@ -76,46 +76,46 @@ const routes = [
         //     noCollapse: true,
         //   },
 
-  },
+    },
 
 
-  {type : "divider"},
-  { type: "title", title: "Account Manage", key: "account-pages" },
-  {
-    type: "collapse",
-    name: "Profile",
-    key: "startupProfile",
-    route: "/startup/startupProfile",
-    icon: <CustomerSupport size="12px" />,
-    component: < startupProfile />,
-    noCollapse: true,
-  },
-  {
-    type: "collapse",
-    name: "Settings",
-    key: "Settings",
-    //route: "/startup/profile",
-    icon: <Settings size="12px" />,
-    component: < profile />,
-    noCollapse: true,
-    active: false, // for a temporary 
-  },
-  // Add more route objects as needed
+    { type: "divider" },
+    { type: "title", title: "Account Manage", key: "account-pages" },
+    {
+        type: "collapse",
+        name: "Profile",
+        key: "startupProfile",
+        route: "/startup/startupProfile",
+        icon: < CustomerSupport size = "12px" / > ,
+        component: < startupProfile / > ,
+        noCollapse: true,
+    },
+    {
+        type: "collapse",
+        name: "Settings",
+        key: "Settings",
+        //route: "/startup/profile",
+        icon: < Settings size = "12px" / > ,
+        component: < profile / > ,
+        noCollapse: true,
+        active: false, // for a temporary 
+    },
+    // Add more route objects as needed
 ];
 
 
-function StartUpNavbar(){
-  return (
-    <Sidenav
-      mainPage="/startup"
-      brandName="Angel Investor Platform"
-      brand={LogoName}
-      routes={routes}
-      // Add other props as needed
-      
-    ></Sidenav>
-    
-  );
+function StartUpNavbar() {
+    return ( <
+        Sidenav mainPage = "/startup"
+        brandName = "Angel Investor Platform"
+        brand = { LogoName }
+        routes = { routes }
+        // Add other props as needed
+
+        >
+        < /Sidenav>
+
+    );
 }
 
 export default StartUpNavbar;
