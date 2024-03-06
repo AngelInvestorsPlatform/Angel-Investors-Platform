@@ -80,9 +80,9 @@ class Investor(models.Model):
     investor_name = models.CharField(max_length=100, default='', null=False)
     investor_phone = models.CharField(max_length=20, null=True, blank=True)
     investor_country = models.CharField(max_length=20, choices=COUNTRY_CHOICES, default='SA', null=True, blank=True)
-    investor_sector = models.CharField(max_length=50, choices=IN_SECTORS_CHOICES, default='', null=True, blank=True)
-    investor_experience = models.CharField(max_length=50, choices=EXPERIENCE_CHOICES, default='', null=True, blank=True)
-    investor_income = models.CharField(max_length=50,choices=INCOME_CHOICES, default='', null=True, blank=True)
+    investor_sector = models.CharField(max_length=50, choices=IN_SECTORS_CHOICES, default='Information Technology')
+    investor_experience = models.CharField(max_length=50, choices=EXPERIENCE_CHOICES, default='Less than 1 year')
+    investor_income = models.CharField(max_length=50,choices=INCOME_CHOICES, default='Less than 100K')
 
     def __str__(self):
         return self.investor_name
@@ -98,7 +98,7 @@ class Startup(models.Model):
     startup_id = models.AutoField(primary_key=True)
     startup_name = models.CharField(max_length=100, null=False)
     startup_phone = models.CharField(max_length=20, null=False, blank=True)
-    startup_sector = models.CharField(max_length=50, choices=ST_SECTORS_CHOICES, default='', blank=True)
+    startup_sector = models.CharField(max_length=50, choices=ST_SECTORS_CHOICES, default='Technology', blank=True)
     startup_stage = models.CharField(max_length=20,  null=False, blank=True)
     startup_team = models.CharField(max_length=2000, null=False, blank=True)
     startup_country = models.CharField(max_length=20, choices=COUNTRY_CHOICES, default='SA')
