@@ -22,7 +22,7 @@ class UserLoginView(APIView):
         user = authenticate(username=request.data['username'], password=request.data['password'])
         if user:
             token, created = Token.objects.get_or_create(user=user)
-            return Response({'token': token.key, 'username': user.username, 'role': user.role})
+            return Response({'token': token.key, 'first_name': user.first_name, 'email':user.email, 'role': user.role})
         else:
             return Response({'message': 'Invalid username or password'}, status=status.HTTP_401_UNAUTHORIZED)
 
