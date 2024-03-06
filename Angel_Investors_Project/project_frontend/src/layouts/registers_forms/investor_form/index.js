@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
 //for API
 import axios from "axios";
@@ -20,6 +20,7 @@ import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
 import SoftInput from "components/SoftInput";
 import SoftButton from "components/SoftButton";
+import Select from '@mui/material/Select';
 
 // registers_forms layout components
 import CoverLayout from "layouts/registers_forms/components/CoverLayout";
@@ -29,10 +30,22 @@ import Separator from "layouts/registers_forms/components/Separator";
 import investor from "assets/images/backgraund-images/investor-backgraund2.svg";
 import SoftAlert from "components/SoftAlert";
 
+const selectStyles = {
+  width: "100%",
+  padding: "0.75rem",
+  fontSize: "1rem",
+  backgroundColor: "#f4f4f4",
+  color: "#888",
+  border: "none",
+  borderRadius: "8px",
+};
+
+const required = { color: "red" };
+
 function InvestorForm() {
   //form Data variables
   const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
+  const [first_name, setfirst_name] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [investor_name, setName] = useState("");
@@ -66,13 +79,12 @@ function InvestorForm() {
   const handlePasswordChange = (event) => setPassword(event.target.value);
   const handlePasswordConfirmationChange = (event) => setPasswordConfirmation(event.target.value);
 
-  const handleNameChange = (e) => setName(e.target.value);
+  const handleNameChange = (e) => setName(e.target.value) || setfirst_name(e.target.value);
   const handlePhoneChange = (e) => setPhone(e.target.value);
   const handleCountryChange = (e) => setCountry(e.target.value);
   const handleSectorChange = (e) => setSector(e.target.value);
   const handleExperienceChange = (e) => setExperience(e.target.value);
   const handleIncomeChange = (e) => setIncome(e.target.value);
-
   //on submit
   const handleSubmit = async () => {
     try {
@@ -82,7 +94,6 @@ function InvestorForm() {
       // Validate if all required fields are filled out
       if (
         !email ||
-        !username ||
         !password ||
         !passwordConfirmation ||
         !investor_name ||
@@ -117,7 +128,7 @@ function InvestorForm() {
       setError("");
       // If all conditions are met, proceed with registration
       const response1 = await axios.post(`${DJANGO_API}auth/register`, {
-        username,
+        first_name,
         email,
         password,
         role,
@@ -169,6 +180,7 @@ function InvestorForm() {
     return re.test(password);
   };
 
+
   return (
     <CoverLayout
       title="Investor Registration"
@@ -196,21 +208,9 @@ function InvestorForm() {
         </SoftAlert>
       )}
       <Separator title="User Data " />
-      <SoftBox component="form" role="form" width="100" display="flex" flexWrap="wrap">
+      <SoftBox component="form" role="form" width="100" display="flex" flex="row" flexWrap="wrap" justifyContent="center">
         {/* First Column */}
-        <SoftBox flex="0 0 48%" mr={2} mb={3}>
-          <SoftBox mb={2}>
-            <SoftTypography component="label" variant="caption" fontWeight="bold">
-              Username <span style={{ color: "red" }}>*</span>
-            </SoftTypography>
-            <SoftInput
-              type="text"
-              placeholder="Username"
-              name="username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-          </SoftBox>
+        <SoftBox flex="0 0 48%"> {/*mt={6}*/}
           <SoftBox mb={2}>
             <SoftTypography component="label" variant="caption" fontWeight="bold">
               Email <span style={{ color: "red" }}>*</span>
@@ -225,10 +225,6 @@ function InvestorForm() {
               error={email && !validateEmail(email)}
             />
           </SoftBox>
-        </SoftBox>
-        {/* Second Column */}
-
-        <SoftBox flex="0 0 48%" mb={3}>
           <SoftBox mb={2}>
             <SoftBox mt={2} display="flex" justifyContent="space-between">
               <SoftTypography component="label" variant="caption" fontWeight="bold">
@@ -267,6 +263,8 @@ function InvestorForm() {
           </SoftBox>
         </SoftBox>
       </SoftBox>
+        {/* Second Column */}
+        {/* <SoftBox flex="0 0 48%" mb={3}> </SoftBox> */}
 
       <Separator title="Investor Data " />
       <SoftBox component="form" role="form" width="100" display="flex" flex="row" flexWrap="wrap">
@@ -298,21 +296,13 @@ function InvestorForm() {
           </SoftBox>
           <SoftBox mb={2}>
             <SoftTypography component="label" variant="caption" fontWeight="bold">
-              Country
+              Country <span style={{ color: "red" }}>*</span>
             </SoftTypography>
             <select
               value={investor_country}
               onChange={handleCountryChange}
               required
-              style={{
-                width: "100%",
-                padding: "0.75rem",
-                fontSize: "1rem",
-                backgroundColor: "#f4f4f4",
-                color: "#888",
-                border: "none",
-                borderRadius: "8px",
-              }}
+              style={selectStyles}
             >
               <option value="">Select your country</option>
               <option value="USA">United States</option>
@@ -341,15 +331,7 @@ function InvestorForm() {
               value={investor_sector}
               onChange={handleSectorChange}
               required
-              style={{
-                width: "100%",
-                padding: "0.75rem",
-                fontSize: "1rem",
-                backgroundColor: "#f4f4f4",
-                color: "#888",
-                border: "none",
-                borderRadius: "8px",
-              }}
+              style={selectStyles}
             >
               <option value="">Select your sector</option>
               <option value="Biotech">Biotech</option>
@@ -372,15 +354,7 @@ function InvestorForm() {
               value={investor_experience}
               onChange={handleExperienceChange}
               required
-              style={{
-                width: "100%",
-                padding: "0.75rem",
-                fontSize: "1rem",
-                backgroundColor: "#f4f4f4",
-                color: "#888",
-                border: "none",
-                borderRadius: "8px",
-              }}
+              style={selectStyles}
             >
               <option value="">Select your Experience</option>
               <option value="Less than 1 year">Less than 1 year</option>
@@ -391,32 +365,24 @@ function InvestorForm() {
             </select>
           </SoftBox>
           <SoftBox mb={2}>
-            <SoftTypography component="label" variant="caption" fontWeight="bold">
-              Income <span style={{ color: "red" }}>*</span>
-            </SoftTypography>
-            <select
-              value={investor_income}
-              onChange={handleIncomeChange}
-              required
-              style={{
-                width: "100%",
-                padding: "0.75rem",
-                fontSize: "1rem",
-                backgroundColor: "#f4f4f4",
-                color: "#888",
-                border: "none",
-                borderRadius: "8px",
-              }}
-            >
-              <option value="">Select your income</option>
-              <option value="Less than 100K">Less than 100K</option>
-              <option value="200K-300k">200K-300k</option>
-              <option value="300K-400k">300K-400k</option>
-              <option value="400k-500k">400k-500k</option>
-              <option value="600k-700k">600k-700k</option>
-              <option value="800k-900k">800k-900k</option>
-              <option value="More than 900k">More than 900k</option>
-            </select>
+          <SoftTypography component="label" variant="caption" fontWeight="bold">
+           Income
+          </SoftTypography>
+          <select
+            value={investor_income}
+            onChange={handleIncomeChange}
+            required
+            style={selectStyles}
+          >
+            <option value="">Select your income</option>
+            <option value="Less than 100K">Less than 100K</option>
+            <option value="200K-300k">200K-300k</option>
+            <option value="300K-400k">300K-400k</option>
+            <option value="400k-500k">400k-500k</option>
+            <option value="600k-700k">600k-700k</option>
+            <option value="800k-900k">800k-900k</option>
+            <option value="More than 900k">More than 900k</option>
+          </select>
           </SoftBox>
         </SoftBox>
       </SoftBox>
@@ -427,7 +393,7 @@ function InvestorForm() {
       )}
 
       <SoftBox mt={4} mb={1}>
-        <SoftButton variant="gradient" color="info" fullWidth circular onClick={handleSubmit}>
+        <SoftButton variant="gradient" color="info" fullWidth circular onClick={handleSubmit} to="/investor" >
           submit
         </SoftButton>
       </SoftBox>

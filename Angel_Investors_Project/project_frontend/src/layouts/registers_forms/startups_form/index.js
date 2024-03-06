@@ -41,10 +41,23 @@ import startup from "assets/images/backgraund-images/startup-backgraund2.svg";
 import { Info } from "@mui/icons-material";
 import { dark } from "@mui/material/styles/createPalette";
 
+const selectStyles = {
+  width: "100%",
+  padding: "0.75rem",
+  fontSize: "1rem",
+  backgroundColor: "#f4f4f4",
+  color: "#888",
+  border: "none",
+  borderRadius: "8px",
+};
+
+const required = { color: "red" };
+
+
 function startup_form() {
   //form Data variables
   const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
+  const [first_name, setfirst_name] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [startup_name, setStartupName] = useState("");
@@ -78,9 +91,8 @@ function startup_form() {
   //The following codes to handle input validity using JavaScript
   const handleEmailChange = (event) => setEmail(event.target.value);
   const handlePasswordChange = (event) => setPassword(event.target.value);
-  const handlePasswordConfirmationChange = (event) =>setPasswordConfirmation(event.target.value);
-
-  const handleStartupNameChange = (e) => setStartupName(e.target.value);
+  const handlePasswordConfirmationChange = (event) =>setPasswordConfirmation(event.target.value); 
+  const handleStartupNameChange = (e) => setStartupName(e.target.value) || setfirst_name(e.target.value);
   const handleStartupSectorChange = (e) => setStartupSector(e.target.value);
   const handleStartupStageChange = (e) => setStartupStage(e.target.value);
   const handlePhoneChange = (e) => setPhone(e.target.value);
@@ -96,7 +108,7 @@ function startup_form() {
       setrole("startup")
   
       // Validate if all required fields are filled out
-      if (!email || !username || !password || !passwordConfirmation ||
+      if (!email || !password || !passwordConfirmation ||
           !startup_name || !startup_sector || !startup_stage ||
           !startup_team || !startup_country ) {
         setError("fields are required.");
@@ -124,9 +136,9 @@ function startup_form() {
       setError("");
       // If all conditions are met, proceed with registration
       const response1 = await axios.post(`${DJANGO_API}auth/register`, {
-         username,
          email,
          password,
+         first_name,
          role
       });
   
@@ -213,25 +225,12 @@ function startup_form() {
       )}
 
       <Separator title="User Data " />
-      <SoftBox component="form" role="form" width="100" display="flex" flex="row" flexWrap="wrap">
+      <SoftBox component="form" role="form" width="100" display="flex" flex="row" flexWrap="wrap" justifyContent="center">
         {/* First Column */}
-
-        <SoftBox flex="0 0 48%" mr={2} mb={3}>
+        <SoftBox flex="0 0 48%"> {/*mt={6}*/}
           <SoftBox mb={2}>
             <SoftTypography component="label" variant="caption" fontWeight="bold">
-              Username <span style={{ color: "red" }}>*</span>
-            </SoftTypography>
-            <SoftInput
-              type="text"
-              placeholder="Username"
-              name="username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-          </SoftBox>
-          <SoftBox mb={2}>
-            <SoftTypography component="label" variant="caption" fontWeight="bold">
-              Email <span style={{ color: "red" }}>*</span>
+              Email <span style={required}>*</span>
             </SoftTypography>
             <SoftInput
               type="email"
@@ -243,13 +242,10 @@ function startup_form() {
               error={email && !validateEmail(email)}
             />
           </SoftBox>
-        </SoftBox>
-        {/* Second Column */}
-        <SoftBox flex="0 0 48%" mb={3}>
           <SoftBox mb={2}>
             <SoftBox mt={2} display="flex" justifyContent="space-between">
               <SoftTypography component="label" variant="caption" fontWeight="bold">
-                Password <span style={{ color: "red" }}>*</span>
+                Password <span style={required}>*</span>
               </SoftTypography>
               <Tooltip
                 title="Password must contain at least 8 characters, including uppercase, lowercase, and numbers."
@@ -270,7 +266,7 @@ function startup_form() {
           </SoftBox>
           <SoftBox mb={2}>
             <SoftTypography component="label" variant="caption" fontWeight="bold">
-              Re-type Password <span style={{ color: "red" }}>*</span>
+              Re-type Password <span style={required}>*</span>
             </SoftTypography>
             <SoftInput
               type="password"
@@ -284,6 +280,8 @@ function startup_form() {
           </SoftBox>
         </SoftBox>
       </SoftBox>
+        {/* Second Column */}
+        {/* <SoftBox flex="0 0 48%" mb={3}> </SoftBox> */}
 
       <Separator title="Your Startup Data " />
       <SoftBox component="form" role="form" width="100" display="flex" flex="row" flexWrap="wrap">
@@ -291,7 +289,7 @@ function startup_form() {
         <SoftBox flex="0 0 48%" mr={2} mb={3}>
           <SoftBox mb={2}>
             <SoftTypography component="label" variant="caption" fontWeight="bold">
-              Startup Name <span style={{ color: "red" }}>*</span>
+              Startup Name <span style={required}>*</span>
             </SoftTypography>
             <SoftInput
               type="text"
@@ -304,7 +302,7 @@ function startup_form() {
           </SoftBox>
           <SoftBox mb={2}>
             <SoftTypography component="label" variant="caption" fontWeight="bold">
-              Team Size <span style={{ color: "red" }}>*</span>
+              Team Size <span style={required}>*</span>
             </SoftTypography>
             <SoftInput
               type="text"
@@ -326,21 +324,13 @@ function startup_form() {
           </SoftBox>
           <SoftBox mb={2}>
             <SoftTypography component="label" variant="caption" fontWeight="bold">
-              Startup Sector <span style={{ color: "red" }}>*</span>
-            </SoftTypography>
+              Startup Sector <span style={required}>*</span>
+            </SoftTypography> 
             <select
               value={startup_sector}
               onChange={handleStartupSectorChange}
               required
-              style={{
-                width: "100%",
-                padding: "0.75rem",
-                fontSize: "1rem",
-                backgroundColor: "#f4f4f4",
-                color: "#888",
-                border: "none",
-                borderRadius: "8px",
-              }}
+              style={selectStyles}
             >
               <option value="">Select Sector</option>
               <option value="Technology">Technology</option>
@@ -361,7 +351,7 @@ function startup_form() {
         <SoftBox flex="0 0 48%" mb={3}>
           <SoftBox mb={2}>
             <SoftTypography component="label" variant="caption" fontWeight="bold">
-              Startup Stage <span style={{ color: "red" }}>*</span>
+              Startup Stage <span style={required}>*</span>
             </SoftTypography>
             <SoftInput
               type="startup_stage"
@@ -391,20 +381,12 @@ function startup_form() {
           </SoftBox>
           <SoftBox mb={2}>
             <SoftTypography component="label" variant="caption" fontWeight="bold">
-              Country <span style={{ color: "red" }}>*</span>
+              Country <span style={required}>*</span>
             </SoftTypography>
             <select
               value={startup_country}
               onChange={handleCountryChange}
-              style={{
-                width: "100%",
-                padding: "0.75rem",
-                fontSize: "1rem",
-                backgroundColor: "#f4f4f4",
-                color: "#888",
-                border: "none",
-                borderRadius: "8px",
-              }}
+              style={selectStyles}
             >
               <option value="">Select your country</option>
               <option value="USA">United States</option>
@@ -436,7 +418,7 @@ function startup_form() {
           <SoftBox mb={2}>
             <SoftBox mt={4} display="flex" justifyContent="space-between">
               <SoftTypography component="label" variant="caption" fontWeight="bold">
-                Website
+                Website <span style={required}>*</span>
               </SoftTypography>
               <Tooltip title="should be valid website URL." placement="right-start">
                 <Icon>error_outline</Icon>
@@ -460,11 +442,12 @@ function startup_form() {
       )}
 
       <SoftBox mt={4} mb={1}>
-        <SoftButton variant="gradient" color="info" circular fullWidth onClick={handleSubmit}>
+        <SoftButton variant="gradient" color="info" circular fullWidth onClick={handleSubmit}
+        to="/startup">
           Submit
         </SoftButton>
       </SoftBox>
     </CoverLayout>
-  );
+      );
 }
 export default startup_form;
