@@ -129,7 +129,7 @@ function Welcome() {
                   </SoftTypography>{" "}
                 </SoftBox>{" "}
                 <SoftTypography variant="body2" sx={{ fontSize: 20 }} color="white">
-                  Log in now to discover exclusive opportunities, connect with investors, and take
+                  Sign up now to discover exclusive opportunities, connect with investors, and take
                   your startup journey to the next level.
                 </SoftTypography>
                 <SoftBox mb={6}></SoftBox>

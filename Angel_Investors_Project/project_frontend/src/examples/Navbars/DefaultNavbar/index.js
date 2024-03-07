@@ -186,8 +186,8 @@ function DefaultNavbar({ transparent, light, action }) {
           <DefaultNavbarLink icon="person" name="profile" route="/profile" light={light} /> */}
             <DefaultNavbarLink
               icon="key"
-              name="sign in"
-              route="/authentication/sign-up"
+              name="log in"
+              route="/authentication/log-in"
               light={light}
             />
             {/*           <DefaultNavbarLink
