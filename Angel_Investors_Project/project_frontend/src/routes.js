@@ -61,8 +61,8 @@ import InvestorProfile from "layouts/investor/InvestorProfile";
 //import page component
 import StartUpDeals from "layouts/startup/pageComponents/StartUpDeals";
 import StartUpHome from "layouts/startup/pageComponents/StartUpHome";
-// import StartUpPanding from "layouts/startup/pageComponents/StartUpPanding";
-// import StartUpRejected from "layouts/startup/pageComponents/StartUpRejected";
+import StartUpPending from "layouts/startup/pageComponents/StartUpPending";
+import StartUpRejected from "layouts/startup/pageComponents/StartUpRejected";
 import StartUpProfile from "layouts/startup/StartUpProfile";
 
 
@@ -225,9 +225,27 @@ const routes = [{
         component: < StartUpDeals / > ,
         noCollapse: true,
     },
+   
+    {
+            type: "collapse",
+            name: "Pending Deals",
+            key: "StartUpPending",
+            route: "/Startup/StartUpPending",
+            icon: <SpaceShip size="12px" />,
+            component: < StartUpPending />,
+            noCollapse: true,
+          },
 
-
-
+   {
+            type: "collapse",
+            name: "Rejected Deals",
+            key: "RejectedDeals",
+            route: "/Startup/StartUpRejected",
+            icon: <SpaceShip size="12px" />,
+            component: < StartUpRejected />,
+            noCollapse: true,
+          },
+          
     {
         type: "collapse",
         name: "investor ",

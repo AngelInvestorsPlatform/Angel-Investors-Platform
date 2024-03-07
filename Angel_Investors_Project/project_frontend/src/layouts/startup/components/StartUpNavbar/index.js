@@ -16,8 +16,8 @@ import LogoName from "assets/images/logo-name.svg";
 //import page component 
 import StartUpDeals from "layouts/startup/pageComponents/StartUpDeals";
 import StartUpHome from "layouts/startup/pageComponents/StartUpHome";
-// import StartUpPanding from "layouts/startup/pageComponents/StartUpPanding";
-// import StartUpRejected from "layouts/startup/pageComponents/StartUpRejected";
+import StartUpPending from "layouts/startup/pageComponents/StartUpPending";
+import StartUpRejected from "layouts/startup/pageComponents/StartUpRejected";
 import StartUpProfile from "layouts/startup/StartUpProfile";
 
 //style
@@ -58,26 +58,25 @@ const routes = [
     noCollapse: true,
     
   },
-        // {
-        //     type: "collapse",
-        //     name: "Panding Deals",
-        //     key: "PandingDeals",
-        //     route: "/Startup/StartUpPanding",
-        //     icon: <SpaceShip size="12px" />,
-        //     component: < StartUpPanding />,
-        //     noCollapse: true,
-        //   },
-        //   {
-        //     type: "collapse",
-        //     name: "Rejected Deals",
-        //     key: "RejectedDeals",
-        //     route: "/Startup/StartUpRejected",
-        //     icon: <SpaceShip size="12px" />,
-        //     component: < StartUpRejected />,
-        //     noCollapse: true,
-        //   },
+        {
+            type: "collapse",
+            name: "Pending Deals",
+            key: "Pending",
+            route: "/Startup/StartUpPending",
+            icon: <SpaceShip size="12px" />,
+            component: < StartUpPending />,
+            noCollapse: true,
+          },
+          {
+            type: "collapse",
+            name: "Rejected Deals",
+            key: "Rejected",
+            route: "/Startup/StartUpRejected",
+            icon: <SpaceShip size="12px" />,
+            component: < StartUpRejected />,
+            noCollapse: true,
+          },
 
-//
 
   {type : "divider"},
   { type: "title", title: "Account Manage", key: "account-pages" },
