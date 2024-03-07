@@ -39,7 +39,7 @@ const action = (
 // Date of start
 const DealsData = {
   columns: [
-    { name: "syndicate_name", align: "left" },
+    { name: "SYNDICATE", align: "left" },
     { name: "Amount", align: "left" },
     { name: "status", align: "left" },
     { name: "Date_Of_Start", align: "center" },
@@ -49,7 +49,7 @@ const DealsData = {
 
   rows: [
     {
-      syndicate_name: [logoSlack, " GLANTE"],
+      SYNDICATE: [logoSlack, " GLANTE"],
       Amount: (
         <SoftTypography variant="button" color="text" fontWeight="medium">
           $200,500
@@ -57,7 +57,7 @@ const DealsData = {
       ),
       status: (
         <SoftTypography variant="caption" color="text" fontWeight="medium">
-          working
+          be collected soon
         </SoftTypography>
       ),
       Date_Of_Start: (
@@ -69,7 +69,7 @@ const DealsData = {
       action,
     },
     {
-      syndicate_name: [logoInvesion, "Invesion"],
+      SYNDICATE: [logoInvesion, "Invesion"],
       Amount: (
         <SoftTypography variant="button" color="text" fontWeight="medium">
           $500,000
@@ -77,7 +77,7 @@ const DealsData = {
       ),
       status: (
         <SoftTypography variant="caption" color="text" fontWeight="medium">
-          done
+          completed
         </SoftTypography>
       ),
       Date_Of_Start: (
@@ -89,7 +89,7 @@ const DealsData = {
       action,
     },
     {
-      syndicate_name: [logoJira, "Jira"],
+      SYNDICATE: [logoJira, "Jira"],
       Amount: (
         <SoftTypography variant="button" color="text" fontWeight="medium">
           $300,400
@@ -109,7 +109,7 @@ const DealsData = {
       action,
     },
     {
-      syndicate_name: [logoSlack, "Slack"],
+      SYNDICATE: [logoSlack, "Slack"],
       Amount: (
         <SoftTypography variant="button" color="text" fontWeight="medium">
           $100,900
@@ -129,7 +129,7 @@ const DealsData = {
       action,
     },
     {
-      syndicate_name: [logoWebDev, "Webdev"],
+      SYNDICATE: [logoWebDev, "Webdev"],
       Amount: (
         <SoftTypography variant="button" color="text" fontWeight="medium">
           $140,000
@@ -137,7 +137,7 @@ const DealsData = {
       ),
       status: (
         <SoftTypography variant="caption" color="text" fontWeight="medium">
-          working
+          be collected soon
         </SoftTypography>
       ),
       Date_Of_Start: (
@@ -149,7 +149,7 @@ const DealsData = {
       action,
     },
     {
-      syndicate_name: [logoXD, "Adobe XD"],
+      SYNDICATE: [logoXD, "Adobe XD"],
       Amount: (
         <SoftTypography variant="button" color="text" fontWeight="medium">
           $200,300
@@ -157,7 +157,7 @@ const DealsData = {
       ),
       status: (
         <SoftTypography variant="caption" color="text" fontWeight="medium">
-          done
+          completed
         </SoftTypography>
       ),
       Date_Of_Start: (
@@ -169,7 +169,7 @@ const DealsData = {
       action,
     },
     {
-      syndicate_name: [ logoSlack , "CAMEO"],
+      SYNDICATE: [ logoSlack , "CAMEO"],
       Amount: (
         <SoftTypography variant="button" color="text" fontWeight="medium">
           $200,500
@@ -177,7 +177,7 @@ const DealsData = {
       ),
       status: (
         <SoftTypography variant="caption" color="text" fontWeight="medium">
-          working
+          be collected soon
         </SoftTypography>
       ),
       Date_Of_Start: (
@@ -189,7 +189,7 @@ const DealsData = {
       action,
     },
     {
-      syndicate_name: [logoJira, "Jira"],
+      SYNDICATE: [logoJira, "Jira"],
       Amount: (
         <SoftTypography variant="button" color="text" fontWeight="medium">
           $300,400
@@ -206,6 +206,46 @@ const DealsData = {
         </SoftTypography>
       ),
       completion: <Completion value={30} color="error" />,
+      action,
+    },
+    {
+      SYNDICATE: [logoXD, "Adobe XD"],
+      Amount: (
+        <SoftTypography variant="button" color="text" fontWeight="medium">
+          $200,300
+        </SoftTypography>
+      ),
+      status: (
+        <SoftTypography variant="caption" color="text" fontWeight="medium">
+          completed
+        </SoftTypography>
+      ),
+      Date_Of_Start: (
+        <SoftTypography variant="caption" color="text" fontWeight="medium">
+          23/04/18
+        </SoftTypography>
+      ),
+      completion: <Completion value={100} color="success" />,
+      action,
+    },
+    {
+      SYNDICATE: [logoWebDev, "Webdev"],
+      Amount: (
+        <SoftTypography variant="button" color="text" fontWeight="medium">
+          $140,000
+        </SoftTypography>
+      ),
+      status: (
+        <SoftTypography variant="caption" color="text" fontWeight="medium">
+          be collected soon
+        </SoftTypography>
+      ),
+      Date_Of_Start: (
+        <SoftTypography variant="caption" color="text" fontWeight="medium">
+          23/04/18
+        </SoftTypography>
+      ),
+      completion: <Completion value={80} color="info" />,
       action,
     },
   ],
