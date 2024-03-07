@@ -45,12 +45,23 @@ const selectStyles = {
   width: "100%",
   padding: "0.75rem",
   fontSize: "1rem",
-  backgroundColor: "#f4f4f4",
+  backgroundColor: "#ffff",
+  borderColor:"#e9ecef",
   color: "#888",
-  border: "none",
+  border: "0.2",
   borderRadius: "8px",
+  transition: "border-color 0.2s",
 };
 
+const handleFocus = (event) => {
+  // Change border color when focused
+  event.target.style.border = "2px solid #17c1e8";
+};
+
+const handleBlur = (event) => {
+  // Reset border color when blurred
+  event.target.style.border = "0.2px solid #e9ecef";
+};
 const required = { color: "red" };
 
 
@@ -328,11 +339,12 @@ function startup_form() {
             </SoftTypography> 
             <select
               value={startup_sector}
-              onChange={handleStartupSectorChange}
-              required
+              onChange={handleStartupSectorChange} 
               style={selectStyles}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
             >
-              <option value="">Select Sector</option>
+              <option value="" disabled>Select Sector</option>
               <option value="Technology">Technology</option>
               <option value="Healthcare">Healthcare</option>
               <option value="Environmental technology">Environmental technology</option>
@@ -387,6 +399,8 @@ function startup_form() {
               value={startup_country}
               onChange={handleCountryChange}
               style={selectStyles}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
             >
               <option value="">Select your country</option>
               <option value="USA">United States</option>
