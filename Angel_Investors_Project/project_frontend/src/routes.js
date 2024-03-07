@@ -63,7 +63,7 @@ import StartUpDeals from "layouts/startup/pageComponents/StartUpDeals";
 import StartUpHome from "layouts/startup/pageComponents/StartUpHome";
 // import StartUpPanding from "layouts/startup/pageComponents/StartUpPanding";
 // import StartUpRejected from "layouts/startup/pageComponents/StartUpRejected";
-import StartUpProfile from "layouts/startup/StartUpProfile";
+import startupProfile from "layouts/startup/startupProfile";
 
 
 // Soft UI Dashboard React icons
@@ -212,7 +212,7 @@ const routes = [{
         key: "StartUpProfile",
         route: "/startup/StartUpProfile",
         icon: < CustomerSupport size = "12px" / > ,
-        component: < StartUpProfile / > ,
+        component: < startupProfile / > ,
         noCollapse: true,
     },
 
