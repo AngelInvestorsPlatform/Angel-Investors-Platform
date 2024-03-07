@@ -18,8 +18,14 @@ import { useState, useEffect } from "react";
 // react-router components
 import { useLocation, Link } from "react-router-dom";
 
+//for user auth global context
+import { useAuthUser } from "context/authContext";
+import { Navigate } from "react-router-dom";
+
 // prop-types is a library for typechecking of props.
 import PropTypes from "prop-types";
+//for API
+import axios from "axios";
 
 // @material-ui core components
 import AppBar from "@mui/material/AppBar";
@@ -32,6 +38,7 @@ import Icon from "@mui/material/Icon";
 import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
 import SoftInput from "components/SoftInput";
+import SoftAlert from "components/SoftAlert";
 
 // Soft UI Dashboard React examples
 import Breadcrumbs from "examples/Breadcrumbs";
@@ -65,6 +72,19 @@ function DashboardNavbar({ absolute, light, isMini }) {
   const [openMenu, setOpenMenu] = useState(false);
   const route = useLocation().pathname.split("/").slice(1);
 
+  const { userData, setUserData, isLoggedIn, setIsLoggedIn, role } = useAuthUser();
+  const [logError, setLogError] = useState("");
+  const [RedirectToUserPage, setRedirectToUserPage] = useState(false);
+  const [RedirectToLogin, setRedirectToLogin] = useState(false);
+
+  if (RedirectToUserPage) {
+    return <Navigate to="/landing" />;
+  }
+
+  if (RedirectToLogin){
+    return <Navigate to="/authentication/log-in" />;
+  }
+
   useEffect(() => {
     // Setting the navbar type
     if (fixedNavbar) {
@@ -95,6 +115,28 @@ function DashboardNavbar({ absolute, light, isMini }) {
   const handleConfiguratorOpen = () => setOpenConfigurator(dispatch, !openConfigurator);
   const handleOpenMenu = (event) => setOpenMenu(event.currentTarget);
   const handleCloseMenu = () => setOpenMenu(false);
+
+  const handleLogout = async () => {
+    try {
+      const logoutResponse = await axios.post(`${process.env.REACT_APP_DJANGO_API}auth/logout`, {});
+  
+      if (logoutResponse.status === 200) {
+        setUserData(null); // Clear user data
+        setIsLoggedIn(false); // Set login status to false
+      } else {
+        setLogError("Error: not logged out");
+      }
+    } catch (errorX) {
+      // Handle error, display appropriate message
+      setLogError("Logout Failed: ");
+    }
+  };
+
+  const handleLogin = () => {
+
+    setRedirectToLogin(true);
+  };
+
 
   // Render the notifications menu
   const renderMenu = () => (
@@ -154,24 +196,22 @@ function DashboardNavbar({ absolute, light, isMini }) {
               />
             </SoftBox>
             <SoftBox color={light ? "white" : "inherit"}>
-              <Link to="/authentication/sign-in">
-                <IconButton sx={navbarIconButton} size="small">
-                  <Icon
-                    sx={({ palette: { dark, white } }) => ({
-                      color: light ? white.main : dark.main,
-                    })}
-                  >
-                    account_circle
-                  </Icon>
-                  <SoftTypography
-                    variant="button"
-                    fontWeight="medium"
-                    color={light ? "white" : "dark"}
-                  >
-                    Sign in
-                  </SoftTypography>
-                </IconButton>
-              </Link>
+              <IconButton sx={navbarIconButton} size="small">
+                <Icon
+                  sx={({ palette: { dark, white } }) => ({
+                    color: light ? white.main : dark.main,
+                  })}
+                >
+                  account_circle
+                </Icon>
+                <SoftTypography
+                  variant="button"
+                  fontWeight="medium"
+                  color={light ? "white" : "dark"}
+                >
+                  {userData ? userData.first_name : "Hello"}
+                </SoftTypography>
+              </IconButton>
               <IconButton
                 size="small"
                 color="inherit"
@@ -182,14 +222,19 @@ function DashboardNavbar({ absolute, light, isMini }) {
                   {miniSidenav ? "menu_open" : "menu"}
                 </Icon>
               </IconButton>
-              <IconButton
-                size="small"
-                color="inherit"
-                sx={navbarIconButton}
-                onClick={handleConfiguratorOpen}
-              >
-                <Icon>settings</Icon>
+              {isLoggedIn ? (
+                <Link to="/landing">
+              <IconButton size="small" color="inherit" sx={navbarIconButton} onClick={handleLogout}>
+                <Icon>logout</Icon>
               </IconButton>
+              </Link>
+              ) : (
+                <Link to="/authentication/log-in">
+                <IconButton size="small" color="inherit" sx={navbarIconButton}>
+                <Icon>login</Icon>
+              </IconButton>
+              </Link>
+              )}
               <IconButton
                 size="small"
                 color="inherit"
@@ -206,6 +251,12 @@ function DashboardNavbar({ absolute, light, isMini }) {
           </SoftBox>
         )}
       </Toolbar>
+      {/*if logout Fail*/}
+      {logError && (
+        <SoftAlert fontSize="small" color="error" mt={2} dismissible>
+          {logError}
+        </SoftAlert>
+      )}
     </AppBar>
   );
 }
