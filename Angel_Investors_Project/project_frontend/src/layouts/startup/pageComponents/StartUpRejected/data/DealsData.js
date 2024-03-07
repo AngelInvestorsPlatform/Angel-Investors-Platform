@@ -6,7 +6,6 @@ import SoftAvatar from "components/SoftAvatar";
 import SoftBadge from "components/SoftBadge";
 //icon
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
-
 // Images
 import team2 from "assets/images/team-2.jpg";
 import team3 from "assets/images/team-3.jpg";
@@ -55,6 +54,32 @@ const authorsTableData = {
 
   rows: [
     {
+      Syndicate_Lead: <Author image={team4} name="Laurent Perrier" email="laurent@creative-tim.com" />,
+      Syndicate_name: <Function job="Executive" org="Projects" />,
+      
+      Date: (
+        <SoftTypography variant="caption" color="secondary" fontWeight="medium">
+          19/09/17
+        </SoftTypography>
+      ),
+      offer: (
+        <SoftTypography variant="caption" color="secondary" fontWeight="medium">
+          1,500,000
+        </SoftTypography>
+      ),
+      action: (
+        <SoftTypography
+          component="a"
+          href="#"
+          variant="caption"
+          color="secondary"
+          fontWeight="medium"
+        >
+          X
+        </SoftTypography>
+      ),
+    },
+    {
       Syndicate_Lead: <Author image={team2} name="John Michael" email="john@creative-tim.com" />,
       Syndicate_name: <Function job="Manager" org="Organization" />,
       Date: (
@@ -75,7 +100,7 @@ const authorsTableData = {
           color="secondary"
           fontWeight="medium"
         >
-          Edit
+          X
         </SoftTypography>
       ),
     },
@@ -102,7 +127,7 @@ const authorsTableData = {
           color="secondary"
           fontWeight="medium"
         >
-          Edit
+          X
         </SoftTypography>
       ),
     },
@@ -121,15 +146,15 @@ const authorsTableData = {
         </SoftTypography>
       ),
       action: (
-        <Icon
+        <SoftTypography
           component="a"
           href="#"
           variant="caption"
           color="secondary"
           fontWeight="medium"
         >
-          HighlightOff
-        </Icon>
+          X
+        </SoftTypography>
       ),
     },
     {
@@ -154,7 +179,7 @@ const authorsTableData = {
           color="secondary"
           fontWeight="medium"
         >
-          Edit
+      X
         </SoftTypography>
       ),
     },
@@ -180,7 +205,7 @@ const authorsTableData = {
           color="secondary"
           fontWeight="medium"
         >
-          Edit
+          X
         </SoftTypography>
       ),
     },
@@ -206,7 +231,33 @@ const authorsTableData = {
           color="secondary"
           fontWeight="medium"
         >
-          Edit
+          X
+        </SoftTypography>
+      ),
+    },
+    {
+      Syndicate_Lead: <Author image={team3} name="Michael Levi" email="michael@creative-tim.com" />,
+      Syndicate_name: <Function job="Programator" org="Developer" />,
+     
+      Date: (
+        <SoftTypography variant="caption" color="secondary" fontWeight="medium">
+          24/12/08
+        </SoftTypography>
+      ),
+      offer: (
+        <SoftTypography variant="caption" color="secondary" fontWeight="medium">
+          350,000
+        </SoftTypography>
+      ),
+      action: (
+        <SoftTypography
+          component="a"
+          href="#"
+          variant="caption"
+          color="secondary"
+          fontWeight="medium"
+        >
+      X
         </SoftTypography>
       ),
     },
