@@ -52,11 +52,11 @@ function SidenavCard() {
         </SoftBox>
         <SoftBox lineHeight={1}>
           <SoftTypography variant="h6" color="white">
-          wanna be a Lead?
+          Wanna be a lead?
           </SoftTypography>
           <SoftBox mb={1.825} mt={-1}>
             <SoftTypography variant="caption" color="white" fontWeight="medium">
-              create your won syndicate
+            Create your own syndicate.
             </SoftTypography>
           </SoftBox>
           <SoftButton
