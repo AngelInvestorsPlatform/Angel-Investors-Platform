@@ -34,7 +34,23 @@ function ExploreSyndicate() {
         <SoftBox mb={3}>
           <Card>
             <SoftBox display="flex" justifyContent="space-between" alignItems="center" p={3}>
-              <SoftTypography variant="h6"> Syndicate</SoftTypography>
+            <SoftBox>
+            <SoftTypography variant="h4" color="info" fontWeight="regular" textGradient> Explore Syndicate</SoftTypography>
+          <SoftBox display="flex" alignItems="center" lineHeight={0}>
+            <Icon
+              sx={{
+                fontWeight: "bold",
+                color: ({ palette: { info } }) => info.main,
+                mt: -0.3,
+              }}
+            >
+              equalizer
+            </Icon>
+            <SoftTypography variant="button" fontWeight="regular" color="text">
+              &nbsp; Browse all <strong> The Syndicate</strong> 
+            </SoftTypography>
+          </SoftBox>
+        </SoftBox>
             </SoftBox>
             <SoftBox
               sx={{
