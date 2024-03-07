@@ -112,6 +112,14 @@ function startup_form() {
   const handleCityChange = (e) => setCity(e.target.value);
   const handleWebsiteChange = (e) => setWebsite(e.target.value);
 
+
+  // const [RedirectToUserI, setRedirectToUserI] = useState(false);
+  const [RedirectToUserS, setRedirectToUserS] = useState(false);
+
+  if (RedirectToUserS) {
+    return <Navigate to="/authenticatio/log-in" />;
+  } 
+
   //on submit
   const handleSubmit = async () => {
     try {
@@ -166,9 +174,10 @@ function startup_form() {
           startup_web,
         });
             if (Response2.status === 200 || Response2.status === 201) {
-                setRegConfirm("successfully registered");
+                setRegConfirm("successfully registered, Please Login to your account");
                 const { data } = Response2;
                 setFormMessage(data);
+                //setRedirectToUserS(true);
 
                 window.scrollTo({ top: 0, behavior: "smooth" });
               } else {

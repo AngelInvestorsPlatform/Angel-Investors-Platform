@@ -16,7 +16,8 @@ Coded by www.creative-tim.com
 import { useState, useEffect } from "react";
 
 // react-router components
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
+import { HashLink as Link } from 'react-router-hash-link';
 
 //for API
 import axios from "axios";
@@ -39,6 +40,8 @@ import SoftButton from "components/SoftButton";
 // Soft UI Dashboard React examples
 import BlankNavbarLink from "examples/Navbars/BlankNavbar/BlankNavbarLink";
 import BlankNavbarMobile from "examples/Navbars/BlankNavbar/BlankNavbarMobile";
+import DefaultNavbarLink from "examples/Navbars/DefaultNavbar/DefaultNavbarLink";
+
 
 // Soft UI Dashboard React base styles
 import breakpoints from "assets/theme/base/breakpoints";
@@ -150,7 +153,22 @@ function BlankNavbar({ transparent, light, action }) {
           </>
         ) : (
           <SoftBox color="inherit" display={{ xs: "none", lg: "flex" }} m={0} p={0}>
-
+          <DefaultNavbarLink
+            icon="key"
+            name="log in"
+            route="/authentication/log-in"
+            light={light}
+          />
+          <SoftBox
+              display={{ xs: "none", lg: "inline-block" }}
+              component={Link}
+              to="/landing#getStarted"
+            >
+              <SoftButton variant="gradient" color="info" size="medium" circular>
+                Get Started &nbsp;
+                <Icon>account_circle</Icon>
+              </SoftButton>
+            </SoftBox>
           
           </SoftBox>
         )}

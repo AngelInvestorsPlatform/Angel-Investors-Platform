@@ -94,6 +94,13 @@ function InvestorForm() {
   const handleSectorChange = (e) => setSector(e.target.value);
   const handleExperienceChange = (e) => setExperience(e.target.value);
   const handleIncomeChange = (e) => setIncome(e.target.value);
+
+  const [RedirectToUserI, setRedirectToUserI] = useState(false);
+
+  if (RedirectToUserI) {
+    return <Navigate to="/investor" />;
+  } 
+
   //on submit
   const handleSubmit = async () => {
     try {
@@ -154,9 +161,10 @@ function InvestorForm() {
           investor_income,
         });
         if (Response2.status === 200 || Response2.status === 201) {
-          setRegConfirm("successfully registered");
+          setRegConfirm("successfully registered, Please Login to your account");
           const { data } = Response2;
           setFormMessage(data);
+          //setRedirectToUserI(true);
 
           window.scrollTo({ top: 0, behavior: "smooth" });
         } else {
