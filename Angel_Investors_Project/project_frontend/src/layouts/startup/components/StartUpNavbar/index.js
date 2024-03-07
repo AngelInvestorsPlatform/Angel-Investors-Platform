@@ -31,6 +31,8 @@ import CustomerSupport from "examples/Icons/CustomerSupport";
 import Office from "examples/Icons/Office";
 import Settings from "examples/Icons/Settings";
 import { Home } from "@mui/icons-material";
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import DisabledByDefaultIcon from '@mui/icons-material/DisabledByDefault';
 
 const routes = [ 
     { type: "title", title: "Home", key: "Home" },
@@ -63,7 +65,7 @@ const routes = [
             name: "Pending Deals",
             key: "Pending",
             route: "/Startup/StartUpPending",
-            icon: <SpaceShip size="12px" />,
+            icon: <AccessTimeIcon size="12px" />,
             component: < StartUpPending />,
             noCollapse: true,
           },
@@ -72,7 +74,7 @@ const routes = [
             name: "Rejected Deals",
             key: "Rejected",
             route: "/Startup/StartUpRejected",
-            icon: <SpaceShip size="12px" />,
+            icon: <DisabledByDefaultIcon size="12px" />,
             component: < StartUpRejected />,
             noCollapse: true,
           },
