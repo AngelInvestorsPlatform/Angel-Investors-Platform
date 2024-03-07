@@ -18,7 +18,7 @@ import StartUpDeals from "layouts/startup/pageComponents/StartUpDeals";
 import StartUpHome from "layouts/startup/pageComponents/StartUpHome";
 import StartUpPending from "layouts/startup/pageComponents/StartUpPending";
 import StartUpRejected from "layouts/startup/pageComponents/StartUpRejected";
-import StartUpProfile from "layouts/startup/StartUpProfile";
+import StartUpProfile from "layouts/startup/startupProfile";
 
 //style
 // import styled from 'styled-components';
