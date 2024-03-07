@@ -18,7 +18,7 @@ import typography from "assets/theme/base/typography";
 
 // Investor layout components
 import InvestorNavbar from 'layouts/investor/components/InvestorNavbar';
-import Projects from "layouts/investor/components/Projects";
+import YourSyndicates from "layouts/investor/components/YourSyndicates";
 
 // Data
 
@@ -32,7 +32,7 @@ function YourSyndicate() {
       <InvestorNavbar />
       <SoftBox py={3}>
         {/*  your Syndicate table start here */}
-        <Projects/>
+        <YourSyndicates/>
 
         {/*  your Syndicate table end here */}
       </SoftBox>
