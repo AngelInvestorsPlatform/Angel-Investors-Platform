@@ -4,11 +4,14 @@ import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
 import SoftAvatar from "components/SoftAvatar";
 import SoftBadge from "components/SoftBadge";
+//icon
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
 // Images
 import team2 from "assets/images/team-2.jpg";
 import team3 from "assets/images/team-3.jpg";
 import team4 from "assets/images/team-4.jpg";
+import { Icon } from "@mui/material";
 
 function Author({ image, name, email }) {
   return (
@@ -43,25 +46,27 @@ function Function({ job, org }) {
 
 const authorsTableData = {
   columns: [
-    { name: "Syndicate name", align: "left" },
-    { name: "function", align: "left" },
-    { name: "status", align: "center" },
-    { name: "employed", align: "center" },
-    { name: "action", align: "center" },
+    { name: "Syndicate_Lead", align: "left" },
+    { name: "Syndicate_name", align: "left" },
+    { name: "Date", align: "center" },
+    { name: "offer", align: "center" },
+     { name: "action", align: "center" },
   ],
 
   rows: [
     {
-      Syndicatename: <Author image={team2} name="John Michael" email="john@creative-tim.com" />,
-      function: <Function job="Manager" org="Organization" />,
-      status: (
-        <SoftBadge variant="gradient" badgeContent="online" color="success" size="xs" container />
-      ),
-      employed: (
+      Syndicate_Lead: <Author image={team2} name="John Michael" email="john@creative-tim.com" />,
+      Syndicate_name: <Function job="Manager" org="Organization" />,
+      Date: (
         <SoftTypography variant="caption" color="secondary" fontWeight="medium">
           23/04/18
         </SoftTypography>
       ),
+      offer: (
+        <SoftTypography variant="caption" color="secondary" fontWeight="medium">
+          1,000,000
+        </SoftTypography>
+      ),
       action: (
         <SoftTypography
           component="a"
@@ -75,15 +80,19 @@ const authorsTableData = {
       ),
     },
     {
-      author: <Author image={team3} name="Alexa Liras" email="alexa@creative-tim.com" />,
-      function: <Function job="Programator" org="Developer" />,
-      status: (
-        <SoftBadge variant="gradient" badgeContent="offline" color="secondary" size="xs" container />
-      ),
-      employed: (
+      Syndicate_Lead: <Author image={team3} name="Alexa Liras" email="alexa@creative-tim.com" />,
+      Syndicate_name: <Function job="Programator" org="Developer" />,
+    
+      Date: (
         <SoftTypography variant="caption" color="secondary" fontWeight="medium">
           11/01/19
         </SoftTypography>
+        
+      ),
+      offer: (
+        <SoftTypography variant="caption" color="secondary" fontWeight="medium">
+          500,000
+        </SoftTypography>
       ),
       action: (
         <SoftTypography
@@ -98,39 +107,45 @@ const authorsTableData = {
       ),
     },
     {
-      author: <Author image={team4} name="Laurent Perrier" email="laurent@creative-tim.com" />,
-      function: <Function job="Executive" org="Projects" />,
-      status: (
-        <SoftBadge variant="gradient" badgeContent="online" color="success" size="xs" container />
-      ),
-      employed: (
+      Syndicate_Lead: <Author image={team4} name="Laurent Perrier" email="laurent@creative-tim.com" />,
+      Syndicate_name: <Function job="Executive" org="Projects" />,
+      
+      Date: (
         <SoftTypography variant="caption" color="secondary" fontWeight="medium">
           19/09/17
         </SoftTypography>
       ),
+      offer: (
+        <SoftTypography variant="caption" color="secondary" fontWeight="medium">
+          1,500,000
+        </SoftTypography>
+      ),
       action: (
-        <SoftTypography
+        <Icon
           component="a"
           href="#"
           variant="caption"
           color="secondary"
           fontWeight="medium"
         >
-          Edit
-        </SoftTypography>
+          HighlightOff
+        </Icon>
       ),
     },
     {
-      author: <Author image={team3} name="Michael Levi" email="michael@creative-tim.com" />,
-      function: <Function job="Programator" org="Developer" />,
-      status: (
-        <SoftBadge variant="gradient" badgeContent="online" color="success" size="xs" container />
-      ),
-      employed: (
+      Syndicate_Lead: <Author image={team3} name="Michael Levi" email="michael@creative-tim.com" />,
+      Syndicate_name: <Function job="Programator" org="Developer" />,
+     
+      Date: (
         <SoftTypography variant="caption" color="secondary" fontWeight="medium">
           24/12/08
         </SoftTypography>
       ),
+      offer: (
+        <SoftTypography variant="caption" color="secondary" fontWeight="medium">
+          350,000
+        </SoftTypography>
+      ),
       action: (
         <SoftTypography
           component="a"
@@ -144,16 +159,19 @@ const authorsTableData = {
       ),
     },
     {
-      author: <Author image={team2} name="Richard Gran" email="richard@creative-tim.com" />,
-      function: <Function job="Manager" org="Executive" />,
-      status: (
-        <SoftBadge variant="gradient" badgeContent="offline" color="secondary" size="xs" container />
-      ),
-      employed: (
+      Syndicate_Lead: <Author image={team2} name="Richard Gran" email="richard@creative-tim.com" />,
+      Syndicate_name: <Function job="Manager" org="Executive" />,
+      
+      Date: (
         <SoftTypography variant="caption" color="secondary" fontWeight="medium">
           04/10/21
         </SoftTypography>
       ),
+      offer: (
+        <SoftTypography variant="caption" color="secondary" fontWeight="medium">
+         900,000
+        </SoftTypography>
+      ),
       action: (
         <SoftTypography
           component="a"
@@ -167,14 +185,17 @@ const authorsTableData = {
       ),
     },
     {
-      author: <Author image={team4} name="Miriam Eric" email="miriam@creative-tim.com" />,
-      function: <Function job="Programtor" org="Developer" />,
-      status: (
-        <SoftBadge variant="gradient" badgeContent="offline" color="secondary" size="xs" container />
-      ),
-      employed: (
+      Syndicate_Lead: <Author image={team4} name="Miriam Eric" email="miriam@creative-tim.com" />,
+      Syndicate_name: <Function job="Programtor" org="Developer" />,
+      
+      Date: (
         <SoftTypography variant="caption" color="secondary" fontWeight="medium">
           14/09/20
+        </SoftTypography>
+      ),
+      offer: (
+        <SoftTypography variant="caption" color="secondary" fontWeight="medium">
+          2,000,000
         </SoftTypography>
       ),
       action: (

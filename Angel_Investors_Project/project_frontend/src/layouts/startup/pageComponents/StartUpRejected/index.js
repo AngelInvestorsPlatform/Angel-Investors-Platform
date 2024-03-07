@@ -28,7 +28,7 @@ import StartUpNavbar from 'layouts/startup/components/StartUpNavbar';
 
 // Data
 
-import DealsData from "layouts/startup/pageComponents/StartUpPending/data/DealsData";
+import DealsData from "layouts/startup/pageComponents/StartUpRejected/data/DealsData";
 
 function Tables() {
   const { columns, rows } = DealsData;
