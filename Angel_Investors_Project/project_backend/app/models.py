@@ -82,7 +82,7 @@ class Investor(models.Model):
     investor_country = models.CharField(max_length=20, choices=COUNTRY_CHOICES, default='SA', null=True, blank=True)
     investor_sector = models.CharField(max_length=50, choices=IN_SECTORS_CHOICES, default='Information Technology')
     investor_experience = models.CharField(max_length=50, choices=EXPERIENCE_CHOICES, default='Less than 1 year')
-    investor_income = models.CharField(max_length=50,choices=INCOME_CHOICES, default='Less than 100K')
+    investor_income = models.CharField(max_length=50, default='Less than 100K')
 
     def __str__(self):
         return self.investor_name

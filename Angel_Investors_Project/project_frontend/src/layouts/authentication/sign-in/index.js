@@ -89,14 +89,14 @@ function SignIn() {
       }
     } catch (errorX) {
       // Handle error, display appropriate message
-      setLogError(" Sign In Failed: " + errorX.message);
+      setLogError(" Log In Failed: " + errorX.message);
     }
   };
   if (!isLoggedIn) {
     return (
       <CoverLayout
         title="Welcome back"
-        description="Enter your email and password to sign in"
+        description="Enter your email and password to log in"
         image={curved9}
       >
         {/*if login Success*/}
@@ -165,7 +165,7 @@ function SignIn() {
           </SoftBox>
           <SoftBox mt={4} mb={1}>
             <SoftButton variant="gradient" color="info" fullWidth onClick={handleSignIn}>
-              sign in
+              log in
             </SoftButton>
           </SoftBox>
           <SoftBox mt={3} textAlign="center">
@@ -173,7 +173,7 @@ function SignIn() {
               Don&apos;t have an account?{" "}
               <SoftTypography
                 component={Link}
-                to="/authentication/sign-up"
+                to="/authentication/log-in"
                 variant="button"
                 color="info"
                 fontWeight="medium"

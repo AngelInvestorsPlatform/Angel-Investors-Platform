@@ -44,7 +44,7 @@ import VirtualReality from "layouts/virtual-reality";
 import RTL from "layouts/rtl";
 import Profile from "layouts/profile";
 import SignIn from "layouts/authentication/sign-in";
-import SignUp from "layouts/authentication/sign-up";
+import SignUp from "layouts/authentication/log-in";
 import Selection from "layouts/authentication/Selection";
 import Investor_form from "layouts/registers_forms/investor_form";
 import Startups_form from "layouts/registers_forms/startups_form"
@@ -142,7 +142,7 @@ const routes = [{
         component: < Profile / > ,
         noCollapse: true,
     },
-    {
+    {/* {
         type: "collapse",
         name: "Sign In",
         key: "sign-in",
@@ -150,12 +150,12 @@ const routes = [{
         icon: < Document size = "12px" / > ,
         component: < SignIn / > ,
         noCollapse: true,
-    },
+    }, */},
     {
         type: "collapse",
-        name: "Sign Up",
-        key: "sign-up",
-        route: "/authentication/sign-up",
+        name: "Log In",
+        key: "log-in",
+        route: "/authentication/log-in",
         icon: < SpaceShip size = "12px" / > ,
         component: < SignUp / > ,
         noCollapse: true,

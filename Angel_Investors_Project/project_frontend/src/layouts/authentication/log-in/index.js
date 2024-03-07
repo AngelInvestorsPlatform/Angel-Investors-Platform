@@ -131,7 +131,7 @@ function LogIn() {
   return (
     <BasicLayout
       title="Welcome back"
-      description="Enter your email and password to sign in"
+      description="Enter your email and password to log in"
       image={curved6}
     >
       {/*if register Success*/}

@@ -20,7 +20,6 @@ import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
 import SoftInput from "components/SoftInput";
 import SoftButton from "components/SoftButton";
-import Select from '@mui/material/Select';
 
 // registers_forms layout components
 import CoverLayout from "layouts/registers_forms/components/CoverLayout";
@@ -34,13 +33,23 @@ const selectStyles = {
   width: "100%",
   padding: "0.75rem",
   fontSize: "1rem",
-  backgroundColor: "#f4f4f4",
+  backgroundColor: "#ffff",
+  borderColor:"#e9ecef",
   color: "#888",
-  border: "none",
+  border: "0.2",
   borderRadius: "8px",
+  transition: "border-color 0.2s",
 };
 
-const required = { color: "red" };
+const handleFocus = (event) => {
+  // Change border color when focused
+  event.target.style.border = "2px solid #17c1e8";
+};
+
+const handleBlur = (event) => {
+  // Reset border color when blurred
+  event.target.style.border = "0.2px solid #e9ecef";
+};
 
 function InvestorForm() {
   //form Data variables
@@ -303,6 +312,8 @@ function InvestorForm() {
               onChange={handleCountryChange}
               required
               style={selectStyles}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
             >
               <option value="">Select your country</option>
               <option value="USA">United States</option>
@@ -332,6 +343,8 @@ function InvestorForm() {
               onChange={handleSectorChange}
               required
               style={selectStyles}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
             >
               <option value="">Select your sector</option>
               <option value="Biotech">Biotech</option>
@@ -355,6 +368,8 @@ function InvestorForm() {
               onChange={handleExperienceChange}
               required
               style={selectStyles}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
             >
               <option value="">Select your Experience</option>
               <option value="Less than 1 year">Less than 1 year</option>
@@ -366,7 +381,7 @@ function InvestorForm() {
           </SoftBox>
           <SoftBox mb={2}>
           <SoftTypography component="label" variant="caption" fontWeight="bold">
-           Income
+           Income <span style={{ color: "red" }}>*</span>
           </SoftTypography>
           <select
             value={investor_income}

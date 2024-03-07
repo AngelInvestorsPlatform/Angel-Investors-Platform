@@ -59,8 +59,8 @@ function DefaultNavbarMobile({ open, close }) {
         </>
         ) : (
           <>
-        <DefaultNavbarLink icon="account_circle" name="sign up" route="/landing#getStarted" />
-        <DefaultNavbarLink icon="key" name="sign in" route="/authentication/sign-up" />
+        <DefaultNavbarLink icon="account_circle" name="log in" route="/landing#getStarted" />
+        <DefaultNavbarLink icon="key" name="log in" route="/authentication/log-in" />
           </>
 
         )}

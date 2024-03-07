@@ -55,7 +55,7 @@ function Footer() {
             <SoftBox mr={{ xs: 2, lg: 3, xl: 6 }}>
               <SoftTypography
                 component="a"
-                href="/authentication/sign-up"
+                href="/authentication/log-in"
                 variant="body2"
                 color="secondary"
               >
