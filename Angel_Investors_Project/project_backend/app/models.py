@@ -98,7 +98,7 @@ class Startup(models.Model):
     startup_id = models.AutoField(primary_key=True)
     startup_name = models.CharField(max_length=100, null=False)
     startup_phone = models.CharField(max_length=20, null=False, blank=True)
-    startup_sector = models.CharField(max_length=50, choices=ST_SECTORS_CHOICES, default='Technology', blank=True)
+    startup_sector = models.CharField(max_length=50, default='Technology', blank=True)
     startup_stage = models.CharField(max_length=20,  null=False, blank=True)
     startup_team = models.CharField(max_length=2000, null=False, blank=True)
     startup_country = models.CharField(max_length=20, choices=COUNTRY_CHOICES, default='SA')
