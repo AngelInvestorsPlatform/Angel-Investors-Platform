@@ -58,13 +58,13 @@ import YourDeals from "layouts/investor/pageComponents/YourDeals";
 import ExploreSyndicate from "layouts/investor/pageComponents/ExploreSyndicate";
 import InvestorProfile from "layouts/investor/InvestorProfile";
 
-//import page component 
+//import page component
 import StartUpDeals from "layouts/startup/pageComponents/StartUpDeals";
 import StartUpHome from "layouts/startup/pageComponents/StartUpHome";
 // import StartUpPanding from "layouts/startup/pageComponents/StartUpPanding";
 // import StartUpRejected from "layouts/startup/pageComponents/StartUpRejected";
+import StartUpProfile from "layouts/startup/StartUpProfile";
 
-import startupProfile from "layouts/startup/startupProfile";
 
 // Soft UI Dashboard React icons
 import Shop from "examples/Icons/Shop";
@@ -76,17 +76,16 @@ import CustomerSupport from "examples/Icons/CustomerSupport";
 import CreditCard from "examples/Icons/CreditCard";
 import Cube from "examples/Icons/Cube";
 
-const routes = [
-    {
-      type: "collapse",
-      name: "Dashboard",
-      key: "dashboard",
-      route: "/dashboard",
-      icon: <Shop size="12px" />,
-      component: <Dashboard />,
-      noCollapse: true,
+const routes = [{
+        type: "collapse",
+        name: "Dashboard",
+        key: "dashboard",
+        route: "/dashboard",
+        icon: < Shop size = "12px" / > ,
+        component: < Dashboard / > ,
+        noCollapse: true,
     },
-    
+
     {
         type: "collapse",
         name: "Landing",
@@ -96,7 +95,7 @@ const routes = [
         component: < Landing / > ,
         noCollapse: true,
     },
-    
+
     {
         type: "collapse",
         name: "Tables",
@@ -198,38 +197,38 @@ const routes = [
         noCollapse: true,
     },
     {
-    type: "collapse",
-    name: "Startup Home",
-    key: "StartUpHome",
-    route: "/startup/StartUpHome",
-    icon: <Document size="12px" />,
-    component: < StartUpHome />,
-    noCollapse: true,
-  },
-  
+        type: "collapse",
+        name: "Startup Home",
+        key: "StartUpHome",
+        route: "/startup/StartUpHome",
+        icon: < Document size = "12px" / > ,
+        component: < StartUpHome / > ,
+        noCollapse: true,
+    },
+
+    {
+        type: "collapse",
+        name: "Profile",
+        key: "StartUpProfile",
+        route: "/startup/StartUpProfile",
+        icon: < CustomerSupport size = "12px" / > ,
+        component: < StartUpProfile / > ,
+        noCollapse: true,
+    },
+
+    {
+        type: "collapse",
+        name: "Startup Deals",
+        key: "StartUpDeals",
+        route: "/startup/StartUpDeals",
+        icon: < Shop size = "12px" / > ,
+        component: < StartUpDeals / > ,
+        noCollapse: true,
+    },
 
 
-  {
-    type: "collapse",
-    name: "Startup Deals",
-    key: "StartUpDeals",
-    route: "/startup/StartUpDeals",
-    icon: <Shop size="12px" />,
-    component: <StartUpDeals />,
-    noCollapse: true,
-  },
 
-  {
-    type: "collapse",
-    name: "startup Profile",
-    key: "startupProfile",
-    route: "/startup/startupProfile",
-    icon: <CustomerSupport size="12px" />,
-    component: < startupProfile />,
-    noCollapse: true,
-  },
-
-{
+    {
         type: "collapse",
         name: "investor ",
         key: "investor",
@@ -239,42 +238,41 @@ const routes = [
         noCollapse: true,
     },
     {
-    type: "collapse",
-    name: "Your Syndicates",
-    key: "YourSyndicates",
-    route:"/investor/yourSyndicates",
-    icon: <Shop size="12px"/>,
-    component: < YourSyndicate />,
-    noCollapse: true,
-  },
+        type: "collapse",
+        name: "Your Syndicates",
+        key: "YourSyndicates",
+        route: "/investor/yourSyndicates",
+        icon: < Shop size = "12px" / > ,
+        component: < YourSyndicate / > ,
+        noCollapse: true,
+    },
     {
-    type: "collapse",
-    name: "Your Deals",
-    key: "YourDeals",
-    route: "/investor/YourDeals",
-    icon: <Document size="12px" />,
-    component: < YourDeals />,
-    noCollapse: true,
-  },
-  {
-    type: "collapse",
-    name: "Explore Syndicate",
-    key: "ExploreSyndicate",
-    route: "/investor/ExploreSyndicate",
-    icon: <SpaceShip size="12px" />,
-    component: < ExploreSyndicate />,
-    noCollapse: true,
-  },
+        type: "collapse",
+        name: "Your Deals",
+        key: "YourDeals",
+        route: "/investor/YourDeals",
+        icon: < Document size = "12px" / > ,
+        component: < YourDeals / > ,
+        noCollapse: true,
+    },
     {
-    type: "collapse",
-    name: "Investor Profile",
-    key: "InvestorProfile",
-    route: "/investor/profile",
-    icon: <CustomerSupport size="12px" />,
-    component: < InvestorProfile />,
-    noCollapse: true,
-  },
+        type: "collapse",
+        name: "Explore Syndicate",
+        key: "ExploreSyndicate",
+        route: "/investor/ExploreSyndicate",
+        icon: < SpaceShip size = "12px" / > ,
+        component: < ExploreSyndicate / > ,
+        noCollapse: true,
+    },
+    {
+        type: "collapse",
+        name: "Investor Profile",
+        key: "InvestorProfile",
+        route: "/investor/profile",
+        icon: < CustomerSupport size = "12px" / > ,
+        component: < InvestorProfile / > ,
+        noCollapse: true,
+    },
 ];
 
 export default routes;
-

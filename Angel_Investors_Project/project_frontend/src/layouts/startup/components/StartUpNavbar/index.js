@@ -18,7 +18,7 @@ import StartUpDeals from "layouts/startup/pageComponents/StartUpDeals";
 import StartUpHome from "layouts/startup/pageComponents/StartUpHome";
 // import StartUpPanding from "layouts/startup/pageComponents/StartUpPanding";
 // import StartUpRejected from "layouts/startup/pageComponents/StartUpRejected";
-import startupProfile from "layouts/startup/startupProfile";
+import StartUpProfile from "layouts/startup/StartUpProfile";
 
 //style
 // import styled from 'styled-components';
@@ -57,37 +57,37 @@ const routes = [
         component: < StartUpDeals / > ,
         noCollapse: true,
 
-        // {
-        //     type: "collapse",
-        //     name: "StartUp Panding",
-        //     key: "StartUpPanding",
-        //     route: "/Startup/StartUpPanding",
-        //     icon: <SpaceShip size="12px" />,
-        //     component: < StartUpPanding />,
-        //     noCollapse: true,
-        //   },
-        //   {
-        //     type: "collapse",
-        //     name: "StartUp Rejected",
-        //     key: "StartUpRejected",
-        //     route: "/Startup/StartUpRejected",
-        //     icon: <SpaceShip size="12px" />,
-        //     component: < StartUpRejected />,
-        //     noCollapse: true,
-        //   },
-
     },
+    // {
+    //     type: "collapse",
+    //     name: "Panding Deals",
+    //     key: "PandingDeals",
+    //     route: "/Startup/StartUpPanding",
+    //     icon: <SpaceShip size="12px" />,
+    //     component: < StartUpPanding />,
+    //     noCollapse: true,
+    //   },
+    //   {
+    //     type: "collapse",
+    //     name: "Rejected Deals",
+    //     key: "RejectedDeals",
+    //     route: "/Startup/StartUpRejected",
+    //     icon: <SpaceShip size="12px" />,
+    //     component: < StartUpRejected />,
+    //     noCollapse: true,
+    //   },
 
+    //
 
     { type: "divider" },
     { type: "title", title: "Account Manage", key: "account-pages" },
     {
         type: "collapse",
         name: "Profile",
-        key: "startupProfile",
-        route: "/startup/startupProfile",
+        key: "StartUpProfile",
+        route: "/startup/StartUpProfile",
         icon: < CustomerSupport size = "12px" / > ,
-        component: < startupProfile / > ,
+        component: < StartUpProfile / > ,
         noCollapse: true,
     },
     {
