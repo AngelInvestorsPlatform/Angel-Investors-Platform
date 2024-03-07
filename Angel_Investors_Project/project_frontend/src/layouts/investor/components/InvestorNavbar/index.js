@@ -10,6 +10,9 @@ import Icon from "@mui/material/Icon";
 // Soft UI Dashboard React examples
 import Sidenav from "examples/Sidenav";
 
+// Soft UI Dashboard React components
+import SoftBox from "components/SoftBox";
+
 //import image 
 import LogoName from "assets/images/logo-name.svg";
 
@@ -18,6 +21,7 @@ import YourSyndicate from "layouts/investor/pageComponents/YourSyndicates";
 import YourDeals from "layouts/investor/pageComponents/YourDeals";
 import ExploreSyndicate from "layouts/investor/pageComponents/ExploreSyndicate";
 import InvestorProfile from "layouts/investor/InvestorProfile";
+import SidenavCardTolead from "examples/Sidenav/SidenavCardTolead";
 
 
 //icon
@@ -89,7 +93,11 @@ function InvestorNavbar() {
       brand={LogoName}
       routes={routes}
       // Add other props as needed
-    ></Sidenav>
+      >
+      <SoftBox pt={7} my={2} mx={2} mt="auto">
+        <SidenavCardTolead/>
+      </SoftBox>
+      </Sidenav>
   );
 }
 

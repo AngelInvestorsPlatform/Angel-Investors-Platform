@@ -43,7 +43,7 @@ import sidenavLogoLabel from "examples/Sidenav/styles/sidenav";
 // Soft UI Dashboard React context
 import { useSoftUIController, setMiniSidenav } from "context";
 
-function Sidenav({ color, mainPage, brand, brandName, routes, ...rest }) {
+function Sidenav({ color, mainPage, brand, brandName, children,routes, ...rest }) {
   const [controller, dispatch] = useSoftUIController();
   const { miniSidenav, transparentSidenav } = controller;
   const location = useLocation();
@@ -113,7 +113,7 @@ function Sidenav({ color, mainPage, brand, brandName, routes, ...rest }) {
           textTransform="uppercase"
           opacity={0.6}
           pl={3}
-          mt={10}
+          mt={5}
           mb={1}
           ml={1}
         >
@@ -157,10 +157,11 @@ function Sidenav({ color, mainPage, brand, brandName, routes, ...rest }) {
       </SoftBox>
       <Divider />
       <List>{renderRoutes}</List>
-      <SoftBox pt={2} my={2} mx={2} mt="auto">
-        <SidenavCard />
+      <SoftBox>
+        {children}
+      {/*  <SidenavCard />
         <SoftBox mt={2}>
-          <SoftButton
+           <SoftButton
             component="a"
             href="https://creative-tim.com/product/soft-ui-dashboard-pro-react"
             target="_blank"
@@ -171,7 +172,7 @@ function Sidenav({ color, mainPage, brand, brandName, routes, ...rest }) {
           >
             upgrade to pro
           </SoftButton>
-        </SoftBox>
+        </SoftBox> */}
       </SoftBox>
     </SidenavRoot>
   );
@@ -191,6 +192,7 @@ Sidenav.propTypes = {
   mainPage: PropTypes.string,
   brandName: PropTypes.string.isRequired,
   routes: PropTypes.arrayOf(PropTypes.object).isRequired,
+  children: PropTypes.element,
 };
 
 export default Sidenav;
