@@ -50,20 +50,25 @@ import Investor_form from "layouts/registers_forms/investor_form";
 import Startups_form from "layouts/registers_forms/startups_form"
 import Startup from "layouts/startup"
 import Investor from "layouts/investor"
+import LeadInvestor from "layouts/LeadInvestor"
 
 
-//import investor page component 
+
+//import investor page component  
 import YourSyndicate from "layouts/investor/pageComponents/YourSyndicates";
 import YourDeals from "layouts/investor/pageComponents/YourDeals";
 import ExploreSyndicate from "layouts/investor/pageComponents/ExploreSyndicate";
 import InvestorProfile from "layouts/investor/InvestorProfile";
-
-//import page component
+ 
+//import startup page component
 import StartUpDeals from "layouts/startup/pageComponents/StartUpDeals";
 import StartUpHome from "layouts/startup/pageComponents/StartUpHome";
 import StartUpPending from "layouts/startup/pageComponents/StartUpPending";
 import StartUpRejected from "layouts/startup/pageComponents/StartUpRejected";
-import StartUpProfile from "layouts/startup/startupProfile";
+import StartUpProfile from "layouts/startup/StartUpProfile"; // I couldn't put it in pageComponents folder
+
+//import Lead investor page component
+
 
 
 // Soft UI Dashboard React icons
@@ -76,7 +81,8 @@ import CustomerSupport from "examples/Icons/CustomerSupport";
 import CreditCard from "examples/Icons/CreditCard";
 import Cube from "examples/Icons/Cube";
 
-const routes = [{
+const routes = [
+    {
         type: "collapse",
         name: "Dashboard",
         key: "dashboard",
@@ -289,6 +295,15 @@ const routes = [{
         route: "/investor/profile",
         icon: < CustomerSupport size = "12px" / > ,
         component: < InvestorProfile / > ,
+        noCollapse: true,
+    },
+    {
+        type: "collapse",
+        name: "Lead ",
+        key: "LeadInvestor",
+        route: "/LeadInvestor",
+        icon: < Shop size = "12px" / > ,
+        component: < LeadInvestor / > ,
         noCollapse: true,
     },
 ];
