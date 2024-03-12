@@ -65,7 +65,7 @@ import StartUpDeals from "layouts/startup/pageComponents/StartUpDeals";
 import StartUpHome from "layouts/startup/pageComponents/StartUpHome";
 import StartUpPending from "layouts/startup/pageComponents/StartUpPending";
 import StartUpRejected from "layouts/startup/pageComponents/StartUpRejected";
-import StartUpProfile from "layouts/startup/StartUpProfile"; // I couldn't put it in pageComponents folder
+import StartUpProfile from "layouts/startup/startupProfile"; // I couldn't put it in pageComponents folder
 
 //import Lead investor page component
 
