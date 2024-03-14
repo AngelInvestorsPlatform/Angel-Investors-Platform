@@ -28,10 +28,10 @@ import StartUpNavbar from 'layouts/startup/components/StartUpNavbar';
 
 // Data
 
-import DealsData from "layouts/startup/pageComponents/StartUpPending/data/DealsData";
+import OffersData from "layouts/startup/pageComponents/StartUpOffers/data/OffersData";
 
 function Tables() {
-  const { columns, rows } = DealsData;
+  const { columns, rows } = OffersData;
   
 
   return (
@@ -40,7 +40,7 @@ function Tables() {
       <StartUpNavbar/> 
       <SoftBox mb={3}>
 <SoftTypography variant="h3" color="info" fontWeight="regular" textGradient>
-        Pending Deals
+        Offers
                 </SoftTypography>
                 </SoftBox>
       <SoftBox py={3}>

@@ -16,9 +16,9 @@ import LogoName from "assets/images/logo-name.svg";
 //import page component 
 import StartUpDeals from "layouts/startup/pageComponents/StartUpDeals";
 import StartUpHome from "layouts/startup/pageComponents/StartUpHome";
-import StartUpPending from "layouts/startup/pageComponents/StartUpPending";
+import StartUpOffers from "layouts/startup/pageComponents/StartUpOffers";
 import StartUpRejected from "layouts/startup/pageComponents/StartUpRejected";
-import StartUpProfile from "layouts/startup/startupProfile";
+import StartUpProfile from "layouts/startup/StartupProfile";
 
 //style
 // import styled from 'styled-components';
@@ -62,11 +62,11 @@ const routes = [
   },
         {
             type: "collapse",
-            name: "Pending Deals",
-            key: "Pending",
-            route: "/Startup/StartUpPending",
+            name: "Offers",
+            key: "Offers",
+            route: "/Startup/StartUpOffers",
             icon: <AccessTimeIcon size="12px" />,
-            component: < StartUpPending />,
+            component: < StartUpOffers />,
             noCollapse: true,
           },
           {

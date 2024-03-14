@@ -63,9 +63,9 @@ import InvestorProfile from "layouts/investor/InvestorProfile";
 //import startup page component
 import StartUpDeals from "layouts/startup/pageComponents/StartUpDeals";
 import StartUpHome from "layouts/startup/pageComponents/StartUpHome";
-import StartUpPending from "layouts/startup/pageComponents/StartUpPending";
+import StartUpOffers from "layouts/startup/pageComponents/StartUpOffers";
 import StartUpRejected from "layouts/startup/pageComponents/StartUpRejected";
-import StartUpProfile from "layouts/startup/startupProfile"; // I couldn't put it in pageComponents folder
+import StartUpProfile from "layouts/startup/StartupProfile"; // I couldn't put it in pageComponents folder
 
 //import Lead investor page component
 
@@ -234,11 +234,11 @@ const routes = [
    
     {
             type: "collapse",
-            name: "Pending Deals",
-            key: "StartUpPending",
-            route: "/Startup/StartUpPending",
+            name: "Offers",
+            key: "StartUpOffers",
+            route: "/Startup/StartUpOffers",
             icon: <SpaceShip size="12px" />,
-            component: < StartUpPending />,
+            component: < StartUpOffers />,
             noCollapse: true,
           },
 
