@@ -35,7 +35,7 @@ Coded by www.creative-tim.com
   10. The `component` key is used to store the component of its route.
 */
 
-// Soft UI Dashboard React layouts
+// Dashboard React layouts
 import Landing from "layouts/landing";
 import Dashboard from "layouts/dashboard";
 import Tables from "layouts/tables";
@@ -43,15 +43,13 @@ import Billing from "layouts/billing";
 import VirtualReality from "layouts/virtual-reality";
 import RTL from "layouts/rtl";
 import Profile from "layouts/profile";
-import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/log-in";
 import Selection from "layouts/authentication/Selection";
 import Investor_form from "layouts/registers_forms/investor_form";
-import Startups_form from "layouts/registers_forms/startups_form"
-import Startup from "layouts/startup"
-import Investor from "layouts/investor"
-import LeadInvestor from "layouts/LeadInvestor"
-
+import Startups_form from "layouts/registers_forms/startups_form";
+import Startup from "layouts/startup";
+import Investor from "layouts/investor";
+import LeadInvestor from "layouts/LeadInvestor";
 
 
 //import investor page component  
@@ -65,9 +63,16 @@ import StartUpDeals from "layouts/startup/pageComponents/StartUpDeals";
 import StartUpHome from "layouts/startup/pageComponents/StartUpHome";
 import StartUpOffers from "layouts/startup/pageComponents/StartUpOffers";
 import StartUpRejected from "layouts/startup/pageComponents/StartUpRejected";
-import StartUpProfile from "layouts/startup/StartupProfile"; // I couldn't put it in pageComponents folder
+import StartUpProfile from "layouts/startup/startupProfile"; // I couldn't put it in pageComponents folder
 
 //import Lead investor page component
+import SyndicateProfile from "layouts/LeadInvestor/pageComponents/SyndicateProfile";  
+import Overview from "layouts/LeadInvestor/pageComponents/Overview";
+import ActiveDeals from "layouts/LeadInvestor/pageComponents/ActiveDeals";
+import NewDeals from "layouts/LeadInvestor/pageComponents/NewDeals";
+import ManageMembers from "layouts/LeadInvestor/pageComponents/ManageMembers";  
+import ExploreStartups from "layouts/LeadInvestor/pageComponents/ExploreStartups";
+import AddStartups from "layouts/LeadInvestor/pageComponents/AddStartups";
 
 
 
@@ -299,11 +304,74 @@ const routes = [
     },
     {
         type: "collapse",
-        name: "Lead ",
+        name: "LeadInvestor ",
         key: "LeadInvestor",
         route: "/LeadInvestor",
         icon: < Shop size = "12px" / > ,
         component: < LeadInvestor / > ,
+        noCollapse: true,
+    },
+    {
+        type: "collapse",
+        name: "Syndicate Profile ",
+        key: "SyndicateProfile",
+        route: "/LeadInvestor/SyndicateProfile",
+        icon: < CustomerSupport size = "12px" / > ,
+        component: < SyndicateProfile / > ,
+        noCollapse: true,
+    },
+    {
+        type: "collapse",
+        name: "Overview ",
+        key: "Overview",
+        route: "/LeadInvestor/Overview",
+        icon: < Document size = "12px" / > ,
+        component: < Overview / > ,
+        noCollapse: true,
+    },
+    {
+        type: "collapse",
+        name: "Active Deals ",
+        key: "ActiveDeals",
+        route: "/LeadInvestor/ActiveDeals",
+        icon: < Document size = "12px" / > ,
+        component: < ActiveDeals / > ,
+        noCollapse: true,
+    },
+    {
+        type: "collapse",
+        name: "New Deals ",
+        key: "NewDeals",
+        route: "/LeadInvestor/NewDeals",
+        icon: < Document size = "12px" / > ,
+        component: < NewDeals / > ,
+        noCollapse: true,
+    },
+    {
+        type: "collapse",
+        name: "Manage Members ",
+        key: "ManageMembers",
+        route: "/LeadInvestor/ManageMembers",
+        icon: < Document size = "12px" / > ,
+        component: < ManageMembers / > ,
+        noCollapse: true,
+    },
+    {
+        type: "collapse",
+        name: "Explore Startups ",
+        key: "ExploreStartups",
+        route: "/LeadInvestor/ExploreStartups",
+        icon: < SpaceShip size = "12px" / > ,
+        component: < ExploreStartups / > ,
+        noCollapse: true,
+    },
+    {
+        type: "collapse",
+        name: "Add Startups ",
+        key: "AddStartups",
+        route: "/LeadInvestor/AddStartups",
+        icon: < Shop size = "12px" / > ,
+        component: < AddStartups / > ,
         noCollapse: true,
     },
 ];

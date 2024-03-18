@@ -35,12 +35,12 @@ import GradientLineChart from "examples/Charts/LineCharts/GradientLineChart";
 // Soft UI Dashboard React base styles
 import typography from "assets/theme/base/typography";
 
-// LeadInvestor layout components
+// Investor layout components
 import BuildByDevelopers from "layouts/LeadInvestor/components/BuildByDevelopers";
 import WorkWithTheRockets from "layouts/LeadInvestor/components/WorkWithTheRockets";
 import Projects from "layouts/LeadInvestor/components/Projects";
 import OrderOverview from "layouts/LeadInvestor/components/OrderOverview";
-import LeadInvestorNavbar from 'layouts/LeadInvestor/components/LeadNavbar';
+import LeadNavbar from 'layouts/LeadInvestor/components/LeadNavbar';
 
 // Data
 import reportsBarChartData from "layouts/LeadInvestor/data/reportsBarChartData";
@@ -48,14 +48,14 @@ import gradientLineChartData from "layouts/LeadInvestor/data/gradientLineChartDa
 
 
 
-function LeadInvestorDashboard() {
+function InvestorDashboard() {
   const { size } = typography;
   const { chart, items } = reportsBarChartData;
 
   return (
     <DashboardLayout>
     <DashboardNavbar/>
-     <LeadInvestorNavbar/>
+     <LeadNavbar/>
       <SoftBox py={3}>
         <SoftBox mb={3}>
           <Grid container spacing={3}>
@@ -156,4 +156,4 @@ function LeadInvestorDashboard() {
   );
 }
 
-export default LeadInvestorDashboard;
+export default InvestorDashboard;

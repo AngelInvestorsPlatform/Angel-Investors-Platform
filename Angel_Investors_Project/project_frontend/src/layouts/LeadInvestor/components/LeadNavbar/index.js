@@ -13,16 +13,25 @@ import Sidenav from "examples/Sidenav";
 // Soft UI Dashboard React components
 import SoftBox from "components/SoftBox";
 
-//import image 
+// import image
 import LogoName from "assets/images/logo-name.svg";
 
-//import page component
-
-import InvestorProfile from "layouts/investor/InvestorProfile"; // - lead -
+// import page component
 import SidenavCardTolead from "examples/Sidenav/SidenavCardTolead";
 
+// Your Syndicate
+import SyndicateProfile from "layouts/LeadInvestor/pageComponents/SyndicateProfile";
+import Overview from "layouts/LeadInvestor/pageComponents/Overview";
+import ActiveDeals from "layouts/LeadInvestor/pageComponents/ActiveDeals";
+import NewDeals from "layouts/LeadInvestor/pageComponents/NewDeals";
+import ManageMembers from "layouts/LeadInvestor/pageComponents/ManageMembers";
 
-//icon
+// Startups
+import ExploreStartups from "layouts/LeadInvestor/pageComponents/ExploreStartups";
+import AddStartups from "layouts/LeadInvestor/pageComponents/AddStartups";
+import InvestorProfile from "layouts/investor/InvestorProfile"; // - lead -
+
+// icon
 import SpaceShip from "examples/Icons/SpaceShip";
 import Shop from "examples/Icons/Shop";
 import Document from "examples/Icons/Document";
@@ -30,38 +39,74 @@ import CustomerSupport from "examples/Icons/CustomerSupport";
 import Office from "examples/Icons/Office";
 import Settings from "examples/Icons/Settings";
 
+// didn't delete this to make it easier for whoever is working on it - edit - <3 u
+
 const routes = [
-  //  didn't delete this to make it easier for whoever is working on it - edit -
-  // {
-  //   type: "collapse",
-  //   name: "Your Syndicates",
-  //   key: "YourSyndicates",
-  //   route: "/investor/yourSyndicates",
-  //   icon: <Shop size="12px" />,
-  //   component: < YourSyndicate />,
-  //   noCollapse: true,
-  // },
-  // {
-  //   type: "collapse",
-  //   name: "Your Deals",
-  //   key: "YourDeals",
-  //   route: "/investor/YourDeals",
-  //   icon: <Document size="12px" />,
-  //   component: < YourDeals />,
-  //   noCollapse: true,
-  // },
-  // {type : "divider"},
-  // {
-  //   type: "collapse",
-  //   name: "Explore Syndicate",
-  //   key: "ExploreSyndicate",
-  //   route: "/investor/ExploreSyndicate",
-  //   icon: <SpaceShip size="12px" />,
-  //   component: < ExploreSyndicate />,
-  //   noCollapse: true,
-  // },
-  {type : "divider"},
-  { type: "title", title: "Account Manage", key: "account-pages" },
+  {
+    type: "collapse",
+    name: "Syndicate Profile",
+    key: "SyndicateProfile",
+    route: "/LeadInvestor/pageComponents/SyndicateProfile",
+    icon: <Shop size="12px" />,
+    component: < SyndicateProfile />,
+    noCollapse: true,
+  },
+  {
+    type: "Overview",
+    name: "Overview",
+    key: "Overview",
+    route: "/LeadInvestor/pageComponents/Overview",
+    icon: <Document size="12px" />,
+    component: < Overview />,
+    noCollapse: true,
+  },
+  {
+    type: "collapse",
+    name: "ActiveDeals",
+    key: "ActiveDeals",
+    route: "/LeadInvestor/pageComponents/ActiveDeals",
+    icon: <SpaceShip size="12px" />,
+    component: < ActiveDeals />,
+    noCollapse: true,
+  },
+  {
+    type: "collapse",
+    name: "NewDeals",
+    key: "NewDeals",
+    route: "/LeadInvestor/pageComponents/NewDeals",
+    icon: <SpaceShip size="12px" />,
+    component: < NewDeals />,
+    noCollapse: true,
+  },
+  {
+    type: "collapse",
+    name: "ManageMembers",
+    key: "ManageMembers",
+    route: "/LeadInvestor/pageComponents/ManageMembers",
+    icon: <SpaceShip size="12px" />,
+    component: < ManageMembers />,
+    noCollapse: true,
+  },
+  { type: "divider" },
+  { type: "title", title: "Startups", key: "Startups-pages" },
+  {
+    type: "collapse",
+    name: "Explore Startups",
+    key: "ExploreStartups",
+    route: "/LeadInvestor/pageComponents/ExploreStartups",
+    icon: <CustomerSupport size="12px" />,
+    component: < ExploreStartups />,
+    noCollapse: true,
+  },
+  {
+    type: "collapse",
+    name: "Add Startups",
+    key: "AddStartups",
+    route: "/LeadInvestor/pageComponents/AddStartups",
+    icon: <CustomerSupport size="12px" />,
+    component: < AddStartups />,
+    noCollapse: true,
+  },
   {
     type: "collapse",
     name: "Profile",
@@ -75,29 +120,33 @@ const routes = [
     type: "collapse",
     name: "Settings",
     key: "Settings",
-    //route: "/investor/profile",
+    route: "/investor/InvestorProfile",
     icon: <Settings size="12px" />,
-    component: < profile />,
+    component: < InvestorProfile />,
     noCollapse: true,
-    active: false, // for a temporary 
+    active: false, //for a temporary
   },
   // Add more route objects as needed
 ];
 
-function InvestorNavbar() {
+function LeadNavbar() {
   return (
     <Sidenav
-      mainPage="/investor"
+      mainPage="/LeadInvestor"
       brandName="Angel Investor Platform"
       brand={LogoName}
       routes={routes}
-      // Add other props as needed
-      >
+      Add
+      other
+      props
+      as
+      needed
+    >
       <SoftBox pt={7} my={2} mx={2} mt="auto">
-        <SidenavCardTolead/>
+        <SidenavCardTolead />
       </SoftBox>
-      </Sidenav>
+    </Sidenav>
   );
 }
 
-export default InvestorNavbar;
+export default LeadNavbar;
