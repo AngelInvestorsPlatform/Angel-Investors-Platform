@@ -42,11 +42,13 @@ import Settings from "examples/Icons/Settings";
 // didn't delete this to make it easier for whoever is working on it - edit - <3 u
 
 const routes = [
+  { type: "title", title: "Your Syndicate", key: "Syndicate-pages" },
+  {type: "divider" },
   {
     type: "collapse",
     name: "Syndicate Profile",
     key: "SyndicateProfile",
-    route: "/LeadInvestor/pageComponents/SyndicateProfile",
+    route: "/LeadInvestor/SyndicateProfile",
     icon: <Shop size="12px" />,
     component: < SyndicateProfile />,
     noCollapse: true,
@@ -55,7 +57,7 @@ const routes = [
     type: "Overview",
     name: "Overview",
     key: "Overview",
-    route: "/LeadInvestor/pageComponents/Overview",
+    route: "/LeadInvestor/Overview",
     icon: <Document size="12px" />,
     component: < Overview />,
     noCollapse: true,
@@ -64,7 +66,7 @@ const routes = [
     type: "collapse",
     name: "ActiveDeals",
     key: "ActiveDeals",
-    route: "/LeadInvestor/pageComponents/ActiveDeals",
+    route: "/LeadInvestor/ActiveDeals",
     icon: <SpaceShip size="12px" />,
     component: < ActiveDeals />,
     noCollapse: true,
@@ -73,7 +75,7 @@ const routes = [
     type: "collapse",
     name: "NewDeals",
     key: "NewDeals",
-    route: "/LeadInvestor/pageComponents/NewDeals",
+    route: "/LeadInvestor/NewDeals",
     icon: <SpaceShip size="12px" />,
     component: < NewDeals />,
     noCollapse: true,
@@ -82,18 +84,19 @@ const routes = [
     type: "collapse",
     name: "ManageMembers",
     key: "ManageMembers",
-    route: "/LeadInvestor/pageComponents/ManageMembers",
+    route: "/LeadInvestor/ManageMembers",
     icon: <SpaceShip size="12px" />,
     component: < ManageMembers />,
     noCollapse: true,
   },
   { type: "divider" },
   { type: "title", title: "Startups", key: "Startups-pages" },
+  {type: "divider" },
   {
     type: "collapse",
     name: "Explore Startups",
     key: "ExploreStartups",
-    route: "/LeadInvestor/pageComponents/ExploreStartups",
+    route: "/LeadInvestor/ExploreStartups",
     icon: <CustomerSupport size="12px" />,
     component: < ExploreStartups />,
     noCollapse: true,
@@ -102,11 +105,13 @@ const routes = [
     type: "collapse",
     name: "Add Startups",
     key: "AddStartups",
-    route: "/LeadInvestor/pageComponents/AddStartups",
+    route: "/LeadInvestor/AddStartups",
     icon: <CustomerSupport size="12px" />,
     component: < AddStartups />,
     noCollapse: true,
   },
+  {type : "divider"},
+  {type: "title", title: "Account Manage", key: "account-pages" },
   {
     type: "collapse",
     name: "Profile",
@@ -136,14 +141,8 @@ function LeadNavbar() {
       brandName="Angel Investor Platform"
       brand={LogoName}
       routes={routes}
-      Add
-      other
-      props
-      as
-      needed
     >
       <SoftBox pt={7} my={2} mx={2} mt="auto">
-        <SidenavCardTolead />
       </SoftBox>
     </Sidenav>
   );
