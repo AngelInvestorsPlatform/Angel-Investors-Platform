@@ -14,6 +14,7 @@ Coded by www.creative-tim.com
 */
 
 import { useState, useEffect } from "react";
+import PropTypes from 'prop-types';
 
 // @mui material components
 import Card from "@mui/material/Card";
@@ -42,7 +43,7 @@ import breakpoints from "assets/theme/base/breakpoints";
 import burceMars from "assets/images/bruce-mars.jpg";
 import curved0 from "assets/images/curved-images/curved0.jpg";
 
-function Header() {
+function Header({name, job, img}) {
   const [tabsOrientation, setTabsOrientation] = useState("horizontal");
   const [tabValue, setTabValue] = useState(0);
 
@@ -103,7 +104,7 @@ function Header() {
         <Grid container spacing={3} alignItems="center">
           <Grid item>
             <SoftAvatar
-              src={burceMars}
+              src={img}
               alt="profile-image"
               variant="rounded"
               size="xl"
@@ -113,14 +114,14 @@ function Header() {
           <Grid item>
             <SoftBox height="100%" mt={0.5} lineHeight={1}>
               <SoftTypography variant="h5" fontWeight="medium">
-                Alex Thompson
+               {name}
               </SoftTypography>
               <SoftTypography variant="button" color="text" fontWeight="medium">
-                CEO / Co-Founder
+               {job}
               </SoftTypography>
             </SoftBox>
           </Grid>
-          <Grid item xs={12} md={6} lg={4} sx={{ ml: "auto" }}>
+{/*           <Grid item xs={12} md={6} lg={4} sx={{ ml: "auto" }}>
             <AppBar position="static">
               <Tabs
                 orientation={tabsOrientation}
@@ -133,11 +134,18 @@ function Header() {
                 <Tab label="Settings" icon={<Settings />} />
               </Tabs>
             </AppBar>
-          </Grid>
+          </Grid> */}
         </Grid>
       </Card>
     </SoftBox>
   );
+
 }
+
+Header.propTypes = {
+  name: PropTypes.string.isRequired,
+  job: PropTypes.string.isRequired,
+  img: PropTypes.string.isRequired,
+};
 
 export default Header;

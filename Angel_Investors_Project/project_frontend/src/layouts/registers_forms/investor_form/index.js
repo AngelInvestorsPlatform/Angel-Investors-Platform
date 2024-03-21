@@ -24,6 +24,7 @@ import SoftButton from "components/SoftButton";
 // registers_forms layout components
 import CoverLayout from "layouts/registers_forms/components/CoverLayout";
 import Separator from "layouts/registers_forms/components/Separator";
+import FixedTags from "layouts/registers_forms/components/FixedTags";
 
 // Images
 import investor from "assets/images/backgraund-images/investor-backgraund2.svg";
@@ -100,6 +101,13 @@ function InvestorForm() {
   if (RedirectToUserI) {
     return <Navigate to="/investor" />;
   } 
+
+  const [selectedValue, setSelectedValue] = useState([]); // State to hold the selected value
+
+  // Callback function to handle the selected value
+  const handleSelectedValue = (value) => {
+    setSelectedValue(value);
+  };
 
   //on submit
   const handleSubmit = async () => {
@@ -344,31 +352,6 @@ function InvestorForm() {
         <SoftBox flex="0 0 48%" mb={3}>
           <SoftBox mb={2}>
             <SoftTypography component="label" variant="caption" fontWeight="bold">
-              Sector <span style={{ color: "red" }}>*</span>
-            </SoftTypography>
-            <select
-              value={investor_sector}
-              onChange={handleSectorChange}
-              required
-              style={selectStyles}
-              onFocus={handleFocus}
-              onBlur={handleBlur}
-            >
-              <option value="">Select your sector</option>
-              <option value="Biotech">Biotech</option>
-              <option value="Adtech">Adtech</option>
-              <option value="Analytics">Analytics</option>
-              <option value="Market">Market</option>
-              <option value="Agriculture & Food Processing">Agriculture & Food Processing</option>
-              <option value="Information Technology">Information Technology</option>
-              <option value="ICT">ICT</option>
-              <option value="Health">Health</option>
-              <option value="Finance">Finance</option>
-              <option value="Education">Education</option>
-            </select>
-          </SoftBox>
-          <SoftBox mb={2}>
-            <SoftTypography component="label" variant="caption" fontWeight="bold">
               Experience <span style={{ color: "red" }}>*</span>
             </SoftTypography>
             <select
@@ -407,7 +390,34 @@ function InvestorForm() {
             <option value="More than 900k">More than 900k</option>
           </select>
           </SoftBox>
+        <SoftBox mb={2}>
+          <SoftTypography component="label" variant="caption" fontWeight="bold">
+            Sector <span style={{ color: "red" }}>*</span>
+          </SoftTypography>
+          {/* <select
+            value={investor_sector}
+            onChange={handleSectorChange}
+            required
+            style={selectStyles}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            >
+            <option value="">Select your sector</option>
+            <option value="Biotech">Biotech</option>
+            <option value="Adtech">Adtech</option>
+            <option value="Analytics">Analytics</option>
+            <option value="Market">Market</option>
+            <option value="Agriculture & Food Processing">Agriculture & Food Processing</option>
+            <option value="Information Technology">Information Technology</option>
+            <option value="ICT">ICT</option>
+            <option value="Health">Health</option>
+            <option value="Finance">Finance</option>
+            <option value="Education">Education</option>
+          </select> */}
+        <FixedTags placeholder="Select your sector" onSelectedValueChange={handleSelectedValue} />
+        {/* <p>Selected Value: {selectedValue.map(item => item.title).join(', ')}</p> */} {/* just fot testing how the value will be in save */}
         </SoftBox>
+          </SoftBox>
       </SoftBox>
       {error && (
         <SoftTypography component="label" variant="caption" fontWeight="regular" color="error">

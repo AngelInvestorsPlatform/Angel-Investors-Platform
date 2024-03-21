@@ -14,67 +14,37 @@ Coded by www.creative-tim.com
 */
 
 // Images
-import kal from "assets/images/kal-visuals-square.jpg";
-import marie from "assets/images/marie.jpg";
-import ivana from "assets/images/ivana-square.jpg";
-import team3 from "assets/images/team-3.jpg";
-import team4 from "assets/images/team-4.jpg";
+import logoXD from "assets/images/small-logos/logo-xd.svg";
+import logoAtlassian from "assets/images/small-logos/logo-atlassian.svg";
+import logoSlack from "assets/images/small-logos/logo-slack.svg";
+import logoSpotify from "assets/images/small-logos/logo-spotify.svg";
+import logoJira from "assets/images/small-logos/logo-jira.svg";
 
 const profilesListData = [
   {
-    image: kal,
-    name: "Sophie B.",
-    description: "Hi! I need more information..",
-    action: {
-      type: "internal",
-      route: "/pages/profile/profile-overview",
-      color: "info",
-      label: "reply",
-    },
+    image: logoXD,
+    name: "Soft UI",
+    amount: "$14,000",
   },
   {
-    image: marie,
-    name: "Anne Marie",
-    description: "Awesome work, can you..",
-    action: {
-      type: "internal",
-      route: "/pages/profile/profile-overview",
-      color: "info",
-      label: "reply",
-    },
+    image: logoAtlassian,
+    name: "Track",
+    amount: "$3,000",
   },
   {
-    image: ivana,
-    name: "Ivanna",
-    description: "About files I can..",
-    action: {
-      type: "internal",
-      route: "/pages/profile/profile-overview",
-      color: "info",
-      label: "reply",
-    },
+    image: logoSlack,
+    name: "Platform",
+    amount: "$20,500",
   },
   {
-    image: team4,
+    image: logoSpotify,
     name: "Peterson",
-    description: "Have a great afternoon..",
-    action: {
-      type: "internal",
-      route: "/pages/profile/profile-overview",
-      color: "info",
-      label: "reply",
-    },
+    amount: "$500",
   },
   {
-    image: team3,
-    name: "Nick Daniel",
-    description: "Hi! I need more information..",
-    action: {
-      type: "internal",
-      route: "/pages/profile/profile-overview",
-      color: "info",
-      label: "reply",
-    },
+    image: logoJira,
+    name: "Redesign ",
+    amount: "$2,000",
   },
 ];
 

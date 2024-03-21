@@ -25,16 +25,20 @@ import Divider from "@mui/material/Divider";
 import Tooltip from "@mui/material/Tooltip";
 import Icon from "@mui/material/Icon";
 
+import IconButton from "@mui/material/IconButton";
+
 // Soft UI Dashboard React components
 import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
 import SoftBadge from "components/SoftBadge";
+import SoftButton from "components/SoftButton";
 
 // Soft UI Dashboard React base styles
 import colors from "assets/theme/base/colors";
 import typography from "assets/theme/base/typography";
+import { Grid } from "@mui/material";
 
-function ProfileInfoCard({ title, description, info, sectors, social,  action }) {
+function StartupInfoCard({ title, description, info, sectors, stage, team, web, social, action }) {
   const labels = [];
   const values = [];
   const { socialMediaColors } = colors;
@@ -84,11 +88,10 @@ function ProfileInfoCard({ title, description, info, sectors, social,  action })
       {icon}
     </SoftBox>
   ));
- 
-  const renderBadges = sectors.map((sector, key) => (
-    <SoftBadge key={key} badgeContent={sector} color="light" variant="gradient" size="sm" />
-  ));
 
+  const renderBadges = sectors.map((sector, key) => (
+    <SoftBadge key={key} badgeContent={sector} color="dark" variant="gradient" size="lg" />
+  ));
 
   return (
     <Card sx={{ height: "100%" }}>
@@ -104,39 +107,86 @@ function ProfileInfoCard({ title, description, info, sectors, social,  action })
       </SoftBox>
       <SoftBox p={2}>
         <SoftBox mb={2} lineHeight={1}>
-          <SoftTypography variant="button" color="text" fontWeight="regular">
+          <SoftTypography variant="body2" color="text" fontWeight="regular">
             {description}
           </SoftTypography>
         </SoftBox>
         <SoftBox opacity={0.3}>
           <Divider />
         </SoftBox>
-        <SoftBox>
-          {renderItems}
+
+        <SoftBox display="flex" px={4} py={1} justifyContent="space-between">
           <SoftBox display="flex" py={1} pr={2}>
-          <SoftTypography variant="button" fontWeight="bold" textTransform="capitalize">
-            sectors: &nbsp;
+            <SoftTypography variant="h5" fontWeight="bold" textTransform="capitalize">
+              sectors: &nbsp;
             </SoftTypography>
             {renderBadges}
-            </SoftBox>
+          </SoftBox>
+
           <SoftBox display="flex" py={1} pr={2}>
-            <SoftTypography variant="button" fontWeight="bold" textTransform="capitalize">
-              social: &nbsp;
+            <SoftTypography ml={5} variant="h5" fontWeight="bold" textTransform="capitalize">
+              Stage: &nbsp;
             </SoftTypography>
-            {renderSocial}
+            <SoftBadge badgeContent={stage} color="info" size="lg" />
+          </SoftBox>
+
+          <SoftBox display="flex" py={1} pr={2}>
+            <SoftTypography ml={5} variant="h5" fontWeight="bold" textTransform="capitalize">
+              TeamMembers: &nbsp;
+            </SoftTypography>
+            <SoftBadge badgeContent={team} color="info" size="lg" />
           </SoftBox>
         </SoftBox>
+
+        <SoftBox opacity={0.3}>
+          <Divider />
+        </SoftBox>
+
+        <Grid container spacing={15}>
+          <Grid item mx={4} mb={4}>
+          <SoftTypography mt={3} mb={2} variant="h5" fontWeight="bold" textTransform="capitalize">
+            Startup Contact: &nbsp;
+          </SoftTypography>
+          <SoftBox>
+            {renderItems}
+            <SoftBox display="flex" py={1} pr={2}>
+              <SoftTypography variant="button" fontWeight="bold" textTransform="capitalize">
+                social: &nbsp;
+              </SoftTypography>
+              {renderSocial}
+            </SoftBox>
+          </SoftBox>
+          </Grid>
+
+          <Grid item mx={4} mb={1}> 
+        <SoftBox display="flex" alignItems="center" justifyContent="center" py={9}>
+            <SoftButton
+              variant="contained"
+              color="info"
+              size="large"
+              component={Link}
+              to={web ? web : "#"} 
+            >
+              <Icon>website</Icon>
+              &nbsp;Visit the website
+            </SoftButton>
+          </SoftBox>
+          </Grid>
+        </Grid>
       </SoftBox>
     </Card>
   );
 }
 
 // Typechecking props for the ProfileInfoCard
-ProfileInfoCard.propTypes = {
+StartupInfoCard.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   info: PropTypes.objectOf(PropTypes.string).isRequired,
   sectors: PropTypes.arrayOf(PropTypes.string).isRequired,
+  stage: PropTypes.string.isRequired,
+  team: PropTypes.string.isRequired,
+  web: PropTypes.string,
   social: PropTypes.arrayOf(PropTypes.object).isRequired,
   action: PropTypes.shape({
     route: PropTypes.string.isRequired,
@@ -144,4 +194,4 @@ ProfileInfoCard.propTypes = {
   }).isRequired,
 };
 
-export default ProfileInfoCard;
+export default StartupInfoCard;
