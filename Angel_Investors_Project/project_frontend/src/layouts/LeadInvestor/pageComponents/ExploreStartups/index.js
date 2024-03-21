@@ -17,25 +17,25 @@ import Table from "examples/Tables/Table";
 import typography from "assets/theme/base/typography";
 
 // Investor layout components
-import InvestorNavbar from 'layouts/investor/components/InvestorNavbar';
+import LeadNavbar from 'layouts/LeadInvestor/components/LeadNavbar';
 
 // Data
-import SyndicatesTableData from "layouts/investor/data/SyndicatesTableData";
+import startupsTableData from "layouts/LeadInvestor/data/startupsTableData";
 
-function ExploreSyndicate() {
-  const { columns, rows } = SyndicatesTableData;
+function ExploreStartups() {
+  const { columns, rows } = startupsTableData;
 
   return (
     <DashboardLayout>
       <DashboardNavbar />
-      <InvestorNavbar />
+      <LeadNavbar />
       <SoftBox py={3}>
-        {/*   Syndicate table start here */}
+        {/*   Startups table start here */}
         <SoftBox mb={3}>
           <Card>
             <SoftBox display="flex" justifyContent="space-between" alignItems="center" p={3}>
             <SoftBox>
-            <SoftTypography variant="h4" color="info" fontWeight="regular" textGradient> Explore Syndicate</SoftTypography>
+            <SoftTypography variant="h4" color="info" fontWeight="regular" textGradient>Explore Startups</SoftTypography>
           <SoftBox display="flex" alignItems="center" lineHeight={0}>
             <Icon
               sx={{
@@ -47,7 +47,7 @@ function ExploreSyndicate() {
               equalizer
             </Icon>
             <SoftTypography variant="button" fontWeight="regular" color="text">
-              &nbsp; Browse all <strong> The Syndicate</strong> 
+              &nbsp; Browse all <strong> The Startups</strong> 
             </SoftTypography>
           </SoftBox>
         </SoftBox>
@@ -74,4 +74,4 @@ function ExploreSyndicate() {
   );
 }
 
-export default ExploreSyndicate;
+export default ExploreStartups;

@@ -21,7 +21,7 @@ import SidenavCardTolead from "examples/Sidenav/SidenavCardTolead";
 
 // Your Syndicate
 import SyndicateProfile from "layouts/LeadInvestor/pageComponents/SyndicateProfile";
-import Overview from "layouts/LeadInvestor/pageComponents/Overview";
+import LeadInvestor from "layouts/LeadInvestor";
 import ActiveDeals from "layouts/LeadInvestor/pageComponents/ActiveDeals";
 import NewDeals from "layouts/LeadInvestor/pageComponents/NewDeals";
 import ManageMembers from "layouts/LeadInvestor/pageComponents/ManageMembers";
@@ -31,13 +31,21 @@ import ExploreStartups from "layouts/LeadInvestor/pageComponents/ExploreStartups
 import AddStartups from "layouts/LeadInvestor/pageComponents/AddStartups";
 import InvestorProfile from "layouts/investor/InvestorProfile"; // - lead -
 
-// icon
+// icons
 import SpaceShip from "examples/Icons/SpaceShip";
 import Shop from "examples/Icons/Shop";
 import Document from "examples/Icons/Document";
 import CustomerSupport from "examples/Icons/CustomerSupport";
 import Office from "examples/Icons/Office";
 import Settings from "examples/Icons/Settings";
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import PostAddIcon from '@mui/icons-material/PostAdd';
+import ExploreIcon from '@mui/icons-material/Explore';
+import TableViewOutlinedIcon from '@mui/icons-material/TableViewOutlined';
+import HandshakeOutlinedIcon from '@mui/icons-material/HandshakeOutlined';
+import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
+import LeaderboardOutlinedIcon from '@mui/icons-material/LeaderboardOutlined';
+import RocketLaunchOutlinedIcon from '@mui/icons-material/RocketLaunchOutlined';
 
 // didn't delete this to make it easier for whoever is working on it - edit - <3 u
 
@@ -46,46 +54,46 @@ const routes = [
   {type: "divider" },
   {
     type: "collapse",
+    name: "Overview",
+    key: "LeadInvestor",
+    route: "/LeadInvestor",
+    icon: <LeaderboardOutlinedIcon size="12px" />,
+    component: < LeadInvestor />,
+    noCollapse: true,
+  },
+  {
+    type: "collapse",
     name: "Syndicate Profile",
     key: "SyndicateProfile",
     route: "/LeadInvestor/SyndicateProfile",
-    icon: <Shop size="12px" />,
+    icon: <DashboardOutlinedIcon size="12px" />,
     component: < SyndicateProfile />,
     noCollapse: true,
   },
   {
-    type: "Overview",
-    name: "Overview",
-    key: "Overview",
-    route: "/LeadInvestor/Overview",
-    icon: <Document size="12px" />,
-    component: < Overview />,
-    noCollapse: true,
-  },
-  {
     type: "collapse",
-    name: "ActiveDeals",
+    name: "Active Deals",
     key: "ActiveDeals",
     route: "/LeadInvestor/ActiveDeals",
-    icon: <SpaceShip size="12px" />,
+    icon: <HandshakeOutlinedIcon size="12px" />,
     component: < ActiveDeals />,
     noCollapse: true,
-  },
+  }, 
   {
     type: "collapse",
-    name: "NewDeals",
+    name: "New Deals",
     key: "NewDeals",
     route: "/LeadInvestor/NewDeals",
-    icon: <SpaceShip size="12px" />,
+    icon: <RocketLaunchOutlinedIcon size="12px" />,
     component: < NewDeals />,
     noCollapse: true,
   },
   {
     type: "collapse",
-    name: "ManageMembers",
+    name: "Manage Members",
     key: "ManageMembers",
     route: "/LeadInvestor/ManageMembers",
-    icon: <SpaceShip size="12px" />,
+    icon: <ManageAccountsIcon size="12px" />,
     component: < ManageMembers />,
     noCollapse: true,
   },
@@ -97,16 +105,16 @@ const routes = [
     name: "Explore Startups",
     key: "ExploreStartups",
     route: "/LeadInvestor/ExploreStartups",
-    icon: <CustomerSupport size="12px" />,
+    icon: <ExploreIcon size="12px" />,
     component: < ExploreStartups />,
     noCollapse: true,
-  },
+  }, 
   {
     type: "collapse",
     name: "Add Startups",
     key: "AddStartups",
     route: "/LeadInvestor/AddStartups",
-    icon: <CustomerSupport size="12px" />,
+    icon: < PostAddIcon size="12px" />,
     component: < AddStartups />,
     noCollapse: true,
   },
@@ -125,12 +133,13 @@ const routes = [
     type: "collapse",
     name: "Settings",
     key: "Settings",
-    route: "/investor/InvestorProfile",
+    route: "/investor/Profile",
     icon: <Settings size="12px" />,
     component: < InvestorProfile />,
     noCollapse: true,
-    active: false, //for a temporary
+    // active: false, //for a temporary
   },
+  
   // Add more route objects as needed
 ];
 

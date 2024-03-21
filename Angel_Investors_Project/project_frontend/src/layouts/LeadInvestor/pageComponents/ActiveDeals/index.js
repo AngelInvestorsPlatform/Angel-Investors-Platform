@@ -17,7 +17,7 @@ import Table from "examples/Tables/Table";
 import typography from "assets/theme/base/typography";
 
 // Investor layout components
-import InvestorNavbar from 'layouts/investor/components/InvestorNavbar';
+import LeadNavbar from 'layouts/LeadInvestor/components/LeadNavbar';
 import Projects from "layouts/investor/components/Projects";
 
 // Data
@@ -29,7 +29,7 @@ function YourDeals() {
   return (
     <DashboardLayout>
       <DashboardNavbar />
-      <InvestorNavbar />
+      <LeadNavbar />
       <SoftBox py={3}>
         {/*  your Deals table start here */}
         <Projects/>

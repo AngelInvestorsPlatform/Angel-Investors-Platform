@@ -38,7 +38,7 @@ import PlaceholderCard from "examples/Cards/PlaceholderCard";
 import Header from "layouts/profile/components/Header";
 import PlatformSettings from "layouts/profile/components/PlatformSettings";
 // Investor layout components
-import InvestorNavbar from 'layouts/investor/components/InvestorNavbar';
+import LeadNavbar from 'layouts/LeadInvestor/components/LeadNavbar';
 
 // Data
 import profilesListData from "layouts/profile/data/profilesListData";
@@ -52,10 +52,10 @@ import team2 from "assets/images/team-2.jpg";
 import team3 from "assets/images/team-3.jpg";
 import team4 from "assets/images/team-4.jpg";
 
-function Overview() {
+function SyndicateOverview() {
   return (
     <DashboardLayout>
-    <InvestorNavbar />
+    <LeadNavbar />
       <Header />
       <SoftBox mt={5} mb={3}>
         <Grid container spacing={3}>
@@ -186,4 +186,4 @@ function Overview() {
   );
 }
 
-export default Overview;
+export default SyndicateOverview;
