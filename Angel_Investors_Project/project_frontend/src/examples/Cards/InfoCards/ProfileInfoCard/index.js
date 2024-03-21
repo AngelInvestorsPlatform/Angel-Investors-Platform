@@ -28,12 +28,13 @@ import Icon from "@mui/material/Icon";
 // Soft UI Dashboard React components
 import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
+import SoftBadge from "components/SoftBadge";
 
 // Soft UI Dashboard React base styles
 import colors from "assets/theme/base/colors";
 import typography from "assets/theme/base/typography";
 
-function ProfileInfoCard({ title, description, info, social, action }) {
+function ProfileInfoCard({ title, description, info, sectors, social,  action }) {
   const labels = [];
   const values = [];
   const { socialMediaColors } = colors;
@@ -83,11 +84,16 @@ function ProfileInfoCard({ title, description, info, social, action }) {
       {icon}
     </SoftBox>
   ));
+ 
+  const renderBadges = sectors.map((sector, key) => (
+    <SoftBadge key={key} badgeContent={sector} color="light" variant="gradient" size="sm" />
+  ));
+
 
   return (
     <Card sx={{ height: "100%" }}>
       <SoftBox display="flex" justifyContent="space-between" alignItems="center" pt={2} px={2}>
-        <SoftTypography variant="h6" fontWeight="medium" textTransform="capitalize">
+        <SoftTypography variant="h5" fontWeight="bold" textTransform="capitalize">
           {title}
         </SoftTypography>
         <SoftTypography component={Link} to={action.route} variant="body2" color="secondary">
@@ -108,6 +114,12 @@ function ProfileInfoCard({ title, description, info, social, action }) {
         <SoftBox>
           {renderItems}
           <SoftBox display="flex" py={1} pr={2}>
+          <SoftTypography variant="button" fontWeight="bold" textTransform="capitalize">
+            sectors: &nbsp;
+            </SoftTypography>
+            {renderBadges}
+            </SoftBox>
+          <SoftBox display="flex" py={1} pr={2}>
             <SoftTypography variant="button" fontWeight="bold" textTransform="capitalize">
               social: &nbsp;
             </SoftTypography>
@@ -124,6 +136,7 @@ ProfileInfoCard.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   info: PropTypes.objectOf(PropTypes.string).isRequired,
+  sectors: PropTypes.arrayOf(PropTypes.string).isRequired,
   social: PropTypes.arrayOf(PropTypes.object).isRequired,
   action: PropTypes.shape({
     route: PropTypes.string.isRequired,
