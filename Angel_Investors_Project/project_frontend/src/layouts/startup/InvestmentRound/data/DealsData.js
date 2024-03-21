@@ -51,7 +51,7 @@ const DealsData = {
       SATRTUP: [logoSlack, " GLANTE"],
       FOUNDER: (
         <SoftTypography variant="button" color="text" fontWeight="medium">
-          KHALED FAHAD  
+          khaled fahad 
         </SoftTypography>
       ),
       STAGE: (
