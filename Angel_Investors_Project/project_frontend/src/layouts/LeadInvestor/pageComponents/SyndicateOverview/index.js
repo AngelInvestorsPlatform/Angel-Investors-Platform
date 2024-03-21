@@ -35,6 +35,7 @@ import SyndicateData from "layouts/investor/InvestorProfile/data/investorProfile
 
 // Images
 import burceMars from "assets/images/bruce-mars.jpg";
+import LeadNavbar from "layouts/LeadInvestor/components/LeadNavbar";
 
 
 function Overview() {
@@ -87,7 +88,7 @@ const socialMediaInfo = [
 
   return (
     <DashboardLayout>
-    <InvestorNavbar />
+    <LeadNavbar />
       <Header name = {name} job ={job} img={burceMars} />
       <SoftBox mt={5} mb={3}>
         <Grid container spacing={3}>
