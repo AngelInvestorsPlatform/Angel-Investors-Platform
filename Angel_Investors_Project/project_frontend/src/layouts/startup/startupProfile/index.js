@@ -21,6 +21,7 @@ import Card from "@mui/material/Card";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
 // Soft UI Dashboard React components
 import SoftBox from "components/SoftBox";
@@ -29,7 +30,7 @@ import SoftTypography from "components/SoftTypography";
 // Soft UI Dashboard React examples
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import Footer from "examples/Footer";
-import ProfileInfoCard from "examples/Cards/InfoCards/ProfileInfoCard";
+import StartupInfoCard from "examples/Cards/InfoCards/StartupInfoCard";
 import ProfilesList from "examples/Lists/ProfilesList";
 import DefaultProjectCard from "examples/Cards/ProjectCards/DefaultProjectCard";
 import PlaceholderCard from "examples/Cards/PlaceholderCard";
@@ -52,50 +53,82 @@ import team3 from "assets/images/team-3.jpg";
 import team4 from "assets/images/team-4.jpg";
 
 function Overview() {
+
+//user variable || for backend link ||
+// User header info
+const name = "Alex Thompson";
+const job = "Angel Investor";
+
+// User information
+const userInfo = {
+  CommercialName: "Alec M. Thompson",
+  email: "alecthompson@mail.com",
+  mobile: "(44) 123 1234 123",
+  country: "Saudi Arabia",
+};
+
+// Description
+const descriptionInfo = "Our platform is cutting-edge fintech startup specializing in revolutionizing digital payments and financial transactions. Led by a team of industry experts, our mission is to streamline financial processes, enhance security, and provide seamless experiences for businesses and consumers alike. With innovative technologies and a forward-thinking approach, Wrq is poised to disrupt the fintech landscape and drive the future of finance.";
+
+// Sectors
+const sectorsInfo = ["Fintech"];
+
+// Startup Stage
+const stageInfo = "Pre-seed";
+
+// Team members
+const TeamMembers = "5";
+
+// Social media links
+const socialMediaInfo = [
+  {
+    link: "https://www.facebook.com/WrqFintech/",
+    icon: <FacebookIcon />,
+    color: "facebook",
+  },
+  {
+    link: "https://twitter.com/WrqFintech",
+    icon: <TwitterIcon />,
+    color: "twitter",
+  },
+  {
+    link: "https://www.instagram.com/WrqFintechOfficial/",
+    icon: <InstagramIcon />,
+    color: "instagram",
+  },
+  {
+    link: "https://www.linkedin.com/company/WrqFintech/",
+    icon: <LinkedInIcon />,
+    color: "linkedin",
+  },
+];
+
+
+
   return (
     <DashboardLayout>
     <StartUpNavbar />
       <Header />
       <SoftBox mt={5} mb={3}>
         <Grid container spacing={3}>
-          <Grid item xs={12} md={6} xl={4}>
-            <PlatformSettings />
-          </Grid>
-          <Grid item xs={12} md={6} xl={4}>
-            <ProfileInfoCard
-              title="profile information"
-              description="Hi, I’m Alec Thompson, Decisions: If you can’t decide, the answer is no. If two equally difficult paths, choose the one more painful in the short term (pain avoidance is creating an illusion of equality)."
-              info={{
-                fullName: "Alec M. Thompson",
-                mobile: "(44) 123 1234 123",
-                email: "alecthompson@mail.com",
-                location: "USA",
-              }}
-              social={[
-                {
-                  link: "https://www.facebook.com/CreativeTim/",
-                  icon: <FacebookIcon />,
-                  color: "facebook",
-                },
-                {
-                  link: "https://twitter.com/creativetim",
-                  icon: <TwitterIcon />,
-                  color: "twitter",
-                },
-                {
-                  link: "https://www.instagram.com/creativetimofficial/",
-                  icon: <InstagramIcon />,
-                  color: "instagram",
-                },
-              ]}
+          <Grid item>
+          <StartupInfoCard
+              title="About This Startup Company"
+              description={descriptionInfo}
+              info={userInfo}
+              sectors={sectorsInfo}
+              stage={stageInfo}
+              team={TeamMembers}
+              web="/landing"
+              social={socialMediaInfo}
               action={{ route: "", tooltip: "Edit Profile" }}
             />
           </Grid>
-          <Grid item xs={12} xl={4}>
-            <ProfilesList title="conversations" profiles={profilesListData} />
-          </Grid>
-        </Grid>
-      </SoftBox>
+          </Grid> 
+          </SoftBox>
+          {/*
+
+     
       <SoftBox mb={3}>
         <Card>
           <SoftBox pt={2} px={2}>
@@ -178,7 +211,7 @@ function Overview() {
             </Grid>
           </SoftBox>
         </Card>
-      </SoftBox>
+      </SoftBox> */}
 
       <Footer />
     </DashboardLayout>
