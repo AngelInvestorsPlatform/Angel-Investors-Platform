@@ -67,14 +67,10 @@ import InvestmentRound from "layouts/startup/InvestmentRound";
 import SettingsProfile from "layouts/startup/pageComponents/SettingsProfile";
 
 //import Lead investor page component
-<<<<<<< HEAD
 import SyndicateProfile from "layouts/LeadInvestor/pageComponents/SyndicateProfile";
 // import SyndicateOverview from "layouts/LeadInvestor/pageComponents/SyndicateOverview";
-=======
 // import LeadInvestor from "layouts/LeadInvestor/pageComponents/LeadInvestor";  
-import SyndicateProfile from "layouts/LeadInvestor/pageComponents/SyndicateProfile";  
-import Overview from "layouts/LeadInvestor/pageComponents/Overview";
->>>>>>> 7bc0dcf315c0a19f6556b6aa772e630cba1825a7
+import Overview from "layouts/LeadInvestor/pageComponents/SyndicateOverview";
 import ActiveDeals from "layouts/LeadInvestor/pageComponents/ActiveDeals";
 import NewDeals from "layouts/LeadInvestor/pageComponents/NewDeals";
 import ManageMembers from "layouts/LeadInvestor/pageComponents/ManageMembers";
@@ -244,7 +240,6 @@ const routes = [
     noCollapse: true,
   },
 
-<<<<<<< HEAD
   {
     type: "collapse",
     name: "Offers",
@@ -382,7 +377,7 @@ const routes = [
     component: <AddStartups />,
     noCollapse: true,
   },
-=======
+
    {
             type: "collapse",
             name: "Rejected Deals",
@@ -529,7 +524,6 @@ const routes = [
         component: < AddStartups / > ,
         noCollapse: true,
     },
->>>>>>> 7bc0dcf315c0a19f6556b6aa772e630cba1825a7
 ];
 
 export default routes;
