@@ -3,6 +3,8 @@
 import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
 import SoftAvatar from "components/SoftAvatar";
+import { Link } from "react-router-dom";
+import SoftButton from "components/SoftButton";
 
 // Images
 import syndicate2 from "assets/images/syndicate-2.jpg";
@@ -11,16 +13,24 @@ import syndicate4 from "assets/images/syndicate-4.jpg";
 import syndicate3 from "assets/images/syndicate-3.jpg";
 import syndicate5 from "assets/images/syndicate-5.jpg";
 import syndicate6 from "assets/images/syndicate-6.jpg";
-function Syndicate({ image, S_name }) {
+function Syndicate({ image, S_name, to }) { // Add 'to' prop for link
   return (
     <SoftBox display="flex" alignItems="center" px={1} py={0.5}>
       <SoftBox mr={2}>
         <SoftAvatar src={image} alt={S_name} size="sm" variant="rounded" />
       </SoftBox>
       <SoftBox display="flex" flexDirection="column">
-        <SoftTypography variant="button" fontWeight="medium">
-          {S_name}
-        </SoftTypography>
+        {to ? ( // Conditionally render link based on 'to' prop
+          <Link to={to}>
+            <SoftTypography variant="button" fontWeight="medium">
+              {S_name}
+            </SoftTypography>
+          </Link>
+        ) : (
+          <SoftTypography variant="button" fontWeight="medium">
+            {S_name}
+          </SoftTypography>
+        )}
       </SoftBox>
     </SoftBox>
   );
@@ -43,124 +53,108 @@ const offersTableData = {
   columns: [
     { name: "Syndicate name", align: "left" },
     { name: "Syndicate lead", align: "left" },
-    { name: "About", align: "center" },
-    { name: "offered amount", align: "center" },
+    { name: "The offer", align: "left" },
     { name: "action", align: "center" },
   ],
 
   rows: [
     {
-      "Syndicate name": <Syndicate image={syndicate2} S_name="Wingspan Syndicate" />,
+      "Syndicate name": (
+        <Syndicate image={syndicate2} S_name="Wingspan Syndicate" to="/startup/StartUpDeals" /> 
+      ),
       "Syndicate lead": <S_Lead lead_name="Abdullah Mohammed" email="AbdullahMohammed@gmail.com" />,
-      About: (
-        <SoftTypography variant="caption" color="secondary" fontWeight="medium">
-          Elevating startups with expert support and investment for soaring success.
-        </SoftTypography>
-      ),
-      "offered amount": (
-        <SoftTypography variant="caption" color="secondary" fontWeight="medium">
-          $500,500
+      "The offer": (
+        <SoftTypography variant="caption" color="secondary" fontWeight="medium" style={{ display: "block" }}>
+         Allocation $200,500
         </SoftTypography>
       ),
       action: (
         <div>
-          <button>...</button>
+          <SoftButton style={{ marginRight: "10px",  backgroundColor: "#50C878" , color:"white", padding: "8px 16px", borderRadius: "4px" }}>Accept</SoftButton>
+          <SoftButton style={{ backgroundColor: "#d32f2f", color:"white", padding: "8px 16px", borderRadius: "4px" }}>Reject</SoftButton>
         </div>
+          
       ),
     },
     {
-      "Syndicate name": <Syndicate image={syndicate1} S_name="Angels investors" />,
+      "Syndicate name":( <Syndicate image={syndicate1} S_name="Angels investors" to="/startup/StartUpDeals"/>
+      ),
       "Syndicate lead": <S_Lead lead_name="Michael Levi" email="michael.L@gmail.com" />,
-      About: (
+      "The offer": (
         <SoftTypography variant="caption" color="secondary" fontWeight="medium">
-          Provide early-stage funding and mentorship to startups, fostering growth and innovation.
-        </SoftTypography>
-      ),
-      "offered amount": (
-        <SoftTypography variant="caption" color="secondary" fontWeight="medium">
-          $300,000
+         Allocation $300,000
         </SoftTypography>
       ),
       action: (
         <div>
-          <button>...</button>
+          <SoftButton style={{ marginRight: "10px",  backgroundColor: "#50C878" , color:"white", padding: "8px 16px", borderRadius: "4px" }}>Accept</SoftButton>
+          <SoftButton style={{ backgroundColor: "#d32f2f", color:"white", padding: "8px 16px", borderRadius: "4px" }}>Reject</SoftButton>
         </div>
       ),
     },
     {
-      "Syndicate name": <Syndicate image={syndicate4} S_name="Archangel Investors" />,
+      "Syndicate name": ( <Syndicate image={syndicate4} S_name="Archangel Investors" to="/startup/StartUpDeals" />
+      ),
       "Syndicate lead": <S_Lead lead_name="Mohammed Khaled" email="Abdallah.M@hotmail.com" />,
-      About: (
+      "The offer": (
         <SoftTypography variant="caption" color="secondary" fontWeight="medium">
-          Provides strategic support and funding for promising ventures.
-        </SoftTypography>
-      ),
-      "offered amount": (
-        <SoftTypography variant="caption" color="secondary" fontWeight="medium">
-          $300,500
+          Allocation $300,500
         </SoftTypography>
       ),
       action: (
         <div>
-          <button>...</button>
+          <SoftButton style={{ marginRight: "10px",  backgroundColor: "#50C878" , color:"white", padding: "8px 16px", borderRadius: "4px" }}>Accept</SoftButton>
+          <SoftButton style={{ backgroundColor: "#d32f2f", color:"white", padding: "8px 16px", borderRadius: "4px" }}>Reject</SoftButton>
         </div>
+
       ),
     },
     {
-      "Syndicate name": <Syndicate image={syndicate3} S_name="Syndicate" />,
+      "Syndicate name":( <Syndicate image={syndicate3} S_name="Syndicate" to="/startup/StartUpDeals" />
+      ),
       "Syndicate lead": <S_Lead lead_name="someone A" email="SomeoneA@gmail.com" />,
-      About: (
+      "The offer": (
         <SoftTypography variant="caption" color="secondary" fontWeight="medium">
-          Amplifying investment opportunities through collaborative capital deployment.
-        </SoftTypography>
-      ),
-      "offered amount": (
-        <SoftTypography variant="caption" color="secondary" fontWeight="medium">
-          $400,000
+         Allocation $400,000
         </SoftTypography>
       ),
       action: (
         <div>
-          <button>...</button>
-        </div>
+        <SoftButton style={{ marginRight: "10px",  backgroundColor: "#50C878" , color:"white", padding: "8px 16px", borderRadius: "4px" }}>Accept</SoftButton>
+        <SoftButton style={{ backgroundColor: "#d32f2f", color:"white", padding: "8px 16px", borderRadius: "4px" }}>Reject</SoftButton>
+      </div>
       ),
     },
     {
-      "Syndicate name": <Syndicate image={syndicate5} S_name="syndicate capital" />,
+      "Syndicate name":( <Syndicate image={syndicate5} S_name="syndicate capital" to="/startup/StartUpDeals"/>
+      ),
       "Syndicate lead": <S_Lead lead_name="Mohammed " email="Mohammed@outlook.sa" />,
-      About: (
+      "The offer": (
         <SoftTypography variant="caption" color="secondary" fontWeight="medium">
-          Leverages collective investment power to fuel growth and innovation in diverse ventures.
-        </SoftTypography>
-      ),
-      "offered amount": (
-        <SoftTypography variant="caption" color="secondary" fontWeight="medium">
-          $200,000
+          Allocation $200,000
         </SoftTypography>
       ),
       action: (
         <div>
-          <button>...</button>
+          <SoftButton style={{ marginRight: "10px",  backgroundColor: "#50C878" , color:"white", padding: "8px 16px", borderRadius: "4px" }}>Accept</SoftButton>
+          <SoftButton style={{ backgroundColor: "#d32f2f", color:"white", padding: "8px 16px", borderRadius: "4px" }}>Reject</SoftButton>
         </div>
       ),
     },
     {
-      "Syndicate name": <Syndicate image={syndicate6} S_name="Syndicate" />,
-      "Syndicate lead": <S_Lead lead_name="Miriam Eric" email="miriam0E@gmail.com" />,
-      About: (
-        <SoftTypography variant="caption" color="secondary" fontWeight="medium">
-          Elevating startups with expert support and investment for soaring success.
-        </SoftTypography>
+      "Syndicate name":( <Syndicate image={syndicate6} S_name="Syndicate" to="/startup/StartUpDeals"/>
       ),
-      "offered amount": (
+      "Syndicate lead": <S_Lead lead_name="Miriam Eric" email="miriam0E@gmail.com" />,
+      "The offer": (
         <SoftTypography variant="caption" color="secondary" fontWeight="medium">
-          $200,500
+         Allocation $200,500
         </SoftTypography>
       ),
       action: (
         <div>
-          <button>...</button>
-        </div>
+        <SoftButton style={{ marginRight: "10px",  backgroundColor: "#50C878" , color:"white", padding: "8px 16px", borderRadius: "4px" }}>Accept</SoftButton>
+        <SoftButton style={{ backgroundColor: "#d32f2f", color:"white", padding: "8px 16px", borderRadius: "4px" }}>Reject</SoftButton>
+      </div>
       ),
     },
   ],
