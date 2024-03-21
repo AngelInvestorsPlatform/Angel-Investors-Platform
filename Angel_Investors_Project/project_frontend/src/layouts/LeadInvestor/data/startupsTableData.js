@@ -30,6 +30,7 @@ import team1 from "assets/images/team-1.jpg";
 import team2 from "assets/images/team-2.jpg";
 import team3 from "assets/images/team-3.jpg";
 import team4 from "assets/images/team-4.jpg";
+import { Phone } from "@mui/icons-material";
 
 
 
@@ -62,6 +63,21 @@ function Function({ sect, stage }) {
         </SoftTypography>
         <SoftTypography variant="caption" color="secondary" sx={{ fontSize: "0.8rem" }}>
           {stage}
+        </SoftTypography>
+      </SoftBox>
+    </SoftBox>
+  );
+}
+
+function Contact({ email, phone }) {
+  return (
+    <SoftBox display="flex" alignItems="center" px={1} py={0.5}>
+      <SoftBox display="flex" flexDirection="column">
+        <SoftTypography variant="text" fontWeight="light" sx={{ fontSize: "0.9rem" }}>
+          {email}
+        </SoftTypography>
+        <SoftTypography variant="caption" color="secondary" sx={{ fontSize: "0.8rem" }}>
+          {phone}
         </SoftTypography>
       </SoftBox>
     </SoftBox>
@@ -102,6 +118,7 @@ const StartupssTableData = {
   columns: [
     { name: "Startups", align: "left" },
     { name: "About", align: "center" },
+    { name: "Contact", align: "center" },
     { name: "Ask", align: "center" },
     { name: "valuation", align: "center" },
     { name: "Offer", align: "center" },
@@ -111,6 +128,7 @@ const StartupssTableData = {
     {
       Startups: <Startups image={logoSlack} name="Fiverr" Founders ="Founders  : Denis Sklyarov" />,
       About: <Function sect="Technology Sector" stage="pre-seed" />,
+      Contact: (<Contact email="Fiverr22@gmail.com" phone="055549877" />),
       Ask: (
         <SoftTypography variant="caption" color="secondary" fontWeight="medium">
           $100K
@@ -127,6 +145,7 @@ const StartupssTableData = {
     {
       Startups: <Startups image={logoJira} name="SimilarWeb" Founders ="Founders  : Igor Goldenberg" />,
       About: <Function sect="Finance Sector" stage="Series A" />,
+      Contact: (<Contact email="Fiverr22@gmail.com" phone="055549877" />),
       Ask: (
         <SoftTypography variant="caption" color="secondary" fontWeight="medium">
           $500K
@@ -141,6 +160,7 @@ const StartupssTableData = {
     {
       Startups: <Startups image={logoAtlassian} name="Wix" Founders ="Founders  : Igor Goldenberg" />,
       About: <Function sect="Healthcare Sector" stage="Pre-Seed" />,
+      Contact: (<Contact email="Wix22@gmail.com" phone="055549877" />),
       Ask: (
         <SoftTypography variant="caption" color="secondary" fontWeight="medium">
           $200K
@@ -155,6 +175,7 @@ const StartupssTableData = {
     {
       Startups: <Startups image={logoSpotify} name="WiFi Map" Founders ="Founders : Igor Goldenberg" />,
       About: <Function sect=" Food & Beverage Sector" stage="Series B" />,
+      Contact: (<Contact email="Wifimap.swe1@gmail.com" phone="" />),
       Ask: (
         <SoftTypography variant="caption" color="secondary" fontWeight="medium">
           $100K
@@ -170,6 +191,7 @@ const StartupssTableData = {
     {
       Startups: <Startups image={logoInvesion} name="D-ID" Founders ="Founders  : Ahmed Abo Jamal" />,
       About: <Function sect="Technology Sector" stage="Other" />,
+      Contact: (<Contact email="D.id244@gmail.com" phone="05554967" />),
       Ask: (
         <SoftTypography variant="caption" color="secondary" fontWeight="medium">
           $50K
@@ -185,6 +207,7 @@ const StartupssTableData = {
     {
       Startups: <Startups image={logoAtlassian} name="Astria" Founders ="Founders : Dan Dovrat" />,
       About: <Function sect="Artificial Intelligence Sector" stage="Seed" />,
+      Contact: (<Contact email="Astria22@gmail.com" phone="055549877" />),
       Ask: (
         <SoftTypography variant="caption" color="secondary" fontWeight="medium">
           $250K
@@ -200,6 +223,7 @@ const StartupssTableData = {
     {
       Startups: <Startups image={logoSlack} name="GreenTech" Founders ="Founders : Guy L" />,
       About: <Function sect="Sustainable Energy Sector" stage="Pre-Seed" />,
+      Contact: (<Contact email="GreenTech22@gmail.com" phone="" />),
       Ask: (
         <SoftTypography variant="caption" color="secondary" fontWeight="medium">
           $500K
@@ -215,6 +239,7 @@ const StartupssTableData = {
     {
       Startups: <Startups image={logoJira} name="Bounce" Founders ="Founders : Michael Smith" />,
       About: <Function sect="Startups Incubation Sector" stage="Series B" />,
+      Contact: (<Contact email="Bounce22@gmail.com" phone="054995587" />),
       Ask: (
         <SoftTypography variant="caption" color="secondary" fontWeight="medium">
           $800K
@@ -230,6 +255,7 @@ const StartupssTableData = {
     {
       Startups: <Startups image={logoInvesion} name="SoftTech" Founders ="Founders : Olivia Davis" />,
       About: <Function sect="Software Development Sector" stage="Seed" />,
+      Contact: (<Contact email="SoftTech22@gmail.com" phone="054995587" />),
       Ask: (
         <SoftTypography variant="caption" color="secondary" fontWeight="medium">
           $100K
@@ -245,6 +271,7 @@ const StartupssTableData = {
     {
       Startups: <Startups image={logoAtlassian} name="SocialTech" Founders ="Founders : Emily Wilson" />,
       About: <Function sect="Social Media Sector" stage="Seed" />,
+      Contact: (<Contact email="SocialTech@gmail.com" phone="" />),
       Ask: (
         <SoftTypography variant="caption" color="secondary" fontWeight="medium">
           $200K
