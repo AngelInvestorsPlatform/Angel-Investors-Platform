@@ -19,7 +19,8 @@ import StartUpHome from "layouts/startup/pageComponents/StartUpHome";
 import StartUpOffers from "layouts/startup/pageComponents/StartUpOffers";
 import StartUpRejected from "layouts/startup/pageComponents/StartUpRejected";
 import StartUpProfile from "layouts/startup/startupProfile";
-
+import InvestmentRound from "layouts/startup/InvestmentRound";
+import SettingsProfile from "layouts/startup/pageComponents/SettingsProfile";
 //style
 // import styled from 'styled-components';
 
@@ -78,6 +79,17 @@ const routes = [
             component: < StartUpRejected />,
             noCollapse: true,
           },
+          {
+            type: "collapse",
+            name: "Investment Round",
+            key: "InvestmentRound",
+            route: "/Startup/InvestmentRound",
+            icon: <SpaceShip size="12px" />,
+            component: < InvestmentRound />,
+            noCollapse: true,
+          },
+        
+        
 
 
   {type : "divider"},
@@ -94,14 +106,13 @@ const routes = [
   {
     type: "collapse",
     name: "Settings",
-    key: "Settings",
-    //route: "/startup/profile",
+    key: "SettingsProfile",
+    route: "/startup/SettingsProfile",
     icon: <Settings size="12px" />,
-    component: < profile />,
+    component: < SettingsProfile />,
     noCollapse: true,
-    active: false, // for a temporary 
+    // for a temporary 
   },
-  // Add more route objects as needed
 ];
 
 
