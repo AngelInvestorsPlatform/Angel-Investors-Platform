@@ -63,9 +63,12 @@ import StartUpDeals from "layouts/startup/pageComponents/StartUpDeals";
 import StartUpHome from "layouts/startup/pageComponents/StartUpHome";
 import StartUpOffers from "layouts/startup/pageComponents/StartUpOffers";
 import StartUpRejected from "layouts/startup/pageComponents/StartUpRejected";
-import StartUpProfile from "layouts/startup/startupProfile"; // I couldn't put it in pageComponents folder
+import StartUpProfile from "layouts/startup/startupProfile"; 
+import InvestmentRound from "layouts/startup/InvestmentRound";
+import SettingsProfile from "layouts/startup/pageComponents/SettingsProfile";
 
 //import Lead investor page component
+// import LeadInvestor from "layouts/LeadInvestor/pageComponents/LeadInvestor";  
 import SyndicateProfile from "layouts/LeadInvestor/pageComponents/SyndicateProfile";  
 import Overview from "layouts/LeadInvestor/pageComponents/Overview";
 import ActiveDeals from "layouts/LeadInvestor/pageComponents/ActiveDeals";
@@ -254,6 +257,25 @@ const routes = [
             route: "/Startup/StartUpRejected",
             icon: <SpaceShip size="12px" />,
             component: < StartUpRejected />,
+            noCollapse: true,
+          },
+            {
+            type: "collapse",
+            name: "Settings",
+            key: "SettingsProfile",
+            route: "/startup/SettingsProfile",
+            icon: <Settings size="12px" />,
+            component: < SettingsProfile />,
+            noCollapse: true,
+    
+          },
+            {
+            type: "collapse",
+            name: "Investment Round",
+            key: "InvestmentRound",
+            route: "/Startup/InvestmentRound",
+            icon: <SpaceShip size="12px" />,
+            component: < InvestmentRound />,
             noCollapse: true,
           },
           

@@ -15,54 +15,57 @@ Coded by www.creative-tim.com
 // @mui material components
 import Card from "@mui/material/Card";
 
+// @mui material components
+import Grid from "@mui/material/Grid";
+import Icon from "@mui/material/Icon";
+
 // Soft UI Dashboard React components
 import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
+
+// @mui icons
+
+
 
 // Soft UI Dashboard React examples
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
-import Table from "examples/Tables/Table";
+
 import StartUpNavbar from 'layouts/startup/components/StartUpNavbar';
 
+
+// startup layout components
+import Header from "layouts/startup/pageComponents/StartUpDeals/components/Header";
+import SyndicateInfo from "layouts/startup/pageComponents/StartUpDeals/components/SyndicateInfo";
+import DealInfo from "layouts/startup/pageComponents/StartUpDeals/components/DealInfo";
+
 // Data
-// import authorsTableData from "layouts/tables/data/authorsTableData";
 import DealsData from "layouts/startup/pageComponents/StartUpDeals/data/DealsData";
 
-function Tables() {
-  // const { columns, rows } = authorsTableData;
+function Deal() {
+
   const { columns: prCols, rows: prRows } = DealsData;
 
   return (
     <DashboardLayout>
       <DashboardNavbar />
+      <Header/>
       <StartUpNavbar/> 
-      <SoftBox mb={3}>
-<SoftTypography variant="h3" color="info" fontWeight="regular" textGradient>
-         Deals
-                </SoftTypography>
-                </SoftBox>
-        <SoftBox mb={3}>
-        <Card>
-        
-          <SoftBox
-            sx={{
-              "& .MuiTableRow-root:not(:last-child)": {
-                "& td": {
-                  borderBottom: ({ borders: { borderWidth, borderColor } }) =>
-                    `${borderWidth[1]} solid ${borderColor}`,
-                },
-              },
-            }}
-          >
-            <Table columns={prCols} rows={prRows} />
+      <SoftBox mt={5} mb={3}>
+        <Grid container spacing={3}>
+          <Grid item xs={12} md={6} xl={4}>
+          <DealInfo/>
+          </Grid>
+          <Grid item xs={12} md={12} xl={8}>
+             <SyndicateInfo />
+          </Grid>
+          </Grid>
           </SoftBox>
-        </Card>
-      </SoftBox>
+    {/*  */}
       <Footer />
     </DashboardLayout>
   );
 }
 
-export default Tables;
+export default Deal;

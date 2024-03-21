@@ -21,7 +21,7 @@ import logoXD from "assets/images/small-logos/logo-xd.svg";
 function Completion({ value, color }) {
   return (
     <SoftBox display="flex" alignItems="center">
-      <SoftTypography variant="caption" color="text" fontWeight="medium">
+      <SoftTypography variant="h" color="info" fontWeight="medium">
         {value}%
       </SoftTypography>
       <SoftBox width="8rem">
@@ -39,34 +39,32 @@ const action = (
 // Date of start
 const DealsData = {
   columns: [
-    { name: "SYNDICATE", align: "left" },
-    { name: "Amount", align: "left" },
-    { name: "status", align: "left" },
-    { name: "Date_Of_Start", align: "center" },
-    { name: "completion", align: "center" },
-    { name: "action", align: "center" },
+    { name: "SATRTUP", align: "left" },
+    { name: "FOUNDER", align: "left" },
+    { name: "STAGE", align: "left" },
+    { name: "sector", align: "center" },
+ 
   ],
 
   rows: [
     {
-      SYNDICATE: [logoSlack, " GLANTE"],
-      Amount: (
+      SATRTUP: [logoSlack, " GLANTE"],
+      FOUNDER: (
         <SoftTypography variant="button" color="text" fontWeight="medium">
-          $200,500
+          KHALED FAHAD  
         </SoftTypography>
       ),
-      status: (
+      STAGE: (
         <SoftTypography variant="caption" color="text" fontWeight="medium">
-          be collected soon
+         Seed B
         </SoftTypography>
       ),
-      Date_Of_Start: (
+      sector: (
         <SoftTypography variant="caption" color="text" fontWeight="medium">
-          23/04/18
+        Information system
         </SoftTypography>
       ),
-      completion: <Completion value={60} color="info" />,
-      action,
+     
     },
     // {
     //   SYNDICATE: [logoInvesion, "Invesion"],
