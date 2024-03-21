@@ -23,7 +23,7 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 
 //email
-import { Link } from "@react-email/components"
+
 
 // Soft UI Dashboard React components
 import SoftBox from "components/SoftBox";

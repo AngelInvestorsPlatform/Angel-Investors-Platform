@@ -23,7 +23,7 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 
 //email
-import { Link } from "@react-email/components"
+
 
 // Soft UI Dashboard React components
 import SoftBox from "components/SoftBox";
@@ -46,7 +46,7 @@ import breakpoints from "assets/theme/base/breakpoints";
 // Images 
 import burceMars from "assets/images/OneSynicate.jpg";
 // import curved0 from "assets/images/curved-images/white-curved.jpeg";
-import curved0 from "assets/images/curved-images/coverRound.jpg";
+import curved0 from "assets/images/curved-images/coverRound2.jpg";
 function Header() {
   const [tabsOrientation, setTabsOrientation] = useState("horizontal");
   const [tabValue, setTabValue] = useState(0);
