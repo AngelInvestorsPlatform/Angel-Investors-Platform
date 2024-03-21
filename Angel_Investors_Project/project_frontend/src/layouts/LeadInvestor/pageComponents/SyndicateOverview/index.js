@@ -26,12 +26,11 @@ import PlaceholderCard from "examples/Cards/PlaceholderCard";
 import Header from "layouts/LeadInvestor/components/Header";
 import PlatformSettings from "layouts/profile/components/PlatformSettings";
 // Investor layout components
-import InvestorNavbar from 'layouts/investor/components/InvestorNavbar';
-import SyndicateCard from "layouts/investor/InvestorProfile/components/SyndicateCard";
+// import SyndicateCard from "layouts/investor/InvestorProfile/components/SyndicateCard";
 
 // Data for backend
 import profilesListData from "layouts/LeadInvestor/data/membersListData.js";
-import SyndicateData from "layouts/investor/InvestorProfile/data/investorProfileSyndicateData";
+// import SyndicateData from "layouts/investor/InvestorProfile/data/investorProfileSyndicateData";
 
 // Images
 import burceMars from "assets/images/bruce-mars.jpg";
@@ -108,7 +107,6 @@ const socialMediaInfo = [
         </Grid>
       </SoftBox>
       <SoftBox>
-      <SyndicateCard Syndicate={SyndicateData} />
       </SoftBox>
 
       <Footer />
