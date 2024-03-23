@@ -54,6 +54,7 @@ FixedTags.propTypes = {
 
 const sectors = [
     { title: 'ML' },
+    { title: 'AI' },
     { title: 'Biotech' },
     { title: 'Adtech' },
     { title: 'Analytics' },
@@ -63,5 +64,6 @@ const sectors = [
     { title: 'ICT' },
     { title: 'Health' },
     { title: 'Finance' },
-    { title: 'Education' }
+    { title: 'Education' },
+    { title: 'Others'},
 ];

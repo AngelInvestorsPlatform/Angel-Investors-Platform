@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 //for API
 import axios from "axios";
@@ -104,9 +104,17 @@ function InvestorForm() {
 
   const [selectedValue, setSelectedValue] = useState([]); // State to hold the selected value
 
+  useEffect(() => {
+    convertToText();
+  }, [selectedValue]);
+
   // Callback function to handle the selected value
   const handleSelectedValue = (value) => {
     setSelectedValue(value);
+  };
+
+  const convertToText = async () => {
+    setSector(selectedValue.map(item => item.title).join(', '))// to convert the array to normal text
   };
 
   //on submit
@@ -232,10 +240,11 @@ function InvestorForm() {
           {formMessage}
         </SoftAlert>
       )}
-      <Separator title="User Data " />
-      <SoftBox component="form" role="form" width="100" display="flex" flex="row" flexWrap="wrap" justifyContent="center">
+
+
+      <SoftBox component="form" role="form" width="100" display="flex" flex="row" flexWrap="wrap">
         {/* First Column */}
-        <SoftBox flex="0 0 48%"> {/*mt={6}*/}
+        <SoftBox flex="0 0 48%" mr={2} mb={3}>
           <SoftBox mb={2}>
             <SoftTypography component="label" variant="caption" fontWeight="bold">
               Email <span style={{ color: "red" }}>*</span>
@@ -286,15 +295,6 @@ function InvestorForm() {
               error={passwordConfirmation && password !== passwordConfirmation}
             />
           </SoftBox>
-        </SoftBox>
-      </SoftBox>
-        {/* Second Column */}
-        {/* <SoftBox flex="0 0 48%" mb={3}> </SoftBox> */}
-
-      <Separator title="Investor Data " />
-      <SoftBox component="form" role="form" width="100" display="flex" flex="row" flexWrap="wrap">
-        {/* third Column */}
-        <SoftBox flex="0 0 48%" mr={2} mb={3}>
           <SoftBox mb={2}>
             <SoftTypography component="label" variant="caption" fontWeight="bold">
               Name <span style={{ color: "red" }}>*</span>
@@ -319,6 +319,10 @@ function InvestorForm() {
               onChange={handlePhoneChange}
             />
           </SoftBox>
+        </SoftBox>
+
+        {/* Second Column */}
+        <SoftBox flex="0 0 48%" mb={3}>
           <SoftBox mb={2}>
             <SoftTypography component="label" variant="caption" fontWeight="bold">
               Country <span style={{ color: "red" }}>*</span>
@@ -346,10 +350,6 @@ function InvestorForm() {
               <option value="Other">Other</option>
             </select>
           </SoftBox>
-        </SoftBox>
-
-        {/* forth Column */}
-        <SoftBox flex="0 0 48%" mb={3}>
           <SoftBox mb={2}>
             <SoftTypography component="label" variant="caption" fontWeight="bold">
               Experience <span style={{ color: "red" }}>*</span>
@@ -414,8 +414,9 @@ function InvestorForm() {
             <option value="Finance">Finance</option>
             <option value="Education">Education</option>
           </select> */}
-        <FixedTags placeholder="Select your sector" onSelectedValueChange={handleSelectedValue} />
-        {/* <p>Selected Value: {selectedValue.map(item => item.title).join(', ')}</p> */} {/* just fot testing how the value will be in save */}
+        <FixedTags placeholder="Select your sector" onSelectedValueChange={handleSelectedValue} onClick={convertToText}/>
+        <p> select value : {selectedValue.map(item => item.title).join(', ')}</p>
+        <p>set value : {investor_sector}</p>
         </SoftBox>
           </SoftBox>
       </SoftBox>
@@ -426,7 +427,7 @@ function InvestorForm() {
       )}
 
       <SoftBox mt={4} mb={1}>
-        <SoftButton variant="gradient" color="info" fullWidth circular onClick={handleSubmit} to="/investor" >
+        <SoftButton variant="gradient" color="info" fullWidth circular onClick={handleSubmit} >
           submit
         </SoftButton>
       </SoftBox>

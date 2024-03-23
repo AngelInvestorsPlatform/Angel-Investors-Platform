@@ -244,10 +244,9 @@ function startup_form() {
         </SoftAlert>
       )}
 
-      <Separator title="User Data " />
-      <SoftBox component="form" role="form" width="100" display="flex" flex="row" flexWrap="wrap" justifyContent="center">
+      <SoftBox component="form" role="form" width="100" display="flex" flex="row" flexWrap="wrap">
         {/* First Column */}
-        <SoftBox flex="0 0 48%"> {/*mt={6}*/}
+        <SoftBox flex="0 0 48%" mr={2} mb={3}>
           <SoftBox mb={2}>
             <SoftTypography component="label" variant="caption" fontWeight="bold">
               Email <span style={required}>*</span>
@@ -298,15 +297,6 @@ function startup_form() {
               error={passwordConfirmation && password !== passwordConfirmation}
             />
           </SoftBox>
-        </SoftBox>
-      </SoftBox>
-        {/* Second Column */}
-        {/* <SoftBox flex="0 0 48%" mb={3}> </SoftBox> */}
-
-      <Separator title="Your Startup Data " />
-      <SoftBox component="form" role="form" width="100" display="flex" flex="row" flexWrap="wrap">
-        {/* third Column */}
-        <SoftBox flex="0 0 48%" mr={2} mb={3}>
           <SoftBox mb={2}>
             <SoftTypography component="label" variant="caption" fontWeight="bold">
               Startup Name <span style={required}>*</span>
@@ -342,6 +332,10 @@ function startup_form() {
               onChange={handlePhoneChange}
             />
           </SoftBox>
+        </SoftBox>
+
+        {/* Second Column */}
+        <SoftBox flex="0 0 48%" mb={3}>
           <SoftBox mb={2}>
             <SoftTypography component="label" variant="caption" fontWeight="bold">
               Startup Sector <span style={required}>*</span>
@@ -366,10 +360,6 @@ function startup_form() {
               <option value="LegalTech">LegalTech</option>
             </select>
           </SoftBox>
-        </SoftBox>
-
-        {/* forth Column */}
-        <SoftBox flex="0 0 48%" mb={3}>
           <SoftBox mb={2}>
             <SoftTypography component="label" variant="caption" fontWeight="bold">
               Startup Stage <span style={required}>*</span>
@@ -441,7 +431,7 @@ function startup_form() {
           <SoftBox mb={2}>
             <SoftBox mt={4} display="flex" justifyContent="space-between">
               <SoftTypography component="label" variant="caption" fontWeight="bold">
-                Website <span style={required}>*</span>
+                Website
               </SoftTypography>
               <Tooltip title="should be valid website URL." placement="right-start">
                 <Icon>error_outline</Icon>

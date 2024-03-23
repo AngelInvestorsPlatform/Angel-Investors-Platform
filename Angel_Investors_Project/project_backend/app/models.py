@@ -80,7 +80,7 @@ class Investor(models.Model):
     investor_name = models.CharField(max_length=100, default='', null=False)
     investor_phone = models.CharField(max_length=20, null=True, blank=True)
     investor_country = models.CharField(max_length=20, choices=COUNTRY_CHOICES, default='SA', null=True, blank=True)
-    investor_sector = models.CharField(max_length=50, choices=IN_SECTORS_CHOICES, default='Information Technology')
+    investor_sector = models.CharField(max_length=5000, default='Information Technology')
     investor_experience = models.CharField(max_length=50, choices=EXPERIENCE_CHOICES, default='Less than 1 year')
     investor_income = models.CharField(max_length=50, default='Less than 100K')
 
