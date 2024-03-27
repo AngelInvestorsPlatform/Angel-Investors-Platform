@@ -61,12 +61,14 @@ function SidenavCard() {
           </SoftBox>
           <SoftButton
             component={Link}
-            href="#"
+            href="/LeadInvestor/syndicate_form"
             target="_blank"
             rel="noreferrer"
             size="small"
             color="white"
             fullWidth
+            // onClick={handleSyndicate}
+            // to="/LeadInvestor/syndicate_form"
           >
             create New
           </SoftButton>
