@@ -1,4 +1,5 @@
 import { useState } from "react";
+import React from "react";
 
 //for API
 import axios from "axios";
@@ -20,6 +21,11 @@ import Card from "@mui/material/Card";
 import Checkbox from "@mui/material/Checkbox";
 import Tooltip from "@mui/material/Tooltip";
 import Icon from "@mui/material/Icon";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControl from "@mui/material/FormControl";
+import FormLabel from "@mui/material/FormLabel";
 
 // Soft UI Dashboard React components
 import SoftBox from "components/SoftBox";
@@ -46,24 +52,23 @@ const selectStyles = {
   padding: "0.75rem",
   fontSize: "1rem",
   backgroundColor: "#ffff",
-  borderColor:"#e9ecef",
+  borderColor: "#e9ecef",
   color: "#888",
   border: "0.2",
   borderRadius: "8px",
   transition: "border-color 0.2s",
 };
 
-const handleFocus = (event) => {
+const handleFocus = (e) => {
   // Change border color when focused
-  event.target.style.border = "2px solid #17c1e8";
+  e.target.style.border = "2px solid #17c1e8";
 };
 
-const handleBlur = (event) => {
+const handleBlur = (e) => {
   // Reset border color when blurred
-  event.target.style.border = "0.2px solid #e9ecef";
+  e.target.style.border = "0.2px solid #e9ecef";
 };
 const required = { color: "red" };
-
 
 function startup_form() {
   //form Data variables
@@ -79,20 +84,22 @@ function startup_form() {
   const [startup_country, setCountry] = useState("");
   const [startup_city, setCity] = useState("");
   const [startup_web, setWebsite] = useState("");
+  const [isExclusive, setIsExclusive] = useState(false);
+  const [syndicateLeadEmail, setSyndicateLeadEmail] = useState("");
 
   //error handling variables
 
   const [error, setError] = useState("");
   const [registerError, setRegError] = useState("");
   const [registerConfirm, setRegConfirm] = useState("");
-  const [formMessage , setFormMessage]= useState("");
-  const [errorMessage, setErrorMessage] =useState("");
+  const [formMessage, setFormMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   //redirect variable
   const [redirect, setRedirect] = useState(false);
 
   // auth variables saving
-  const { userData, setUserData, isLoggedIn, setIsLoggedIn ,  role, setrole} = useAuthUser();
+  const { userData, setUserData, isLoggedIn, setIsLoggedIn, role, setrole } = useAuthUser();
 
   if (redirect) {
     //Redirect To Dashboard
@@ -100,10 +107,11 @@ function startup_form() {
   }
 
   //The following codes to handle input validity using JavaScript
-  const handleEmailChange = (event) => setEmail(event.target.value);
-  const handlePasswordChange = (event) => setPassword(event.target.value);
-  const handlePasswordConfirmationChange = (event) =>setPasswordConfirmation(event.target.value); 
-  const handleStartupNameChange = (e) => setStartupName(e.target.value) || setfirst_name(e.target.value);
+  const handleEmailChange = (e) => setEmail(e.target.value);
+  const handlePasswordChange = (e) => setPassword(e.target.value);
+  const handlePasswordConfirmationChange = (e) => setPasswordConfirmation(e.target.value);
+  const handleStartupNameChange = (e) =>
+    setStartupName(e.target.value) || setfirst_name(e.target.value);
   const handleStartupSectorChange = (e) => setStartupSector(e.target.value);
   const handleStartupStageChange = (e) => setStartupStage(e.target.value);
   const handlePhoneChange = (e) => setPhone(e.target.value);
@@ -111,56 +119,74 @@ function startup_form() {
   const handleCountryChange = (e) => setCountry(e.target.value);
   const handleCityChange = (e) => setCity(e.target.value);
   const handleWebsiteChange = (e) => setWebsite(e.target.value);
+  const handleSyndicateLeadEmailChange = (e) => setSyndicateLeadEmail(e.target.value);
 
+  const handleIsExclusiveChange = (e) => {
+    // Update state immediately based on clicked radio button
+    setIsExclusive(e.target.value === "True");
+    // Clear email if user switches back to "No"
+    if (e.target.value === "False") {
+      setSyndicateLeadEmail("");
+    }
+  };
 
   // const [RedirectToUserI, setRedirectToUserI] = useState(false);
   const [RedirectToUserS, setRedirectToUserS] = useState(false);
 
   if (RedirectToUserS) {
     return <Navigate to="/authenticatio/log-in" />;
-  } 
+  }
 
   //on submit
   const handleSubmit = async () => {
     try {
       const DJANGO_API = process.env.REACT_APP_DJANGO_API;
-      setrole("startup")
-  
+      setrole("startup");
+
       // Validate if all required fields are filled out
-      if (!email || !password || !passwordConfirmation ||
-          !startup_name || !startup_sector || !startup_stage ||
-          !startup_team || !startup_country ) {
+      if (
+        !email ||
+        !password ||
+        !passwordConfirmation ||
+        !startup_name ||
+        !startup_sector ||
+        !startup_stage ||
+        !startup_team ||
+        !startup_country
+      ) {
         setError("fields are required.");
         return;
       }
-  
+
       // Verify if email is correct
       if (!validateEmail(email)) {
         setError("Please enter a valid email address.");
         return;
       }
-  
+
       // Verify if password meets requirements
       if (!validatePassword(password)) {
-        setError("Password must contain at least 8 characters, including uppercase, lowercase, and numbers.");
+        setError(
+          "Password must contain at least 8 characters, including uppercase, lowercase, and numbers."
+        );
         return;
       }
-  
+
       // Verify if password confirmation matches password
       if (password !== passwordConfirmation) {
         setError("Passwords do not match.");
         return;
       }
-      
+
       setError("");
       // If all conditions are met, proceed with registration
       const response1 = await axios.post(`${DJANGO_API}auth/register`, {
-         email,
-         password,
-         first_name,
-         role
+        email,
+        password,
+        first_name,
+        role,
       });
-  
+
       // If registration is successful, set user status to true
       if (response1.status === 201 || response1.status === 200) {
         const Response2 = await axios.post(`${process.env.REACT_APP_DJANGO_API}form/Startup/`, {
@@ -173,29 +199,29 @@ function startup_form() {
           startup_city,
           startup_web,
         });
-            if (Response2.status === 200 || Response2.status === 201) {
-                setRegConfirm("successfully registered, Please Login to your account");
-                const { data } = Response2;
-                setFormMessage(data);
-                //setRedirectToUserS(true);
+        if (Response2.status === 200 || Response2.status === 201) {
+          setRegConfirm("successfully registered, Please Login to your account");
+          const { data } = Response2;
+          setFormMessage(data);
+          //setRedirectToUserS(true);
 
-                window.scrollTo({ top: 0, behavior: "smooth" });
-              } else {
-              let errorMessageY = "Registration failed. Please try again later.";
-              setErrorMessage(errorMessageY);}
-            // Check if the response contains detailed error messages
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        } else {
+          let errorMessageY = "Registration failed. Please try again later.";
+          setErrorMessage(errorMessageY);
+        }
+        // Check if the response contains detailed error messages
       } else {
-          // Extract the first error message for username field
-          //400 58
+        // Extract the first error message for username field
+        //400 58
         if (response1) {
           // Extract the first error message for username field
           let errorMessageX = response1;
           setErrorMessage(errorMessageX);
         }
-        
       }
     } catch (errorX) {
-      setRegError( "Failed: " + errorX.message + "\n" + errorMessage);
+      setRegError("Failed: " + errorX.message + "\n" + errorMessage);
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
@@ -215,7 +241,6 @@ function startup_form() {
     const urlPattern = /^(https?:\/\/)?([\w\-]+\.)*[\w\-]+[\.][A-Za-z]{2,63}(\/\S*)?$/;
     return urlPattern.test(url);
   };
-
 
   return (
     <CoverLayout
@@ -339,15 +364,17 @@ function startup_form() {
           <SoftBox mb={2}>
             <SoftTypography component="label" variant="caption" fontWeight="bold">
               Startup Sector <span style={required}>*</span>
-            </SoftTypography> 
+            </SoftTypography>
             <select
               value={startup_sector}
-              onChange={handleStartupSectorChange} 
+              onChange={handleStartupSectorChange}
               style={selectStyles}
               onFocus={handleFocus}
               onBlur={handleBlur}
             >
-              <option value="" disabled>Select Sector</option>
+              <option value="" disabled>
+                Select Sector
+              </option>
               <option value="Technology">Technology</option>
               <option value="Healthcare">Healthcare</option>
               <option value="Environmental technology">Environmental technology</option>
@@ -446,6 +473,45 @@ function startup_form() {
               error={startup_web && !validateURL(startup_web)}
             />
           </SoftBox>
+         
+          {/*  // add a radio button (are you exclusive? )
+          
+          <SoftBox mb={2}>
+            <SoftTypography component="label" variant="caption" fontWeight="bold">
+              Are you an exclusive Startup?
+            </SoftTypography>
+            <RadioGroup row aria-label="position" name="position" defaultValue="top">
+              <FormControlLabel
+                value="True"
+                control={<Radio color="primary" />}
+                label="Yes"
+                labelPlacement="top"
+                checked={isExclusive} // Check based on state value
+                onChange={handleIsExclusiveChange}
+              />
+              <FormControlLabel
+                value="False"
+                control={<Radio color="primary" />}
+                label="No"
+                labelPlacement="start"
+                onChange={handleIsExclusiveChange}
+                defaultChecked
+              />
+            </RadioGroup>
+          </SoftBox>
+          {isExclusive && (
+            <SoftBox mb={2}>
+              <SoftTypography component="label" variant="caption" fontWeight="bold">
+                Syndicate Lead Email
+              </SoftTypography>
+              <SoftInput
+                type="email"
+                placeholder="Syndicate Lead Email"
+                value={syndicateLeadEmail}
+                onChange={handleSyndicateLeadEmailChange}
+              />
+            </SoftBox>
+          )} */}
         </SoftBox>
       </SoftBox>
       {error && (
@@ -455,12 +521,18 @@ function startup_form() {
       )}
 
       <SoftBox mt={4} mb={1}>
-        <SoftButton variant="gradient" color="info" circular fullWidth onClick={handleSubmit}
-        to="/startup">
+        <SoftButton
+          variant="gradient"
+          color="info"
+          circular
+          fullWidth
+          onClick={handleSubmit}
+          to="/startup"
+        >
           Submit
         </SoftButton>
       </SoftBox>
     </CoverLayout>
-      );
+  );
 }
 export default startup_form;

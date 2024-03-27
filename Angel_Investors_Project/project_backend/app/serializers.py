@@ -32,7 +32,9 @@ class StartupSerializer(serializers.ModelSerializer):
                   'startup_team',
                   'startup_country',
                   'startup_city',
-                  'startup_web')
+                  'startup_web',)
         
+                # 'isExclusive', 
+                # 'syndicateLeadEmail'
 
         # 'StartupImg'
