@@ -12,6 +12,8 @@ Coded by www.creative-tim.com
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
+// @mui material components
+import Card from "@mui/material/Card";
 
 // @mui material components
 import Grid from "@mui/material/Grid";
@@ -19,50 +21,73 @@ import Icon from "@mui/material/Icon";
 
 // Soft UI Dashboard React components
 import SoftBox from "components/SoftBox";
-import SoftTypography from "components/SoftTypography";
+
+;import SoftTypography from "components/SoftTypography";
+
+
+// @mui icons
+
+
 
 // Soft UI Dashboard React examples
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-import DashboardNavbar from 'examples/Navbars/DashboardNavbar';
-
-
+import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
+
+import StartUpNavbar from 'layouts/startup/components/StartUpNavbar';
+
+
 import MiniStatisticsCard from "examples/Cards/StatisticsCards/MiniStatisticsCard";
 import ReportsBarChart from "examples/Charts/BarCharts/ReportsBarChart";
 import GradientLineChart from "examples/Charts/LineCharts/GradientLineChart";
 
-// Soft UI Dashboard React base styles
-import typography from "assets/theme/base/typography";
-
-// Dashboard layout components
-
 import Projects from "layouts/dashboard/components/Projects";
 import OrderOverview from "layouts/dashboard/components/OrderOverview";
-import StartUpNavbar from 'layouts/startup/components/StartUpNavbar';
-
 
 
 
 // Data
 import reportsBarChartData from "layouts/dashboard/data/reportsBarChartData";
 import gradientLineChartData from "layouts/dashboard/data/gradientLineChartData";
+// startup layout components
+import Header from "layouts/startup/pageComponents/StartUpDeals/components/Header";
+import SyndicateInfo from "layouts/startup/pageComponents/StartUpDeals/components/SyndicateInfo";
+import DealInfo from "layouts/startup/pageComponents/StartUpDeals/components/DealInfo";
+import DealsData from "layouts/startup/pageComponents/StartUpDeals/data/DealsData";
+import typography from "assets/theme/base/typography";
+// Data
+//
+function Deal() {
 
-function StartupHome() {
+  const { columns: prCols, rows: prRows } = DealsData;
   const { size } = typography;
   const { chart, items } = reportsBarChartData;
-
   return (
     <DashboardLayout>
-       <DashboardNavbar/>
-   <StartUpNavbar />
-   <SoftBox mb={3}>
+      <DashboardNavbar />
+      <Header/>
+      <StartUpNavbar/> 
+
+      <SoftBox mt={5} mb={3}>
+        <Grid container spacing={3}>
+          <Grid item xs={12} md={6} xl={4}>
+          <DealInfo/>
+          </Grid>
+          <Grid item xs={12} md={12} xl={8}>
+             <SyndicateInfo />
+          </Grid>
+          </Grid>
+          </SoftBox>
+      {/* ------------------------*/}
+          
+
+      <SoftBox mb={3}>
 <SoftTypography variant="h3" color="info" fontWeight="regular" textGradient>
      Equity  Overview
                 </SoftTypography>
                 </SoftBox>
   
-   <SoftBox py={3}> 
-
+   <SoftBox py={3}>
         <SoftBox mb={3}>
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6} xl={3}>
@@ -148,11 +173,18 @@ function StartupHome() {
           </Grid>
         </Grid>
       </SoftBox>
-      <Footer />
-        
 
+
+
+      {/* ------------------------*/}
+
+
+
+
+    {/*  */}
+      <Footer />
     </DashboardLayout>
   );
 }
 
-export default StartupHome;
+export default Deal;

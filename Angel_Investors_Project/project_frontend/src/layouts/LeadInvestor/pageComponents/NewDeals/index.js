@@ -175,7 +175,7 @@ function YourDeals() {
             color="info"
             fullWidth
             circular
-            to="/investor"
+          
             style={{ padding: "15px 32px" }}
           >
             submit

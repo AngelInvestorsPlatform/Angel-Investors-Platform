@@ -29,6 +29,23 @@ import SoftTypography from "components/SoftTypography";
 import Separator from "layouts/startup/components/Separator"
 import DealsData from "layouts/startup/pageComponents/StartUpDeals/data/DealsData";
 
+//instead of calling the sectors array
+const sectors = ["Fintech", "Healthcare", "Analytics", "ML"];
+const sectors1 = ["Finance", "Blockchain Investment", "Stock Trading"];
+const sectors2 = ["Healthcare", "Telemedicine", "Medical Devices"];
+const sectors3 = ["Food", "Beverage", "Plant-based", "Hospitality"];
+const sectors4 = ["Fintech", "Pre-Seed", "Cryptocurrency"];
+const sectors5 = [
+  "Software-Development",
+  "Software as a Service",
+  "AI",
+];
+const sectors6 = ["Social Media", "Social Networking", "Content Creation", "Influencer Marketing"];
+
+
+
+
+
 function PlatformSettings() {
   const [followsMe, setFollowsMe] = useState(true);
   const [answersPost, setAnswersPost] = useState(false);

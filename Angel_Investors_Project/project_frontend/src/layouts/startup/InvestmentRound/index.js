@@ -43,10 +43,10 @@ import StartUpNavbar from 'layouts/startup/components/StartUpNavbar';
 //  layout components
 import Header from "layouts/startup/InvestmentRound/components/Header";
 //data
-import DealsData from "layouts/startup/pageComponents/StartUpDeals/data/DealsData";
+import Round from "layouts/startup/InvestmentRound/data/Round";
 
-function Round() {
-  const { columns, rows } = DealsData;
+function invesRound() {
+  const { columns, rows } = Round;
  
     return (
       <DashboardLayout>
@@ -110,57 +110,6 @@ function Round() {
 </SoftBox>
           </Card>
 
-      {/* <Grid container spacing={6} alignItems="center">
-          <Grid item>
-           
-          </Grid>
-         
-          <Grid item xs={10} lg={10} align="center">
-            <SoftBox mt={15} mb={1}>
-              <SoftTypography
-                variant="h4"
-                color="info"
-                fontWeight="bold"
-                align="center"
-                textGradient
-              >
-              Welcome funder!
-              </SoftTypography>
-               </SoftBox>
-          </Grid>
-          </Grid> */}
- {/* <SoftBox mt={12} mb={12} mr={12}  ml={12}> */}
-  
-          {/* <SoftTypography  variant="h4"  mb={1} mr={5}  ml={30}
-                    color="text"
-                    fontWeight="bold"
-                    align="center"
-                    textGradient   >
-             Founder : khaled fahad 
-                </SoftTypography>
-                <SoftTypography  variant="h4"  mb={1} mr={5}  ml={5}
-                    color="text"
-                    fontWeight="bold"
-                    align="center"
-                    textGradient    >
-            StartUp Name : Bellatrixfly
-                </SoftTypography>
-                <SoftTypography  variant="h4"  mb={1} mr={5}  ml={30}
-                    color="text"
-                    fontWeight="bold"
-                    align="center"
-                    textGradient    >
-           Sector : Informstion Teqnologyy
-                </SoftTypography>
-                <SoftTypography  variant="h4"  mb={2} mr={5}  ml={5}
-                    color="text"
-                    fontWeight="bold"
-                    align="center"
-                    textGradient    >
-              Stage : Seed A
-                </SoftTypography> */}
-                {/* </SoftBox> */}
-        
      
            
 
@@ -169,4 +118,4 @@ function Round() {
     );
   }
   
-export default Round;
+export default invesRound;
