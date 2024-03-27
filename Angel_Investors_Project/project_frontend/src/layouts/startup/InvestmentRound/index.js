@@ -43,7 +43,7 @@ import StartUpNavbar from 'layouts/startup/components/StartUpNavbar';
 //  layout components
 import Header from "layouts/startup/InvestmentRound/components/Header";
 //data
-import DealsData from "layouts/startup/InvestmentRound/data/DealsData";
+import DealsData from "layouts/startup/pageComponents/StartUpDeals/data/DealsData";
 
 function Round() {
   const { columns, rows } = DealsData;

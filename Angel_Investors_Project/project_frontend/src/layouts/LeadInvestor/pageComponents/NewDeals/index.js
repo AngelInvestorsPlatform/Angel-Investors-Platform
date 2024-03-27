@@ -45,12 +45,12 @@ import { Info } from "@mui/icons-material";
 // ).toString();
 
 function YourDeals() {
-  const [text, setText] = useState('');
+  const [text, setText] = useState("");
 
   const handleChange = (event) => {
     setText(event.target.value);
   };
-  
+
   const [selectedFile, setSelectedFile] = useState(null);
 
   const onFileChange = (event) => {
@@ -81,57 +81,44 @@ function YourDeals() {
           {/*mt={6}*/}
           <SoftBox mb={2} mr={6}>
             <SoftTypography component="label" variant="caption" fontWeight="bold">
-              Startup name 
+              Startup name
             </SoftTypography>
             <SoftInput type="text" name="nameStartup" />
           </SoftBox>
           <SoftBox mb={2} mr={6}>
             <SoftBox mt={2} display="flex" justifyContent="space-between">
               <SoftTypography component="label" variant="caption" fontWeight="bold">
-                Founders 
+                Founders
               </SoftTypography>
             </SoftBox>
             <SoftInput type="text" name="Founders" />
           </SoftBox>
+
           <SoftBox mb={2} mr={6}>
             <SoftTypography component="label" variant="caption" fontWeight="bold">
-              evaluation 
+              evaluation
             </SoftTypography>
             <SoftInput type="number" placeholder="" name="evaluationStartup" />
           </SoftBox>
-          <SoftBox mb={2} mr={6} display="flex" 
-     >
+          
+          <SoftBox mb={2} mr={6}>
             <SoftTypography component="label" variant="caption" fontWeight="bold">
-                 Memo
-            </SoftTypography>  </SoftBox>
-            <textarea
-            display="flex"   
-  rows="5" // Adjust rows for desired initial height
-  cols="60" // Adjust cols for desired initial width
-  placeholder="Enter ----- here"
-  value={text}
-  onChange={handleChange}
-  style={{
-    border: 'none',
-    padding: '10px',
-    borderRadius: '5px',
-    width: '620px',
-    height: '250px',
-    resize: 'none', // Disable resizing for consistent appearance
-    // Optional styles for improved readability:
-    fontSize: '16px',
-    fontFamily: 'sans-serif', // Adjust for desired font
-  }}
-              
-            />
-        
+              Memo
+            </SoftTypography>
+          <SoftInput
+            placeholder="Enter here"
+            value={text}
+            onChange={handleChange}
+            multiline rows={10}
+          />
+          </SoftBox>
         </SoftBox>
 
         {/* 2 Column */}
-        <SoftBox flex="0 0 30%" mb={3}mt={12}>
+        <SoftBox flex="0 0 30%" mb={3} mt={12}>
           <SoftBox mb={2} mr={6}>
             <SoftTypography component="label" variant="caption" fontWeight="bold">
-              amount for the syndicate 
+              amount for the syndicate
             </SoftTypography>
             <SoftInput type="text" placeholder="allocated" />
           </SoftBox>
@@ -143,7 +130,7 @@ function YourDeals() {
           </SoftBox>
           <SoftBox mb={2} mr={6}>
             <SoftTypography component="label" variant="caption" fontWeight="bold">
-             lead`s invest 
+              lead`s invest
             </SoftTypography>
             <SoftInput type="text" placeholder="Lead Syndicate" />
           </SoftBox>
@@ -178,23 +165,23 @@ function YourDeals() {
               </SoftBox>
             )}
           </SoftBox>
-       
         </SoftBox>
-  
-  </SoftBox>
-  
-  <SoftBox  mb={3}
-   width="100"
-        display="flex"
-        flex="row"
-        flexWrap="wrap"
-        justifyContent="center">
-      <SoftBox mt={4} mb={1}>
-        <SoftButton variant="gradient" color="info" fullWidth circular to="/investor"   style={{padding: '15px 32px'}}>
-          submit
-        </SoftButton>
-      </SoftBox>  
-      </SoftBox>  
+      </SoftBox>
+
+      <SoftBox mb={3} width="100" display="flex" flex="row" flexWrap="wrap" justifyContent="center">
+        <SoftBox mt={4} mb={1}>
+          <SoftButton
+            variant="gradient"
+            color="info"
+            fullWidth
+            circular
+            to="/investor"
+            style={{ padding: "15px 32px" }}
+          >
+            submit
+          </SoftButton>
+        </SoftBox>
+      </SoftBox>
 
       <Footer />
     </DashboardLayout>
