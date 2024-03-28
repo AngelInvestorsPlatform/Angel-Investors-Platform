@@ -20,7 +20,7 @@ import LogoName from "assets/images/logo-name.svg";
 import SidenavCardTolead from "examples/Sidenav/SidenavCardTolead";
 
 // Your Syndicate
-import SyndicateProfile from "layouts/LeadInvestor/pageComponents/SyndicateProfile";
+// import SyndicateProfile from "layouts/LeadInvestor/pageComponents/SyndicateProfile";
 import LeadInvestor from "layouts/LeadInvestor";
 import ActiveDeals from "layouts/LeadInvestor/pageComponents/ActiveDeals";
 import NewDeals from "layouts/LeadInvestor/pageComponents/NewDeals";
@@ -61,7 +61,7 @@ const routes = [
     component: < LeadInvestor />,
     noCollapse: true,
   },
-  {
+  /* {
     type: "collapse",
     name: "Syndicate Profile",
     key: "SyndicateProfile",
@@ -69,7 +69,7 @@ const routes = [
     icon: <DashboardOutlinedIcon size="12px" />,
     component: < SyndicateProfile />,
     noCollapse: true,
-  },
+  }, */
   {
     type: "collapse",
     name: "Active Deals",

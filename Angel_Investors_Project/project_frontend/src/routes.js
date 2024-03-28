@@ -69,7 +69,7 @@ import SettingsProfile from "layouts/startup/pageComponents/SettingsProfile";
 
 //import Lead investor page component
 import SyndicateForm from "layouts/LeadInvestor/syndicate_form";
-import SyndicateProfile from "layouts/LeadInvestor/pageComponents/SyndicateProfile";
+// import SyndicateProfile from "layouts/LeadInvestor/pageComponents/SyndicateProfile";
 import Overview from "layouts/LeadInvestor/pageComponents/SyndicateOverview";
 import ActiveDeals from "layouts/LeadInvestor/pageComponents/ActiveDeals";
 import NewDeals from "layouts/LeadInvestor/pageComponents/NewDeals";
@@ -333,7 +333,7 @@ const routes = [
     component: <SyndicateForm />,
     noCollapse: true,
   }, 
-  {
+  /* {
     type: "collapse",
     name: "Syndicate Profile ",
     key: "SyndicateProfile",
@@ -341,7 +341,7 @@ const routes = [
     icon: <CustomerSupport size="12px" />,
     component: <SyndicateProfile />,
     noCollapse: true,
-  },
+  }, */
   {
     type: "collapse",
     name: " Overview",
@@ -497,7 +497,7 @@ const routes = [
     component: <syndicateform />,
     noCollapse: true,
   },
-  {
+  /* {
     type: "collapse",
     name: "Syndicate Profile ",
     key: "SyndicateProfile",
@@ -505,7 +505,7 @@ const routes = [
     icon: <CustomerSupport size="12px" />,
     component: <SyndicateProfile />,
     noCollapse: true,
-  },
+  }, */
   {
     type: "collapse",
     name: "Overview ",
