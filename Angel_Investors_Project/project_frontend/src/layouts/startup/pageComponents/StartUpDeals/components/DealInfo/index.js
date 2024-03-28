@@ -80,13 +80,16 @@ function PlatformSettings() {
             {/* <Switch checked={answersPost} onChange={() => setAnswersPost(!answersPost)} /> */}
             <Tab icon={<ChevronRightIcon />} />
           </SoftBox>
-          <SoftBox width="80%" ml={2}>
+          <SoftBox width="80%" ml={2}mb={3}>
             <SoftTypography variant="button" fontWeight="regular" color="text">
          investors : 5 
             </SoftTypography>
           </SoftBox>
         </SoftBox> 
         <SoftBox display="flex" py={1} mb={0.25}>
+          </SoftBox>
+
+        <SoftBox display="flex" py={1} mb={3}>
           <SoftBox mt={0.25}>
             {/* <Switch checked={answersPost} onChange={() => setAnswersPost(!answersPost)} /> */}
           </SoftBox>
@@ -98,9 +101,9 @@ function PlatformSettings() {
         </SoftBox>
       
       
-        <SoftBox display="flex" alignItems="center" >
+        <SoftBox display="flex" alignItems="center" mb={10} >
       <SoftTypography variant="caption" color="text" fontWeight="small ">
-        60%  .
+        60%   
       </SoftTypography>
       <SoftBox width="30rem">
         <SoftProgress value="60" color="text" fontWeight="medium"variant="gradient" label={false} />

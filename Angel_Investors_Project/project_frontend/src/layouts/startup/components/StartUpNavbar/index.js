@@ -51,16 +51,16 @@ const routes = [
   
 
 
-  {
-    type: "collapse",
-    name: "Your Deals",
-    key: "StartUpDeals",
-    route: "/startup/StartUpDeals",
-    icon: <Document size="12px" />,
-    component: <StartUpDeals />,
-    noCollapse: true,
+  // {
+  //   type: "collapse",
+  //   name: "Your Deals",
+  //   key: "StartUpDeals",
+  //   route: "/startup/StartUpDeals",
+  //   icon: <Document size="12px" />,
+  //   component: <StartUpDeals />,
+  //   noCollapse: true,
     
-  },
+  // },
         {
             type: "collapse",
             name: "Offers",
@@ -70,15 +70,15 @@ const routes = [
             component: < StartUpOffers />,
             noCollapse: true,
           },
-          {
-            type: "collapse",
-            name: "Rejected Deals",
-            key: "Rejected",
-            route: "/Startup/StartUpRejected",
-            icon: <DisabledByDefaultIcon size="12px" />,
-            component: < StartUpRejected />,
-            noCollapse: true,
-          },
+          // {
+          //   type: "collapse",
+          //   name: "Rejected Deals",
+          //   key: "Rejected",
+          //   route: "/Startup/StartUpRejected",
+          //   icon: <DisabledByDefaultIcon size="12px" />,
+          //   component: < StartUpRejected />,
+          //   noCollapse: true,
+          // },
           {
             type: "collapse",
             name: "Investment Round",

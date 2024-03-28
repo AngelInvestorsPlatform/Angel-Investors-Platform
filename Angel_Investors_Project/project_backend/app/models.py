@@ -104,6 +104,8 @@ class Startup(models.Model):
     startup_country = models.CharField(max_length=20, choices=COUNTRY_CHOICES, default='SA')
     startup_city = models.CharField(max_length=50, null=True, blank=True)
     startup_web = models.URLField(max_length=200, null=False, blank=True)
+    # isExclusive = models.BooleanField(null=False, default=False)
+    # syndicateLeadEmail = models.CharField(max_length=50, null=True, blank=True)
 
     def __str__(self):
         return self.startup_name

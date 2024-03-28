@@ -91,14 +91,13 @@ function Offerbtn() {
   const closeMenu = () => setMenu(null);
 
   return (
-<SoftBox p={-5} display="flex" alignItems="center">
+<SoftBox p={-5} px={1} display="flex" alignItems="center" gap={5} >
       <SoftInput
         pr={3} // Reduced padding right for spacing
         py={3}
         placeholder="Your offer details"
         icon={{ component: "message", direction: "left" }}
-        height="50px"
-        flex={2} // Allow input to grow horizontally
+        multiline rows={3}
       />
       <SoftButton
         color="info"

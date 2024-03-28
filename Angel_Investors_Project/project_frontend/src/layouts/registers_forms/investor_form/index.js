@@ -415,8 +415,8 @@ function InvestorForm() {
             <option value="Education">Education</option>
           </select> */}
         <FixedTags placeholder="Select your sector" onSelectedValueChange={handleSelectedValue} onClick={convertToText}/>
-        <p> select value : {selectedValue.map(item => item.title).join(', ')}</p>
-        <p>set value : {investor_sector}</p>
+        {/* <p> select value : {selectedValue.map(item => item.title).join(', ')}</p>
+        <p>set value : {investor_sector}</p> */}
         </SoftBox>
           </SoftBox>
       </SoftBox>
