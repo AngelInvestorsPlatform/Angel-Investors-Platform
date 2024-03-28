@@ -1,11 +1,12 @@
-
-// this page is not used
-
-import { NavLink } from 'react-router-dom'; 
-
 // @mui material components
 import Grid from "@mui/material/Grid";
-import Icon from "@mui/material/Icon";
+import Card from "@mui/material/Card";
+
+// @mui icons
+import FacebookIcon from "@mui/icons-material/Facebook";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
 // Soft UI Dashboard React components
 import SoftBox from "components/SoftBox";
@@ -13,134 +14,109 @@ import SoftTypography from "components/SoftTypography";
 
 // Soft UI Dashboard React examples
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-import DashboardNavbar from 'examples/Navbars/DashboardNavbar';
 import Footer from "examples/Footer";
-import MiniStatisticsCard from "examples/Cards/StatisticsCards/MiniStatisticsCard";
-import ReportsBarChart from "examples/Charts/BarCharts/ReportsBarChart";
-import GradientLineChart from "examples/Charts/LineCharts/GradientLineChart";
-
-// Soft UI Dashboard React base styles
-import typography from "assets/theme/base/typography";
+import ProfileInfoCard from "examples/Cards/InfoCards/ProfileInfoCard";
+import ProfileDealList from "examples/Lists/ProfileDealList";
+import DefaultProjectCard from "examples/Cards/ProjectCards/DefaultProjectCard";
+import PlaceholderCard from "examples/Cards/PlaceholderCard";
 
 // Investor layout components
-import BuildByDevelopers from "layouts/LeadInvestor/components/BuildByDevelopers";
-import WorkWithTheRockets from "layouts/LeadInvestor/components/WorkWithTheRockets";
-import Projects from "layouts/LeadInvestor/components/Projects";
-import OrderOverview from "layouts/LeadInvestor/components/OrderOverview";
-import LeadNavbar from 'layouts/LeadInvestor/components/LeadNavbar';
+import Header from "layouts/LeadInvestor/components/Header";
+import PlatformSettings from "layouts/profile/components/PlatformSettings";
+// Investor layout components
+// import SyndicateCard from "layouts/investor/InvestorProfile/components/SyndicateCard";
 
-// Data
-import reportsBarChartData from "layouts/LeadInvestor/data/reportsBarChartData";
-import gradientLineChartData from "layouts/LeadInvestor/data/gradientLineChartData";
+// Data for backend
+import membersListData from "layouts/LeadInvestor/data/membersListData.js";
+import ActiveDealsData from "layouts/LeadInvestor/data/ActiveDealsData";
+import NewDealsData from "layouts/LeadInvestor/data/NewDealsData";
 
+// import SyndicateData from "layouts/investor/InvestorProfile/data/investorProfileSyndicateData";
 
+// Images
+import burceMars from "assets/images/bruce-mars.jpg";
+import LeadNavbar from "layouts/LeadInvestor/components/LeadNavbar";
 
-function InvestorDashboard() {
-  const { size } = typography;
-  const { chart, items } = reportsBarChartData;
+function Overview() {
+  //user variable || for backend link ||
+  //user header info
+  const name = " St8 Syndicate";
+  const lead = "Lead: Ali Ahmad";
+
+  // User information
+  const userInfo = {
+    Lead: "Ali M. Ahmad",
+    email: "AliAhmad@mail.com",
+    mobile: "(966) 23 1234 123",
+    country: "SA",
+    experience: "3-5 years",
+  };
+
+  // Description
+  const descriptionInfo =
+    "This syndicate offers a unique opportunity for investors to amplify their reach in the BioTech sector. By pooling resources, you can access promising startups that might be outside your individual investment range.  In addition, you'll benefit from the expertise of a proven leader in [industry], ensuring a meticulous evaluation process.  Furthermore, the syndicate fosters a collaborative network, allowing you to connect with like-minded investors and exchange valuable insights.  Finally, the streamlined investment process allows you to focus on making informed decisions, while the syndicate handles the due diligence and other details.";
+
+  // Sectors
+  const sectorsInfo = ["Biotech", "Adtech", "Analytics", "Market"];
+
+  // Social media links
+  const socialMediaInfo = [
+    {
+      link: "https://www.facebook.com/CreativeTim/",
+      icon: <FacebookIcon />,
+      color: "facebook",
+    },
+    {
+      link: "https://twitter.com/creativetim",
+      icon: <TwitterIcon />,
+      color: "twitter",
+    },
+    {
+      link: "https://www.instagram.com/creativetimofficial/",
+      icon: <InstagramIcon />,
+      color: "instagram",
+    },
+    {
+      link: "https://www.linkedin.com/company/creativetim/",
+      icon: <LinkedInIcon />,
+      color: "linkedin",
+    },
+  ];
 
   return (
     <DashboardLayout>
-    <DashboardNavbar/>
-     <LeadNavbar/>
-      <SoftBox py={3}>
-        <SoftBox mb={3}>
-          <Grid container spacing={3}>
-            <Grid item xs={12} sm={6} xl={3}>
-              <MiniStatisticsCard
-                title={{ text: "today's money" }}
-                count="$53,000"
-                percentage={{ color: "success", text: "+55%" }}
-                icon={{ color: "info", component: "paid" }}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6} xl={3}>
-              <MiniStatisticsCard
-                title={{ text: "today's users" }}
-                count="2,300"
-                percentage={{ color: "success", text: "+3%" }}
-                icon={{ color: "info", component: "public" }}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6} xl={3}>
-              <MiniStatisticsCard
-                title={{ text: "new clients" }}
-                count="+3,462"
-                percentage={{ color: "error", text: "-2%" }}
-                icon={{ color: "info", component: "emoji_events" }}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6} xl={3}>
-              <MiniStatisticsCard
-                title={{ text: "sales" }}
-                count="$103,430"
-                percentage={{ color: "success", text: "+5%" }}
-                icon={{
-                  color: "info",
-                  component: "shopping_cart",
-                }}
-              />
-            </Grid>
-          </Grid>
-        </SoftBox>
-        <SoftBox mb={3}>
-          <Grid container spacing={3}>
-            <Grid item xs={12} lg={7}>
-              <BuildByDevelopers />
-            </Grid>
-            <Grid item xs={12} lg={5}>
-              <WorkWithTheRockets />
-            </Grid>
-          </Grid>
-        </SoftBox>
-        <SoftBox mb={3}>
-          <Grid container spacing={3}>
-            <Grid item xs={12} lg={5}>
-              <ReportsBarChart
-                title="active users"
-                description={
-                  <>
-                    (<strong>+23%</strong>) than last week
-                  </>
-                }
-                chart={chart}
-                items={items}
-              />
-            </Grid>
-            <Grid item xs={12} lg={7}>
-              <GradientLineChart
-                title="Sales Overview"
-                description={
-                  <SoftBox display="flex" alignItems="center">
-                    <SoftBox fontSize={size.lg} color="success" mb={0.3} mr={0.5} lineHeight={0}>
-                      <Icon className="font-bold">arrow_upward</Icon>
-                    </SoftBox>
-                    <SoftTypography variant="button" color="text" fontWeight="medium">
-                      4% more{" "}
-                      <SoftTypography variant="button" color="text" fontWeight="regular">
-                        in 2021
-                      </SoftTypography>
-                    </SoftTypography>
-                  </SoftBox>
-                }
-                height="20.25rem"
-                chart={gradientLineChartData}
-              />
-            </Grid>
-          </Grid>
-        </SoftBox>
+      <LeadNavbar />
+      <Header name={name} lead={lead} img={burceMars} />
+
+      <SoftBox mt={5} mb={3}>
+
         <Grid container spacing={3}>
-          <Grid item xs={12} md={6} lg={8}>
-            <Projects />
+          <Grid item xs={12} md={6} xl={8}>
+            <ProfileInfoCard
+              title="About St8 Syndicate"
+              description={descriptionInfo}
+              info={userInfo}
+              sectors={sectorsInfo}
+              //social={socialMediaInfo}
+              action={{ route: "", tooltip: "Edit Profile" }}
+            />
           </Grid>
-          <Grid item xs={12} md={6} lg={4}>
-            <OrderOverview />
+          <Grid item xs={3} xl={4}>
+            <ProfileDealList title="Syndicate members " profiles={membersListData} />
+          </Grid>
+          <Grid item xs={6} xl={4}>
+            <ProfileDealList title="Active Deals" profiles={ActiveDealsData} />
+          </Grid>
+
+          <Grid item xs={6} xl={4}>
+            <ProfileDealList title="New Deals" profiles={NewDealsData} />
           </Grid>
         </Grid>
-      </SoftBox>
+        </SoftBox>
+
       <Footer />
     </DashboardLayout>
   );
 }
 
-export default InvestorDashboard;
+export default Overview;

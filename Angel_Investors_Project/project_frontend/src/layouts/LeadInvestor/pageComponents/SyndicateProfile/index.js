@@ -42,7 +42,7 @@ function Overview() {
 //user variable || for backend link ||
 //user header info
 const name = "Ali Ahmad";
-const job = "Lead Investor";
+const lead = "Lead Investor";
 
 // User information
 const userInfo = {
@@ -88,7 +88,7 @@ const socialMediaInfo = [
   return (
     <DashboardLayout>
     <LeadNavbar />
-      <Header name = {name} job ={job} img={burceMars} />
+      <Header name = {name} lead ={lead} img={burceMars} />
       <SoftBox mt={5} mb={3}>
         <Grid container spacing={3}>
           <Grid item xs={12} md={6} xl={8}>

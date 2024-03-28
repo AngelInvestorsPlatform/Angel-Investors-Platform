@@ -68,7 +68,7 @@ function ProfileInfoCard({ title, description, info, sectors, social,  action })
   ));
 
   // Render the card social media icons
-  const renderSocial = social.map(({ link, icon, color }) => (
+ /*  const renderSocial = social.map(({ link, icon, color }) => (
     <SoftBox
       key={color}
       component="a"
@@ -83,7 +83,7 @@ function ProfileInfoCard({ title, description, info, sectors, social,  action })
     >
       {icon}
     </SoftBox>
-  ));
+  )); */
  
   const renderBadges = sectors.map((sector, key) => (
     <SoftBadge key={key} badgeContent={sector} color="light" variant="gradient" size="sm" />
@@ -119,12 +119,12 @@ function ProfileInfoCard({ title, description, info, sectors, social,  action })
             </SoftTypography>
             {renderBadges}
             </SoftBox>
-          <SoftBox display="flex" py={1} pr={2}>
+         {/* <SoftBox display="flex" py={1} pr={2}>
             <SoftTypography variant="button" fontWeight="bold" textTransform="capitalize">
               social: &nbsp;
             </SoftTypography>
-            {renderSocial}
-          </SoftBox>
+             {renderSocial} 
+          </SoftBox>*/}
         </SoftBox>
       </SoftBox>
     </Card>

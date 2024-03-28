@@ -44,7 +44,7 @@ import burceMars from "assets/images/bruce-mars.jpg";
 import Lead from "assets/images/backgraund-images/investor-backgraund2.svg";
 
 
-function Header({name, job, img}) {
+function Header({name, lead, img}) {
   const [tabsOrientation, setTabsOrientation] = useState("horizontal");
   const [tabValue, setTabValue] = useState(0);
 
@@ -118,7 +118,7 @@ function Header({name, job, img}) {
                {name}
               </SoftTypography>
               <SoftTypography variant="button" color="text" fontWeight="medium">
-               {job}
+               {lead}
               </SoftTypography>
             </SoftBox>
           </Grid>
@@ -145,7 +145,7 @@ function Header({name, job, img}) {
 
 Header.propTypes = {
   name: PropTypes.string.isRequired,
-  job: PropTypes.string.isRequired,
+  lead: PropTypes.string.isRequired,
   img: PropTypes.string.isRequired,
 };
 

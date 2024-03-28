@@ -1,5 +1,3 @@
-
-
 // @mui material components
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
@@ -29,67 +27,69 @@ import PlatformSettings from "layouts/profile/components/PlatformSettings";
 // import SyndicateCard from "layouts/investor/InvestorProfile/components/SyndicateCard";
 
 // Data for backend
-import profilesListData from "layouts/LeadInvestor/data/membersListData.js";
+import membersListData from "layouts/LeadInvestor/data/membersListData.js";
+import ActiveDealsData from "layouts/LeadInvestor/data/ActiveDealsData";
+import NewDealsData from "layouts/LeadInvestor/data/NewDealsData";
+
 // import SyndicateData from "layouts/investor/InvestorProfile/data/investorProfileSyndicateData";
 
 // Images
 import burceMars from "assets/images/bruce-mars.jpg";
 import LeadNavbar from "layouts/LeadInvestor/components/LeadNavbar";
 
-
 function Overview() {
+  //user variable || for backend link ||
+  //user header info
+  const name = " St8 Syndicate";
+  const lead = "Lead: Ali Ahmad";
 
-//user variable || for backend link ||
-//user header info
-const name = "Ali Ahmad";
-const job = "Lead Investor";
+  // User information
+  const userInfo = {
+    Lead: "Ali M. Ahmad",
+    email: "AliAhmad@mail.com",
+    mobile: "(966) 23 1234 123",
+    country: "SA",
+    experience: "3-5 years",
+  };
 
-// User information
-const userInfo = {
-  Lead: "Ali M. Ahmad",
-  email: "AliAhmad@mail.com",
-  mobile: "(966) 23 1234 123",
-  country: "SA",
-  experience: "3-5 years",
-};
+  // Description
+  const descriptionInfo =
+    "This syndicate offers a unique opportunity for investors to amplify their reach in the BioTech sector. By pooling resources, you can access promising startups that might be outside your individual investment range.  In addition, you'll benefit from the expertise of a proven leader in [industry], ensuring a meticulous evaluation process.  Furthermore, the syndicate fosters a collaborative network, allowing you to connect with like-minded investors and exchange valuable insights.  Finally, the streamlined investment process allows you to focus on making informed decisions, while the syndicate handles the due diligence and other details.";
 
-// Description
-const descriptionInfo = "This syndicate offers a unique opportunity for investors to amplify their reach in the BioTech sector. By pooling resources, you can access promising startups that might be outside your individual investment range.  In addition, you'll benefit from the expertise of a proven leader in [industry], ensuring a meticulous evaluation process.  Furthermore, the syndicate fosters a collaborative network, allowing you to connect with like-minded investors and exchange valuable insights.  Finally, the streamlined investment process allows you to focus on making informed decisions, while the syndicate handles the due diligence and other details.";
+  // Sectors
+  const sectorsInfo = ["Biotech", "Adtech", "Analytics", "Market"];
 
-// Sectors
-const sectorsInfo = ["Biotech", "Adtech", "Analytics", "Market"];
-
-// Social media links
-const socialMediaInfo = [
-  {
-    link: "https://www.facebook.com/CreativeTim/",
-    icon: <FacebookIcon />,
-    color: "facebook",
-  },
-  {
-    link: "https://twitter.com/creativetim",
-    icon: <TwitterIcon />,
-    color: "twitter",
-  },
-  {
-    link: "https://www.instagram.com/creativetimofficial/",
-    icon: <InstagramIcon />,
-    color: "instagram",
-  },
-  {
-    link: "https://www.linkedin.com/company/creativetim/",
-    icon: <LinkedInIcon />,
-    color: "linkedin",
-  },
-];
-
-
+  // Social media links
+  const socialMediaInfo = [
+    {
+      link: "https://www.facebook.com/CreativeTim/",
+      icon: <FacebookIcon />,
+      color: "facebook",
+    },
+    {
+      link: "https://twitter.com/creativetim",
+      icon: <TwitterIcon />,
+      color: "twitter",
+    },
+    {
+      link: "https://www.instagram.com/creativetimofficial/",
+      icon: <InstagramIcon />,
+      color: "instagram",
+    },
+    {
+      link: "https://www.linkedin.com/company/creativetim/",
+      icon: <LinkedInIcon />,
+      color: "linkedin",
+    },
+  ];
 
   return (
     <DashboardLayout>
-    <LeadNavbar />
-      <Header name = {name} job ={job} img={burceMars} />
+      <LeadNavbar />
+      <Header name={name} lead={lead} img={burceMars} />
+
       <SoftBox mt={5} mb={3}>
+
         <Grid container spacing={3}>
           <Grid item xs={12} md={6} xl={8}>
             <ProfileInfoCard
@@ -97,17 +97,22 @@ const socialMediaInfo = [
               description={descriptionInfo}
               info={userInfo}
               sectors={sectorsInfo}
-              social={socialMediaInfo}
+              //social={socialMediaInfo}
               action={{ route: "", tooltip: "Edit Profile" }}
             />
           </Grid>
-          <Grid item xs={12} xl={4}>
-            <ProfileDealList title="Syndicate members " profiles={profilesListData} />
+          <Grid item xs={3} xl={4}>
+            <ProfileDealList title="Syndicate members " profiles={membersListData} />
+          </Grid>
+          <Grid item xs={6} xl={4}>
+            <ProfileDealList title="Active Deals" profiles={ActiveDealsData} />
+          </Grid>
+
+          <Grid item xs={6} xl={4}>
+            <ProfileDealList title="New Deals" profiles={NewDealsData} />
           </Grid>
         </Grid>
-      </SoftBox>
-      <SoftBox>
-      </SoftBox>
+        </SoftBox>
 
       <Footer />
     </DashboardLayout>
