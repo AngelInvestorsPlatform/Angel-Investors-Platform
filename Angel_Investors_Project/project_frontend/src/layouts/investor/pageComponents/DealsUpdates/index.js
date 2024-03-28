@@ -25,22 +25,22 @@ import InvestorNavbar from "layouts/investor/components/InvestorNavbar";
 import Projects from "layouts/investor/components/Projects";
 
 // images
-import logoInvesion from "assets/images/small-logos/logo-invision.svg";
+import logoInvesion from "assets/images/small-logos/logoinvision.svg";
+import logoXD from "assets/images/small-logos/logo-xd.svg";
 
-function DealsDetails() {
-  const deal = "Tamara";
-  const ceoName = "Ahmad Abddallh";
+function DealsUpdates() {
+  const deal = "Xdreams";
+  const ceoName = "Nasser H.";
 
   // User information
   const userInfo = {
-    investment: "100,000",
+    invested: "100,000",
     allocation: "1M",
     "lead's Investment": "10,000",
     totalCarry: "15%",
   };
   // Description
-  const dealInfo =
-    " Describe the deal here";
+  const dealInfo = " Deal description...";
 
   // Sectors
   const sectorsInfo = ["Fintech", "Adtech"];
@@ -68,7 +68,7 @@ function DealsDetails() {
               <Grid container spacing={3} alignItems="center">
                 <Grid item>
                   <SoftAvatar
-                    src={logoInvesion}
+                    src={logoXD}
                     alt="profile-image"
                     variant="rounded"
                     size="xl"
@@ -102,27 +102,26 @@ function DealsDetails() {
                 <Grid item xs={12} md={6} xl={12}>
                   <TimelineList title="Updates">
                     <TimelineItem
-                      color="success"
+                      color="info"
                       icon="notifications"
-                      title="$2400 Design changes"
-                      dateTime="22 DEC 7:20 PM"
-                      description="People care about how you see the world, how you think, what motivates you, what you’re struggling with or afraid of."
-                      badges={["design"]}
+                      title="Title"
+                      dateTime="22 MAR 7:20 PM"
+                      description="ًWrite update here."
+                      //badges={["design"]}
                     />
                     <TimelineItem
-                      color="error"
-                      icon="inventory_2"
-                      title="New order #1832412"
-                      dateTime="21 DEC 11 PM"
-                      description="People care about how you see the world, how you think, what motivates you, what you’re struggling with or afraid of."
-                      badges={["order", "#1832412"]}
+                      icon="notifications"
+                      title="Title"
+                      dateTime="21 MAR 11 PM"
+                      description="Write update here."
+                      //badges={["order", "#1832412"]}
                     />
                     <TimelineItem
-                      icon="shopping_cart"
-                      title="Server payments for April"
-                      dateTime="21 DEC 9:34 PM"
-                      description="People care about how you see the world, how you think, what motivates you, what you’re struggling with or afraid of."
-                      badges={["server", "payments"]}
+                      icon="notifications"
+                      title="Title"
+                      dateTime="21 MAR 9:34 PM"
+                      description="Write update here."
+                      //badges={["server", "payments"]}
                       lastItem
                     />
                   </TimelineList>
@@ -137,4 +136,4 @@ function DealsDetails() {
   );
 }
 
-export default DealsDetails;
+export default DealsUpdates;
