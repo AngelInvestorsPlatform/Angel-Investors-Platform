@@ -74,6 +74,7 @@ import Overview from "layouts/LeadInvestor/pageComponents/SyndicateOverview";
 import ActiveDeals from "layouts/LeadInvestor/pageComponents/ActiveDeals";
 import NewDeals from "layouts/LeadInvestor/pageComponents/NewDeals";
 import ManageMembers from "layouts/LeadInvestor/pageComponents/ManageMembers";
+import JoiningRequests from "layouts/LeadInvestor/pageComponents/ManageMembers/JoiningRequests"
 import ExploreStartups from "layouts/LeadInvestor/pageComponents/ExploreStartups";
 import AddStartups from "layouts/LeadInvestor/pageComponents/AddStartups";
 
@@ -375,6 +376,15 @@ const routes = [
     route: "/LeadInvestor/ManageMembers",
     icon: <Document size="12px" />,
     component: <ManageMembers />,
+    noCollapse: true,
+  },
+  {
+    type: "collapse",
+    name: "Joining Requests",
+    key: "JoiningRequests",
+    route: "/LeadInvestor/ManageMembers/JoiningRequests",
+    icon: <Document size="12px" />,
+    component: <JoiningRequests />,
     noCollapse: true,
   },
   {

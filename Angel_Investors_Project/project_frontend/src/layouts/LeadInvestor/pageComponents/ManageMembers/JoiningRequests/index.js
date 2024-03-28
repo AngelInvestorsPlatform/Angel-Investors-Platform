@@ -1,13 +1,9 @@
 // @mui material components
 import Card from "@mui/material/Card";
-import React, { useState } from "react";
 
 // Soft UI Dashboard React components
 import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
-import { Link } from "react-router-dom";
-//import MenuItem from "@mui/material/MenuItem";
-//import Menu from "@mui/material/Menu";
 
 // Soft UI Dashboard React examples
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
@@ -19,35 +15,24 @@ import Table from "examples/Tables/Table";
 import typography from "assets/theme/base/typography";
 
 // Investor layout components
-import LeadNavbar from "layouts/LeadInvestor/components/LeadNavbar";
+import LeadNavbar from 'layouts/LeadInvestor/components/LeadNavbar';
+
 
 // Data
-import manageTableData from "./data/ManageData";
+import joinTableData from "layouts/LeadInvestor/pageComponents/ManageMembers/data/JoinData"
 
 function Tables() {
-  const { columns, rows } = manageTableData;
+  const { columns, rows } = joinTableData;
 
   return (
     <DashboardLayout>
       <DashboardNavbar />
       <LeadNavbar />
-      <SoftBox display="flex" justifyContent="flex-end">
-        <SoftTypography
-          variant="h9"
-          color="info"
-          fontWeight="regular"
-          textGradient
-          component={Link}
-          to="/LeadInvestor/ManageMembers/JoiningRequests"
-        >
-          Joining Requests
-        </SoftTypography>
-      </SoftBox>
       <SoftBox py={3}>
-        <SoftTypography variant="h3" color="info" fontWeight="regular" textGradient>
-          Manage Members
-        </SoftTypography>
-      </SoftBox>
+      <SoftTypography variant="h3" color="info" fontWeight="regular" textGradient>
+      Joining Requests
+                </SoftTypography>
+                </SoftBox>
       <SoftBox py={3}>
         <SoftBox mb={3}>
           <Card>
@@ -65,8 +50,8 @@ function Tables() {
             </SoftBox>
           </Card>
         </SoftBox>
-      </SoftBox>
-      <Footer />
+        </SoftBox>
+      <Footer />   
     </DashboardLayout>
   );
 }
