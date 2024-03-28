@@ -108,17 +108,18 @@ function ProfileInfoCard({ title, description, info, sectors, social,  action })
             {description}
           </SoftTypography>
         </SoftBox>
-        <SoftBox opacity={0.3}>
-          <Divider />
-        </SoftBox>
-        <SoftBox>
-          {renderItems}
-          <SoftBox display="flex" py={1} pr={2}>
+        <SoftBox display="flex" py={1} pr={2}>
           <SoftTypography variant="button" fontWeight="bold" textTransform="capitalize">
             sectors: &nbsp;
             </SoftTypography>
             {renderBadges}
             </SoftBox>
+        <SoftBox opacity={0.3}>
+          <Divider />
+        </SoftBox>
+        <SoftBox>
+          {renderItems}
+          
          {/* <SoftBox display="flex" py={1} pr={2}>
             <SoftTypography variant="button" fontWeight="bold" textTransform="capitalize">
               social: &nbsp;

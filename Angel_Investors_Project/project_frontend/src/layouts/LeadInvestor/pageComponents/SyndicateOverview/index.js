@@ -95,8 +95,9 @@ function Overview() {
             <ProfileInfoCard
               title="About St8 Syndicate"
               description={descriptionInfo}
-              info={userInfo}
               sectors={sectorsInfo}
+              info={userInfo}
+              
               //social={socialMediaInfo}
               action={{ route: "", tooltip: "Edit Profile" }}
             />

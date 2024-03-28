@@ -230,17 +230,17 @@ function syndicate_form() {
               //error={email && !validateEmail(email)}
             />
           </SoftBox>
-          {/* <SoftBox mb={2}>
+           <SoftBox mb={2}>
             <SoftTypography component="label" variant="caption" fontWeight="bold" fontSize="16px">
-              Interest of the syndicate
+            Sector of the syndicate
             </SoftTypography>
             <SoftInput
               type="text"
-              placeholder="Sector, Stage..."
+              //placeholder=""
               //value={startup_team}
               //onChange={handleTeamSizeChange}
             />
-          </SoftBox> */}
+          </SoftBox> 
         </SoftBox>
 
         {/* Second Column */}
