@@ -109,14 +109,14 @@ function Header() {
             <SoftBox mt={15} mb={4}>
               <SoftTypography
                 variant="h1"
-                color="white"
+                color="info"
                 fontWeight="bold"
                 align="center"
                  mb={4}
               >
               Fundraising 
               </SoftTypography> 
-              <SoftTypography  color="white" fontWeight="medium" alignItems="center">
+              <SoftTypography  color="info" fontWeight="medium" alignItems="center">
               you can determine the needs of your company for those who want to invest in your funding round.
               </SoftTypography>
               </SoftBox>

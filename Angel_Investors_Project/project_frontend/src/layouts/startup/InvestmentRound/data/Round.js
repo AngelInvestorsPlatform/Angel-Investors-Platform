@@ -20,29 +20,6 @@ import logoXD from "assets/images/small-logos/logo-xd.svg";
 
 
 
-// function StartUp({ image, name, Founder, stage, sector }) {
-//   return (
-//     <SoftBox display="flex" alignItems="center" px={1} py={0.5}>
-//       <SoftBox mr={2}>
-//         <SoftAvatar src={image} alt={name} size="sm" variant="rounded" />
-//       </SoftBox>
-//       <SoftBox display="flex" flexDirection="column">
-//         <SoftTypography variant="button" fontWeight="medium">
-//           {name}
-//         </SoftTypography>
-//         <SoftTypography variant="caption" color="secondary">
-//           {Founder}
-//         </SoftTypography>
-//         <SoftTypography variant="caption" color="text" fontWeight="medium">
-//        {stage}
-//         </SoftTypography>
-//         <SoftTypography variant="caption" color="text" fontWeight="medium">
-//        {sector}
-//         </SoftTypography>
-//       </SoftBox>
-//     </SoftBox>
-//   );
-// }
 
 
 
@@ -50,34 +27,32 @@ import logoXD from "assets/images/small-logos/logo-xd.svg";
 // Date of start
 const DealsData = {
   columns: [
-    { name: "SATRTUP", align: "left" },
-    { name: "FOUNDER", align: "left" },
-    { name: "STAGE", align: "left" },
-    { name: "sector", align: "center" },
+   
+    { name: "information", align: "left" },
  
   ],
 
   rows: [
     {
-      SATRTUP: [logoSlack, " GLANTE"],
-      FOUNDER: (
-        <SoftTypography variant="button" color="text" fontWeight="medium">
-          khaled fahad 
-        </SoftTypography>
-      ),
-      STAGE: (
-        <SoftTypography variant="caption" color="text" fontWeight="medium">
-         Seed B
-        </SoftTypography>
-      ),
-      sector: (
-        <SoftTypography variant="caption" color="text" fontWeight="medium">
-       Healthcare
-        </SoftTypography>
-      ),
-     
-    },
+      information: [logoSlack, " GLANTE"],
    
+     
+    },{      information: (
+      <SoftTypography variant="center" color="text" fontWeight="medium">
+      Founder:  khaled fahad 
+      </SoftTypography>
+    
+    ),},
+    {   information: (
+      <SoftTypography variant="center" color="text" fontWeight="medium">
+      Stage: Seed B
+      </SoftTypography>
+ ),},
+ {   information: (
+  <SoftTypography variant="center" color="text" fontWeight="medium">
+  Sector: Healthcare
+  </SoftTypography>
+),},
   ],
 };
 

@@ -53,64 +53,83 @@ function invesRound() {
       <DashboardNavbar />
       <Header/>
       <StartUpNavbar/> 
-      <Card>
-           
-            <SoftBox
+      <SoftBox mt={5} mb={3}>
+        <Grid container spacing={3}>
+          <Grid item xs={6} md={6} xl={6}>
+    
+            <SoftBox ml={12}
               sx={{
                 "& .MuiTableRow-root:not(:last-child)": {
                   "& td": {
                     borderBottom: ({ borders: { borderWidth, borderColor } }) =>
-                      `${borderWidth[1]} solid ${borderColor}`,
+                      `${borderWidth[33]} solid ${borderColor}`,
+                   
                   },
                 },
-              }}
+              }}   style={{ width: '450px' }}
             >
-              <Table columns={columns} rows={rows} />
+              <Table columns={columns} rows={rows}   />
             </SoftBox>
-            <SoftBox component="form" role="form" width="100" display="flex" flex="row" flexWrap="wrap" mt={4} >
-     
+           \
+         </Grid>
+       
+            
+
+
+        
      {/* ////////////////////////*/}
 
-   {/* third Column */}
-   <SoftBox flex="0 0 20%"  mr={9} mb={3} ml={30}>
-     <SoftBox mb={2}>
-       <SoftTypography  color="info" component="label" variant="h5" fontWeight="bold" textGradient>
+
+   
+    <Grid item xs={6} xl={4}>
+  
+          <SoftBox mb={2} >
+    
+       <SoftTypography  color="info" component="label" variant="h5" fontWeight="bold" >
        wanted amount (ask) 
        </SoftTypography>
        <SoftInput
          type="number"
          placeholder=""
-         minLength={10}
-        
+           
        />
-     </SoftBox></SoftBox>
-<SoftBox flex="0 0 20%" mr={9} mb={3} ml={6}>
-     <SoftBox mb={2}>
-       <SoftTypography color="info" component="label" variant="h5" fontWeight="bold" textGradient>
+     </SoftBox>
+   
+     {/* ////////////////////////*/}
+
+
+       <SoftBox mb={2} >
+       <SoftTypography color="info" component="label" variant="h5" fontWeight="bold" >
        valuation
        </SoftTypography>
        <SoftInput
          type="number"
          placeholder=""
-         minLength={10}
-     
-       />
-     </SoftBox>
+        />
+   
        </SoftBox>
     
- <SoftBox mt={4} mb={1}>
-   <SoftButton variant="gradient" color="info" circular fullWidth 
-   to="/startup">
-     Submit
-   </SoftButton>
- </SoftBox> 
-   
+     {/* ////////////////////////*/}
+      
+        
+     < SoftBox mb={3} width="100" display="flex" flex="row" flexWrap="wrap" justifyContent="center">
+        <SoftBox mt={4} mb={1}>
+          <SoftButton
+            variant="gradient"
+            color="info"
+            fullWidth
+            circular
+          
+            style={{ padding: "15px 32px" }}
+          >
+            submit
+          </SoftButton>
+        </SoftBox>
+      </SoftBox>
 
-
-</SoftBox>
-          </Card>
-
-     
+      </Grid>
+       </Grid>    
+      </SoftBox>
            
 
     
