@@ -36,11 +36,7 @@ const sectors1 = ["Finance", "Blockchain Investment", "Stock Trading"];
 const sectors2 = ["Healthcare", "Telemedicine", "Medical Devices"];
 const sectors3 = ["Food", "Beverage", "Plant-based", "Hospitality"];
 const sectors4 = ["Fintech", "Pre-Seed", "Cryptocurrency"];
-const sectors5 = [
-  "Software-Development",
-  "Software as a Service",
-  "AI",
-];
+const sectors5 = ["Software-Development", "Software as a Service", "AI"];
 const sectors6 = ["Social Media", "Social Networking", "Content Creation", "Influencer Marketing"];
 
 
@@ -56,14 +52,14 @@ function Syndicate({ image, name, Lead }) {
           {name}
         </SoftTypography>
         <SoftTypography variant="caption" color="secondary">
-          {Lead}
+          Lead :&nbsp;{Lead}
         </SoftTypography>
       </SoftBox>
     </SoftBox>
   );
 }
 
-function Function({ sectors }) {
+function SectorsFunction({ sectors }) {
   const sect1 = sectors[0];
   const sect2 = sectors[1];
   const sect3 = sectors[2];
@@ -83,67 +79,113 @@ function Function({ sectors }) {
   );
 }
 
-const avatars = (members) =>
-  members.map(([image, name]) => (
-    <Tooltip key={name} title={name} placeholder="bottom">
-      <SoftAvatar
-        src={image}
-        alt="name"
-        size="xs"
-        sx={{
-          border: ({ borders: { borderWidth }, palette: { white } }) =>
-            `${borderWidth[2]} solid ${white.main}`,
-          cursor: "pointer",
-          position: "relative",
+function StatusFunction({ status }) {
+  let color;
+  switch (status.toLowerCase()) {
+    case 'new':
+      color = 'success';
+      break;
+    case 'active':
+      color = 'info';
+      break;
+    case 'inactive':
+      color = 'secondary';
+      break;
+    case 'closed':
+      color = 'error';
+      break;
+    default:
+      color = 'light'; // Default color if status doesn't match any case
+      break;
+  }
 
-          "&:not(:first-of-type)": {
-            ml: -1.25,
-          },
-
-          "&:hover, &:focus": {
-            zIndex: "10",
-          },
-        }}
-      />
-    </Tooltip>
-  ));
-
-function Morebtn() {
-  const [menu, setMenu] = useState(null);
-
-  const openMenu = ({ currentTarget }) => setMenu(currentTarget);
-  const closeMenu = () => setMenu(null);
-
-  const renderMenu = (
-    <Menu
-      id="simple-menu"
-      anchorEl={menu}
-      anchorOrigin={{
-        vertical: "top",
-        horizontal: "left",
-      }}
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      open={Boolean(menu)}
-      onClose={closeMenu}
-    >
-      <MenuItem onClick={closeMenu}>stage </MenuItem>
-      <MenuItem onClick={closeMenu}>members name</MenuItem>
-      <MenuItem onClick={closeMenu}> Deals startup name</MenuItem>
-      <MenuItem onClick={closeMenu}> Join The Syndicate</MenuItem>
-    </Menu>
-  );
   return (
-<SoftBox p={-5} sx={{ fontSize: "0.3rem" }}>
-  <SoftButton color="info" size="small" variant="contained" onClick={openMenu}>
-    <SoftTypography variant="caption" color = "light" px={-1}>View More</SoftTypography>
-  </SoftButton>
-  {renderMenu}
-</SoftBox>
+    <SoftBadge variant="gradient" badgeContent={status} color={color} size="md" border />
   );
 }
+
+const avatars = (members) => {
+  if (members.length <= 5) {
+    return members.map(([image, name]) => (
+      <Tooltip key={name} title={name} placeholder="bottom">
+        <SoftAvatar
+          src={image}
+          alt={name}
+          size="xs"
+          sx={{
+            border: ({ borders: { borderWidth }, palette: { white } }) =>
+              `${borderWidth[2]} solid ${white.main}`,
+            cursor: "pointer",
+            position: "relative",
+
+            "&:not(:first-of-type)": {
+              ml: -1.25,
+            },
+
+            "&:hover, &:focus": {
+              zIndex: "10",
+            },
+          }}
+        />
+      </Tooltip>
+    ));
+  } else {
+    const remainingMembers = members.length - 4;
+    const visibleMembers = members.slice(0, 4);
+    return (
+      <>
+        {visibleMembers.map(([image, name]) => (
+          <Tooltip key={name} title={name} placeholder="bottom">
+            <SoftAvatar
+              src={image}
+              alt={name}
+              size="xs"
+              sx={{
+                border: ({ borders: { borderWidth }, palette: { white } }) =>
+                  `${borderWidth[2]} solid ${white.main}`,
+                cursor: "pointer",
+                position: "relative",
+
+                "&:not(:first-of-type)": {
+                  ml: -1.25,
+                },
+
+                "&:hover, &:focus": {
+                  zIndex: "10",
+                },
+              }}
+            />
+          </Tooltip>
+        ))}
+        <Tooltip title={`${remainingMembers} other members`} placeholder="bottom">
+          <SoftAvatar
+            bgColor="secondary"
+            alt={`+${remainingMembers}`}
+            size="xs"
+            sx={{
+              border: ({ borders: { borderWidth }, palette: { white } }) =>
+                `${borderWidth[2]} solid ${white.main}`,
+              cursor: "pointer",
+              position: "relative",
+
+              "&:not(:first-of-type)": {
+                ml: -1.25,
+              },
+
+              "&:hover, &:focus": {
+                zIndex: "10",
+              },
+            }}
+          >
+            +{remainingMembers}
+          </SoftAvatar>
+        </Tooltip>
+      </>
+    );
+  }
+};
+
+
 
 function ViewMore() {
   // for the dialog
@@ -160,7 +202,7 @@ function ViewMore() {
   return (
     <SoftBox p={-5} sx={{ fontSize: "0.3rem" }}>
       <SoftButton color="info" size="small" variant="contained" onClick={handleOpenDialog}>
-        <SoftTypography variant="caption" color="light" px={-1}>
+        <SoftTypography fontSize="11px" variant="caption" color="light" px={-1}>
           View More
         </SoftTypography>
       </SoftButton>
@@ -174,19 +216,17 @@ const SyndicatesTableData = {
     { name: "Syndicate", align: "left" },
     { name: "Sector", align: "center" },
     { name: "status", align: "center" },
-    { name: "Deals", align: "center" },
+    { name: "Active Deals", align: "center" },
     { name: "members", align: "center" },
-    { name: "more", align: "center" },
+    { name: " ", align: "center" },
   ],
 
   rows: [
     {
-      Syndicate: <Syndicate image={logoSlack} name="VainTech" Lead="Lead : Ahmed Abo Jamal" />,
-      Sector: <Function sectors={sectors} />,
-      status: (
-        <SoftBadge variant="gradient" badgeContent="New" color="success" size="xs" container />
-      ),
-      Deals: (
+      Syndicate: <Syndicate image={logoSlack} name="VainTech" Lead="Ahmed Abo Jamal" />,
+      Sector: <SectorsFunction sectors={sectors} />,
+      status: <StatusFunction status="new"/>,
+      "Active Deals": (
         <SoftTypography variant="caption" color="secondary" fontWeight="medium">
           3 Deals
         </SoftTypography>
@@ -201,15 +241,13 @@ const SyndicatesTableData = {
           ])}
         </SoftBox>
       ),
-      more: (<ViewMore/>),
+      " ": (<ViewMore/>),
     },
     {
       Syndicate: <Syndicate image={logoJira} name="AnotherUnion" Lead="Lead : John Doe" />,
-      Sector: <Function sectors={sectors1} />,
-      status: (
-        <SoftBadge variant="gradient" badgeContent="Active" color="info" size="xs" container />
-      ),
-      Deals: (
+      Sector: <SectorsFunction sectors={sectors1} />,
+      status: <StatusFunction status="Active"/>,
+      "Active Deals": (
         <SoftTypography variant="caption" color="secondary" fontWeight="medium">
           5 Deals
         </SoftTypography>
@@ -224,21 +262,13 @@ const SyndicatesTableData = {
           ])}
         </SoftBox>
       ),
-      more: (<ViewMore/>)
+      " ": (<ViewMore/>)
     },
     {
-      Syndicate: <Syndicate image={logoAtlassian} name="TechNerds" Lead="Lead : Sarah Smith" />,
-      Sector: <Function sectors={sectors2} />,
-      status: (
-        <SoftBadge
-          variant="gradient"
-          badgeContent="inactive"
-          color="secondary"
-          size="xs"
-          container
-        />
-      ),
-      Deals: (
+      Syndicate: <Syndicate image={logoAtlassian} name="TechNerds" Lead="Sarah Smith" />,
+      Sector: <SectorsFunction sectors={sectors2} />,
+      status: <StatusFunction status="Inactive"/>,
+      "Active Deals": (
         <SoftTypography variant="caption" color="secondary" fontWeight="medium">
           2 Deals
         </SoftTypography>
@@ -251,21 +281,13 @@ const SyndicatesTableData = {
           ])}
         </SoftBox>
       ),
-      more: (<ViewMore/>)
+      " ": (<ViewMore/>)
     },
     {
-      Syndicate: <Syndicate image={logoSpotify} name="FutureInnovate" Lead="Lead: Michael Brown" />,
-      Sector: <Function sectors={sectors3} />,
-      status: (
-        <SoftBadge
-          variant="gradient"
-          badgeContent="inactive"
-          color="secondary"
-          size="xs"
-          container
-        />
-      ),
-      Deals: (
+      Syndicate: <Syndicate image={logoSpotify} name="FutureInnovate" Lead="Michael Brown" />,
+      Sector: <SectorsFunction sectors={sectors3} />,
+      status: <StatusFunction status="Inactive"/>,
+      "Active Deals": (
         <SoftTypography variant="caption" color="secondary" fontWeight="medium">
           No Deals
         </SoftTypography>
@@ -275,15 +297,13 @@ const SyndicatesTableData = {
           {avatars([[team4, "Jessica Doe"]])}
         </SoftBox>
       ),
-      more: (<ViewMore/>)
+      " ": (<ViewMore/>)
     },
     {
-      Syndicate: <Syndicate image={logoSlack} name="VainTech" Lead="Lead : Ahmed Abo Jamal" />,
-      Sector: <Function sectors={sectors4} />,
-      status: (
-        <SoftBadge variant="gradient" badgeContent="New" color="success" size="xs" container />
-      ),
-      Deals: (
+      Syndicate: <Syndicate image={logoSlack} name="VainTech" Lead="Ahmed Abo Jamal" />,
+      Sector: <SectorsFunction sectors={sectors4} />,
+      status: <StatusFunction status="new"/>,
+      "Active Deals": (
         <SoftTypography variant="caption" color="secondary" fontWeight="medium">
           3 Deals
         </SoftTypography>
@@ -298,15 +318,13 @@ const SyndicatesTableData = {
           ])}
         </SoftBox>
       ),
-      more: (<ViewMore/>)
+      " ": (<ViewMore/>)
     },
     {
-      Syndicate: <Syndicate image={logoInvesion} name="TechGurus" Lead="Lead: Emma Johnson" />,
-      Sector: <Function sectors={sectors1} />,
-      status: (
-        <SoftBadge variant="gradient" badgeContent="Active" color="info" size="xs" container />
-      ),
-      Deals: (
+      Syndicate: <Syndicate image={logoInvesion} name="TechGurus" Lead="Emma Johnson" />,
+      Sector: <SectorsFunction sectors={sectors1} />,
+      status: <StatusFunction status="Active"/>,
+      "Active Deals": (
         <SoftTypography variant="caption" color="secondary" fontWeight="medium">
           8 Deals
         </SoftTypography>
@@ -318,18 +336,19 @@ const SyndicatesTableData = {
             [team2, "Nathan Wilson"],
             [team1, "Olivia Brown"],
             [team2, "Sophia Lee"],
+            [team2, "Nathan Wilson"],
+            [team1, "Olivia Brown"],
+            [team2, "Sophia Lee"],
           ])}
         </SoftBox>
       ),
-      more: (<ViewMore/>)
+      " ": (<ViewMore/>)
     },
     {
-      Syndicate: <Syndicate image={logoAtlassian} name="GreenTech" Lead="Lead: Ethan Miller" />,
-      Sector: <Function sectors={sectors6} />,
-      status: (
-        <SoftBadge variant="gradient" badgeContent="Closed" color="error" size="xs" container />
-      ),
-      Deals: (
+      Syndicate: <Syndicate image={logoAtlassian} name="GreenTech" Lead="Ethan Miller" />,
+      Sector: <SectorsFunction sectors={sectors6} />,
+      status: <StatusFunction status="Closed"/>,
+      "Active Deals": (
         <SoftTypography variant="caption" color="secondary" fontWeight="medium">
           4 Deals
         </SoftTypography>
@@ -339,20 +358,25 @@ const SyndicatesTableData = {
           {avatars([
             [team3, "Ethan Miller"],
             [team4, "Ava Wilson"],
-            [team2, "Logan Davis"],
-            [team4, "Chloe Brown"],
+            [team2, "Nathan Wilson"],
+            [team1, "Olivia Brown"],
+            [team2, "Sophia Lee"],
+            [team2, "Nathan Wilson"],
+            [team1, "Olivia Brown"],
+            [team2, "Sophia Lee"],
+            [team2, "Nathan Wilson"],
+            [team1, "Olivia Brown"],
+            [team2, "Sophia Lee"],
           ])}
         </SoftBox>
       ),
-      more: (<ViewMore/>)
+      " ": (<ViewMore/>)
     },
     {
-      Syndicate: <Syndicate image={logoJira} name="InnoHub" Lead="Lead: Michael Smith" />,
-      Sector: <Function sectors={sectors5} />,
-      status: (
-        <SoftBadge variant="gradient" badgeContent="New" color="success" size="xs" container />
-      ),
-      Deals: (
+      Syndicate: <Syndicate image={logoJira} name="InnoHub" Lead="Michael Smith" />,
+      Sector: <SectorsFunction sectors={sectors5} />,
+      status: <StatusFunction status="new"/>,
+      "Active Deals": (
         <SoftTypography variant="caption" color="secondary" fontWeight="medium">
           2 Deals
         </SoftTypography>
@@ -367,15 +391,13 @@ const SyndicatesTableData = {
           ])}
         </SoftBox>
       ),
-      more: (<ViewMore/>)
+      " ": (<ViewMore/>)
     },
     {
-      Syndicate: <Syndicate image={logoInvesion} name="SoftTech" Lead="Lead: Olivia Davis" />,
-      Sector: <Function sectors={sectors4} />,
-      status: (
-        <SoftBadge variant="gradient" badgeContent="Active" color="info" size="xs" container />
-      ),
-      Deals: (
+      Syndicate: <Syndicate image={logoInvesion} name="SoftTech" Lead="Olivia Davis" />,
+      Sector: <SectorsFunction sectors={sectors4} />,
+      status: <StatusFunction status="Active"/>,
+      "Active Deals": (
         <SoftTypography variant="caption" color="secondary" fontWeight="medium">
           6 Deals
         </SoftTypography>
@@ -387,18 +409,17 @@ const SyndicatesTableData = {
             [team2, "Ethan Johnson"],
             [team2, "Mia Wilson"],
             [team3, "Noah Smith"],
+            [team2, "Nathan Wilson"],
           ])}
         </SoftBox>
       ),
-      more: (<ViewMore/>)
+      " ": (<ViewMore/>)
     },
     {
-      Syndicate: <Syndicate image={logoAtlassian} name="SocialTech" Lead="Lead: Emily Wilson" />,
-      Sector: <Function sectors={sectors2} />,
-      status: (
-        <SoftBadge variant="gradient" badgeContent="Closed" color="error" size="xs" container />
-      ),
-      Deals: (
+      Syndicate: <Syndicate image={logoAtlassian} name="SocialTech" Lead="Emily Wilson" />,
+      Sector: <SectorsFunction sectors={sectors2} />,
+      status: <StatusFunction status="Closed"/>,
+      "Active Deals": (
         <SoftTypography variant="caption" color="secondary" fontWeight="medium">
           3 Deals
         </SoftTypography>
@@ -410,10 +431,12 @@ const SyndicatesTableData = {
             [team1, "Sophia Johnson"],
             [team1, "Lucas Davis"],
             [team2, "Liam Smith"],
+            [team1, "Olivia Brown"],
+            [team2, "Sophia Lee"],
           ])}
         </SoftBox>
       ),
-      more: (<ViewMore/>)
+      " ": (<ViewMore/>)
     },
   ],
 };
