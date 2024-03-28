@@ -56,6 +56,7 @@ import YourSyndicate from "layouts/investor/pageComponents/YourSyndicates";
 import YourDeals from "layouts/investor/pageComponents/YourDeals";
 import ExploreSyndicate from "layouts/investor/pageComponents/ExploreSyndicate";
 import InvestorProfile from "layouts/investor/InvestorProfile";
+import SyndicateDetailsProfile from "layouts/investor/pageComponents/SyndicateDetailsProfile";
 
 //import startup page component
 import StartUpDeals from "layouts/startup/pageComponents/StartUpDeals";
@@ -276,6 +277,15 @@ const routes = [
     route: "/investor/yourSyndicates",
     icon: <Shop size="12px" />,
     component: <YourSyndicate />,
+    noCollapse: true,
+  },
+  {
+    type: "collapse",
+    name: "Your Syndicate Details Profile",
+    key: "SyndicateDetailsProfile",
+    route: "/investor/yourSyndicates/SyndicateDetailsProfile",
+    icon: <Shop size="12px" />,
+    component: <SyndicateDetailsProfile />,
     noCollapse: true,
   },
   {
