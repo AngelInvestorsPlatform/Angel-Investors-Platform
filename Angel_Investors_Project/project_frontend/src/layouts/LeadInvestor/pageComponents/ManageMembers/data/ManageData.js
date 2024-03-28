@@ -5,6 +5,8 @@ import SoftTypography from "components/SoftTypography";
 import SoftAvatar from "components/SoftAvatar";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
+import SoftBadge from "components/SoftBadge";
+
 
 // Images
 import team1 from "assets/images/team-1.jpg";
@@ -32,8 +34,8 @@ function Investor({ image, I_name, email }) {
 const manageTableData = {
   columns: [
     { name: "Investor Name", align: "left" },
-    { name: "Sector", align: "left" },
-    { name: "About", align: "left" },
+    { name: "Sector", align: "center" },
+    { name: "About", align: "center" },
     { name: "  ", align: "center" },
   ],
 
@@ -43,14 +45,7 @@ const manageTableData = {
         <Investor image={team3} I_name="Abdullah Mohammed" email="AbdullahM@gmail.com" />
       ),
       Sector: (
-        <SoftTypography
-          variant="caption"
-          color="secondary"
-          fontWeight="medium"
-          style={{ display: "block" }}
-        >
-          E-commerce, AI
-        </SoftTypography>
+        <SoftBadge variant="gradient" badgeContent="E-commerce, AI" color="info" size="md"  /> 
       ),
       About: (
         <SoftTypography
@@ -71,14 +66,7 @@ const manageTableData = {
         <Investor image={team1} I_name="Rei Levi" email="Rei.L@gmail.com" />
       ),
       Sector: (
-        <SoftTypography
-          variant="caption"
-          color="secondary"
-          fontWeight="medium"
-          style={{ display: "block" }}
-        >
-          LegalTech, Helathcare
-        </SoftTypography>
+        <SoftBadge variant="gradient" badgeContent="LegalTech, Helathcare" color="info" size="md"  /> 
       ),
       About: (
         <SoftTypography variant="caption" color="secondary" fontWeight="medium">investor</SoftTypography>
@@ -96,15 +84,9 @@ const manageTableData = {
         <Investor image={team2} I_name="Mohammed Khaled" email="Abdallah.M@hotmail.com" />
       ),
       Sector: (
-        <SoftTypography
-          variant="caption"
-          color="secondary"
-          fontWeight="medium"
-          style={{ display: "block" }}
-        >
-          Biotech, Education
-        </SoftTypography>
+        <SoftBadge variant="gradient" badgeContent="Biotech, Education" color="info" size="md"  /> 
       ),
+          
       About: (
         <SoftTypography variant="caption" color="secondary" fontWeight="medium">investor</SoftTypography>
       ),
@@ -119,15 +101,9 @@ const manageTableData = {
         <Investor image={team4} I_name="Someone A" email="SomeoneA@gmail.com" />
       ),
       Sector: (
-        <SoftTypography
-          variant="caption"
-          color="secondary"
-          fontWeight="medium"
-          style={{ display: "block" }}
-        >
-          Market, Information Technology
-        </SoftTypography>
+        <SoftBadge variant="gradient" badgeContent="Market, Information Technology" color="info" size="md"  /> 
       ),
+          
       About: (
         <SoftTypography variant="caption" color="secondary" fontWeight="medium">investor</SoftTypography>
       ),
@@ -142,14 +118,7 @@ const manageTableData = {
         <Investor image={team2} I_name="Mohammed" email="Mohammed@outlook.sa" />
       ),
       Sector: (
-        <SoftTypography
-          variant="caption"
-          color="secondary"
-          fontWeight="medium"
-          style={{ display: "block" }}
-        >
-          ICT, AI
-        </SoftTypography>
+        <SoftBadge variant="gradient" badgeContent="ICT, AI" color="info" size="md"  /> 
       ),
       About: (
         <SoftTypography variant="caption" color="secondary" fontWeight="medium">investor</SoftTypography>
@@ -165,15 +134,9 @@ const manageTableData = {
         <Investor image={team3} I_name="Miriam Eric" email="miriam0E@gmail.com" />
       ),
       Sector: (
-        <SoftTypography
-          variant="caption"
-          color="secondary"
-          fontWeight="medium"
-          style={{ display: "block" }}
-        >
-          Finance, Market
-        </SoftTypography>
+        <SoftBadge variant="gradient" badgeContent="Finance, Market" color="info" size="md"  /> 
       ),
+         
       About: (
         <SoftTypography variant="caption" color="secondary" fontWeight="medium">investor</SoftTypography>
       ),

@@ -24,6 +24,7 @@ import LeadNavbar from "layouts/LeadInvestor/components/LeadNavbar";
 // Data
 import manageTableData from "./data/ManageData";
 
+
 function Tables() {
   const { columns, rows } = manageTableData;
 
@@ -31,18 +32,6 @@ function Tables() {
     <DashboardLayout>
       <DashboardNavbar />
       <LeadNavbar />
-      <SoftBox display="flex" justifyContent="flex-end">
-        <SoftTypography
-          variant="h9"
-          color="info"
-          fontWeight="regular"
-          textGradient
-          component={Link}
-          to="/LeadInvestor/ManageMembers/JoiningRequests"
-        >
-          Joining Requests
-        </SoftTypography>
-      </SoftBox>
       <SoftBox py={3}>
         <SoftTypography variant="h3" color="info" fontWeight="regular" textGradient>
           Manage Members
@@ -62,10 +51,39 @@ function Tables() {
               }}
             >
               <Table columns={columns} rows={rows} />
+              
             </SoftBox>
           </Card>
         </SoftBox>
       </SoftBox>
+
+
+      <SoftBox display="flex" justifyContent="left">
+        <SoftTypography
+          variant="h9"
+          color="info"
+          fontWeight="regular"
+          textGradient
+          component={Link}
+          to="/LeadInvestor/ManageMembers/JoiningRequests"
+        >
+          Joining Requests
+        </SoftTypography>
+      </SoftBox>
+      
+      <SoftBox display="flex" justifyContent="left">
+        <SoftTypography
+          variant="h9"
+          color="info"
+          fontWeight="regular"
+          textGradient
+          component={Link}
+          //to="/LeadInvestor/ManageMembers/JoiningRequests"
+        >
+          Invite Members
+        </SoftTypography>
+      </SoftBox>
+
       <Footer />
     </DashboardLayout>
   );
