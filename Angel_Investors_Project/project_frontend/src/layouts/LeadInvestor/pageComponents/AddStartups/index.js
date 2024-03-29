@@ -45,13 +45,28 @@ import { Info } from "@mui/icons-material";
 // ).toString();
 
 function YourDeals() {
-  const [text, setText] = useState("");
+//data
+  const [StartupName, setStartupName] = useState("");
+  const [Founders, setFounders] = useState("");
+  const [valuation, setvaluation] = useState("");
+  const [Memo, setMemo] = useState("");
+  const [Stage, setStage] = useState("");
+  const [Lead, setLead] = useState("");
+  const [Carry, setCarry] = useState("");
+  const [min, setMin] = useState("");
+  const [max, setMax] = useState("");
 
-  const handleChange = (event) => {
-    setText(event.target.value);
-  };
+//handle
 
-  const [selectedFile, setSelectedFile] = useState(null);
+
+//erorr code
+
+
+  // const handleChange = (event) => {
+  //   setText(event.target.value);
+  // };
+//
+const [PitchDeck, setPitchDeck] = useState("");
 
   const onFileChange = (event) => {
     const file = event.target.files[0];
@@ -97,6 +112,12 @@ function YourDeals() {
           <SoftBox mb={2} mr={6}>
             <SoftTypography component="label" variant="caption" fontWeight="bold">
               evaluation
+            </SoftTypography>
+            <SoftInput type="number" placeholder="" name="evaluationStartup" />
+          </SoftBox>
+          <SoftBox mb={2} mr={6}>
+            <SoftTypography component="label" variant="caption" fontWeight="bold">
+              Stage
             </SoftTypography>
             <SoftInput type="number" placeholder="" name="evaluationStartup" />
           </SoftBox>
@@ -178,7 +199,7 @@ function YourDeals() {
           
             style={{ padding: "15px 32px" }}
           >
-            submit
+            add 
           </SoftButton>
         </SoftBox>
       </SoftBox>

@@ -36,7 +36,7 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import DisabledByDefaultIcon from '@mui/icons-material/DisabledByDefault';
 
 const routes = [ 
-    { type: "title", title: "Home", key: "Home" },
+    { type: "title", title: "overview", key: "overview" },
      {
     type: "collapse",
     name: "Equity Overview",
@@ -47,7 +47,7 @@ const routes = [
     noCollapse: true,
   },
   {type : "divider"},
-  { type: "title", title: "Deals", key: "Deals" },
+  { type: "title", title: "Fundraising", key: "Fundraising" },
   
 
 

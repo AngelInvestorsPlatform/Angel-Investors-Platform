@@ -4,18 +4,17 @@ import Grid from "@mui/material/Grid";
 import Icon from "@mui/material/Icon";
 
 // Soft UI Dashboard React components
-
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 //for API
 import axios from "axios";
 
+// react-router-dom components
+import { Link } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
-import Tooltip from "@mui/material/Tooltip";
 
 
-//for user auth global context
-import { useAuthUser } from "context/authContext";
 
 // Soft UI Dashboard React components
 import SoftBox from "components/SoftBox";
@@ -26,10 +25,6 @@ import Card from "@mui/material/Card";
 import Table from "examples/Tables/Table";
 // @mui icons
 import Separator from "layouts/registers_forms/components/Separator";
-
-// Images
-import investor from "assets/images/backgraund-images/investor-backgraund2.svg";
-import SoftAlert from "components/SoftAlert";
 
 
 // Soft UI Dashboard React examples
@@ -46,8 +41,54 @@ import Header from "layouts/startup/InvestmentRound/components/Header";
 import Round from "layouts/startup/InvestmentRound/data/Round";
 
 function invesRound() {
-  const { columns, rows } = Round;
- 
+    const { columns, rows } = Round;
+
+// Data
+const [ask, setAsk] = useState("");
+const [valuation, setValuation] = useState("");
+
+// Error state
+const [error, setError] = useState(""); // Initialize error state to an empty string
+
+// Handle form changes
+const handleAskChange = (event) => {
+  setAsk(event.target.value);
+};
+
+const handleValuationChange = (event) => {
+  // Consider adding validation here
+  setValuation(event.target.value);
+};
+
+// Form submission handler
+const handleSubmit = async () => {
+  try {
+    // Assuming DJANGO_API is a valid environment variable
+    const apiUrl = process.env.REACT_APP_DJANGO_API;
+
+    if (!ask || !valuation) {
+      setError("Asking price and estimated valuation are required.");
+      return;
+    }
+
+    // Handle potential non-numeric input for valuation
+    if (isNaN(valuation) || parseFloat(valuation) < 0) {
+      setError("Estimated valuation must be a non-negative number.");
+      return;
+    }
+
+    const data = {
+      ask,
+      valuation,
+      
+    };
+      // ...
+    } catch (error) {
+      console.error("Error submitting data:", error);
+      setError("An error occurred. Please try again."); // Improve error message
+    }
+  };
+  
     return (
       <DashboardLayout>
       <DashboardNavbar />
@@ -62,22 +103,23 @@ function invesRound() {
                 "& .MuiTableRow-root:not(:last-child)": {
                   "& td": {
                     borderBottom: ({ borders: { borderWidth, borderColor } }) =>
-                      `${borderWidth[33]} solid ${borderColor}`,
+                      `${borderWidth[1]} solid ${borderColor}`,
                    
                   },
                 },
-              }}   style={{ width: '450px' }}
+              }}   style={{ width: '350px' }}
             >
               <Table columns={columns} rows={rows}   />
             </SoftBox>
-           \
+           
          </Grid>
        
             
 
 
         
-     {/* ////////////////////////*/}
+     {/*------------------------------------------------------------------------------------------*/}
+
 
 
    
@@ -91,11 +133,13 @@ function invesRound() {
        <SoftInput
          type="number"
          placeholder=""
-           
+         name="ask"
+           value={ask}
+              onChange={handleAskChange}   
        />
      </SoftBox>
    
-     {/* ////////////////////////*/}
+     {/*------------------------------------------------------------------------------------------*/}
 
 
        <SoftBox mb={2} >
@@ -105,12 +149,15 @@ function invesRound() {
        <SoftInput
          type="number"
          placeholder=""
+         name="valuation"
+         value={valuation}
+         onChange={handleValuationChange}   
         />
    
        </SoftBox>
     
-     {/* ////////////////////////*/}
-      
+         {/*------------------------------------------------------------------------------------------*/}
+
         
      < SoftBox mb={3} width="100" display="flex" flex="row" flexWrap="wrap" justifyContent="center">
         <SoftBox mt={4} mb={1}>
@@ -118,8 +165,8 @@ function invesRound() {
             variant="gradient"
             color="info"
             fullWidth
-            circular
-          
+            circular 
+            onClick={handleSubmit}
             style={{ padding: "15px 32px" }}
           >
             submit

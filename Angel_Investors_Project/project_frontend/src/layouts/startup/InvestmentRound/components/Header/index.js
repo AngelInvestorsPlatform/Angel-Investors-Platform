@@ -113,6 +113,7 @@ function Header() {
                 fontWeight="bold"
                 align="center"
                  mb={4}
+                 textGradient
               >
               Fundraising 
               </SoftTypography> 
