@@ -32,14 +32,14 @@ function Investor({ image, I_name, email }) {
 }
 
 const joinTableData = {
-  columns: [
+  columns2: [
     { name: "Investor Name", align: "left" },
     { name: "Sector", align: "left" },
     { name: "About", align: "left" },
     { name: "Action", align: "center" },
   ],
 
-  rows: [
+  rows2: [
     {
       "Investor Name": (
         <Investor image={team2} I_name="Abdullah Mohammed" email="AbdullahM@gmail.com" />
@@ -61,7 +61,7 @@ const joinTableData = {
           fontWeight="medium"
           style={{ display: "block" }}
         >
-          investor{" "}
+          investor
         </SoftTypography>
       ),
       Action: (
@@ -127,8 +127,7 @@ const joinTableData = {
       ),
       About: (
         <SoftTypography variant="caption" color="secondary" fontWeight="medium">
-          {" "}
-          investor{" "}
+          investor
         </SoftTypography>
       ),
       Action: (
@@ -160,7 +159,6 @@ const joinTableData = {
       ),
       About: (
         <SoftTypography variant="caption" color="secondary" fontWeight="medium">
-          {" "}
           investor
         </SoftTypography>
       ),
@@ -225,20 +223,19 @@ const joinTableData = {
       ),
       About: (
         <SoftTypography variant="caption" color="secondary" fontWeight="medium">
-          {" "}
-          investor{" "}
+          investor
         </SoftTypography>
       ),
       Action: (
         <Grid container spacing={1} justifyContent="flex-end">
           <Grid item>
             <IconButton color="error" aria-label="Reject">
-              <CloseIcon fontSize="small" /> {/* "X" icon */}
+              <CloseIcon fontSize="small" />
             </IconButton>
           </Grid>
           <Grid item>
             <IconButton color="success" aria-label="Accept">
-              <CheckCircleIcon fontSize="small" /> {/* Checkmark (✓) icon */}
+              <CheckCircleIcon fontSize="small" />
             </IconButton>
           </Grid>
         </Grid>

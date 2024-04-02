@@ -13,6 +13,7 @@ import team1 from "assets/images/team-1.jpg";
 import team2 from "assets/images/team-2.jpg";
 import team3 from "assets/images/team-3.jpg";
 import team4 from "assets/images/team-4.jpg";
+import team5 from "assets/images/team5.jpg"
 function Investor({ image, I_name, email }) {
   return (
     <SoftBox display="flex" alignItems="center" px={1} py={0.5}>
@@ -36,13 +37,14 @@ const manageTableData = {
     { name: "Investor Name", align: "left" },
     { name: "Sector", align: "center" },
     { name: "About", align: "center" },
+    { name: "Active Deals", align: "center" },
     { name: "  ", align: "center" },
   ],
 
   rows: [
     {
       "Investor Name": (
-        <Investor image={team3} I_name="Abdullah Mohammed" email="AbdullahM@gmail.com" />
+        <Investor image={team5} I_name="Abdullah Mohammed" email="AbdullahM@gmail.com" />
       ),
       Sector: (
         <SoftBadge variant="gradient" badgeContent="E-commerce, AI" color="info" size="md"  /> 
@@ -54,6 +56,9 @@ const manageTableData = {
           fontWeight="medium"
           style={{ display: "block" }}
         >investor</SoftTypography>
+      ),
+      "Active Deals": (
+        <SoftTypography variant="caption" color="secondary" fontWeight="medium">2 Deals</SoftTypography>
       ),
       "  ": (
         <IconButton aria-label="delete" disabled color="primary">
@@ -70,6 +75,9 @@ const manageTableData = {
       ),
       About: (
         <SoftTypography variant="caption" color="secondary" fontWeight="medium">investor</SoftTypography>
+      ),
+      "Active Deals": (
+        <SoftTypography variant="caption" color="secondary" fontWeight="medium">1 Deal</SoftTypography>
       ),
       "  ": (
         <div>
@@ -90,6 +98,9 @@ const manageTableData = {
       About: (
         <SoftTypography variant="caption" color="secondary" fontWeight="medium">investor</SoftTypography>
       ),
+      "Active Deals": (
+        <SoftTypography variant="caption" color="secondary" fontWeight="medium">3 Deals</SoftTypography>
+      ),
       "  ": (
         <IconButton aria-label="delete" disabled color="primary">
           <DeleteIcon />
@@ -107,6 +118,9 @@ const manageTableData = {
       About: (
         <SoftTypography variant="caption" color="secondary" fontWeight="medium">investor</SoftTypography>
       ),
+      "Active Deals": (
+        <SoftTypography variant="caption" color="secondary" fontWeight="medium">No Deals</SoftTypography>
+      ),
       "  ": (
         <IconButton aria-label="delete" disabled color="primary">
           <DeleteIcon />
@@ -122,6 +136,9 @@ const manageTableData = {
       ),
       About: (
         <SoftTypography variant="caption" color="secondary" fontWeight="medium">investor</SoftTypography>
+      ),
+      "Active Deals": (
+        <SoftTypography variant="caption" color="secondary" fontWeight="medium">4 Deals</SoftTypography>
       ),
       "  ": (
         <IconButton aria-label="delete" disabled color="primary">
@@ -139,6 +156,9 @@ const manageTableData = {
          
       About: (
         <SoftTypography variant="caption" color="secondary" fontWeight="medium">investor</SoftTypography>
+      ),
+      "Active Deals": (
+        <SoftTypography variant="caption" color="secondary" fontWeight="medium">1 Deal</SoftTypography>
       ),
       "  ": (
         <IconButton aria-label="delete" disabled color="primary">
