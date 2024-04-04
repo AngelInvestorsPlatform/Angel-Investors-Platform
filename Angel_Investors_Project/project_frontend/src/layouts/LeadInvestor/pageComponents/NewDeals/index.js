@@ -44,7 +44,15 @@ import { Info } from "@mui/icons-material";
 //   import.meta.url
 // ).toString();
 
+//data
+import acceptances from "layouts/LeadInvestor/pageComponents/NewDeals/data/acceptances";
+import additions from "layouts/LeadInvestor/pageComponents/NewDeals/data/additions";
+
+
 function YourDeals() {
+
+  const { columns2, rows2 } = acceptances;
+  const { columns3, rows3 } = additions;
   const [text, setText] = useState("");
 
   const handleChange = (event) => {
@@ -66,122 +74,91 @@ function YourDeals() {
     <DashboardLayout>
       <DashboardNavbar />
       <LeadNavbar />
-      <SoftBox
-        component="form"
-        role="form"
-        width="100"
-        display="flex"
-        flex="row"
-        flexWrap="wrap"
-        justifyContent="center"
-      >
-        {/* First Column */}
-        <SoftBox flex="0 0 30%" mt={12}>
-          {" "}
-          {/*mt={6}*/}
-          <SoftBox mb={2} mr={6}>
-            <SoftTypography component="label" variant="caption" fontWeight="bold">
-              Startup name
-            </SoftTypography>
-            <SoftInput type="text" name="nameStartup" />
-          </SoftBox>
-          <SoftBox mb={2} mr={6}>
-            <SoftBox mt={2} display="flex" justifyContent="space-between">
-              <SoftTypography component="label" variant="caption" fontWeight="bold">
-                Founders
-              </SoftTypography>
-            </SoftBox>
-            <SoftInput type="text" name="Founders" />
-          </SoftBox>
-
-          <SoftBox mb={2} mr={6}>
-            <SoftTypography component="label" variant="caption" fontWeight="bold">
-              evaluation
-            </SoftTypography>
-            <SoftInput type="number" placeholder="" name="evaluationStartup" />
-          </SoftBox>
-          
-          <SoftBox mb={2} mr={6}>
-            <SoftTypography component="label" variant="caption" fontWeight="bold">
-              Memo
-            </SoftTypography>
-          <SoftInput
-            placeholder="Enter here"
-            value={text}
-            onChange={handleChange}
-            multiline rows={10}
-          />
-          </SoftBox>
-        </SoftBox>
-
-        {/* 2 Column */}
-        <SoftBox flex="0 0 30%" mb={3} mt={12}>
-          <SoftBox mb={2} mr={6}>
-            <SoftTypography component="label" variant="caption" fontWeight="bold">
-              amount for the syndicate
-            </SoftTypography>
-            <SoftInput type="text" placeholder="allocated" />
-          </SoftBox>
-          <SoftBox mb={2} mr={6}>
-            <SoftTypography component="label" variant="caption" fontWeight="bold">
-              Total Carry
-            </SoftTypography>
-            <SoftInput type="number" placeholder="" />
-          </SoftBox>
-          <SoftBox mb={2} mr={6}>
-            <SoftTypography component="label" variant="caption" fontWeight="bold">
-              lead`s invest
-            </SoftTypography>
-            <SoftInput type="text" placeholder="Lead Syndicate" />
-          </SoftBox>
-          <SoftBox mb={2} mr={6}>
-            <SoftTypography component="label" variant="caption" fontWeight="bold">
-              min. investment
-            </SoftTypography>
-            <SoftInput type="number" placeholder="" />
-          </SoftBox>
-          <SoftBox mb={2} mr={6}>
-            <SoftTypography component="label" variant="caption" fontWeight="bold">
-              max. investment
-            </SoftTypography>
-            <SoftInput type="number" placeholder="" />
-          </SoftBox>
-          <SoftBox mb={2} mr={6}>
-            <SoftTypography component="label" variant="caption" fontWeight="bold">
-              Pitch Deck
-            </SoftTypography>
-
-            <SoftInput
-              type="file"
-              placeholder="Please select a PDF file"
-              // required
-              onChange={onFileChange}
-            />
-            {selectedFile && (
+      {/* accepted card*/ }
+      <SoftBox py={3}>
+        <SoftBox mb={3}>
+          <Card>
+            <SoftBox display="flex" justifyContent="space-between" alignItems="center" p={3}>
               <SoftBox>
-                <span style={{ fontSize: "16px", color: "darkpurple" }}>
-                  Selected File: {selectedFile.name} - Size: {selectedFile.size} bytes
-                </span>{" "}
+                <SoftTypography variant="h4" color="info" fontWeight="regular" textGradient>
+                  {" "}
+                  Accepted Deals
+                </SoftTypography>
+                <SoftBox display="flex" alignItems="center" lineHeight={0}>
+                  <Icon
+                    sx={{
+                      fontWeight: "bold",
+                      color: ({ palette: { info } }) => info.main,
+                      mt: -0.3,
+                    }}
+                  >
+                    equalizer
+                  </Icon>
+                  <SoftTypography variant="button" fontWeight="regular" color="text">
+                    &nbsp; Browse all the <strong> accepted Deals</strong> and add to your syndicate
+                  </SoftTypography>
+                </SoftBox>
               </SoftBox>
-            )}
-          </SoftBox>
+            </SoftBox>
+            <SoftBox
+              sx={{
+                "& .MuiTableRow-root:not(:last-child)": {
+                  "& td": {
+                    borderBottom: ({ borders: { borderWidth, borderColor } }) =>
+                      `${borderWidth[1]} solid ${borderColor}`,
+                  },
+                },
+              }}
+            >
+              <Table columns={columns2} rows={rows2} />
+            </SoftBox>
+          </Card>
         </SoftBox>
       </SoftBox>
 
-      <SoftBox mb={3} width="100" display="flex" flex="row" flexWrap="wrap" justifyContent="center">
-        <SoftBox mt={4} mb={1}>
-          <SoftButton
-            variant="gradient"
-            color="info"
-            fullWidth
-            circular
-          
-            style={{ padding: "15px 32px" }}
-          >
-            submit
-          </SoftButton>
+
+      {/* accepted card*/ }
+      <SoftBox py={3}>
+        <SoftBox mb={3}>
+          <Card>
+            <SoftBox display="flex" justifyContent="space-between" alignItems="center" p={3}>
+              <SoftBox>
+                <SoftTypography variant="h4" color="info" fontWeight="regular" textGradient>
+                  {" "}
+                  Added Deals
+                </SoftTypography>
+                <SoftBox display="flex" alignItems="center" lineHeight={0}>
+                  <Icon
+                    sx={{
+                      fontWeight: "bold",
+                      color: ({ palette: { info } }) => info.main,
+                      mt: -0.3,
+                    }}
+                  >
+                    equalizer
+                  </Icon>
+                  <SoftTypography variant="button" fontWeight="regular" color="text">
+                    &nbsp; Browse all the <strong> Deals you have added</strong> and add to your syndicate
+                  </SoftTypography>
+                </SoftBox>
+              </SoftBox>
+            </SoftBox>
+            <SoftBox
+              sx={{
+                "& .MuiTableRow-root:not(:last-child)": {
+                  "& td": {
+                    borderBottom: ({ borders: { borderWidth, borderColor } }) =>
+                      `${borderWidth[1]} solid ${borderColor}`,
+                  },
+                },
+              }}
+            >
+              <Table columns={columns3} rows={rows3} />
+            </SoftBox>
+          </Card>
         </SoftBox>
       </SoftBox>
+
 
       <Footer />
     </DashboardLayout>
