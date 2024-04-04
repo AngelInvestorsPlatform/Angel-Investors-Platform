@@ -46,6 +46,10 @@ import { Info } from "@mui/icons-material";
 
 function YourDeals() {
 //data
+
+  // Define the 'text' state variable
+  const [text, setText] = useState("");
+
   const [StartupName, setStartupName] = useState("");
   const [Founders, setFounders] = useState("");
   const [valuation, setvaluation] = useState("");
@@ -62,12 +66,12 @@ function YourDeals() {
 //erorr code
 
 
-  // const handleChange = (event) => {
-  //   setText(event.target.value);
-  // };
-//
-const [PitchDeck, setPitchDeck] = useState("");
+  const handleChange = (event) => {
+   setText(event.target.value);
+     };
 
+const [PitchDeck, setPitchDeck] = useState("");
+const [selectedFile, setSelectedFile] = useState(null);
   const onFileChange = (event) => {
     const file = event.target.files[0];
     if (!file.type.includes("pdf")) {
@@ -81,6 +85,30 @@ const [PitchDeck, setPitchDeck] = useState("");
     <DashboardLayout>
       <DashboardNavbar />
       <LeadNavbar />
+      <SoftBox p={5}>
+      <Card> 
+      <SoftBox display="flex" justifyContent="space-between" alignItems="center" p={3}>
+              <SoftBox>
+                <SoftTypography variant="h4" color="info" fontWeight="regular" textGradient>
+                  {" "}
+                  Added New Startup
+                </SoftTypography>
+                <SoftBox display="flex" alignItems="center" lineHeight={0}>
+                  <Icon
+                    sx={{
+                      fontWeight: "bold",
+                      color: ({ palette: { info } }) => info.main,
+                      mt: -0.3,
+                    }}
+                  >
+                    equalizer
+                  </Icon>
+                  <SoftTypography variant="button" fontWeight="regular" color="text">
+                    &nbsp; If you have your own deal and want to add it to your syndicate, add its details from here
+                  </SoftTypography>
+                </SoftBox>
+              </SoftBox>
+            </SoftBox>
       <SoftBox
         component="form"
         role="form"
@@ -91,7 +119,7 @@ const [PitchDeck, setPitchDeck] = useState("");
         justifyContent="center"
       >
         {/* First Column */}
-        <SoftBox flex="0 0 30%" mt={12}>
+        <SoftBox flex="0 0 40%" mt={5}>
           {" "}
           {/*mt={6}*/}
           <SoftBox mb={2} mr={6}>
@@ -136,7 +164,7 @@ const [PitchDeck, setPitchDeck] = useState("");
         </SoftBox>
 
         {/* 2 Column */}
-        <SoftBox flex="0 0 30%" mb={3} mt={12}>
+        <SoftBox flex="0 0 40%" mb={3} mt={5}>
           <SoftBox mb={2} mr={6}>
             <SoftTypography component="label" variant="caption" fontWeight="bold">
               amount for the syndicate
@@ -202,6 +230,8 @@ const [PitchDeck, setPitchDeck] = useState("");
             add 
           </SoftButton>
         </SoftBox>
+      </SoftBox>
+      </Card>
       </SoftBox>
 
       <Footer />
