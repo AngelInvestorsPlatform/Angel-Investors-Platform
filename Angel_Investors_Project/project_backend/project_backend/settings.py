@@ -48,6 +48,10 @@ INSTALLED_APPS = [
     'app',
     'authentication',
     # 'users',
+    'SyndicateApp',
+    'StartupApp',
+    'investorApp',
+    'DealsApp',
 
 ]
 

@@ -1,0 +1,38 @@
+from django.db import models
+from django.conf import settings
+
+class Startup(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='startup_profile')
+    startup_name = models.CharField(max_length=255)
+    sector = models.CharField(max_length=255)
+    city = models.CharField(max_length=255)
+    country = models.CharField(max_length=255)
+    phone = models.BigIntegerField()
+    team_size = models.IntegerField()
+    website = models.URLField()
+    stage = models.CharField(max_length=255)
+    email = models.EmailField()
+    photo = models.ImageField(upload_to='startups/')
+    about = models.TextField()
+    full_name = models.CharField(max_length=255)
+    job_position = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.startup_name
+
+class InvestmentRound(models.Model):
+    startup = models.ForeignKey(Startup, on_delete=models.CASCADE)
+    ask = models.DecimalField(max_digits=10, decimal_places=2)
+    valuation = models.DecimalField(max_digits=10, decimal_places=2)
+
+    def __str__(self):
+        return f"{self.startup.startup_name} - {self.ask}"
+
+class Offer(models.Model):
+    round = models.ForeignKey(InvestmentRound, on_delete=models.CASCADE)
+    lead_investor = models.ForeignKey('SyndicateApp.SyndicateLead', on_delete=models.CASCADE)
+    post = models.TextField()
+    accepted = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"Offer from {self.lead_investor} to {self.round.startup.startup_name}"

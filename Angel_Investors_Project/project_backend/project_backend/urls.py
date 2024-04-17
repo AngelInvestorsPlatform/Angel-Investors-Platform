@@ -7,4 +7,8 @@ urlpatterns = [
 
     path('form/', include('app.urls')),
     path('auth/', include('authentication.urls')),
+    path('startups/', include('StartupApp.urls')),
+    path('investors/', include('investorApp.urls')),
+    path('syndicates/', include('SyndicateApp.urls')),
+    path('deals/', include('DealsApp.urls')),
 ]
