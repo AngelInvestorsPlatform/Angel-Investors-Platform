@@ -47,11 +47,11 @@ curl -X PUT http://127.0.0.1:8000/syndicates/manageSyndicate/ \
         Key: Content-Type
         Value: application/json
         Body: (select 'raw' and 'JSON') 
-                {
-                    "syndicate_name": "Tech and Health Innovators",
-                    "sectors": "Technology, Healthcare, Biotech",
-                    "about": "Expanding focus to include biotechnological advancements."
-                }
+            {
+            "syndicate_name": "Tech Innovators",
+            "sectors": "Technology, Healthcare",
+            "about": "Focused on innovative startups in technology and healthcare sectors."
+            }
         
 
         
@@ -60,7 +60,12 @@ curl -X PUT http://127.0.0.1:8000/syndicates/manageSyndicate/ \
         URL: Same as above.
         Method: PUT
         Follow the same header setup.
-        Body: Use the JSON payload from the PUT example.
+        Body: (select 'raw' and 'JSON') 
+                {
+        "syndicate_name": "Tech and Health Innovators",
+        "sectors": "Technology, Healthcare, Biotech",
+        "about": "Expanding focus to include biotechnological advancements."
+    }
 
 
         

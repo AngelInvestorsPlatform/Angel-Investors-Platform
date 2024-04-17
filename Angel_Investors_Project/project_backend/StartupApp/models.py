@@ -5,17 +5,17 @@ class Startup(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='startup_profile')
     startup_name = models.CharField(max_length=255)
     sector = models.CharField(max_length=255)
-    city = models.CharField(max_length=255)
+    city = models.CharField(max_length=255, null=True, blank=True)
     country = models.CharField(max_length=255)
-    phone = models.BigIntegerField()
+    phone = models.BigIntegerField(null=True, blank=True)
     team_size = models.IntegerField()
-    website = models.URLField()
+    website = models.URLField(null=True, blank=True)
     stage = models.CharField(max_length=255)
     email = models.EmailField()
-    photo = models.ImageField(upload_to='startups/')
+    photo = models.ImageField(upload_to='startups/', null=True, blank=True)
     about = models.TextField()
-    full_name = models.CharField(max_length=255)
-    job_position = models.CharField(max_length=255)
+    full_name = models.CharField(max_length=255, null=True, blank=True)
+    job_position = models.CharField(max_length=255, null=True, blank=True)
 
     def __str__(self):
         return self.startup_name

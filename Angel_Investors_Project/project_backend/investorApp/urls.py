@@ -35,13 +35,12 @@ method = POST
 
 2- /investors/profile/
 method = GET 
--H "Authorization: Token YOUR_TOKEN_HERE"
+-H "Authorization: Token 1cb36a14f7d3472b18382508a0ff0350097584df"
 
 Using Postman  == Under the Headers tab, add a new header:
 Key: Authorization
 Value: Token YOUR_TOKEN_HERE
 Replace YOUR_TOKEN_HERE with the actual token you received.
-
 
 3- /investors/profile/
 method = PATCH    (means update)

@@ -6,13 +6,13 @@ from django.conf import settings
 class investor(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='investor_profile')
     full_name = models.CharField(max_length=255)
-    phone = models.CharField(max_length=15)
+    phone = models.CharField(max_length=15, null=True, blank=True)
     sectors = models.CharField(max_length=255)
     experience = models.CharField(max_length=255)
     country = models.CharField(max_length=255)
     income = models.CharField(max_length=255)
     photo = models.ImageField(upload_to='investors_photos/', null=True, blank=True)
-    about = models.TextField(blank=True, null=True)
+    about = models.TextField(default="An angel investor")
 
     def __str__(self):
         return self.full_name
