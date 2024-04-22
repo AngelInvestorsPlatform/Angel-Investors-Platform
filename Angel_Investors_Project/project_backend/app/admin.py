@@ -17,8 +17,8 @@ It can be accessed via the URL '/admin'
 
 # Register your models here.
 
-admin.site.register(Investor)
-admin.site.register(Startup)
+# admin.site.register(Investor)
+# admin.site.register(Startup)
 
 
 
