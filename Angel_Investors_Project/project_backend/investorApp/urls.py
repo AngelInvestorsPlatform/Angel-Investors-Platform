@@ -2,6 +2,7 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from .views import InvestorViewSet, SyndicateMembershipViewSet, InvestmentViewSet
 from .views import InvestorRegistrationAPIView, InvestorProfileAPIView
+from .views import JoinedSyndicatesView
 
 router = DefaultRouter()
 router.register(r'investors', InvestorViewSet)
@@ -12,6 +13,7 @@ urlpatterns = [
     path('', include(router.urls)),
     path('register/', InvestorRegistrationAPIView.as_view(), name='investor-register'),
     path('profile/', InvestorProfileAPIView.as_view(), name='investor-profile'),
+    path('joined-syndicates/', JoinedSyndicatesView.as_view(), name='joined-syndicates'),
 ]
 
 
@@ -60,4 +62,14 @@ in body :
     "phone": "050085005",
     "country": "KSA"
 }
+
+4- /investors/joined-syndicates/
+
+method = GET
+ -H "Authorization: Token YOUR_TOKEN_HERE"
+
+ Using Postman  == Under the Headers tab, add a new header:
+Key: Authorization
+Value: Token YOUR_TOKEN_HERE
+Replace YOUR_TOKEN_HERE with the actual token you received.
  """

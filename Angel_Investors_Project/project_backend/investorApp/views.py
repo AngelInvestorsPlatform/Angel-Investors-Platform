@@ -16,6 +16,9 @@ from rest_framework.permissions import IsAuthenticated
 from .serializers import InvestorSerializer
 from .models import investor
 
+#for Joined Syndicates View
+from SyndicateApp.models import SyndicateMember
+from .serializers import SyndicateSerializer
 
 class InvestorViewSet(viewsets.ModelViewSet):
     queryset = investor.objects.all()
@@ -63,3 +66,16 @@ class InvestorProfileAPIView(RetrieveUpdateAPIView):
         except investor.DoesNotExist:
             # Handle the case where an investor profile does not exist
             raise NotFound("Investor profile not found.")
+
+#for view user syndicate or your syndicate        
+class JoinedSyndicatesView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        # Assuming the Investor model has a user field linking to the User model
+        userInvestor = investor.objects.get(user=request.user)
+        memberships = SyndicateMember.objects.filter(investor=userInvestor)
+        syndicates = [membership.syndicate for membership in memberships]
+
+        serializer = SyndicateSerializer(syndicates, many=True)
+        return Response(serializer.data)
