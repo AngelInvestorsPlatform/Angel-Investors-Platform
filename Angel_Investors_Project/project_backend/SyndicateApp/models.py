@@ -13,18 +13,25 @@ class Syndicate(models.Model):
 
 
 class SyndicateLead(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    syndicate = models.OneToOneField(Syndicate, on_delete=models.CASCADE, related_name='lead')
-
-    def __str__(self):
-        return f"{self.user.username}'s Syndicate"
-
-
-class SyndicateMember(models.Model):
-    syndicate = models.ForeignKey(Syndicate, on_delete=models.CASCADE, related_name='members')
-    investor = models.ForeignKey('investorApp.investor', on_delete=models.CASCADE)
+    syndicate = models.ForeignKey(Syndicate, on_delete=models.CASCADE, related_name='lead')
+    investor = models.ForeignKey('investorApp.investor', null=True, on_delete=models.CASCADE, related_name='syndicate_leadership')
 
     def __str__(self):
         return f"{self.investor.user.username} - {self.syndicate.syndicate_name}"
 
 
+class SyndicateMember(models.Model):
+    syndicate = models.ForeignKey(Syndicate, on_delete=models.CASCADE, related_name='members')
+    investor = models.ForeignKey('investorApp.investor', on_delete=models.CASCADE, related_name='syndicate_memberships')
+
+    def __str__(self):
+        return f"{self.investor.user.username} - {self.syndicate.syndicate_name}"
+
+
+class JoinRequest(models.Model):
+    syndicate = models.ForeignKey('Syndicate', related_name='join_requests', on_delete=models.CASCADE)
+    investor = models.ForeignKey('investorApp.investor', related_name='join_requests', on_delete=models.CASCADE)
+    action = models.CharField(max_length=10, choices=(('pending', 'Pending'), ('accepted', 'Accepted'), ('rejected', 'Rejected')), default='pending')
+
+    def __str__(self):
+        return f"{self.investor.user.username} requests to join {self.syndicate.syndicate_name} ({self.status})"
