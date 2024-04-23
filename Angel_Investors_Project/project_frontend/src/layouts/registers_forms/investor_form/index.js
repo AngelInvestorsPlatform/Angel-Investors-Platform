@@ -35,7 +35,7 @@ const selectStyles = {
   padding: "0.75rem",
   fontSize: "1rem",
   backgroundColor: "#ffff",
-  borderColor:"#e9ecef",
+  borderColor: "#e9ecef",
   color: "#888",
   border: "0.2",
   borderRadius: "8px",
@@ -58,19 +58,21 @@ function InvestorForm() {
   const [first_name, setfirst_name] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
-  const [investor_name, setName] = useState("");
-  const [investor_phone, setPhone] = useState("");
-  const [investor_country, setCountry] = useState("");
-  const [investor_sector, setSector] = useState("");
-  const [investor_experience, setExperience] = useState("");
-  const [investor_income, setIncome] = useState("");
+  const [full_name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [country, setCountry] = useState("");
+  const [sectors, setSector] = useState("");
+  const [experience, setExperience] = useState("");
+  const [income, setIncome] = useState("");
+  const [photo, setphoto] = useState("");
+  const [about, setabout] = useState("");
 
   //error handling variables
 
   const [error, setError] = useState("");
   const [registerError, setRegError] = useState("");
   const [registerConfirm, setRegConfirm] = useState("");
-  const [formMessage , setFormMessage]= useState("");
+  const [formMessage, setFormMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
   //redirect variable
@@ -95,12 +97,14 @@ function InvestorForm() {
   const handleSectorChange = (e) => setSector(e.target.value);
   const handleExperienceChange = (e) => setExperience(e.target.value);
   const handleIncomeChange = (e) => setIncome(e.target.value);
+  const handlephotoChange = (e) => setphoto(e.target.value);
+  const handleaboutChange = (e) => setabout(e.target.value);
 
   const [RedirectToUserI, setRedirectToUserI] = useState(false);
 
   if (RedirectToUserI) {
     return <Navigate to="/investor" />;
-  } 
+  }
 
   const [selectedValue, setSelectedValue] = useState([]); // State to hold the selected value
 
@@ -114,24 +118,25 @@ function InvestorForm() {
   };
 
   const convertToText = async () => {
-    setSector(selectedValue.map(item => item.title).join(', '))// to convert the array to normal text
+    setSector(selectedValue.map((item) => item.title).join(", ")); // to convert the array to normal text
   };
 
   //on submit
   const handleSubmit = async () => {
     try {
       const DJANGO_API = process.env.REACT_APP_DJANGO_API;
-      setrole("investor")
+      setrole("investor");
 
       // Validate if all required fields are filled out
       if (
         !email ||
         !password ||
         !passwordConfirmation ||
-        !investor_name ||
-        !investor_sector ||
-        !investor_experience ||
-        !investor_income
+        !full_name ||
+        !sectors ||
+        !experience ||
+        !income ||
+        !about
       ) {
         setError("fields are required.");
         return;
@@ -158,51 +163,62 @@ function InvestorForm() {
       }
 
       setError("");
-      // If all conditions are met, proceed with registration
-      const response1 = await axios.post(`${DJANGO_API}auth/register`, {
-        first_name,
-        email,
-        password,
-        role,
-      });
 
-      // If registration is successful, set user status to true
-      if (response1.status === 201 || response1.status === 200) {
-        const Response2 = await axios.post(`${process.env.REACT_APP_DJANGO_API}form/Investors/`, {
-          investor_name,
-          investor_phone,
-          investor_country,
-          investor_sector,
-          investor_experience,
-          investor_income,
+            /////////////////////////////////////////
+
+        const response = await axios.post(`${process.env.REACT_APP_DJANGO_API}investors/register/`, {
+          email,
+          password,
+          first_name,
+          role,
+          full_name,
+          phone,
+          country,
+          sectors,
+          experience,
+          income,
+          photo,
+          about,
         });
-        if (Response2.status === 200 || Response2.status === 201) {
+      
+        if (response.status === 200 || response.status === 201) {
           setRegConfirm("successfully registered, Please Login to your account");
-          const { data } = Response2;
+          const { data } = response;
           setFormMessage(data);
-          //setRedirectToUserI(true);
-
+          //setRedirectToUserS(true);
+      
           window.scrollTo({ top: 0, behavior: "smooth" });
         } else {
           let errorMessageY = "Registration failed. Please try again later.";
           setErrorMessage(errorMessageY);
         }
         // Check if the response contains detailed error messages
-      } else {
         // Extract the first error message for username field
         //400 58
-        if (response1.data.username) {
+        if (response && response.data && response.data.error) {
           // Extract the first error message for username field
-          let errorMessageX = response1.data.username[0];
+          let errorMessageX = response.data.error;
+          if (response.data.user_errors) {
+            errorMessageX += " User: " + JSON.stringify(response.data.user_errors);
+          }
+          if (response.data.investor_errors) {
+            errorMessageX += " Investor: " + JSON.stringify(response.data.investor_errors);
+          }
           setErrorMessage(errorMessageX);
         }
+      } catch (errorX) {
+        let errorMessage = "Registration failed. Please try again later.";
+        if (errorX.response && errorX.response.data && errorX.response.data.error) {
+          errorMessage = errorX.response.data.error;
+        }
+        setRegError("Failed: " + errorMessage);
+        window.scrollTo({ top: 0, behavior: "smooth" });
       }
-    } catch (errorX) {
-      setRegError("Failed: " + errorX.message);
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-  };
+    };
 
+        /////////////////////////////////////////
+
+  
   const validateEmail = (email) => {
     const re = /\S+@\S+\.\S+/;
     return re.test(email);
@@ -212,7 +228,6 @@ function InvestorForm() {
     const re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
     return re.test(password);
   };
-
 
   return (
     <CoverLayout
@@ -240,7 +255,6 @@ function InvestorForm() {
           {formMessage}
         </SoftAlert>
       )}
-
 
       <SoftBox component="form" role="form" width="100" display="flex" flex="row" flexWrap="wrap">
         {/* First Column */}
@@ -302,7 +316,7 @@ function InvestorForm() {
             <SoftInput
               type="text"
               placeholder="Your full name"
-              value={investor_name}
+              value={full_name}
               onChange={handleNameChange}
               required
               minLength={10}
@@ -315,7 +329,7 @@ function InvestorForm() {
             <SoftInput
               type="tel"
               placeholder="0514326789"
-              value={investor_phone}
+              value={phone}
               onChange={handlePhoneChange}
             />
           </SoftBox>
@@ -323,12 +337,35 @@ function InvestorForm() {
 
         {/* Second Column */}
         <SoftBox flex="0 0 48%" mb={3}>
-          <SoftBox mb={2}>
+          <SoftBox mb={1}>
+            <SoftTypography component="label" variant="caption" fontWeight="bold">
+              Profile picture
+            </SoftTypography>
+            <Tooltip title="Maximum image size: 5 MB." placement="right-start">
+              <Icon>error_outline</Icon>
+            </Tooltip>
+          </SoftBox>
+          <SoftBox mb={1}>
+            {/* Image upload section */}
+            <label htmlFor="photo">
+              <input type="file" id="photo" hidden onChange={handlephotoChange} />
+              <SoftButton variant="contained" component="span">
+                Upload
+              </SoftButton>
+            </label>
+
+            {/* Display uploaded image (optional) */}
+            {/* 
+            {photo && <img src={photo} alt="Profile Picture" style={{ maxWidth: "200px" }} />}
+           */}
+          </SoftBox>
+
+          <SoftBox mb={1}>
             <SoftTypography component="label" variant="caption" fontWeight="bold">
               Country <span style={{ color: "red" }}>*</span>
             </SoftTypography>
             <select
-              value={investor_country}
+              value={country}
               onChange={handleCountryChange}
               required
               style={selectStyles}
@@ -350,12 +387,12 @@ function InvestorForm() {
               <option value="Other">Other</option>
             </select>
           </SoftBox>
-          <SoftBox mb={2}>
+          <SoftBox mb={1}>
             <SoftTypography component="label" variant="caption" fontWeight="bold">
               Experience <span style={{ color: "red" }}>*</span>
             </SoftTypography>
             <select
-              value={investor_experience}
+              value={experience}
               onChange={handleExperienceChange}
               required
               style={selectStyles}
@@ -370,32 +407,27 @@ function InvestorForm() {
               <option value="More than 10 years">More than 10 years</option>
             </select>
           </SoftBox>
-          <SoftBox mb={2}>
-          <SoftTypography component="label" variant="caption" fontWeight="bold">
-           Income <span style={{ color: "red" }}>*</span>
-          </SoftTypography>
-          <select
-            value={investor_income}
-            onChange={handleIncomeChange}
-            required
-            style={selectStyles}
-          >
-            <option value="">Select your income</option>
-            <option value="Less than 100K">Less than 100K</option>
-            <option value="200K-300k">200K-300k</option>
-            <option value="300K-400k">300K-400k</option>
-            <option value="400k-500k">400k-500k</option>
-            <option value="600k-700k">600k-700k</option>
-            <option value="800k-900k">800k-900k</option>
-            <option value="More than 900k">More than 900k</option>
-          </select>
+          <SoftBox mb={1}>
+            <SoftTypography component="label" variant="caption" fontWeight="bold">
+              Income <span style={{ color: "red" }}>*</span>
+            </SoftTypography>
+            <select value={income} onChange={handleIncomeChange} required style={selectStyles}>
+              <option value="">Select your income</option>
+              <option value="Less than 100K">Less than 100K</option>
+              <option value="200K-300k">200K-300k</option>
+              <option value="300K-400k">300K-400k</option>
+              <option value="400k-500k">400k-500k</option>
+              <option value="600k-700k">600k-700k</option>
+              <option value="800k-900k">800k-900k</option>
+              <option value="More than 900k">More than 900k</option>
+            </select>
           </SoftBox>
-        <SoftBox mb={2}>
-          <SoftTypography component="label" variant="caption" fontWeight="bold">
-            Sector <span style={{ color: "red" }}>*</span>
-          </SoftTypography>
-          {/* <select
-            value={investor_sector}
+          <SoftBox mb={1}>
+            <SoftTypography component="label" variant="caption" fontWeight="bold">
+              Sector <span style={{ color: "red" }}>*</span>
+            </SoftTypography>
+            {/* <select
+            value={sectors}
             onChange={handleSectorChange}
             required
             style={selectStyles}
@@ -414,11 +446,29 @@ function InvestorForm() {
             <option value="Finance">Finance</option>
             <option value="Education">Education</option>
           </select> */}
-        <FixedTags placeholder="Select your sector" onSelectedValueChange={handleSelectedValue} onClick={convertToText}/>
-        {/* <p> select value : {selectedValue.map(item => item.title).join(', ')}</p>
-        <p>set value : {investor_sector}</p> */}
-        </SoftBox>
+            <FixedTags
+              placeholder="Select your sector"
+              onSelectedValueChange={handleSelectedValue}
+              onClick={convertToText}
+            />
+            {/* <p> select value : {selectedValue.map(item => item.title).join(', ')}</p>
+        <p>set value : {sectors}</p> */}
           </SoftBox>
+        </SoftBox>
+      </SoftBox>
+      <SoftBox mb={1}>
+        <SoftTypography component="label" variant="caption" fontWeight="bold">
+          About <span style={{ color: "red" }}>*</span>
+        </SoftTypography>
+        <SoftInput
+          type="text"
+          placeholder="Tell us about you and your intrest?"
+          value={about}
+          onChange={handleaboutChange}
+          required
+          multiline
+          rows={10}
+        />
       </SoftBox>
       {error && (
         <SoftTypography component="label" variant="caption" fontWeight="regular" color="error">
@@ -427,7 +477,7 @@ function InvestorForm() {
       )}
 
       <SoftBox mt={4} mb={1}>
-        <SoftButton variant="gradient" color="info" fullWidth circular onClick={handleSubmit} >
+        <SoftButton variant="gradient" color="info" fullWidth circular onClick={handleSubmit}>
           submit
         </SoftButton>
       </SoftBox>

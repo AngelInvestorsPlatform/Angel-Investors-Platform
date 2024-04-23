@@ -77,15 +77,17 @@ function startup_form() {
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [startup_name, setStartupName] = useState("");
-  const [startup_sector, setStartupSector] = useState("");
-  const [startup_stage, setStartupStage] = useState("");
-  const [startup_phone, setPhone] = useState("");
-  const [startup_team, setTeamSize] = useState("");
-  const [startup_country, setCountry] = useState("");
-  const [startup_city, setCity] = useState("");
-  const [startup_web, setWebsite] = useState("");
-  const [isExclusive, setIsExclusive] = useState(false);
-  const [syndicateLeadEmail, setSyndicateLeadEmail] = useState("");
+  const [sector, setStartupSector] = useState("");
+  const [stage, setStartupStage] = useState("");
+  const [phone, setPhone] = useState("");
+  const [team_size, setTeamSize] = useState("");
+  const [country, setCountry] = useState("");
+  const [city, setCity] = useState("");
+  const [website, setWebsite] = useState("");
+  const [photo, setphoto] = useState("");
+  const [about, setabout] = useState("");
+  const [full_name, setfull_name] = useState("");
+  const [job_position, setjob_position] = useState("");
 
   //error handling variables
 
@@ -119,7 +121,11 @@ function startup_form() {
   const handleCountryChange = (e) => setCountry(e.target.value);
   const handleCityChange = (e) => setCity(e.target.value);
   const handleWebsiteChange = (e) => setWebsite(e.target.value);
-  const handleSyndicateLeadEmailChange = (e) => setSyndicateLeadEmail(e.target.value);
+  const handlephotoChange = (e) => setphoto(e.target.value);
+  const handleaboutChange = (e) => setabout(e.target.value);
+  const handlefull_nameChange = (e) => setfull_name(e.target.value);
+  const handlejob_positionChange = (e) => setjob_position(e.target.value);
+
 
   const handleIsExclusiveChange = (e) => {
     // Update state immediately based on clicked radio button
@@ -149,10 +155,10 @@ function startup_form() {
         !password ||
         !passwordConfirmation ||
         !startup_name ||
-        !startup_sector ||
-        !startup_stage ||
-        !startup_team ||
-        !startup_country
+        !sector ||
+        !stage ||
+        !team_size ||
+        !country
       ) {
         setError("fields are required.");
         return;
@@ -179,52 +185,64 @@ function startup_form() {
       }
 
       setError("");
-      // If all conditions are met, proceed with registration
-      const response1 = await axios.post(`${DJANGO_API}auth/register`, {
+
+      /////////////////////////////////////////
+      const response = await axios.post(`${process.env.REACT_APP_DJANGO_API}startups/register/`, {
         email,
         password,
         first_name,
         role,
+        startup_name,
+        sector,
+        city,
+        country,
+        phone,
+        team_size,
+        website,
+        stage,
+        photo,
+        about,
+        full_name,
+        job_position
       });
 
-      // If registration is successful, set user status to true
-      if (response1.status === 201 || response1.status === 200) {
-        const Response2 = await axios.post(`${process.env.REACT_APP_DJANGO_API}form/Startup/`, {
-          startup_name,
-          startup_phone,
-          startup_sector,
-          startup_stage,
-          startup_team,
-          startup_country,
-          startup_city,
-          startup_web,
-        });
-        if (Response2.status === 200 || Response2.status === 201) {
-          setRegConfirm("successfully registered, Please Login to your account");
-          const { data } = Response2;
-          setFormMessage(data);
-          //setRedirectToUserS(true);
+      if (response.status === 200 || response.status === 201) {
+        setRegConfirm("successfully registered, Please Login to your account");
+        const { data } = response;
+        setFormMessage(data);
+        //setRedirectToUserS(true);
 
-          window.scrollTo({ top: 0, behavior: "smooth" });
-        } else {
-          let errorMessageY = "Registration failed. Please try again later.";
-          setErrorMessage(errorMessageY);
-        }
-        // Check if the response contains detailed error messages
+        window.scrollTo({ top: 0, behavior: "smooth" });
       } else {
+        let errorMessageY = "Registration failed. Please try again later.";
+        setErrorMessage(errorMessageY);
+      }
+      // Check if the response contains detailed error messages
+      // Extract the first error message for username field
+      //400 58
+      if (response && response.data && response.data.error) {
         // Extract the first error message for username field
-        //400 58
-        if (response1) {
-          // Extract the first error message for username field
-          let errorMessageX = response1;
-          setErrorMessage(errorMessageX);
+        let errorMessageX = response.data.error;
+        if (response.data.user_errors) {
+          errorMessageX += " User: " + JSON.stringify(response.data.user_errors);
         }
+        if (response.data.investor_errors) {
+          errorMessageX += " Startup: " + JSON.stringify(response.data.investor_errors);
+        }
+        setErrorMessage(errorMessageX);
       }
     } catch (errorX) {
-      setRegError("Failed: " + errorX.message + "\n" + errorMessage);
+      let errorMessage = "Registration failed. Please try again later.";
+      if (errorX.response && errorX.response.data && errorX.response.data.error) {
+        errorMessage = errorX.response.data.error;
+      }
+      setRegError("Failed: " + errorMessage);
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
+
+        /////////////////////////////////////////
+
 
   const validateEmail = (email) => {
     const re = /\S+@\S+\.\S+/;
@@ -342,7 +360,7 @@ function startup_form() {
             <SoftInput
               type="text"
               placeholder="3 members"
-              value={startup_team}
+              value={team_size}
               onChange={handleTeamSizeChange}
             />
           </SoftBox>
@@ -353,20 +371,53 @@ function startup_form() {
             <SoftInput
               type="tel"
               placeholder="0514326789"
-              value={startup_phone}
+              value={phone}
               onChange={handlePhoneChange}
+            />
+          </SoftBox>
+          <SoftBox mb={2}>
+            <SoftTypography component="label" variant="caption" fontWeight="bold">
+              Full name
+            </SoftTypography>
+            <SoftInput
+              type="text"
+              placeholder="Ahmd Ali"
+              value={full_name}
+              onChange={handlefull_nameChange}
             />
           </SoftBox>
         </SoftBox>
 
         {/* Second Column */}
         <SoftBox flex="0 0 48%" mb={3}>
-          <SoftBox mb={2}>
+        <SoftBox mb={1}>
+            <SoftTypography component="label" variant="caption" fontWeight="bold">
+              Profile picture
+            </SoftTypography>
+            <Tooltip title="Maximum image size: 5 MB." placement="right-start">
+              <Icon>error_outline</Icon>
+            </Tooltip>
+          </SoftBox>
+          <SoftBox mb={1}>
+            {/* Image upload section */}
+            <label htmlFor="photo">
+              <input type="file" id="photo" hidden onChange={handlephotoChange} />
+              <SoftButton variant="contained" component="span">
+                Upload
+              </SoftButton>
+            </label>
+
+            {/* Display uploaded image (optional) */}
+            {/* 
+            {photo && <img src={photo} alt="Profile Picture" style={{ maxWidth: "200px" }} />}
+           */}
+          </SoftBox>
+          <SoftBox mb={1}>
             <SoftTypography component="label" variant="caption" fontWeight="bold">
               Startup Sector <span style={required}>*</span>
             </SoftTypography>
             <select
-              value={startup_sector}
+              value={sector}
               onChange={handleStartupSectorChange}
               style={selectStyles}
               onFocus={handleFocus}
@@ -387,18 +438,18 @@ function startup_form() {
               <option value="LegalTech">LegalTech</option>
             </select>
           </SoftBox>
-          <SoftBox mb={2}>
+          <SoftBox mb={1}>
             <SoftTypography component="label" variant="caption" fontWeight="bold">
               Startup Stage <span style={required}>*</span>
             </SoftTypography>
             <SoftInput
-              type="startup_stage"
+              type="stage"
               placeholder="Pre-seed, Seed, Series A or Series B ..."
-              value={startup_stage}
+              value={stage}
               onChange={handleStartupStageChange}
             />
             {/* <select
-              value={startup_stage}
+              value={stage}
               onChange={handleStartupStageChange}
               style={{
                 width: "100%",
@@ -417,12 +468,12 @@ function startup_form() {
               <option value="Series B">Series B</option>
             </select> */}
           </SoftBox>
-          <SoftBox mb={2}>
+          <SoftBox mb={1}>
             <SoftTypography component="label" variant="caption" fontWeight="bold">
               Country <span style={required}>*</span>
             </SoftTypography>
             <select
-              value={startup_country}
+              value={country}
               onChange={handleCountryChange}
               style={selectStyles}
               onFocus={handleFocus}
@@ -444,18 +495,18 @@ function startup_form() {
             </select>
           </SoftBox>
 
-          <SoftBox mb={2}>
+          <SoftBox mb={1}>
             <SoftTypography component="label" variant="caption" fontWeight="bold">
               City
             </SoftTypography>
             <SoftInput
               type="text"
               placeholder="Riyadh"
-              value={startup_city}
+              value={city}
               onChange={handleCityChange}
             />
           </SoftBox>
-          <SoftBox mb={2}>
+          <SoftBox mb={1}>
             <SoftBox mt={4} display="flex" justifyContent="space-between">
               <SoftTypography component="label" variant="caption" fontWeight="bold">
                 Website
@@ -467,52 +518,38 @@ function startup_form() {
             <SoftInput
               type="url"
               placeholder="https://www.web.com/"
-              value={startup_web}
+              value={website}
               onChange={handleWebsiteChange}
-              success={startup_web && validateURL(startup_web)}
-              error={startup_web && !validateURL(startup_web)}
+              success={website && validateURL(website)}
+              error={website && !validateURL(website)}
             />
           </SoftBox>
-         
-          {/*  // add a radio button (are you exclusive? )
-          
           <SoftBox mb={2}>
             <SoftTypography component="label" variant="caption" fontWeight="bold">
-              Are you an exclusive Startup?
+            Job Position
             </SoftTypography>
-            <RadioGroup row aria-label="position" name="position" defaultValue="top">
-              <FormControlLabel
-                value="True"
-                control={<Radio color="primary" />}
-                label="Yes"
-                labelPlacement="top"
-                checked={isExclusive} // Check based on state value
-                onChange={handleIsExclusiveChange}
-              />
-              <FormControlLabel
-                value="False"
-                control={<Radio color="primary" />}
-                label="No"
-                labelPlacement="start"
-                onChange={handleIsExclusiveChange}
-                defaultChecked
-              />
-            </RadioGroup>
+            <SoftInput
+              type="text"
+              placeholder="Founder"
+              value={job_position}
+              onChange={handlejob_positionChange}
+            />
           </SoftBox>
-          {isExclusive && (
-            <SoftBox mb={2}>
-              <SoftTypography component="label" variant="caption" fontWeight="bold">
-                Syndicate Lead Email
-              </SoftTypography>
-              <SoftInput
-                type="email"
-                placeholder="Syndicate Lead Email"
-                value={syndicateLeadEmail}
-                onChange={handleSyndicateLeadEmailChange}
-              />
-            </SoftBox>
-          )} */}
         </SoftBox>
+      </SoftBox>
+      <SoftBox mb={1}>
+        <SoftTypography component="label" variant="caption" fontWeight="bold">
+          About <span style={{ color: "red" }}>*</span>
+        </SoftTypography>
+        <SoftInput
+          type="text"
+          placeholder="Tell us about your startup ..."
+          value={about}
+          onChange={handleaboutChange}
+          required
+          multiline
+          rows={10}
+        />
       </SoftBox>
       {error && (
         <SoftTypography component="label" variant="caption" fontWeight="regular" color="error">

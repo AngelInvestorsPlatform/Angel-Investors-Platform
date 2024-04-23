@@ -3,14 +3,15 @@ from SyndicateApp.models import Syndicate
 from django.conf import settings
 
 
+
 class investor(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='investor_profile')
-    full_name = models.CharField(max_length=255)
-    phone = models.CharField(max_length=15, null=True, blank=True)
-    sectors = models.CharField(max_length=255)
-    experience = models.CharField(max_length=255)
-    country = models.CharField(max_length=255)
-    income = models.CharField(max_length=255)
+    full_name = models.CharField(max_length=100, default='', null=False)
+    phone = models.CharField(max_length=20, null=True, blank=True)
+    sectors = models.CharField(max_length=5000, default='Information Technology')
+    experience = models.CharField(max_length=50,  default='Less than 1 year')
+    country =  models.CharField(max_length=20,  default='SA', null=True, blank=True)
+    income = models.CharField(max_length=50, default='Less than 100K')
     photo = models.ImageField(upload_to='investors_photos/', null=True, blank=True)
     about = models.TextField(default="An angel investor")
 
