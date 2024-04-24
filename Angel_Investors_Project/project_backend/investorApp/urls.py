@@ -3,6 +3,7 @@ from rest_framework.routers import DefaultRouter
 from .views import InvestorViewSet, SyndicateMembershipViewSet, InvestmentViewSet
 from .views import InvestorRegistrationAPIView, InvestorProfileAPIView
 from .views import JoinedSyndicatesView
+from .views import CheckSyndicateLeadView
 
 router = DefaultRouter()
 router.register(r'investors', InvestorViewSet)
@@ -14,6 +15,7 @@ urlpatterns = [
     path('register/', InvestorRegistrationAPIView.as_view(), name='investor-register'),
     path('profile/', InvestorProfileAPIView.as_view(), name='investor-profile'),
     path('joined-syndicates/', JoinedSyndicatesView.as_view(), name='joined-syndicates'),
+    path('check-syndicate-lead/', CheckSyndicateLeadView.as_view(), name='check-syndicate-lead'),
 ]
 
 
@@ -72,4 +74,11 @@ method = GET
 Key: Authorization
 Value: Token YOUR_TOKEN_HERE
 Replace YOUR_TOKEN_HERE with the actual token you received.
+
+
+5- /investors/check-syndicate-lead/
+curl -X GET 
+-H "Authorization: Token YOUR_AUTH_TOKEN"
  """
+
+

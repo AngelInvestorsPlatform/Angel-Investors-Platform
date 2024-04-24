@@ -45,12 +45,12 @@ class SyndicateManagementAPIView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request, *args, **kwargs):
-        # Check if the investor already leads a syndicate
-        try:
-            syndicate = request.user.led_syndicate
+        # Get the syndicate that the user leads
+        syndicate = Syndicate.objects.filter(syndicate_lead=request.user).first()
+        if syndicate:
             serializer = SyndicateSerializer(syndicate)
             return Response(serializer.data)
-        except Syndicate.DoesNotExist:
+        else:
             return Response({"message": "No syndicate found"}, status=status.HTTP_404_NOT_FOUND)
 
     def post(self, request, *args, **kwargs):

@@ -136,6 +136,7 @@ function InvestorForm() {
         !sectors ||
         !experience ||
         !income ||
+        !country ||
         !about
       ) {
         setError("fields are required.");
@@ -170,51 +171,48 @@ function InvestorForm() {
           email,
           password,
           first_name,
-          role,
           full_name,
+          role,
           phone,
           country,
           sectors,
           experience,
+          country,
           income,
-          photo,
           about,
         });
       
-        if (response.status === 200 || response.status === 201) {
-          setRegConfirm("successfully registered, Please Login to your account");
-          const { data } = response;
-          setFormMessage(data);
-          //setRedirectToUserS(true);
-      
-          window.scrollTo({ top: 0, behavior: "smooth" });
-        } else {
-          let errorMessageY = "Registration failed. Please try again later.";
-          setErrorMessage(errorMessageY);
-        }
-        // Check if the response contains detailed error messages
-        // Extract the first error message for username field
-        //400 58
-        if (response && response.data && response.data.error) {
-          // Extract the first error message for username field
-          let errorMessageX = response.data.error;
-          if (response.data.user_errors) {
-            errorMessageX += " User: " + JSON.stringify(response.data.user_errors);
+
+          if (response.status >= 200 && response.status < 300) {
+            // Handle successful response
+            setRegConfirm("successfully registered, Please Login to your account")
+            setRegError({ ...registerError, form: "" }); // Clear any form registerError
+          } else {
+            // Handle unexpected status code correctly
+            setRegError({ ...registerError, register: `Unexpected response status: ${response.status}` });
           }
-          if (response.data.investor_errors) {
-            errorMessageX += " Investor: " + JSON.stringify(response.data.investor_errors);
+        } catch (error) {
+          // Handle network error or server error response status codes (e.g., 500)
+          if (error.response) {
+            // The request was made and the server responded with a status code
+            // that falls out of the range of 2xx
+            setRegError({
+              ...registerError,
+              register: `Request failed with status: ${error.response.status}, message: ${
+                error.response.data.detail || error.message
+              }`,
+            });
+          } else if (error.request) {
+            // The request was made but no response was received
+            setRegError({ ...registerError, register: "No response received from the server." });
+          } else {
+            // Something happened in setting up the request that triggered an Error
+            setRegError({ ...registerError, register: "Error setting up the request: " + error.message });
           }
-          setErrorMessage(errorMessageX);
+    
+          window.scrollTo({ top: 0, behavior: "smooth" }); // Scroll to top to show error message
         }
-      } catch (errorX) {
-        let errorMessage = "Registration failed. Please try again later.";
-        if (errorX.response && errorX.response.data && errorX.response.data.error) {
-          errorMessage = errorX.response.data.error;
-        }
-        setRegError("Failed: " + errorMessage);
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      }
-    };
+      };
 
         /////////////////////////////////////////
 
@@ -244,9 +242,15 @@ function InvestorForm() {
       )}
 
       {/*if register Fail*/}
-      {registerError && (
+      {registerError.register && (
         <SoftAlert fontSize="small" color="error" mt={2} dismissible>
-          {registerError}
+          * {registerError.register}
+        </SoftAlert>
+      )}
+
+      {registerError.form && (
+        <SoftAlert fontSize="small" color="error" mt={2} dismissible>
+          * {registerError.form}
         </SoftAlert>
       )}
       {/*if from has a message*/}
@@ -337,7 +341,7 @@ function InvestorForm() {
 
         {/* Second Column */}
         <SoftBox flex="0 0 48%" mb={3}>
-          <SoftBox mb={1}>
+        <SoftBox mt={2} display="flex" justifyContent="space-between">
             <SoftTypography component="label" variant="caption" fontWeight="bold">
               Profile picture
             </SoftTypography>
@@ -345,11 +349,11 @@ function InvestorForm() {
               <Icon>error_outline</Icon>
             </Tooltip>
           </SoftBox>
-          <SoftBox mb={1}>
+          <SoftBox mt={1} mb={1}>
             {/* Image upload section */}
             <label htmlFor="photo">
               <input type="file" id="photo" hidden onChange={handlephotoChange} />
-              <SoftButton variant="contained" component="span">
+              <SoftButton variant="contained" component="span" fullWidth>
                 Upload
               </SoftButton>
             </label>

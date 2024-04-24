@@ -1,3 +1,11 @@
+import React, { useState, useEffect } from "react";
+
+//for API
+import axios from "axios";
+
+//for user auth global context
+import { useAuthUser } from "context/authContext";
+
 // @mui material components
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
@@ -16,6 +24,7 @@ import SoftTypography from "components/SoftTypography";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import Footer from "examples/Footer";
 import ProfileInfoCard from "examples/Cards/InfoCards/ProfileInfoCard";
+import SyndicateInfoCard from "examples/Cards/InfoCards/SyndicateInfoCard";
 import ProfileDealList from "examples/Lists/ProfileDealList";
 import DefaultProjectCard from "examples/Cards/ProjectCards/DefaultProjectCard";
 import PlaceholderCard from "examples/Cards/PlaceholderCard";
@@ -38,10 +47,62 @@ import burceMars from "assets/images/bruce-mars.jpg";
 import LeadNavbar from "layouts/LeadInvestor/components/LeadNavbar";
 
 function Overview() {
+
+   // Auth and config
+   const { userData } = useAuthUser();
+   const token = userData ? userData.token : " ";
+   const config = {
+     headers: {
+       Authorization: `Token ${token}`,
+     },
+   };
+ 
+   const fetchSyndicateProfile = async () => {
+     try {
+       // Make the GET request
+       const response = await axios.get(
+         `${process.env.REACT_APP_DJANGO_API}/syndicates/manageSyndicate/`,
+         config
+       );
+ 
+       // Handle response
+       return response.data;
+     } catch (error) {
+       console.error("Error fetching investor profile:", error);
+       // Handle errors, e.g., token expired, network issues, etc.
+       if (error.response) {
+         // The request was made and the server responded with a status code
+         // that falls out of the range of 2xx
+         console.error("Response data:", error.response.data);
+         console.error("Response status:", error.response.status);
+         console.error("Response headers:", error.response.headers);
+       } else if (error.request) {
+         // The request was made but no response was received
+         console.error("Request error:", error.request);
+       } else {
+         // Something happened in setting up the request that triggered an Error
+         console.error("Error", error.message);
+       }
+     }
+   };
+ 
+   const [profile, setProfile] = useState(null);
+ 
+   useEffect(() => {
+     const loadProfile = async () => {
+       const profileData = await fetchSyndicateProfile();
+       setProfile(profileData);
+     };
+ 
+     loadProfile();
+   }, []);
+
+
   //user variable || for backend link ||
   //user header info
-  const name = " St8 Syndicate";
+  const name = profile ? profile.syndicate_name : "Loading...";
   const lead = "Lead: Ali Ahmad";
+  const title = `About ${name} Syndicate`
 
   // User information
   const userInfo = {
@@ -52,36 +113,12 @@ function Overview() {
     experience: "3-5 years",
   };
 
-  // Description
-  const descriptionInfo =
-    "This syndicate offers a unique opportunity for investors to amplify their reach in the BioTech sector. By pooling resources, you can access promising startups that might be outside your individual investment range.  In addition, you'll benefit from the expertise of a proven leader in [industry], ensuring a meticulous evaluation process.  Furthermore, the syndicate fosters a collaborative network, allowing you to connect with like-minded investors and exchange valuable insights.  Finally, the streamlined investment process allows you to focus on making informed decisions, while the syndicate handles the due diligence and other details.";
-
-  // Sectors
-  const sectorsInfo = ["Biotech", "Adtech", "Analytics", "Market"];
-
-  // Social media links
-  const socialMediaInfo = [
-    {
-      link: "https://www.facebook.com/CreativeTim/",
-      icon: <FacebookIcon />,
-      color: "facebook",
-    },
-    {
-      link: "https://twitter.com/creativetim",
-      icon: <TwitterIcon />,
-      color: "twitter",
-    },
-    {
-      link: "https://www.instagram.com/creativetimofficial/",
-      icon: <InstagramIcon />,
-      color: "instagram",
-    },
-    {
-      link: "https://www.linkedin.com/company/creativetim/",
-      icon: <LinkedInIcon />,
-      color: "linkedin",
-    },
-  ];
+   // Description
+   const descriptionInfo = profile ? profile.about : "Loading...";
+   // Sectors
+   const sectors = profile ? profile.sectors : " "
+   const sectorsInfo = sectors.split(', ').sort(); // Splits the string and sorts alphabetically
+ 
 
   return (
     <DashboardLayout>
@@ -92,14 +129,11 @@ function Overview() {
 
         <Grid container spacing={3}>
           <Grid item xs={12} md={6} xl={8}>
-            <ProfileInfoCard
+            <SyndicateInfoCard
               title="About St8 Syndicate"
               description={descriptionInfo}
               sectors={sectorsInfo}
               info={userInfo}
-              
-              //social={socialMediaInfo}
-              action={{ route: "", tooltip: "Edit Profile" }}
             />
           </Grid>
           <Grid item xs={3} xl={4}>

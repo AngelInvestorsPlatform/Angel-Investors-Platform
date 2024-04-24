@@ -9,9 +9,11 @@ import Icon from "@mui/material/Icon";
 
 // Soft UI Dashboard React examples
 import Sidenav from "examples/Sidenav";
+import ToggleButton from "examples/Sidenav/SidenavToggle";
 
 // Soft UI Dashboard React components
 import SoftBox from "components/SoftBox";
+
 
 // import image
 import LogoName from "assets/images/logo-name.svg";
@@ -55,7 +57,7 @@ const routes = [
   {
     type: "collapse",
     name: "Overview",
-    key: "LeadInvestor",
+    key: "Overview",
     route: "/LeadInvestor",
     icon: <LeaderboardOutlinedIcon size="12px" />,
     component: < LeadInvestor />,
@@ -151,7 +153,8 @@ function LeadNavbar() {
       brand={LogoName}
       routes={routes}
     >
-      <SoftBox pt={7} my={2} mx={2} mt="auto">
+     <SoftBox my={2} mx={2}>
+          <ToggleButton />
       </SoftBox>
     </Sidenav>
   );

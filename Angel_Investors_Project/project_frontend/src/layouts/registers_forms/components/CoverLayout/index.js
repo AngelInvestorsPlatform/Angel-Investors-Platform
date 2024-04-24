@@ -24,14 +24,15 @@ import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
 
 // Soft UI Dashboard React examples
-import BlankNavbar from "examples/Navbars/BlankNavbar";
+//import BlankNavbar from "examples/Navbars/BlankNavbar";
+import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import PageLayout from "examples/LayoutContainers/PageLayout";
 import Footer from "examples/FooterLanding";
 
 function CoverLayout({ color, header, title, description, image, children }) {
   return (
     <PageLayout background="white">
-      <BlankNavbar
+      <DefaultNavbar
         action={{
           type: "external",
           route: "https://",

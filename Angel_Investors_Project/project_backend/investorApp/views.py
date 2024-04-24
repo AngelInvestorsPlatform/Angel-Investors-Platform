@@ -20,6 +20,9 @@ from .models import investor
 from SyndicateApp.models import SyndicateMember
 from .serializers import SyndicateSerializer
 
+#For checks if the user lead a syndicate or not
+from SyndicateApp.models import Syndicate
+
 class InvestorViewSet(viewsets.ModelViewSet):
     queryset = investor.objects.all()
     serializer_class = InvestorSerializer
@@ -79,3 +82,13 @@ class JoinedSyndicatesView(APIView):
 
         serializer = SyndicateSerializer(syndicates, many=True)
         return Response(serializer.data)
+    
+#For checks if the user lead a syndicate or not
+class CheckSyndicateLeadView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        # Assuming `syndicate_lead` is a direct reference to the User model
+        # Adjust if your model uses an intermediary like an Investor model
+        is_lead = Syndicate.objects.filter(syndicate_lead=request.user).exists()
+        return Response({'is_syndicate_lead': is_lead})

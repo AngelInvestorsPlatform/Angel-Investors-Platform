@@ -1,6 +1,8 @@
 from rest_framework import serializers
 from .models import Syndicate, SyndicateMember, SyndicateLead, JoinRequest
 from DealsApp.models import DealMember
+from investorApp.models import investor
+
 
 
 class SyndicateSerializer(serializers.ModelSerializer):
@@ -21,7 +23,8 @@ class SyndicateSerializer(serializers.ModelSerializer):
 class SyndicateLeadSerializer(serializers.ModelSerializer):
     class Meta:
         model = SyndicateLead
-        fields = '__all__'
+        fields = ['syndicate', 'investor']  # Include other fields if necessary
+
 
 class SyndicateMemberSerializer(serializers.ModelSerializer):
     class Meta:

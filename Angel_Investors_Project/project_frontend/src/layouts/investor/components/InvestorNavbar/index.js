@@ -94,7 +94,7 @@ function InvestorNavbar() {
       routes={routes}
       // Add other props as needed
       >
-      <SoftBox pt={7} my={2} mx={2} mt="auto">
+      <SoftBox  my={2} mx={2}>
         <SidenavCardTolead/>
       </SoftBox>
       </Sidenav>

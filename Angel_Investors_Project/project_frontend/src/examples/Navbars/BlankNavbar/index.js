@@ -147,7 +147,7 @@ function BlankNavbar({ transparent, light, action }) {
             </SoftBox>
             <SoftBox display={{ xs: "none", lg: "inline-block" }}>
               <SoftTypography color={light} variant="button" fontWeight="regular" m={3}>
-                Welcome, {userData.username}!
+                Welcome, {userData.first_name}!
               </SoftTypography>
             </SoftBox>
           </>
@@ -158,18 +158,7 @@ function BlankNavbar({ transparent, light, action }) {
             name="log in"
             route="/authentication/log-in"
             light={light}
-          />
-          <SoftBox
-              display={{ xs: "none", lg: "inline-block" }}
-              component={Link}
-              to="/landing#getStarted"
-            >
-              <SoftButton variant="gradient" color="info" size="medium" circular>
-                Get Started &nbsp;
-                <Icon>account_circle</Icon>
-              </SoftButton>
-            </SoftBox>
-          
+          />          
           </SoftBox>
         )}
 
