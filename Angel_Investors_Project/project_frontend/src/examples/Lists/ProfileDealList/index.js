@@ -15,8 +15,9 @@ import SoftAvatar from "components/SoftAvatar";
 import SoftButton from "components/SoftButton";
 import SoftBadge from "components/SoftBadge";
 
-function ProfileDealList({ title, profiles }) {
-  const renderProfiles = profiles.map(({ image, name, amount}) => (
+function ProfileDealList({ title, profiles, message }) {
+
+  const renderProfiles = profiles ? profiles.map(({ image, name, amount}) => (
     <SoftBox key={name} component="li" display="flex" alignItems="center" py={1} mb={1}>
       <SoftBox mr={2}>
         <SoftAvatar src={image} alt="something here" variant="rounded" shadow="md" />
@@ -37,7 +38,7 @@ function ProfileDealList({ title, profiles }) {
         </SoftBox>
       </SoftBox>
     </SoftBox>
-  ));
+  )) : []; // Ensure that renderProfiles is an empty array if profiles is undefined
 
   return (
     <Card sx={{ height: "100%" }}>
@@ -47,9 +48,15 @@ function ProfileDealList({ title, profiles }) {
         </SoftTypography>
       </SoftBox>
       <SoftBox p={2}>
-        <SoftBox component="ul" display="flex" flexDirection="column" p={1} m={0}>
-          {renderProfiles}
-        </SoftBox>
+        {renderProfiles.length > 0 ? (
+          <SoftBox component="ul" display="flex" flexDirection="column" p={1} m={0}>
+            {renderProfiles}
+          </SoftBox>
+        ) : (
+          <SoftBox  display="center" p={1} m={0}>
+            <SoftTypography variant="caption">{message || 'No profiles available'}</SoftTypography>
+          </SoftBox>
+        )}
       </SoftBox>
     </Card>
   );
@@ -58,7 +65,8 @@ function ProfileDealList({ title, profiles }) {
 // Typechecking props for the ProfileDealList
 ProfileDealList.propTypes = {
   title: PropTypes.string.isRequired,
-  profiles: PropTypes.arrayOf(PropTypes.object).isRequired,
+  profiles: PropTypes.arrayOf(PropTypes.object),
+  message: PropTypes.string,
 };
 
 export default ProfileDealList;
