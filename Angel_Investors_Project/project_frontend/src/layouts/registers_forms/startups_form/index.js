@@ -1,5 +1,4 @@
-import { useState } from "react";
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 //for API
 import axios from "axios";
@@ -36,6 +35,7 @@ import SoftAlert from "components/SoftAlert";
 
 // registers_forms layout components
 import CoverLayout from "layouts/registers_forms/components/CoverLayout";
+import FixedTags from "layouts/registers_forms/components/FixedTags";
 
 // Authentication layout components
 import BasicLayout from "layouts/authentication/components/BasicLayout";
@@ -44,8 +44,6 @@ import Separator from "layouts/registers_forms/components/Separator";
 
 // Images
 import startup from "assets/images/backgraund-images/startup-backgraund2.svg";
-import { Info } from "@mui/icons-material";
-import { dark } from "@mui/material/styles/createPalette";
 
 const selectStyles = {
   width: "100%",
@@ -70,7 +68,7 @@ const handleBlur = (e) => {
 };
 const required = { color: "red" };
 
-function startup_form() {
+function startupform() {
   //form Data variables
   const [email, setEmail] = useState("");
   const [first_name, setfirst_name] = useState("");
@@ -112,6 +110,7 @@ function startup_form() {
   const handleEmailChange = (e) => setEmail(e.target.value);
   const handlePasswordChange = (e) => setPassword(e.target.value);
   const handlePasswordConfirmationChange = (e) => setPasswordConfirmation(e.target.value);
+
   const handleStartupNameChange = (e) =>
     setStartupName(e.target.value) || setfirst_name(e.target.value);
   const handleStartupSectorChange = (e) => setStartupSector(e.target.value);
@@ -126,22 +125,31 @@ function startup_form() {
   const handlefull_nameChange = (e) => setfull_name(e.target.value);
   const handlejob_positionChange = (e) => setjob_position(e.target.value);
 
-
-  const handleIsExclusiveChange = (e) => {
-    // Update state immediately based on clicked radio button
-    setIsExclusive(e.target.value === "True");
-    // Clear email if user switches back to "No"
-    if (e.target.value === "False") {
-      setSyndicateLeadEmail("");
-    }
-  };
-
-  // const [RedirectToUserI, setRedirectToUserI] = useState(false);
   const [RedirectToUserS, setRedirectToUserS] = useState(false);
 
-  if (RedirectToUserS) {
+  /* if (RedirectToUserS) {
     return <Navigate to="/authenticatio/log-in" />;
   }
+  
+  if (RedirectToUserS) {
+    //Redirect To Dashboard
+    return <Navigate to="/startup" />;
+  } */
+
+  const [selectedValue, setSelectedValue] = useState([]); // State to hold the selected value
+
+  useEffect(() => {
+    convertToText();
+  }, [selectedValue]);
+
+  // Callback function to handle the selected value
+  const handleSelectedValue = (value) => {
+    setSelectedValue(value);
+  };
+
+  const convertToText = async () => {
+    setStartupSector(selectedValue.map((item) => item.title).join(", ")); // to convert the array to normal text
+  };
 
   //on submit
   const handleSubmit = async () => {
@@ -191,58 +199,58 @@ function startup_form() {
         email,
         password,
         first_name,
-        role,
         startup_name,
+        full_name,
+        role,
+        phone,
         sector,
         city,
         country,
-        phone,
         team_size,
+        about,
         website,
         stage,
-        photo,
-        about,
-        full_name,
-        job_position
+        job_position,
       });
 
-      if (response.status === 200 || response.status === 201) {
+      if (response.status >= 200 && response.status < 300) {
+        // Handle successful response
         setRegConfirm("successfully registered, Please Login to your account");
-        const { data } = response;
-        setFormMessage(data);
-        //setRedirectToUserS(true);
-
-        window.scrollTo({ top: 0, behavior: "smooth" });
+        setRegError({ ...registerError, form: "" }); // Clear any form registerError
       } else {
-        let errorMessageY = "Registration failed. Please try again later.";
-        setErrorMessage(errorMessageY);
+        // Handle unexpected status code correctly
+        setRegError({
+          ...registerError,
+          register: `Unexpected response status: ${response.status}`,
+        });
       }
-      // Check if the response contains detailed error messages
-      // Extract the first error message for username field
-      //400 58
-      if (response && response.data && response.data.error) {
-        // Extract the first error message for username field
-        let errorMessageX = response.data.error;
-        if (response.data.user_errors) {
-          errorMessageX += " User: " + JSON.stringify(response.data.user_errors);
-        }
-        if (response.data.investor_errors) {
-          errorMessageX += " Startup: " + JSON.stringify(response.data.investor_errors);
-        }
-        setErrorMessage(errorMessageX);
+    } catch (error) {
+      // Handle network error or server error response status codes (e.g., 500)
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        setRegError({
+          ...registerError,
+          register: `Request failed with status: ${error.response.status}, message: ${
+            error.response.data.detail || error.message
+          }`,
+        });
+      } else if (error.request) {
+        // The request was made but no response was received
+        setRegError({ ...registerError, register: "No response received from the server." });
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        setRegError({
+          ...registerError,
+          register: "Error setting up the request: " + error.message,
+        });
       }
-    } catch (errorX) {
-      let errorMessage = "Registration failed. Please try again later.";
-      if (errorX.response && errorX.response.data && errorX.response.data.error) {
-        errorMessage = errorX.response.data.error;
-      }
-      setRegError("Failed: " + errorMessage);
-      window.scrollTo({ top: 0, behavior: "smooth" });
+
+      window.scrollTo({ top: 0, behavior: "smooth" }); // Scroll to top to show error message
     }
   };
 
-        /////////////////////////////////////////
-
+  /////////////////////////////////////////
 
   const validateEmail = (email) => {
     const re = /\S+@\S+\.\S+/;
@@ -252,12 +260,6 @@ function startup_form() {
   const validatePassword = (password) => {
     const re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
     return re.test(password);
-  };
-
-  const validateURL = (url) => {
-    // Regular expression to check URL format
-    const urlPattern = /^(https?:\/\/)?([\w\-]+\.)*[\w\-]+[\.][A-Za-z]{2,63}(\/\S*)?$/;
-    return urlPattern.test(url);
   };
 
   return (
@@ -275,9 +277,15 @@ function startup_form() {
       )}
 
       {/*if register Fail*/}
-      {registerError && (
+      {registerError.register && (
         <SoftAlert fontSize="small" color="error" mt={2} dismissible>
-          {registerError}
+          * {registerError.register}
+        </SoftAlert>
+      )}
+
+      {registerError.form && (
+        <SoftAlert fontSize="small" color="error" mt={2} dismissible>
+          * {registerError.form}
         </SoftAlert>
       )}
       {/*if from has a message*/}
@@ -390,7 +398,7 @@ function startup_form() {
 
         {/* Second Column */}
         <SoftBox flex="0 0 48%" mb={3}>
-        <SoftBox mb={1}>
+          <SoftBox mb={1}>
             <SoftTypography component="label" variant="caption" fontWeight="bold">
               Profile picture
             </SoftTypography>
@@ -398,11 +406,11 @@ function startup_form() {
               <Icon>error_outline</Icon>
             </Tooltip>
           </SoftBox>
-          <SoftBox mb={1}>
+          <SoftBox mt={1} mb={1}>
             {/* Image upload section */}
             <label htmlFor="photo">
               <input type="file" id="photo" hidden onChange={handlephotoChange} />
-              <SoftButton variant="contained" component="span">
+              <SoftButton variant="contained" component="span" fullWidth>
                 Upload
               </SoftButton>
             </label>
@@ -413,6 +421,38 @@ function startup_form() {
            */}
           </SoftBox>
           <SoftBox mb={1}>
+            <SoftTypography component="label" variant="caption" fontWeight="bold">
+              Sector <span style={{ color: "red" }}>*</span>
+            </SoftTypography>
+            {/* <select
+            value={sectors}
+            onChange={handleSectorChange}
+            required
+            style={selectStyles}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            >
+            <option value="">Select your sector</option>
+            <option value="Biotech">Biotech</option>
+            <option value="Adtech">Adtech</option>
+            <option value="Analytics">Analytics</option>
+            <option value="Market">Market</option>
+            <option value="Agriculture & Food Processing">Agriculture & Food Processing</option>
+            <option value="Information Technology">Information Technology</option>
+            <option value="ICT">ICT</option>
+            <option value="Health">Health</option>
+            <option value="Finance">Finance</option>
+            <option value="Education">Education</option>
+          </select> */}
+            <FixedTags
+              placeholder="Select your sector"
+              onSelectedValueChange={handleSelectedValue}
+              onClick={convertToText}
+            />
+            {/* <p> select value : {selectedValue.map(item => item.title).join(', ')}</p>
+        <p>set value : {sectors}</p> */}
+          </SoftBox>
+          {/* <SoftBox mb={1}>
             <SoftTypography component="label" variant="caption" fontWeight="bold">
               Startup Sector <span style={required}>*</span>
             </SoftTypography>
@@ -437,7 +477,7 @@ function startup_form() {
               <option value="Artificial Intelligence">Artificial Intelligence</option>
               <option value="LegalTech">LegalTech</option>
             </select>
-          </SoftBox>
+          </SoftBox> */}
           <SoftBox mb={1}>
             <SoftTypography component="label" variant="caption" fontWeight="bold">
               Startup Stage <span style={required}>*</span>
@@ -499,12 +539,7 @@ function startup_form() {
             <SoftTypography component="label" variant="caption" fontWeight="bold">
               City
             </SoftTypography>
-            <SoftInput
-              type="text"
-              placeholder="Riyadh"
-              value={city}
-              onChange={handleCityChange}
-            />
+            <SoftInput type="text" placeholder="Riyadh" value={city} onChange={handleCityChange} />
           </SoftBox>
           <SoftBox mb={1}>
             <SoftBox mt={4} display="flex" justifyContent="space-between">
@@ -526,7 +561,7 @@ function startup_form() {
           </SoftBox>
           <SoftBox mb={2}>
             <SoftTypography component="label" variant="caption" fontWeight="bold">
-            Job Position
+              Job Position
             </SoftTypography>
             <SoftInput
               type="text"
@@ -563,8 +598,7 @@ function startup_form() {
           color="info"
           circular
           fullWidth
-          onClick={handleSubmit}
-          to="/startup"
+          onClick={handleSubmit} 
         >
           Submit
         </SoftButton>
@@ -572,4 +606,4 @@ function startup_form() {
     </CoverLayout>
   );
 }
-export default startup_form;
+export default startupform;

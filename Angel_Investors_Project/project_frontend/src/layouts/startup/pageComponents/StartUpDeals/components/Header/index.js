@@ -14,6 +14,8 @@ Coded by www.creative-tim.com
 */
 
 import { useState, useEffect } from "react";
+import PropTypes from 'prop-types';
+
 
 // @mui material components
 import Card from "@mui/material/Card";
@@ -45,7 +47,7 @@ import breakpoints from "assets/theme/base/breakpoints";
 import burceMars from "assets/images/OneSynicate.jpg";
 import curved0 from "assets/images/curved-images/white-curved.jpeg";
 
-function Header() {
+function Header({name, job, img}) {
   const [tabsOrientation, setTabsOrientation] = useState("horizontal");
   const [tabValue, setTabValue] = useState(0);
 
@@ -116,14 +118,14 @@ function Header() {
           <Grid item>
             <SoftBox height="100%" mt={0.5} lineHeight={1}>
               <SoftTypography variant="h5" fontWeight="medium">
-              Financial Syndicate
+               {name}
               </SoftTypography>
               <SoftTypography variant="button" color="text" fontWeight="medium">
-              By Alex Thompson
+               {job}
               </SoftTypography>
             </SoftBox>
           </Grid>
-          <Grid item xs={12} md={6} lg={4} sx={{ ml: "auto" }}>
+          {/* <Grid item xs={12} md={6} lg={4} sx={{ ml: "auto" }}>
             <AppBar position="static">
               <Tabs
                 orientation={tabsOrientation}
@@ -131,18 +133,24 @@ function Header() {
                 onChange={handleSetTabValue}
                 sx={{ background: "transparent" }}
               >
-                {/* <Tab label="App" icon={<Cube />} /> */}
+                {/* <Tab label="App" icon={<Cube />} /> 
               
                 <Tab label="Message" icon={<Document />}  href="https://mail.google.com/mail/u/0/#inbox?compose=new" />
                 
-                {/* <Tab label="Settings" icon={<Settings />} /> */}
+                {/* <Tab label="Settings" icon={<Settings />} /> 
               </Tabs>
             </AppBar>
-          </Grid>
+          </Grid> */}
         </Grid>
       </Card>
     </SoftBox>
   );
 }
+
+Header.propTypes = {
+  name: PropTypes.string.isRequired,
+  job: PropTypes.string.isRequired,
+  img: PropTypes.string.isRequired,
+};
 
 export default Header;

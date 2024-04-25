@@ -1,18 +1,3 @@
-/**
-=========================================================
-* Soft UI Dashboard React - v4.0.1
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
 // react-routers components
 import { Link } from "react-router-dom";
 
@@ -72,7 +57,7 @@ function StartupInfoCard({ title, description, info, sectors, stage, team, web, 
   ));
 
   // Render the card social media icons
-  const renderSocial = social.map(({ link, icon, color }) => (
+/*   const renderSocial = social.map(({ link, icon, color }) => (
     <SoftBox
       key={color}
       component="a"
@@ -87,7 +72,7 @@ function StartupInfoCard({ title, description, info, sectors, stage, team, web, 
     >
       {icon}
     </SoftBox>
-  ));
+  )); */
 
   const renderBadges = sectors.map((sector, key) => (
     <SoftBadge key={key} badgeContent={sector} color="dark" variant="gradient" size="lg" />
@@ -107,11 +92,11 @@ function StartupInfoCard({ title, description, info, sectors, stage, team, web, 
       </SoftBox>
       <SoftBox p={2}>
         <SoftBox mb={2} lineHeight={1}>
-          <SoftTypography variant="body2" color="text" fontWeight="regular">
+          <SoftTypography variant="button" color="text" fontWeight="regular">
             {description}
           </SoftTypography>
         </SoftBox>
-        <SoftBox opacity={0.3}>
+        <SoftBox >
           <Divider />
         </SoftBox>
 
@@ -149,12 +134,14 @@ function StartupInfoCard({ title, description, info, sectors, stage, team, web, 
           </SoftTypography>
           <SoftBox>
             {renderItems}
-            <SoftBox display="flex" py={1} pr={2}>
+
+            {/* <SoftBox display="flex" py={1} pr={2}>
               <SoftTypography variant="button" fontWeight="bold" textTransform="capitalize">
                 social: &nbsp;
               </SoftTypography>
               {renderSocial}
-            </SoftBox>
+            </SoftBox> */}
+
           </SoftBox>
           </Grid>
 

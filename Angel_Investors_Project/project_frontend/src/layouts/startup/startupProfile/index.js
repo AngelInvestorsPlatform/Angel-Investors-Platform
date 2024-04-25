@@ -1,17 +1,10 @@
-/**
-=========================================================
-* Soft UI Dashboard React - v4.0.1
-=========================================================
+import React, { useState, useEffect } from "react";
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
+//for API
+import axios from "axios";
 
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
+//for user auth global context
+import { useAuthUser } from "context/authContext";
 
 // @mui material components
 import Grid from "@mui/material/Grid";
@@ -36,11 +29,10 @@ import DefaultProjectCard from "examples/Cards/ProjectCards/DefaultProjectCard";
 import PlaceholderCard from "examples/Cards/PlaceholderCard";
 
 // startup layout components
-import Header from "layouts/profile/components/Header";
+import Header from "layouts/startup/startupProfile/components/Header";
 import PlatformSettings from "layouts/profile/components/PlatformSettings";
 import StartUpNavbar from 'layouts/startup/components/StartUpNavbar';
 
-// Data
 import profilesListData from "layouts/profile/data/profilesListData";
 
 // Images
@@ -51,67 +43,96 @@ import team1 from "assets/images/team-1.jpg";
 import team2 from "assets/images/team-2.jpg";
 import team3 from "assets/images/team-3.jpg";
 import team4 from "assets/images/team-4.jpg";
-
+import warQ from "assets/images/startups-logos/warQ.png";
 function Overview() {
 
 //user variable || for backend link ||
+
+// Auth and config
+const { userData } = useAuthUser();
+const token = userData ? userData.token : " ";
+const config = {
+  headers: {
+    Authorization: `Token ${token}`,
+  },
+};
+
+const fetchStartupProfile = async () => {
+  try {
+    // Make the GET request
+    const response = await axios.get(
+      `${process.env.REACT_APP_DJANGO_API}/startups/profile/`,
+      config
+    );
+
+    // Handle response
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching startup profile:", error);
+    // Handle errors, e.g., token expired, network issues, etc.
+    if (error.response) {
+      // The request was made and the server responded with a status code
+      // that falls out of the range of 2xx
+      console.error("Response data:", error.response.data);
+      console.error("Response status:", error.response.status);
+      console.error("Response headers:", error.response.headers);
+    } else if (error.request) {
+      // The request was made but no response was received
+      console.error("Request error:", error.request);
+    } else {
+      // Something happened in setting up the request that triggered an Error
+      console.error("Error", error.message);
+    }
+  }
+};
+
+const [profile, setProfile] = useState(null);
+
+useEffect(() => {
+  const loadProfile = async () => {
+    const profileData = await fetchStartupProfile();
+    setProfile(profileData);
+  };
+
+  loadProfile();
+}, []);
+
 // User header info
-const name = "Alex Thompson";
-const job = "Angel Investor";
+const name = profile ? profile.startup_name : "Loading...";
+const job = profile ? profile.full_name + ": " + profile.job_position : "Loading...";
 
 // User information
 const userInfo = {
-  CommercialName: "Alec M. Thompson",
-  email: "alecthompson@mail.com",
-  mobile: "(44) 123 1234 123",
-  country: "Saudi Arabia",
+  startupName: profile ? profile.startup_name : "Loading...",
+  email: profile ? profile.email : "Loading...",
+  mobile: profile ? profile.phone : "Loading...",
+  country:  profile ? profile.country : "Loading...",
 };
 
 // Description
-const descriptionInfo = "Our platform is cutting-edge fintech startup specializing in revolutionizing digital payments and financial transactions. Led by a team of industry experts, our mission is to streamline financial processes, enhance security, and provide seamless experiences for businesses and consumers alike. With innovative technologies and a forward-thinking approach, Wrq is poised to disrupt the fintech landscape and drive the future of finance.";
+const descriptionInfo = profile ? profile.about : "Loading...";
 
 // Sectors
-const sectorsInfo = ["Fintech"];
+const sectors = profile ? profile.sector : " "
+const sectorsInfo = sectors.split(', ').sort();
 
 // Startup Stage
-const stageInfo = "Pre-seed";
+const stageInfo = profile ? profile.stage : "Loading...";
 
 // Team members
-const TeamMembers = "5";
+const TeamMembers = profile ? profile.team_size : "Loading...";
 
-// Social media links
-const socialMediaInfo = [
-  {
-    link: "https://www.facebook.com/WrqFintech/",
-    icon: <FacebookIcon />,
-    color: "facebook",
-  },
-  {
-    link: "https://twitter.com/WrqFintech",
-    icon: <TwitterIcon />,
-    color: "twitter",
-  },
-  {
-    link: "https://www.instagram.com/WrqFintechOfficial/",
-    icon: <InstagramIcon />,
-    color: "instagram",
-  },
-  {
-    link: "https://www.linkedin.com/company/WrqFintech/",
-    icon: <LinkedInIcon />,
-    color: "linkedin",
-  },
-];
+const website = profile ? profile.website : "Loading...";
 
 
 
   return (
     <DashboardLayout>
     <StartUpNavbar />
-      <Header />
+    <Header name={name} job={job} img={warQ} />
       <SoftBox mt={5} mb={3}>
         <Grid container spacing={3}>
-          <Grid item>
+          <Grid item xs={12} md={6} xl={8}>
           <StartupInfoCard
               title="About This Startup Company"
               description={descriptionInfo}
@@ -119,8 +140,7 @@ const socialMediaInfo = [
               sectors={sectorsInfo}
               stage={stageInfo}
               team={TeamMembers}
-              web="/landing"
-              social={socialMediaInfo}
+              web={website}
               action={{ route: "", tooltip: "Edit Profile" }}
             />
           </Grid>
