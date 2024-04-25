@@ -126,20 +126,21 @@ const routes = [
     type: "collapse",
     name: "Profile",
     key: "InvestorProfile",
-    route: "/investor/profile",
+    /* route: "/investor/profile", */
     icon: <CustomerSupport size="12px" />,
     component: < InvestorProfile />,
     noCollapse: true,
+    active: false, // for a temporary 
   },
   {
     type: "collapse",
     name: "Settings",
     key: "Settings",
-    route: "/investor/Profile",
+    /* route: "/investor/Profile", */
     icon: <Settings size="12px" />,
     component: < InvestorProfile />,
     noCollapse: true,
-    // active: false, //for a temporary
+    active: false, // for a temporary 
   },
   
   // Add more route objects as needed

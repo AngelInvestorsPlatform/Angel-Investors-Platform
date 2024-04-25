@@ -42,7 +42,7 @@ function SidenavCard() {
     try {
       // Make the GET request
       const response = await axios.get(
-        `${process.env.REACT_APP_DJANGO_API}/investors/check-syndicate-lead/`,
+        `${process.env.REACT_APP_DJANGO_API}investors/check-syndicate-lead/`,
         config
       );
 

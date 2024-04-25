@@ -5,19 +5,48 @@ from investorApp.models import investor
 
 
 
+
 class SyndicateSerializer(serializers.ModelSerializer):
+    lead_name = serializers.SerializerMethodField(read_only=True)
+    lead_details = serializers.SerializerMethodField(read_only=True)
+
     class Meta:
         model = Syndicate
-        fields = ['syndicate_name', 'sectors', 'status', 'about', 'syndicate_lead']
+        fields = ['id', 'syndicate_name', 'sectors', 'status', 'about', 'syndicate_lead', 'lead_name', 'lead_details']
         extra_kwargs = {
             'syndicate_lead': {'read_only': True}
         }
+
+    def get_lead_name(self, obj):
+        # Assuming there is a related_name 'investor_profile' linking User to Investor
+        # Check if the user has an investor profile linked
+        if hasattr(obj.syndicate_lead, 'investor_profile'):
+            return obj.syndicate_lead.investor_profile.full_name
+        else:
+            # Check for any other user profile that might exist
+            return obj.syndicate_lead.get_full_name() if hasattr(obj.syndicate_lead, 'get_full_name') else 'Unknown Lead'
+        
+    def get_lead_details(self, obj):
+        # Assuming `syndicate_lead` is directly linked to an `Investor`
+        # and `investor_profile` is an attribute on the user model that points to the investor instance
+        if hasattr(obj.syndicate_lead, 'investor_profile'):
+            # If the investor_profile exists, serialize it
+            investor = obj.syndicate_lead.investor_profile
+            return InvestorSerializer(investor).data
+        else:
+            # Return a default or simplified structure if no investor profile exists
+            return {'detail': 'Lead details are not available.'}
 
     def create(self, validated_data):
         # Set the lead to the current user during syndicate creation
         validated_data['syndicate_lead'] = self.context['request'].user
         return Syndicate.objects.create(**validated_data)
     
+
+class InvestorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = investor
+        fields = ['full_name', 'phone', 'country', 'experience']  # Add other relevant fields
 
 
 class SyndicateLeadSerializer(serializers.ModelSerializer):

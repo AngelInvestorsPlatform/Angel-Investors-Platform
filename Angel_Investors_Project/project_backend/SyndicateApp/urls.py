@@ -57,7 +57,7 @@ urlpatterns = [
  
 #To list all members of a specific lead syndicate:
 6- curl -X GET \
-  http://127.0.0.1:8000/syndicate/manageSyndicateMembers/ \
+  http://127.0.0.1:8000/syndicates/manageSyndicateMembers/ \
   -H 'Authorization: Token YOUR_TOKEN_HERE'
 
 

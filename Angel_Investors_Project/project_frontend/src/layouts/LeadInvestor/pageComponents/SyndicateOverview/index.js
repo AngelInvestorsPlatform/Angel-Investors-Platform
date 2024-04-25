@@ -32,6 +32,8 @@ import PlaceholderCard from "examples/Cards/PlaceholderCard";
 // Investor layout components
 import Header from "layouts/LeadInvestor/components/Header";
 import PlatformSettings from "layouts/profile/components/PlatformSettings";
+import MembersList from "layouts/LeadInvestor/components/MembersList";
+
 // Investor layout components
 // import SyndicateCard from "layouts/investor/InvestorProfile/components/SyndicateCard";
 
@@ -61,7 +63,7 @@ function Overview() {
      try {
        // Make the GET request
        const response = await axios.get(
-         `${process.env.REACT_APP_DJANGO_API}/syndicates/manageSyndicate/`,
+         `${process.env.REACT_APP_DJANGO_API}syndicates/manageSyndicate/`,
          config
        );
  
@@ -101,16 +103,15 @@ function Overview() {
   //user variable || for backend link ||
   //user header info
   const name = profile ? profile.syndicate_name : "Loading...";
-  const lead = "Lead: Ali Ahmad";
+  const lead = profile ? profile.lead_name : "Loading...";
   const title = `About ${name} Syndicate`
 
   // User information
   const userInfo = {
-    Lead: "Ali M. Ahmad",
-    email: "AliAhmad@mail.com",
-    mobile: "(966) 23 1234 123",
-    country: "SA",
-    experience: "3-5 years",
+    Lead: profile ? profile.lead_details.full_name :"...",
+    mobile: profile ? profile.lead_details.phone :"...",
+    country: profile  ? profile.lead_details.country :"...",
+    experience: profile  ? profile.lead_details.experience :"...",
   };
 
    // Description
@@ -137,7 +138,7 @@ function Overview() {
             />
           </Grid>
           <Grid item xs={3} xl={4}>
-            <ProfileDealList title="Syndicate members " profiles={membersListData} />
+            <MembersList/>
           </Grid>
           <Grid item xs={6} xl={4}>
             <ProfileDealList title="Active Deals" profiles={ActiveDealsData} />
