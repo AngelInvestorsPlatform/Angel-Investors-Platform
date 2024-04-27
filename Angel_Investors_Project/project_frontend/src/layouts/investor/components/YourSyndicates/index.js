@@ -1,38 +1,52 @@
-/**
-=========================================================
-* Soft UI Dashboard React - v4.0.1
-=========================================================
+import { useState, useEffect } from "react";
+import axios from "axios";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import MuiLink from "@mui/material/Link";
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-import { useState } from "react";
+//for user auth global context
+import { useAuthUser } from "context/authContext";
 
 // @mui material components
-import Card from "@mui/material/Card";
+import Grid from "@mui/material/Grid";
 import Icon from "@mui/material/Icon";
+import Card from "@mui/material/Card";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 
 // Soft UI Dashboard React components
 import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
+import SoftButton from "components/SoftButton";
 
 // Soft UI Dashboard Materail-UI example components
 import Table from "examples/Tables/Table";
 
+//import syndicate components
+import Syndicate from "layouts/investor/components/SyndicateComponents/Syndicate";
+import SectorsFunction from "layouts/investor/components/SyndicateComponents/SectorsFunction";
+import StatusFunction from "layouts/investor/components/SyndicateComponents/StatusFunction";
+import MemberAvatars from "layouts/investor/components/SyndicateComponents/MemberAvatars";
+
 // Data
 import data from "layouts/investor/components/YourSyndicates/data";
 
+// Images
+import logoXD from "assets/images/small-logos/logo-xd.svg";
+import logoAtlassian from "assets/images/small-logos/logo-atlassian.svg";
+import logoSlack from "assets/images/small-logos/logo-slack.svg";
+import logoSpotify from "assets/images/small-logos/logo-spotify.svg";
+import logoJira from "assets/images/small-logos/logo-jira.svg";
+import logoInvesion from "assets/images/small-logos/logo-invision.svg";
+import team1 from "assets/images/team-1.jpg";
+import team2 from "assets/images/team-2.jpg";
+import team3 from "assets/images/team-3.jpg";
+import team4 from "assets/images/team-4.jpg";
+
+const images = [logoXD, logoAtlassian, logoSlack, logoSpotify, logoJira, logoInvesion];
+
 function YourSyndicates() {
-  const { columns, rows } = data();
+  /////////////Menu
   const [menu, setMenu] = useState(null);
 
   const openMenu = ({ currentTarget }) => setMenu(currentTarget);
@@ -58,6 +72,75 @@ function YourSyndicates() {
       <MenuItem onClick={closeMenu}>Something else</MenuItem>
     </Menu>
   );
+  ///// end of menu
+
+  //
+  // Table const
+  const [tableData, setTableData] = useState({ columns: [], rows: [] });
+
+  // Auth const
+  const { userData } = useAuthUser();
+  const token = userData ? userData.token : " ";
+  useEffect(() => {
+    const config = {
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+    };
+
+    //////// here is the start of request
+    async function fetchSyndicateData() {
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_DJANGO_API}investors/joined-syndicates/`,
+          config
+        );
+
+        const formattedRows = response.data.map((syndicate) => ({
+          Syndicate: (
+            <Link to="/investor/yourSyndicates/SyndicateDetailsProfile">
+              <MuiLink component="div" underline="hover" sx={{ cursor: "pointer" }}>
+                <Syndicate
+                  image={images[Math.floor(Math.random() * images.length)]}
+                  name={syndicate.syndicate_name}
+                  Lead={syndicate.lead_name}
+                />
+              </MuiLink>
+            </Link>
+          ),
+          Sector: <SectorsFunction sectors={syndicate.sectors.split(", ")} />,
+          Status: <StatusFunction status={syndicate.status} />,
+          "Active Deals": (
+            <SoftTypography variant="caption" color="secondary" fontWeight="medium">
+              {syndicate.active_deals} Deals
+            </SoftTypography>
+          ),
+          Members: (
+            <SoftBox display="flex" py={1}>
+              <MemberAvatars members={syndicate.members} />
+            </SoftBox>
+          ),
+        }));
+
+        setTableData({
+          columns: [
+            { name: "Syndicate", align: "left" },
+            { name: "Sector", align: "center" },
+            { name: "Status", align: "center" },
+            { name: "Active Deals", align: "center" },
+            { name: "Members", align: "center" },
+          ],
+          rows: formattedRows,
+        });
+      } catch (error) {
+        console.error("Error fetching syndicates:", error);
+      }
+    }
+
+    if (token) {
+      fetchSyndicateData();
+    }
+  }, [token]); // Dependency array includes token
 
   return (
     <Card>
@@ -77,7 +160,7 @@ function YourSyndicates() {
               equalizer
             </Icon>
             <SoftTypography variant="button" fontWeight="regular" color="text">
-              &nbsp;The Syndicate <strong> You Joined</strong> 
+              &nbsp;The Syndicate <strong> You Joined</strong>
             </SoftTypography>
           </SoftBox>
         </SoftBox>
@@ -98,7 +181,15 @@ function YourSyndicates() {
           },
         }}
       >
-        <Table columns={columns} rows={rows} />
+        {tableData.rows.length > 0 ? (
+          <Table columns={tableData.columns} rows={tableData.rows} />
+        ) : (
+          <SoftBox py={2} px={3}>
+            <SoftTypography variant="h6" fontWeight="regular" color="text">
+              No data available or loading...
+            </SoftTypography>
+          </SoftBox>
+        )}
       </SoftBox>
     </Card>
   );

@@ -23,7 +23,7 @@ class InvestmentSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class SyndicateSerializer(serializers.ModelSerializer):
-    lead_name = serializers.CharField(source='syndicate_lead.user.full_name', read_only=True)
+    lead_name = serializers.SerializerMethodField()
     sectors = serializers.CharField(read_only=True)
     status = serializers.CharField(read_only=True)
     active_deals = serializers.SerializerMethodField()
@@ -44,3 +44,8 @@ class SyndicateSerializer(serializers.ModelSerializer):
     def get_members(self, obj):
         members = SyndicateMember.objects.filter(syndicate=obj)
         return SyndicateMemberSerializer(members, many=True).data
+    
+    def get_lead_name(self, obj):
+        # Assuming there is a related_name 'investor_profile' linking User to Investor
+        investor_profile = getattr(obj.syndicate_lead, 'investor_profile', None)
+        return investor_profile.full_name if investor_profile  else 'Unknown Lead'
