@@ -186,6 +186,7 @@ function InvestorForm() {
           if (response.status >= 200 && response.status < 300) {
             // Handle successful response
             setRegConfirm("successfully registered, Please Login to your account")
+            window.scrollTo({ top: 0, behavior: "smooth" }); // Scroll to top to show confirm message
             setRegError({ ...registerError, form: "" }); // Clear any form registerError
           } else {
             // Handle unexpected status code correctly

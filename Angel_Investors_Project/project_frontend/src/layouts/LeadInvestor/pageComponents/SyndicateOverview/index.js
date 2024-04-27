@@ -131,7 +131,7 @@ function Overview() {
         <Grid container spacing={3}>
           <Grid item xs={12} md={6} xl={8}>
             <SyndicateInfoCard
-              title="About St8 Syndicate"
+              title={title}
               description={descriptionInfo}
               sectors={sectorsInfo}
               info={userInfo}
