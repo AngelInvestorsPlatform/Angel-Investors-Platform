@@ -49,11 +49,13 @@ import team2 from "assets/images/team-2.jpg";
 import team3 from "assets/images/team-3.jpg";
 import team4 from "assets/images/team-4.jpg";
 
+
 // Data
 //import SyndicatesTableData from "layouts/investor/data/SyndicatesTableData";
 //import useSyndicatesTableData from "layouts/investor/data/useSyndicatesTableData";
 
 const images = [logoXD, logoAtlassian, logoSlack, logoSpotify,logoJira,logoInvesion ];
+
 function ExploreSyndicate() {
 // Dialog const
   const [dialogOpen, setDialogOpen] = useState(false); 
@@ -112,14 +114,6 @@ function ExploreSyndicate() {
                   View More
                 </SoftTypography>
               </SoftButton>
-{/*               {dialogOpen && (
-                <SyndicateDialog
-                  open={dialogOpen}
-                  onClose={handleCloseDialog}
-                  Data={responseData}
-                />
-              )} */}
-              {/* <SyndicateDialog open={dialogOpen} onClose={handleCloseDialog} Data={syndicate} /> */}
             </SoftBox>
           ),
         }));

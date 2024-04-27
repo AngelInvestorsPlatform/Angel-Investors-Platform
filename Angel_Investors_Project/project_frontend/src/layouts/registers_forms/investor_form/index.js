@@ -188,9 +188,10 @@ function InvestorForm() {
             setRegConfirm("successfully registered, Please Login to your account")
             window.scrollTo({ top: 0, behavior: "smooth" }); // Scroll to top to show confirm message
             setRegError({ ...registerError, form: "" }); // Clear any form registerError
+
           } else {
             // Handle unexpected status code correctly
-            setRegError({ ...registerError, register: `Unexpected response status: ${response.status}` });
+            setRegError({ ...registerError, register: `Unexpected response status: ${response.status} \n response message: ${response.message}` });
           }
         } catch (error) {
           // Handle network error or server error response status codes (e.g., 500)
@@ -200,7 +201,7 @@ function InvestorForm() {
             setRegError({
               ...registerError,
               register: `Request failed with status: ${error.response.status}, message: ${
-                error.response.data.detail || error.message
+                error.response.data.message
               }`,
             });
           } else if (error.request) {
@@ -342,7 +343,7 @@ function InvestorForm() {
 
         {/* Second Column */}
         <SoftBox flex="0 0 48%" mb={3}>
-        <SoftBox mt={2} display="flex" justifyContent="space-between">
+          <SoftBox mt={2} display="flex" justifyContent="space-between">
             <SoftTypography component="label" variant="caption" fontWeight="bold">
               Profile picture
             </SoftTypography>
