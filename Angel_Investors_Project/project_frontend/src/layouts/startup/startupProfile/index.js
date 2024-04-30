@@ -31,7 +31,7 @@ import PlaceholderCard from "examples/Cards/PlaceholderCard";
 // startup layout components
 import Header from "layouts/startup/startupProfile/components/Header";
 import PlatformSettings from "layouts/profile/components/PlatformSettings";
-import StartUpNavbar from 'layouts/startup/components/StartUpNavbar';
+import StartUpNavbar from "layouts/startup/components/StartUpNavbar";
 
 import profilesListData from "layouts/profile/data/profilesListData";
 
@@ -43,97 +43,96 @@ import team1 from "assets/images/team-1.jpg";
 import team2 from "assets/images/team-2.jpg";
 import team3 from "assets/images/team-3.jpg";
 import team4 from "assets/images/team-4.jpg";
-import warQ from "assets/images/startups-logos/warQ.png";
+import warQ from "assets/images/startups-logos/warq-logo.png";
 function Overview() {
+  //user variable || for backend link ||
 
-//user variable || for backend link ||
-
-// Auth and config
-const { userData } = useAuthUser();
-const token = userData ? userData.token : " ";
-const config = {
-  headers: {
-    Authorization: `Token ${token}`,
-  },
-};
-
-const fetchStartupProfile = async () => {
-  try {
-    // Make the GET request
-    const response = await axios.get(
-      `${process.env.REACT_APP_DJANGO_API}/startups/profile/`,
-      config
-    );
-
-    // Handle response
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching startup profile:", error);
-    // Handle errors, e.g., token expired, network issues, etc.
-    if (error.response) {
-      // The request was made and the server responded with a status code
-      // that falls out of the range of 2xx
-      console.error("Response data:", error.response.data);
-      console.error("Response status:", error.response.status);
-      console.error("Response headers:", error.response.headers);
-    } else if (error.request) {
-      // The request was made but no response was received
-      console.error("Request error:", error.request);
-    } else {
-      // Something happened in setting up the request that triggered an Error
-      console.error("Error", error.message);
-    }
-  }
-};
-
-const [profile, setProfile] = useState(null);
-
-useEffect(() => {
-  const loadProfile = async () => {
-    const profileData = await fetchStartupProfile();
-    setProfile(profileData);
+  // Auth and config
+  const { userData } = useAuthUser();
+  const token = userData ? userData.token : " ";
+  const config = {
+    headers: {
+      Authorization: `Token ${token}`,
+    },
   };
 
-  loadProfile();
-}, []);
+  const fetchStartupProfile = async () => {
+    try {
+      // Make the GET request
+      const response = await axios.get(
+        `${process.env.REACT_APP_DJANGO_API}/startups/profile/`,
+        config
+      );
 
-// User header info
-const name = profile ? profile.startup_name : "Loading...";
-const job = profile ? profile.full_name + ": " + profile.job_position : "Loading...";
+      // Handle response
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching startup profile:", error);
+      // Handle errors, e.g., token expired, network issues, etc.
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        console.error("Response data:", error.response.data);
+        console.error("Response status:", error.response.status);
+        console.error("Response headers:", error.response.headers);
+      } else if (error.request) {
+        // The request was made but no response was received
+        console.error("Request error:", error.request);
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        console.error("Error", error.message);
+      }
+    }
+  };
 
-// User information
-const userInfo = {
-  startupName: profile ? profile.startup_name : "Loading...",
-  email: profile ? profile.email : "Loading...",
-  mobile: profile ? profile.phone : "Loading...",
-  country:  profile ? profile.country : "Loading...",
-};
+  const [profile, setProfile] = useState(null);
 
-// Description
-const descriptionInfo = profile ? profile.about : "Loading...";
+  useEffect(() => {
+    const loadProfile = async () => {
+      const profileData = await fetchStartupProfile();
+      setProfile(profileData);
+    };
 
-// Sectors
-const sectors = profile ? profile.sector : " "
-const sectorsInfo = sectors.split(', ').sort();
+    loadProfile();
+  }, []);
 
-// Startup Stage
-const stageInfo = profile ? profile.stage : "Loading...";
+  // User header info
+  const name = profile ? profile.startup_name : "Loading...";
+  const job = profile ? profile.job_position + ": " + profile.full_name : "Loading...";
 
-// Team members
-const TeamMembers = profile ? profile.team_size : "Loading...";
+  // User information
+  const userInfo = {
+    position: profile ? profile.job_position : "Loading...",
+    name: profile ? profile.full_name : "Loading...",
+    email: profile ? profile.email : "Loading...",
+    mobile: profile ? profile.phone : "Loading...",
+    country: profile ? profile.country : "Loading...",
+    city: profile ? profile.city : "...",
+  };
 
-const website = profile ? profile.website : "Loading...";
+  // Description
+  const descriptionInfo = profile ? profile.about : "Loading...";
 
+  // Sectors
+  const sectors = profile ? profile.sector : " ";
+  const sectorsInfo = sectors.split(", ").sort();
 
+  // Startup Stage
+  const stageInfo = profile ? profile.stage : "Loading...";
+
+  // Team members
+  const TeamMembers = profile ? profile.team_size : "Loading...";
+
+  const website = profile ? profile.website : "Loading...";
 
   return (
     <DashboardLayout>
-    <StartUpNavbar />
-    <Header name={name} job={job} img={warQ} />
-      <SoftBox mt={5} mb={3}>
+      <StartUpNavbar />
+       <Header name={name} job={job} img={warQ} />
+      <SoftBox mt={5} mb={3} ml={6}>
         <Grid container spacing={3}>
-          <Grid item xs={12} md={6} xl={8}>
-          <StartupInfoCard
+          <Grid item>
+            <StartupInfoCard
               title="About This Startup Company"
               description={descriptionInfo}
               info={userInfo}
@@ -144,94 +143,8 @@ const website = profile ? profile.website : "Loading...";
               action={{ route: "", tooltip: "Edit Profile" }}
             />
           </Grid>
-          </Grid> 
-          </SoftBox>
-          {/*
-
-     
-      <SoftBox mb={3}>
-        <Card>
-          <SoftBox pt={2} px={2}>
-            <SoftBox mb={0.5}>
-              <SoftTypography variant="h6" fontWeight="medium">
-                Projects
-              </SoftTypography>
-            </SoftBox>
-            <SoftBox mb={1}>
-              <SoftTypography variant="button" fontWeight="regular" color="text">
-                Architects design houses
-              </SoftTypography>
-            </SoftBox>
-          </SoftBox>
-          <SoftBox p={2}>
-            <Grid container spacing={3}>
-              <Grid item xs={12} md={6} xl={3}>
-                <DefaultProjectCard
-                  image={homeDecor1}
-                  label="project #2"
-                  title="modern"
-                  description="As Uber works through a huge amount of internal management turmoil."
-                  action={{
-                    type: "internal",
-                    route: "/pages/profile/profile-overview",
-                    color: "info",
-                    label: "view project",
-                  }}
-                  authors={[
-                    { image: team1, name: "Elena Morison" },
-                    { image: team2, name: "Ryan Milly" },
-                    { image: team3, name: "Nick Daniel" },
-                    { image: team4, name: "Peterson" },
-                  ]}
-                />
-              </Grid>
-              <Grid item xs={12} md={6} xl={3}>
-                <DefaultProjectCard
-                  image={homeDecor2}
-                  label="project #1"
-                  title="scandinavian"
-                  description="Music is something that every person has his or her own specific opinion about."
-                  action={{
-                    type: "internal",
-                    route: "/pages/profile/profile-overview",
-                    color: "info",
-                    label: "view project",
-                  }}
-                  authors={[
-                    { image: team3, name: "Nick Daniel" },
-                    { image: team4, name: "Peterson" },
-                    { image: team1, name: "Elena Morison" },
-                    { image: team2, name: "Ryan Milly" },
-                  ]}
-                />
-              </Grid>
-              <Grid item xs={12} md={6} xl={3}>
-                <DefaultProjectCard
-                  image={homeDecor3}
-                  label="project #3"
-                  title="minimalist"
-                  description="Different people have different taste, and various types of music."
-                  action={{
-                    type: "internal",
-                    route: "/pages/profile/profile-overview",
-                    color: "info",
-                    label: "view project",
-                  }}
-                  authors={[
-                    { image: team4, name: "Peterson" },
-                    { image: team3, name: "Nick Daniel" },
-                    { image: team2, name: "Ryan Milly" },
-                    { image: team1, name: "Elena Morison" },
-                  ]}
-                />
-              </Grid>
-              <Grid item xs={12} md={6} xl={3}>
-                <PlaceholderCard title={{ variant: "h5", text: "New project" }} outlined />
-              </Grid>
-            </Grid>
-          </SoftBox>
-        </Card>
-      </SoftBox> */}
+        </Grid>
+      </SoftBox>
 
       <Footer />
     </DashboardLayout>

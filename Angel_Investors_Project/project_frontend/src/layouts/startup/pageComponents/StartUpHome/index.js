@@ -1,17 +1,11 @@
-/**
-=========================================================
-* Soft UI Dashboard React - v4.0.1
-=========================================================
+import React, { useState, useEffect } from "react";
 
-* Product Page: https://www.creative-tim.com/product/soft-ui-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
+//for API
+import axios from "axios";
 
-Coded by www.creative-tim.com
+//for user auth global context
+import { useAuthUser } from "context/authContext";
 
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
 // @mui material components
 import Card from "@mui/material/Card";
 
@@ -22,20 +16,16 @@ import Icon from "@mui/material/Icon";
 // Soft UI Dashboard React components
 import SoftBox from "components/SoftBox";
 
-;import SoftTypography from "components/SoftTypography";
-
+import SoftTypography from "components/SoftTypography";
 
 // @mui icons
-
-
 
 // Soft UI Dashboard React examples
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
 
-import StartUpNavbar from 'layouts/startup/components/StartUpNavbar';
-
+import StartUpNavbar from "layouts/startup/components/StartUpNavbar";
 
 import MiniStatisticsCard from "examples/Cards/StatisticsCards/MiniStatisticsCard";
 import ReportsBarChart from "examples/Charts/BarCharts/ReportsBarChart";
@@ -43,9 +33,7 @@ import GradientLineChart from "examples/Charts/LineCharts/GradientLineChart";
 
 import Projects from "layouts/dashboard/components/Projects";
 import OrderOverview from "layouts/dashboard/components/OrderOverview";
-import Separator from "layouts/startup/components/Separator"
-
-
+import Separator from "layouts/startup/components/Separator";
 
 // Data
 import reportsBarChartData from "layouts/dashboard/data/reportsBarChartData";
@@ -54,41 +42,90 @@ import gradientLineChartData from "layouts/dashboard/data/gradientLineChartData"
 import Header from "layouts/startup/pageComponents/StartUpDeals/components/Header";
 import SyndicateInfo from "layouts/startup/pageComponents/StartUpDeals/components/SyndicateInfo";
 import DealInfo from "layouts/startup/pageComponents/StartUpDeals/components/DealInfo";
-import DealsData from "layouts/startup/pageComponents/StartUpDeals/data/DealsData";
 import typography from "assets/theme/base/typography";
+
 // Data
+import warQ from "assets/images/startups-logos/warq-logo.png";
+
 //
 function Deal() {
+  // Auth and config
+  const { userData } = useAuthUser();
+  const token = userData ? userData.token : " ";
+  const config = {
+    headers: {
+      Authorization: `Token ${token}`,
+    },
+  };
 
-  const { columns: prCols, rows: prRows } = DealsData;
+  const fetchStartupProfile = async () => {
+    try {
+      // Make the GET request
+      const response = await axios.get(
+        `${process.env.REACT_APP_DJANGO_API}/startups/profile/`,
+        config
+      );
+
+      // Handle response
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching startup profile:", error);
+      // Handle errors, e.g., token expired, network issues, etc.
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        console.error("Response data:", error.response.data);
+        console.error("Response status:", error.response.status);
+        console.error("Response headers:", error.response.headers);
+      } else if (error.request) {
+        // The request was made but no response was received
+        console.error("Request error:", error.request);
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        console.error("Error", error.message);
+      }
+    }
+  };
+
+  const [profile, setProfile] = useState(null);
+
+  useEffect(() => {
+    const loadProfile = async () => {
+      const profileData = await fetchStartupProfile();
+      setProfile(profileData);
+    };
+
+    loadProfile();
+  }, []);
+
+  // User header info
+  const name = profile ? profile.startup_name : "Loading...";
+  const job = profile ? profile.job_position + ": " + profile.full_name : "Loading...";
+
   const { size } = typography;
   const { chart, items } = reportsBarChartData;
   return (
     <DashboardLayout>
       <DashboardNavbar />
-      <Header/>
-      <StartUpNavbar/> 
+      <StartUpNavbar />
+      <Header name={name} job={job} img={warQ} />
 
-      <SoftBox mt={5} mb={3}>
-        <Grid container spacing={3}>
-          <Grid item xs={12} md={6} xl={4}>
-          <DealInfo/>
-          </Grid>
-          <Grid item xs={12} md={12} xl={8}>
-             <SyndicateInfo />
-          </Grid>
-          </Grid>
-          </SoftBox>
       {/* ------------------------*/}
-         <Separator /> 
+      <Separator />
 
       <SoftBox mb={3} mt={4}>
-<SoftTypography alignItems="center" variant="h3" color="info" fontWeight="regular" textGradient>
-     Equity  Overview
-                </SoftTypography>
-                </SoftBox>
-  
-   <SoftBox py={3}>
+        <SoftTypography
+          alignItems="center"
+          variant="h3"
+          color="info"
+          fontWeight="regular"
+          textGradient
+        >
+          Equity Overview
+        </SoftTypography>
+      </SoftBox>
+
+      <SoftBox py={3}>
         <SoftBox mb={3}>
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6} xl={3}>
@@ -127,62 +164,24 @@ function Deal() {
               />
             </Grid>
           </Grid>
-          
         </SoftBox>
         <SoftBox mb={3}>
-          <Grid container spacing={3}>
-            <Grid item xs={12} lg={5}>
-              <ReportsBarChart
-                title="active users"
-                description={
-                  <>
-                    (<strong>+23%</strong>) than last week
-                  </>
-                }
-                chart={chart}
-                items={items}
-              />
-            </Grid>
-            <Grid item xs={12} lg={7}>
-              <GradientLineChart
-                title="Sales Overview"
-                description={
-                  <SoftBox display="flex" alignItems="center">
-                    <SoftBox fontSize={size.lg} color="success" mb={0.3} mr={0.5} lineHeight={0}>
-                      <Icon className="font-bold">arrow_upward</Icon>
-                    </SoftBox>
-                    <SoftTypography variant="button" color="text" fontWeight="medium">
-                      4% more{" "}
-                      <SoftTypography variant="button" color="text" fontWeight="regular">
-                        in 2021
-                      </SoftTypography>
-                    </SoftTypography>
-                  </SoftBox>
-                }
-                height="20.25rem"
-                chart={gradientLineChartData}
-              />
-            </Grid>
-          </Grid>
+          
         </SoftBox>
+      </SoftBox>
+
+      {/* ------------------------*/}
+      <SoftBox mt={5} mb={3}>
         <Grid container spacing={3}>
-          <Grid item xs={12} md={6} lg={8}>
-            <Projects />
+          <Grid item xs={12} md={6} xl={4}>
+            <DealInfo />
           </Grid>
-          <Grid item xs={12} md={6} lg={4}>
-            <OrderOverview />
+          <Grid item xs={12} md={12} xl={8}>
+            <SyndicateInfo />
           </Grid>
         </Grid>
       </SoftBox>
-
-
-
-      {/* ------------------------*/}
-
-
-
-
-    {/*  */}
+      {/*  */}
       <Footer />
     </DashboardLayout>
   );
