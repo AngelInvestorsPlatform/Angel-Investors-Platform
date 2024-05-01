@@ -52,7 +52,7 @@ class ExclusiveStartup(models.Model):
     startup_name = models.CharField(max_length=255, null=False)
     sector = models.CharField(max_length=255, null=False, blank=True)
     city =  models.CharField(max_length=255, null=True, blank=True)
-    country = models.CharField(max_length=255, default='SA')
+    country = models.CharField(max_length=255, default='SA', null=True, blank=True)
     phone = models.CharField(max_length=255, null=True, blank=True)
     team_size = models.CharField(max_length=2000, null=True, blank=True)
     website = models.URLField(max_length=200, null=True, blank=True)

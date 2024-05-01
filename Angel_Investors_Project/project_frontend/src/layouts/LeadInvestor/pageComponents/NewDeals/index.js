@@ -16,6 +16,8 @@ import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
 import SoftInput from "components/SoftInput";
 import SoftButton from "components/SoftButton";
+import SoftAvatar from "components/SoftAvatar";
+import SoftBadge from "components/SoftBadge";
 
 // registers_forms layout components
 import CoverLayout from "layouts/registers_forms/components/CoverLayout";
@@ -36,45 +38,172 @@ import Projects from "layouts/investor/components/Projects";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Info } from "@mui/icons-material";
-// import { pdfjs } from "react-pdf";
-// import PdfComp from "./PdfComp";
-
-// pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-//   "pdfjs-dist/build/pdf.worker.min.js",
-//   import.meta.url
-// ).toString();
 
 //data
 import acceptances from "layouts/LeadInvestor/pageComponents/NewDeals/data/acceptances";
 import additions from "layouts/LeadInvestor/pageComponents/NewDeals/data/additions";
+import ShowOffer from "layouts/LeadInvestor/pageComponents/NewDeals/data/ShowOffer";
+import OfferStatus from "layouts/LeadInvestor/pageComponents/NewDeals/data/OfferStatus";
+import AddToSyndicate from "layouts/LeadInvestor/pageComponents/NewDeals/data/AddToSyndicate";
 
+// Images
+import logoXD from "assets/images/small-logos/logo-xd.svg";
+import logoAtlassian from "assets/images/small-logos/logo-atlassian.svg";
+import logoSlack from "assets/images/small-logos/logo-slack.svg";
+import logoSpotify from "assets/images/small-logos/logo-spotify.svg";
+import logoJira from "assets/images/small-logos/logo-jira.svg";
+import logoInvesion from "assets/images/small-logos/logo-invision.svg";
+
+const images = [logoXD, logoAtlassian, logoSlack, logoSpotify, logoJira, logoInvesion];
 
 function YourDeals() {
-
-  const { columns2, rows2 } = acceptances;
   const { columns3, rows3 } = additions;
-  const [text, setText] = useState("");
 
-  const handleChange = (event) => {
-    setText(event.target.value);
-  };
+  // Table const
+  const [tableData, setTableData] = useState({ columns: [], rows: [] });
+  const [tableData2, setTableData2] = useState({ columns: [], rows: [] });
 
-  const [selectedFile, setSelectedFile] = useState(null);
+  // Auth const
+  const { userData } = useAuthUser();
+  const token = userData ? userData.token : " ";
+  useEffect(() => {
+    const config = {
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+    };
+    //////// here is the start of lead offers requests
+    async function fetchOffersData() {
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_DJANGO_API}startups/lead-offers/`,
+          config
+        );
 
-  const onFileChange = (event) => {
-    const file = event.target.files[0];
-    if (!file.type.includes("pdf")) {
-      alert("Please select a PDF file!");
-      return;
+        // Define a custom sorting function
+        const sortOffers = (a, b) => {
+          const priority = { accepted: 1, rejected: 2, pending: 3 };
+          return priority[a.action] - priority[b.action];
+        };
+
+        // Sort the offers based on the custom sorting function
+        const sortedOffers = response.data.sort(sortOffers);
+
+        const formattedRows = sortedOffers.map((offer) => ({
+          "Deal Name": (
+            <SoftBox display="flex" alignItems="center" px={1} py={0.5}>
+              <SoftBox mr={2}>
+                <SoftAvatar
+                  src={images[Math.floor(Math.random() * images.length)]}
+                  alt={offer.startup_name}
+                  size="sm"
+                  variant="rounded"
+                />
+              </SoftBox>
+              <SoftBox display="flex" flexDirection="column">
+                <SoftTypography variant="button" fontWeight="medium">
+                  {offer.startup_name}
+                </SoftTypography>
+              </SoftBox>
+            </SoftBox>
+          ),
+          Owner: (
+            <SoftTypography variant="caption" fontWeight="medium">
+              {offer.full_name}
+            </SoftTypography>
+          ),
+          "The offer": <ShowOffer Message={offer.post} />,
+          status: <OfferStatus response={offer.action} Rejection={offer.rejection_reason} />,
+          " ": <AddToSyndicate response={offer.action} />,
+        }));
+
+        setTableData({
+          columns: [
+            { name: "Deal Name", align: "left" },
+            { name: "Owner", align: "center" },
+            { name: "The offer", align: "center" },
+            { name: "status", align: "center" },
+            { name: " ", align: "center" },
+          ],
+          rows: formattedRows,
+        });
+      } catch (error) {
+        console.error("Error fetching syndicates:", error);
+      }
     }
-    setSelectedFile(file);
-  };
+    async function fetchExclusiveData() {
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_DJANGO_API}startups/exclusive-startups/list/`,
+          config
+        );
+
+        const formattedRows = response.data.map((Startup) => ({
+          "Deal Name": (
+            <SoftBox display="flex" alignItems="center" px={1} py={0.5}>
+              <SoftBox mr={2}>
+                <SoftAvatar
+                  src={images[Math.floor(Math.random() * images.length)]}
+                  alt={Startup.startup_name}
+                  size="sm"
+                  variant="rounded"
+                />
+              </SoftBox>
+              <SoftBox display="flex" flexDirection="column">
+                <SoftTypography variant="button" fontWeight="medium">
+                  {Startup.startup_name}
+                </SoftTypography>
+              </SoftBox>
+            </SoftBox>
+          ),
+          Owner: (
+            <SoftTypography variant="caption" fontWeight="medium">
+              {Startup.full_name}
+            </SoftTypography>
+          ),
+          about: (
+            <SoftBox display="flex" flexDirection="column">
+              <SoftBox >
+              <SoftTypography variant="caption">{Startup.sector}</SoftTypography>
+            </SoftBox>
+              <SoftBox>
+              <SoftBadge
+                variant="contained"
+                badgeContent={Startup.stage}
+                color="secondary"
+                size="md"
+              />
+              </SoftBox>
+            </SoftBox>
+          ),
+          " ": <AddToSyndicate response="accepted" />,
+        }));
+
+        setTableData2({
+          columns: [
+            { name: "Deal Name", align: "left" },
+            { name: "Owner", align: "center" },
+            { name: "about", align: "center" },
+            { name: " ", align: "center" },
+          ],
+          rows: formattedRows,
+        });
+      } catch (error) {
+        console.error("Error fetching syndicates:", error);
+      }
+    }
+
+    if (token) {
+      fetchOffersData();
+      fetchExclusiveData();
+    }
+  }, [token]); // Dependency array includes token
 
   return (
     <DashboardLayout>
       <DashboardNavbar />
       <LeadNavbar />
-      {/* accepted card*/ }
+      {/* accepted card*/}
       <SoftBox py={3}>
         <SoftBox mb={3}>
           <Card>
@@ -95,7 +224,7 @@ function YourDeals() {
                     equalizer
                   </Icon>
                   <SoftTypography variant="button" fontWeight="regular" color="text">
-                    &nbsp; Browse all the <strong> accepted Deals</strong> and add to your syndicate
+                    &nbsp; Browse all the <strong>Offers you have sent</strong> and their status
                   </SoftTypography>
                 </SoftBox>
               </SoftBox>
@@ -110,14 +239,21 @@ function YourDeals() {
                 },
               }}
             >
-              <Table columns={columns2} rows={rows2} />
+              {tableData.rows.length > 0 ? (
+                <Table columns={tableData.columns} rows={tableData.rows} />
+              ) : (
+                <SoftBox py={2} px={3}>
+                  <SoftTypography variant="h6" fontWeight="regular" color="text">
+                    No data available or loading...
+                  </SoftTypography>
+                </SoftBox>
+              )}
             </SoftBox>
           </Card>
         </SoftBox>
       </SoftBox>
 
-
-      {/* accepted card*/ }
+      {/* accepted card*/}
       <SoftBox py={3}>
         <SoftBox mb={3}>
           <Card>
@@ -138,7 +274,8 @@ function YourDeals() {
                     equalizer
                   </Icon>
                   <SoftTypography variant="button" fontWeight="regular" color="text">
-                    &nbsp; Browse all the <strong> Deals you have added</strong> and add to your syndicate
+                    &nbsp; Browse all the <strong> exclusive startup you have added</strong> and add
+                    to your syndicate
                   </SoftTypography>
                 </SoftBox>
               </SoftBox>
@@ -153,12 +290,19 @@ function YourDeals() {
                 },
               }}
             >
-              <Table columns={columns3} rows={rows3} />
+              {tableData2.rows.length > 0 ? (
+                <Table columns={tableData2.columns} rows={tableData2.rows} />
+              ) : (
+                <SoftBox py={2} px={3}>
+                  <SoftTypography variant="h6" fontWeight="regular" color="text">
+                    No data available or loading...
+                  </SoftTypography>
+                </SoftBox>
+              )}
             </SoftBox>
           </Card>
         </SoftBox>
       </SoftBox>
-
 
       <Footer />
     </DashboardLayout>
