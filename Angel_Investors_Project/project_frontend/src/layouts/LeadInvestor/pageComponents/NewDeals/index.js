@@ -114,7 +114,7 @@ function YourDeals() {
           ),
           "The offer": <ShowOffer Message={offer.post} />,
           status: <OfferStatus response={offer.action} Rejection={offer.rejection_reason} />,
-          " ": <AddToSyndicate response={offer.action} />,
+          " ": <AddToSyndicate response={offer.action} startupID={offer.startup_id} startupName={offer.startup_name} fullName={offer.full_name} dealType="startup" />,
         }));
 
         setTableData({
@@ -176,7 +176,7 @@ function YourDeals() {
               </SoftBox>
             </SoftBox>
           ),
-          " ": <AddToSyndicate response="accepted" />,
+          " ": <AddToSyndicate response="accepted" startupID={Startup.id} startupName={Startup.startup_name} fullName={Startup.full_name} dealType="ExclusiveStartup" />,
         }));
 
         setTableData2({

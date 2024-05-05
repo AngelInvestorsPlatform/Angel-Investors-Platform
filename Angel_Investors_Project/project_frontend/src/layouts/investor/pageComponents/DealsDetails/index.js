@@ -23,7 +23,7 @@ import InvestorNavbar from "layouts/investor/components/InvestorNavbar";
 import Projects from "layouts/investor/components/Projects";
 
 // images
-import logoInvesion from "assets/images/small-logos/logoinvision.svg";
+import logoAtlassian from "assets/images/small-logos/logo-atlassian.svg";
 
 function DealsDetails() {
   const name = "Ahmad Nasser";
@@ -66,7 +66,7 @@ function DealsDetails() {
               <Grid container spacing={3} alignItems="center">
                 <Grid item>
                   <SoftAvatar
-                    src={logoInvesion}
+                    src={logoAtlassian}
                     alt="profile-image"
                     variant="rounded"
                     size="xl"

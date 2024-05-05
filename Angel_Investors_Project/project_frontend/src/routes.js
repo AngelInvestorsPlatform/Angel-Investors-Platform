@@ -57,6 +57,7 @@ import YourDeals from "layouts/investor/pageComponents/YourDeals";
 import ExploreSyndicate from "layouts/investor/pageComponents/ExploreSyndicate";
 import InvestorProfile from "layouts/investor/InvestorProfile";
 import SyndicateDetailsProfile from "layouts/investor/pageComponents/SyndicateDetailsProfile";
+import DealsDetails from "layouts/investor/pageComponents/DealsDetails";
 
 //import startup page component
 import StartUpDeals from "layouts/startup/pageComponents/StartUpDeals";
@@ -294,6 +295,15 @@ const routes = [
     route: "/investor/YourDeals",
     icon: <Document size="12px" />,
     component: <YourDeals />,
+    noCollapse: true,
+  },
+  {
+    type: "collapse",
+    name: "Deals Details",
+    key: "DealsDetails",
+    route: "/investor/DealsDetails",
+    icon: <Document size="12px" />,
+    component: <DealsDetails />,
     noCollapse: true,
   },
   {

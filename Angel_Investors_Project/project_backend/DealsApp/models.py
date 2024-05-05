@@ -2,15 +2,22 @@ from django.db import models
 from StartupApp.models import Startup
 from SyndicateApp.models import Syndicate
 
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
+
 class Deal(models.Model):
-    startup = models.ForeignKey(Startup, on_delete=models.CASCADE, related_name='deals')
+    # Content type fields to link either to Startup or ExclusiveStartup
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+    object_id = models.PositiveIntegerField()
+    startup = GenericForeignKey('content_type', 'object_id')
+
     syndicate = models.ForeignKey(Syndicate, related_name='deals', on_delete=models.CASCADE)
     memo = models.TextField()
-    pitch_deck = models.FileField(upload_to='pitch_decks/')
+    pitch_deck = models.FileField(upload_to='pitch_decks/', null=True)
     valuation = models.DecimalField(max_digits=15, decimal_places=2)
     allocation = models.DecimalField(max_digits=15, decimal_places=2)
     lead_investment = models.DecimalField(max_digits=15, decimal_places=2)
-    total_currency = models.DecimalField(max_digits=15, decimal_places=2)
+    total_curry = models.DecimalField(max_digits=5, decimal_places=2) 
     minimum_investment = models.DecimalField(max_digits=15, decimal_places=2)
     deadline = models.DateField()
 
