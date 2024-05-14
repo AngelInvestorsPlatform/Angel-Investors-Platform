@@ -33,6 +33,7 @@ import PlaceholderCard from "examples/Cards/PlaceholderCard";
 import Header from "layouts/LeadInvestor/components/Header";
 import PlatformSettings from "layouts/profile/components/PlatformSettings";
 import MembersList from "layouts/LeadInvestor/components/MembersList";
+import ActiveDealsList from "layouts/LeadInvestor/components/ActiveDealsList";
 
 // Investor layout components
 // import SyndicateCard from "layouts/investor/InvestorProfile/components/SyndicateCard";
@@ -129,7 +130,7 @@ function Overview() {
       <SoftBox mt={5} mb={3}>
 
         <Grid container spacing={3}>
-          <Grid item xs={12} md={6} xl={8}>
+          <Grid item xs={12} md={12} xl={8}>
             <SyndicateInfoCard
               title={title}
               description={descriptionInfo}
@@ -137,16 +138,13 @@ function Overview() {
               info={userInfo}
             />
           </Grid>
-          <Grid item xs={3} xl={4}>
+          <Grid item xs={6} md={6} xl={4}>
             <MembersList/>
           </Grid>
-          <Grid item xs={6} xl={4}>
-            <ProfileDealList title="Active Deals" profiles={ActiveDealsData} />
+          <Grid item xs={6} md={6} xl={8}>
+            <ActiveDealsList/>
           </Grid>
 
-          <Grid item xs={6} xl={4}>
-            <ProfileDealList title="New Deals" profiles={NewDealsData} />
-          </Grid>
         </Grid>
         </SoftBox>
 

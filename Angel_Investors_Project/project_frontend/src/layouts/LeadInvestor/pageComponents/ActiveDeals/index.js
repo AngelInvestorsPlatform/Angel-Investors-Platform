@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import MuiLink from "@mui/material/Link";
 
 //for user auth global context
 import { useAuthUser } from "context/authContext";
@@ -69,6 +70,8 @@ function YourDeals() {
 
         const formattedRows = response.data.map((deal) => ({
           "Deal Name": (
+            <Link to={`/LeadInvestor/ActiveDeals/LeadDealsDetails/${deal.id}/${deal.startup_name}`}>
+            <MuiLink component="div" underline="hover" sx={{ cursor: "pointer" }}>
             <SoftBox display="flex" alignItems="center" px={1} py={0.5}>
               <SoftBox mr={2}>
                 <SoftAvatar
@@ -84,6 +87,8 @@ function YourDeals() {
                 </SoftTypography>
               </SoftBox>
             </SoftBox>
+            </MuiLink>
+            </Link>
           ),
           Sectors: (
             <SoftBadge variant="gradient" badgeContent={deal.sector} color="info" size="md" />

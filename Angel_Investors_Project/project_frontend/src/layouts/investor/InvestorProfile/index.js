@@ -38,6 +38,7 @@ import SyndicateCard from "layouts/investor/InvestorProfile/components/Syndicate
 // Data for backend
 import profilesListData from "layouts/investor/InvestorProfile/data/profilesListData";
 import SyndicateData from "layouts/investor/InvestorProfile/data/investorProfileSyndicateData";
+import InvestmentInDeals from "./components/InvestmentInDeals";
 
 // Images
 import burceMars from "assets/images/bruce-mars.jpg";
@@ -92,6 +93,33 @@ function Overview() {
     loadProfile();
   }, []);
 
+  
+  
+
+  //User syndicate request
+  async function fetchSyndicateData() {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_DJANGO_API}investors/joined-syndicates/`,
+        config
+      );
+      return response.data; // Return the data from the API call
+    } catch (error) {
+      console.error("Error fetching syndicates:", error);
+      return []; // Return an empty array in case of an error
+    }
+  }
+
+  const [syndicate, setSyndicate] = useState(null);
+  useEffect(() => {
+    const loadSyndicate = async () => {
+      const syndicateData = await fetchSyndicateData();
+      setSyndicate(syndicateData);
+    };
+  
+    loadSyndicate();
+  }, []);
+
   //user variable || for backend link ||
   //user header info
   /* profile ? profile.first_name : "Loading..." */
@@ -110,8 +138,8 @@ function Overview() {
   // Description
   const descriptionInfo = profile ? profile.about : "Loading...";
   // Sectors
-  const sectors = profile ? profile.sectors : " "
-  const sectorsInfo = sectors.split(', ').sort(); // Splits the string and sorts alphabetically
+  const sectors = profile ? profile.sectors : " ";
+  const sectorsInfo = sectors.split(", ").sort(); // Splits the string and sorts alphabetically
 
   return (
     <DashboardLayout>
@@ -119,7 +147,7 @@ function Overview() {
       <Header name={name} job={job} img={burceMars} />
       <SoftBox mt={5} mb={3}>
         <Grid container spacing={3}>
-          <Grid item xs={12} md={6} xl={8}>
+          <Grid item xs={12} md={8} xl={8}>
             <ProfileInfoCard
               title="About Investor"
               description={descriptionInfo}
@@ -128,13 +156,13 @@ function Overview() {
               action={{ route: "", tooltip: "Edit Profile" }}
             />
           </Grid>
-          <Grid item xs={12} xl={4}>
-            <ProfileDealList title="Investment in Deals " profiles={profilesListData} />
+          <Grid item xs={12} md={4} xl={4}>
+            <InvestmentInDeals/>
           </Grid>
         </Grid>
       </SoftBox>
       <SoftBox>
-        <SyndicateCard Syndicate={SyndicateData} />
+        <SyndicateCard Syndicate={syndicate} />
       </SoftBox>
 
       <Footer />

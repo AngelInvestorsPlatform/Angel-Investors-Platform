@@ -74,7 +74,7 @@ function MemberAvatars({ members }) {
     return (
       <>
         {visibleMembers.map(([image, full_name]) => (
-          <Tooltip key={index} title={full_name} placement="bottom">
+          <Tooltip key={full_name} title={full_name} placement="bottom">
             <SoftAvatar
               src={image || defaultImage}
               alt={full_name}

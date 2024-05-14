@@ -32,13 +32,14 @@ import typography from "assets/theme/base/typography";
 // Investor layout components
 import InvestorNavbar from "layouts/investor/components/InvestorNavbar";
 import Projects from "layouts/investor/components/Projects";
+import MembersInvestmentList from "layouts/LeadInvestor/components/MembersInvestmentList";
 
 // images
 import logoAtlassian from "assets/images/small-logos/logo-atlassian.svg";
 import { FlashOnRounded } from "@mui/icons-material";
 
 
-function DealsDetails() {
+function LeadDealsDetails() {
   const { userId } = useParams();
   const { dealName } = useParams();
   const [userRole, setUserRole] = useState("");
@@ -99,19 +100,6 @@ function DealsDetails() {
   //memo
   const memorandum = Details ? Details.memo : "Lauding...";
 
-  // Description
-  /*   const [memorandum, setMemorandum] = useState(`
-  GreenTech Innovations is poised to disrupt the renewable energy sector with its cutting-edge solar panel technology that significantly increases efficiency while reducing manufacturing costs.Our investment aims to accelerate the production and distribution of these solar panels across North America and Europe, targeting a reduction in the reliance on fossil fuels and a move towards more sustainable energy solutions.
-
-
-  The funds will be used to:
-  - Enhance the research and development team to push the boundaries of current solar technology.
-  - Scale up production capabilities to meet the growing demand for renewable energy solutions.
-  - Expand market reach through strategic partnerships with key players in the energy and housing sectors.
-
-  This investment not only offers a lucrative return potential but also aligns with global efforts towards sustainability, making it an impactful venture in both economic and environmental terms. The management team comprises industry veterans who have previously led successful green startups to exits and IPOs, ensuring that the project is managed by experienced professionals.
-`); */
-
   // Sectors
 
   //const sectorsInfo = ["Biotech", "Renewable Energy"];
@@ -131,7 +119,7 @@ function DealsDetails() {
   const amount = Details ? Details.invested_amount : "0";
   
   useEffect(() => {
-    setUserRole(userHasInvested ? "invested" : "");
+    setUserRole(userHasInvested ? "lead" : "lead");
   }, [userHasInvested]); 
 
   return (
@@ -187,6 +175,7 @@ function DealsDetails() {
                     action={{ route: "", tooltip: "Edit Profile" }}
                   />
                 </Grid>
+                {/* Deals Details Card */}
                 <Grid item xs={12} md={4} xl={4}>
                   <DealsInvestCards
                     dealID={userId}
@@ -200,6 +189,10 @@ function DealsDetails() {
                     carry={carry}
                   />
                 </Grid>
+                {/*investment card */}
+                <Grid item xs={12} md={8} xl={8}>
+                    <MembersInvestmentList DealID={userId}/>
+                </Grid>
               </Grid>
             </SoftBox>
           </SoftBox>
@@ -210,4 +203,4 @@ function DealsDetails() {
   );
 }
 
-export default DealsDetails;
+export default LeadDealsDetails;

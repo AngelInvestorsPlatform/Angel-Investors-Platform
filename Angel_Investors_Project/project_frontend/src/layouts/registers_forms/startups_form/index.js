@@ -166,7 +166,8 @@ function startupform() {
         !sector ||
         !stage ||
         !team_size ||
-        !country
+        !country ||
+        !about
       ) {
         setError("fields are required.");
         return;
@@ -227,6 +228,7 @@ function startupform() {
         });
       }
     } catch (error) {
+      console.log(error);
       // Handle network error or server error response status codes (e.g., 500)
       if (error.response) {
         // The request was made and the server responded with a status code
@@ -262,6 +264,12 @@ function startupform() {
   const validatePassword = (password) => {
     const re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
     return re.test(password);
+  };
+
+  const validateURL = (url) => {
+    // Regular expression to check URL format
+    const urlPattern = /^(https?:\/\/)?([\w\-]+\.)*[\w\-]+[\.][A-Za-z]{2,63}(\/\S*)?$/;
+    return urlPattern.test(url);
   };
 
   return (

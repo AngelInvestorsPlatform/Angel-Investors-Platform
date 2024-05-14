@@ -77,6 +77,7 @@ import NewDeals from "layouts/LeadInvestor/pageComponents/NewDeals";
 import ManageMembers from "layouts/LeadInvestor/pageComponents/ManageMembers";
 import ExploreStartups from "layouts/LeadInvestor/pageComponents/ExploreStartups";
 import AddStartups from "layouts/LeadInvestor/pageComponents/AddStartups";
+import LeadDealsDetails from "layouts/LeadInvestor/pageComponents/DealsDetails";
 
 // Soft UI Dashboard React icons
 import Shop from "examples/Icons/Shop";
@@ -208,7 +209,7 @@ const routes = [
     key: "startup",
     route: "/startup",
     icon: <SpaceShip size="12px" />,
-    component: <Startup />,
+    component: <StartUpHome />,
     noCollapse: true,
   },
   {
@@ -267,7 +268,7 @@ const routes = [
     key: "investor",
     route: "/investor",
     icon: <Shop size="12px" />,
-    component: <Investor />,
+    component: <InvestorProfile />,
     noCollapse: true,
   },
   {
@@ -301,7 +302,7 @@ const routes = [
     type: "collapse",
     name: "Deals Details",
     key: "DealsDetails",
-    route: "/investor/DealsDetails",
+    route: "/investor/YourDeals/DealsDetails/:userId/:dealName",
     icon: <Document size="12px" />,
     component: <DealsDetails />,
     noCollapse: true,
@@ -367,6 +368,15 @@ const routes = [
     route: "/LeadInvestor/ActiveDeals",
     icon: <Document size="12px" />,
     component: <ActiveDeals />,
+    noCollapse: true,
+  },
+  {
+    type: "collapse",
+    name: "Lead Deals Details ",
+    key: "LeadDealsDetails",
+    route: "/LeadInvestor/ActiveDeals/LeadDealsDetails/:userId/:dealName",
+    icon: <Document size="12px" />,
+    component: <LeadDealsDetails />,
     noCollapse: true,
   },
   {

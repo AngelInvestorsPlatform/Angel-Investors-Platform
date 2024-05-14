@@ -49,7 +49,7 @@ urlpatterns = [
                 "deadline": "2025-01-01"
             }'
 3- 
-        curl -X GET http://localhost:8000/deals/syndicate-deals \
+        curl -X GET http://localhost:8000/deals/syndicate-deals/ \
             -H "Authorization: Token YOUR_TOKEN_HERE"
 
             RESULT :
@@ -74,6 +74,24 @@ urlpatterns = [
 4- 
         curl -X GET http://localhost:8000/deals/deal-detail/2/ \
             -H "Authorization: Token YOUR_TOKEN_HERE"
+
+            RESULT :
+            {
+                "startup_name": "SmartBuild Systems",
+                "sector": "Construction Technology",
+                "website": "",
+                "syndicate_name": "Build Ventures",
+                "syndicate_lead_first_name": "Ahmad Nasser",
+                "memo": "Investor: Ahmad Nasser\nStartup: SmartBuild Systems\nSector: Construction Technology.",
+                "valuation": "30000000.00",
+                "allocation": "2000000.00",
+                "lead_investment": "18000.00",
+                "total_curry": "15.00",
+                "minimum_investment": "10000.00",
+                "deadline": "2024-05-31",
+                "user_has_invested": true,
+                "invested_amount": 15000.0
+            }
 
 5- 
         curl -X GET http://localhost:8000/deals/investor-deals/\
@@ -102,7 +120,7 @@ urlpatterns = [
                     "deadline": "2025-01-01"
                 }
 
-6-       curl -X POST http://localhost:8000//deals/invest-in/ \
+6-       curl -X POST http://localhost:8000/deals/invest-in/ \
             -H "Content-Type: application/json" \
             -H "Authorization: Token YOUR_TOKEN_HERE" \
             -d '{"deal": 3, "invested_amount": "5000.00"}'
@@ -124,4 +142,15 @@ urlpatterns = [
 8- 
         curl -X GET http://localhost:8000/deals/investments-in-deals/<int:deal_id>/\
             -H "Authorization: Token YOUR_TOKEN_HERE"
+
+        RESULT :
+                {
+                    "investments": [
+                        {
+                            "investor_name": "Omar Khaled",
+                            "invested_amount": "800.00"
+                        }
+                    ],
+                    "total_invested": 800.0
+                }
 '''

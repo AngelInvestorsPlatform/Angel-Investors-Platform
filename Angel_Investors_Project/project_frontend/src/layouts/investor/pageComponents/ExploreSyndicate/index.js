@@ -87,10 +87,10 @@ function ExploreSyndicate() {
           config
         );
         
-        const formattedRows = response.data.map((syndicate) => ({
+        const formattedRows = response.data.map((syndicate, index) => ({
           Syndicate: (
             <Syndicate
-              image={images[Math.floor(Math.random() * images.length)]}
+              image={images[ index % images.length]}
               name={syndicate.syndicate_name}
               Lead={syndicate.lead_name}
             />

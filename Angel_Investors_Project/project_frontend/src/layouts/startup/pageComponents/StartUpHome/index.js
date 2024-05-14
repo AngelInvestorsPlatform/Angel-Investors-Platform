@@ -128,7 +128,7 @@ function Deal() {
       <SoftBox py={3}>
         <SoftBox mb={3}>
           <Grid container spacing={3}>
-            <Grid item xs={12} sm={6} xl={3}>
+            <Grid item xs={12} sm={12} md={4} xl={4}>
               <MiniStatisticsCard
                 title={{ text: "today's money" }}
                 count="$53,000"
@@ -136,7 +136,7 @@ function Deal() {
                 icon={{ color: "info", component: "paid" }}
               />
             </Grid>
-            <Grid item xs={12} sm={6} xl={3}>
+            <Grid item xs={12} sm={12} md={4} xl={4}>
               <MiniStatisticsCard
                 title={{ text: "today's users" }}
                 count="2,300"
@@ -144,23 +144,12 @@ function Deal() {
                 icon={{ color: "info", component: "public" }}
               />
             </Grid>
-            <Grid item xs={12} sm={6} xl={3}>
+            <Grid item xs={12} sm={12} md={4} xl={4}>
               <MiniStatisticsCard
                 title={{ text: "new clients" }}
                 count="+3,462"
                 percentage={{ color: "error", text: "-2%" }}
                 icon={{ color: "info", component: "emoji_events" }}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6} xl={3}>
-              <MiniStatisticsCard
-                title={{ text: "sales" }}
-                count="$103,430"
-                percentage={{ color: "success", text: "+5%" }}
-                icon={{
-                  color: "info",
-                  component: "shopping_cart",
-                }}
               />
             </Grid>
           </Grid>
@@ -173,10 +162,10 @@ function Deal() {
       {/* ------------------------*/}
       <SoftBox mt={5} mb={3}>
         <Grid container spacing={3}>
-          <Grid item xs={12} md={6} xl={4}>
+          <Grid item xs={12} md={4} xl={4}>
             <DealInfo />
           </Grid>
-          <Grid item xs={12} md={12} xl={8}>
+          <Grid item xs={12} md={8} xl={8}>
             <SyndicateInfo />
           </Grid>
         </Grid>

@@ -24,55 +24,41 @@ import Card from "@mui/material/Card";
 import Divider from "@mui/material/Divider";
 import Tooltip from "@mui/material/Tooltip";
 import Icon from "@mui/material/Icon";
+import Grid from "@mui/material/Grid";
 
 // Soft UI Dashboard React components
 import SoftBox from "components/SoftBox";
 import SoftTypography from "components/SoftTypography";
 import SoftBadge from "components/SoftBadge";
+import SoftButton from "components/SoftButton";
+
+import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
+import FileOpenIcon from "@mui/icons-material/FileOpen";
 
 // Soft UI Dashboard React base styles
 import colors from "assets/theme/base/colors";
 import typography from "assets/theme/base/typography";
 
-function DealsInfoCard({ title, description, info, sectors }) {
+function DealsInfoCard({ title, description, web, file, sectors }) {
   const labels = [];
   const values = [];
   const { size } = typography;
 
-  // Convert this form `objectKey` of the object key in to this `object key`
-  Object.keys(info).forEach((el) => {
-    if (el.match(/[A-Z\s]+/)) {
-      const uppercaseLetter = Array.from(el).find((i) => i.match(/[A-Z]+/));
-      const newElement = el.replace(uppercaseLetter, ` ${uppercaseLetter.toLowerCase()}`);
-
-      labels.push(newElement);
-    } else {
-      labels.push(el);
-    }
-  });
-
-  // Push the object values into the values array
-  Object.values(info).forEach((el) => values.push(el));
-
-  // Render the card info items
-  const renderItems = labels.map((label, key) => (
-    <SoftBox key={label} display="flex" py={1} pr={2}>
-      <SoftTypography variant="button" fontWeight="bold" textTransform="capitalize">
-        {label}: &nbsp;
-      </SoftTypography>
-      <SoftTypography variant="button" fontWeight="regular" color="text">
-        &nbsp;{values[key]}
-      </SoftTypography>
-    </SoftBox>
-  ));
-
   const renderBadges = sectors.map((sector, key) => (
-    <SoftBadge key={key} badgeContent={sector} color="light" variant="gradient" size="sm" />
+    <SoftBadge key={key} badgeContent={sector} color="info" variant="gradient" size="sm" />
   ));
-
 
   return (
     <Card sx={{ height: "100%" }}>
+      <SoftBox display="flex" p={2} pt={4} pr={2}>
+        <SoftTypography variant="button" fontWeight="bold" textTransform="capitalize">
+          &nbsp;
+        </SoftTypography>
+        {renderBadges}
+      </SoftBox>
+      <SoftBox opacity={0.3}>
+        <Divider />
+      </SoftBox>
       <SoftBox display="flex" justifyContent="space-between" alignItems="center" pt={2} px={2}>
         <SoftTypography variant="h5" fontWeight="bold" textTransform="capitalize">
           {title}
@@ -80,21 +66,42 @@ function DealsInfoCard({ title, description, info, sectors }) {
       </SoftBox>
       <SoftBox p={2}>
         <SoftBox mb={2} lineHeight={1}>
-          <SoftTypography variant="button" color="text" fontWeight="regular">
-            {description}
-          </SoftTypography>
+          <div
+            style={{
+              padding: "25px",
+              margin: "20px",
+              borderRadius: "8px",
+              boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
+              whiteSpace: "pre-wrap", // Ensures that whitespace and line breaks are preserved, and text is wrapped
+              lineHeight: "1.6", // Adjust line spacing
+              textAlign: "justify", // Justify text for better alignment
+              textColor:"gray",
+              fontSize:"17px",
+
+            }}
+          >
+            <p>{description}</p>
+          </div>
         </SoftBox>
         <SoftBox opacity={0.3}>
           <Divider />
         </SoftBox>
-        <SoftBox>
-          {renderItems}
-          <SoftBox display="flex" py={1} pr={2}>
-          <SoftTypography variant="button" fontWeight="bold" textTransform="capitalize">
-            sectors: &nbsp;
-            </SoftTypography>
-            {renderBadges}
-            </SoftBox>
+        <SoftBox width="auto" display="flex" justifyContent="center" alignItems="center">
+          <Grid container spacing={3} justifyContent="center" alignItems="center">
+            <Grid item xs={12} sm={6} xl={4}>
+              <SoftButton variant="text" color="info" gradient onClick={file}>
+                {" "}
+                <FileOpenIcon /> &nbsp; Pitch Deck &nbsp; <KeyboardDoubleArrowRightIcon />
+              </SoftButton>
+            </Grid>
+            <Grid item xs={12} sm={6} xl={4}>
+              <SoftButton variant="text" color="info" gradient onClick={web}>
+                {" "}
+                <Icon>language</Icon> &nbsp; visit website &nbsp;
+                <KeyboardDoubleArrowRightIcon />
+              </SoftButton>
+            </Grid>
+          </Grid>
         </SoftBox>
       </SoftBox>
     </Card>
@@ -105,8 +112,9 @@ function DealsInfoCard({ title, description, info, sectors }) {
 DealsInfoCard.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  info: PropTypes.objectOf(PropTypes.string).isRequired,
   sectors: PropTypes.arrayOf(PropTypes.string).isRequired,
+  web: PropTypes.string,
+  file: PropTypes.string,
   action: PropTypes.shape({
     route: PropTypes.string.isRequired,
     tooltip: PropTypes.string.isRequired,

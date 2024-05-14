@@ -96,12 +96,12 @@ function YourSyndicates() {
           config
         );
 
-        const formattedRows = response.data.map((syndicate) => ({
+        const formattedRows = response.data.map((syndicate,index) => ({
           Syndicate: (
             <Link to="/investor/yourSyndicates/SyndicateDetailsProfile">
               <MuiLink component="div" underline="hover" sx={{ cursor: "pointer" }}>
                 <Syndicate
-                  image={images[Math.floor(Math.random() * images.length)]}
+                  image={images[ index % images.length]}
                   name={syndicate.syndicate_name}
                   Lead={syndicate.lead_name}
                 />

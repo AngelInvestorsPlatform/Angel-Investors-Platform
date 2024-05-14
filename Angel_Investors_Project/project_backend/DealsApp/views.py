@@ -56,7 +56,7 @@ class DealDetailView(APIView):
         try:
             deal = Deal.objects.get(pk=pk)
             self.check_object_permissions(request, deal)
-            serializer = DealDetailSerializer(deal)
+            serializer = DealDetailSerializer(deal, context={'request': request})
             return Response(serializer.data)
         except Deal.DoesNotExist:
             return Response({"message": "Deal not found."}, status=404)

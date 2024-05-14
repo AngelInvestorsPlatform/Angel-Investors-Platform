@@ -21,9 +21,7 @@ const CurrencyFormatter = ({ amount }) => {
       };
 
   return (
-    <SoftTypography variant="caption" color="secondary" fontWeight="bold" size="xxs">
-      {formatCurrency(amount)}
-    </SoftTypography>
+      formatCurrency(amount)
   );
 };
 

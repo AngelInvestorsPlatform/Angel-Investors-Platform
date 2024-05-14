@@ -74,6 +74,8 @@ class DealDetailSerializer(serializers.ModelSerializer):
     website = serializers.SerializerMethodField()
     syndicate_name = serializers.CharField(source='syndicate.syndicate_name')
     syndicate_lead_first_name = serializers.CharField(source='syndicate.syndicate_lead.first_name')
+    user_has_invested = serializers.SerializerMethodField()
+    invested_amount = serializers.SerializerMethodField()
 
     class Meta:
         model = Deal
@@ -89,8 +91,22 @@ class DealDetailSerializer(serializers.ModelSerializer):
             'lead_investment', 
             'total_curry', 
             'minimum_investment', 
-            'deadline'
+            'deadline',
+            'user_has_invested',
+            'invested_amount'
         ]
+
+    def get_user_has_invested(self, obj):
+        user = self.context['request'].user
+        return DealMember.objects.filter(syndicate_member__investor__user=user, deal=obj).exists()
+
+    def get_invested_amount(self, obj):
+        user = self.context['request'].user
+        # Only return the invested amount if the user has invested
+        if self.get_user_has_invested(obj):
+            deal_member = DealMember.objects.filter(syndicate_member__investor__user=user, deal=obj).first()
+            return deal_member.invested_amount if deal_member else None
+        return None
 
     def get_startup_name(self, obj):
         return obj.startup.startup_name if isinstance(obj.startup, Startup) else obj.startup.startup_name
@@ -169,6 +185,12 @@ class DealMemberSerializer(serializers.ModelSerializer):
         # Check if user is a member of the syndicate that owns the deal
         if not SyndicateMember.objects.filter(syndicate=deal.syndicate, investor__user=user).exists():
             raise serializers.ValidationError("You are not a member of the syndicate that owns this deal.")
+
+
+         # Check if the user has already invested in this deal
+        if DealMember.objects.filter(syndicate_member__investor__user=user, deal=deal).exists():
+            raise serializers.ValidationError("You have already invested in this deal.")
+
 
         return data
 
