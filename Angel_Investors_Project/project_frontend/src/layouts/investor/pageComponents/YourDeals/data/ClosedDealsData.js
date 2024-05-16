@@ -13,12 +13,12 @@ import SoftAvatar from "components/SoftAvatar";
 import SoftBadge from "components/SoftBadge";
 import SoftButton from "components/SoftButton";
 //images
-import logoXD from "assets/images/small-logos/logo-xd.svg";
-import logoAtlassian from "assets/images/small-logos/logo-atlassian.svg";
-import logoSlack from "assets/images/small-logos/logo-slack.svg";
-import logoSpotify from "assets/images/small-logos/logo-spotify.svg";
-import logoJira from "assets/images/small-logos/logo-jira.svg";
-import logoInvesion from "assets/images/small-logos/logo-invision.svg";
+import logoXD from "assets/images/users-images/Startup1.png";
+import logoAtlassian from "assets/images/users-images/Startup2.png";
+import logoSlack from "assets/images/users-images/Startup3.png";
+import logoSpotify from "assets/images/users-images/Startup4.png";
+import logoJira from "assets/images/users-images/Startup5.png";
+import logoInvesion from "assets/images/users-images/Startup6.png";
 // Data
 function Startup({ image, SU_name, startupProfile }) {
   // Add 'startupProfile' prop for link

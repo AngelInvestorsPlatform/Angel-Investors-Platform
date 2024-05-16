@@ -42,6 +42,7 @@ import InvestmentInDeals from "./components/InvestmentInDeals";
 
 // Images
 import burceMars from "assets/images/bruce-mars.jpg";
+import user1 from "assets/images/users-images/team3.png";
 
 function Overview() {
   // Auth and config
@@ -144,7 +145,7 @@ function Overview() {
   return (
     <DashboardLayout>
       <InvestorNavbar />
-      <Header name={name} job={job} img={burceMars} />
+      <Header name={name} job={job} img={user1} />
       <SoftBox mt={5} mb={3}>
         <Grid container spacing={3}>
           <Grid item xs={12} md={8} xl={8}>

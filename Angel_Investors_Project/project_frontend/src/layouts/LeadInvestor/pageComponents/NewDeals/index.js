@@ -47,14 +47,24 @@ import OfferStatus from "layouts/LeadInvestor/pageComponents/NewDeals/data/Offer
 import AddToSyndicate from "layouts/LeadInvestor/pageComponents/NewDeals/data/AddToSyndicate";
 
 // Images
-import logoXD from "assets/images/small-logos/logo-xd.svg";
-import logoAtlassian from "assets/images/small-logos/logo-atlassian.svg";
-import logoSlack from "assets/images/small-logos/logo-slack.svg";
-import logoSpotify from "assets/images/small-logos/logo-spotify.svg";
-import logoJira from "assets/images/small-logos/logo-jira.svg";
-import logoInvesion from "assets/images/small-logos/logo-invision.svg";
+import logoXD from "assets/images/users-images/Startup1.png";
+import logoAtlassian from "assets/images/users-images/Startup2.png";
+import logoSlack from "assets/images/users-images/Startup3.png";
+import logoSpotify from "assets/images/users-images/Startup4.png";
+import logoJira from "assets/images/users-images/Startup5.png";
+import logoInvesion from "assets/images/users-images/Startup6.png";
 
-const images = [logoXD, logoAtlassian, logoSlack, logoSpotify, logoJira, logoInvesion];
+//const images = [logoXD, logoAtlassian, logoSlack, logoSpotify, logoJira, logoInvesion];
+
+
+import Startup1 from "assets/images/users-images/Startup1.png";
+import Startup2 from "assets/images/users-images/Startup2.png";
+import Startup3 from "assets/images/users-images/Startup3.png";
+import Startup4 from "assets/images/users-images/Startup4.png";
+import Startup5 from "assets/images/users-images/Startup5.png";
+import Startup6 from "assets/images/users-images/Startup6.png";
+
+const images = [Startup1, Startup2, Startup3, Startup4, Startup5, Startup6];
 
 function YourDeals() {
   const { columns3, rows3 } = additions;
@@ -211,7 +221,7 @@ function YourDeals() {
               <SoftBox>
                 <SoftTypography variant="h4" color="info" fontWeight="regular" textGradient>
                   {" "}
-                  Accepted Deals
+                  Requested Deals
                 </SoftTypography>
                 <SoftBox display="flex" alignItems="center" lineHeight={0}>
                   <Icon

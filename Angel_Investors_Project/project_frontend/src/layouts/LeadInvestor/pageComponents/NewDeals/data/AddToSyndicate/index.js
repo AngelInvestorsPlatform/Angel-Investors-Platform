@@ -42,7 +42,7 @@ function Add({ response, startupID, startupName, fullName, dealType }) {
     return null; // Do not render anything if response is not "Accepted"
   }
 
-  const [evaluation, setEvaluation] = useState("");
+  const [Valuation, setValuation] = useState("");
   const [allocation, setAllocation] = useState("");
   const [leadInvest, setLeadInvest] = useState("");
   const [totalCarry, setTotalCarry] = useState("");
@@ -76,7 +76,7 @@ function Add({ response, startupID, startupName, fullName, dealType }) {
   const handleSubmit = async () => {
     try {
       if (
-        !evaluation ||
+        !Valuation ||
         !allocation ||
         !leadInvest ||
         !totalCarry ||
@@ -102,7 +102,7 @@ function Add({ response, startupID, startupName, fullName, dealType }) {
           {
             startup_id: startupID,
             memo: memo,
-            valuation: evaluation,
+            valuation: Valuation,
             allocation: allocation,
             lead_investment: leadInvest,
             total_curry: totalCarry,
@@ -125,7 +125,7 @@ function Add({ response, startupID, startupName, fullName, dealType }) {
           {
             exclusive_startup_id: startupID,
             memo: memo,
-            valuation: evaluation,
+            valuation: Valuation,
             allocation: allocation,
             lead_investment: leadInvest,
             total_curry: totalCarry,
@@ -194,13 +194,13 @@ function Add({ response, startupID, startupName, fullName, dealType }) {
             <Grid item>
               <SoftBox mb={2} mx={2}>
                 <SoftTypography component="label" variant="caption" fontWeight="bold">
-                  evaluation
+                  Valuation
                 </SoftTypography>
                 <SoftInput
                   type="number"
-                  name="evaluation"
-                  value={evaluation}
-                  onChange={handleInputChange(setEvaluation)}
+                  name="Valuation"
+                  value={Valuation}
+                  onChange={handleInputChange(setValuation)}
                 />
               </SoftBox>
             </Grid>

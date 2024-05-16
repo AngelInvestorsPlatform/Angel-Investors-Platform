@@ -6,14 +6,14 @@ import ProfileDealList from "examples/Lists/ProfileDealList";
 import CurrencyFormatter from 'layouts/investor/pageComponents/YourDeals/data/CurrencyFormatter';
 
 // Images
-import logoXD from "assets/images/small-logos/logo-xd.svg";
-import logoAtlassian from "assets/images/small-logos/logo-atlassian.svg";
-import logoSlack from "assets/images/small-logos/logo-slack.svg";
-import logoSpotify from "assets/images/small-logos/logo-spotify.svg";
-import logoJira from "assets/images/small-logos/logo-jira.svg";
-import logoInvesion from "assets/images/small-logos/logo-invision.svg";
+import Startup1 from "assets/images/users-images/Startup1.png";
+import Startup2 from "assets/images/users-images/Startup2.png";
+import Startup3 from "assets/images/users-images/Startup3.png";
+import Startup4 from "assets/images/users-images/Startup4.png";
+import Startup5 from "assets/images/users-images/Startup5.png";
+import Startup6 from "assets/images/users-images/Startup6.png";
 
-const images = [logoXD, logoAtlassian, logoSlack, logoSpotify, logoJira, logoInvesion];
+const images = [Startup1, Startup2, Startup3, Startup4, Startup5, Startup6];
 
 
 

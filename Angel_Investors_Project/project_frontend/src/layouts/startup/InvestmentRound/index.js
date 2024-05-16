@@ -40,6 +40,7 @@ import Header from "layouts/startup/InvestmentRound/components/Header";
 //import Round from "layouts/startup/InvestmentRound/data/Round";
 
 import warQ from "assets/images/startups-logos/logoQ.png";
+import Startup2 from "assets/images/users-images/Startup2.png";
 
 function invesRound() {
   // Data
@@ -55,7 +56,7 @@ function invesRound() {
     setAsk(event.target.value);
   };
 
-  const handleValuationChange = (event) => {
+  const handlValuationChange = (event) => {
     // Consider adding validation here
     setValuation(event.target.value);
   };
@@ -88,7 +89,7 @@ function invesRound() {
               <SoftBox display="flex" alignItems="center" px={1} py={1}>
                 <SoftBox mr={2}>
                   <SoftAvatar
-                    src={warQ}
+                    src={Startup2}
                     alt={Startup.startup_name}
                     size="sm"
                     variant="rounded"
@@ -266,7 +267,7 @@ function invesRound() {
                 placeholder=""
                 name="valuation"
                 value={valuation}
-                onChange={handleValuationChange}
+                onChange={handlValuationChange}
               />
             </SoftBox>
 

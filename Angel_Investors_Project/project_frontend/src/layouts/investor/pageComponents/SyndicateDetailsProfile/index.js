@@ -56,7 +56,7 @@ function SyndicateDetails() {
 
   // Description
   const descriptionInfo =
-    "This syndicate offers a unique opportunity for investors to amplify their reach in the BioTech sector. By pooling resources, you can access promising startups that might be outside your individual investment range.  In addition, you'll benefit from the expertise of a proven leader in [industry], ensuring a meticulous evaluation process.  Furthermore, the syndicate fosters a collaborative network, allowing you to connect with like-minded investors and exchange valuable insights.  Finally, the streamlined investment process allows you to focus on making informed decisions, while the syndicate handles the due diligence and other details.";
+    "This syndicate offers a unique opportunity for investors to amplify their reach in the BioTech sector. By pooling resources, you can access promising startups that might be outside your individual investment range.  In addition, you'll benefit from the expertise of a proven leader in [industry], ensuring a meticulous Valuation process.  Furthermore, the syndicate fosters a collaborative network, allowing you to connect with like-minded investors and exchange valuable insights.  Finally, the streamlined investment process allows you to focus on making informed decisions, while the syndicate handles the due diligence and other details.";
 
   // Sectors
   const sectorsInfo = ["Fintech", "Healthcare", "Analytics", "Market"];

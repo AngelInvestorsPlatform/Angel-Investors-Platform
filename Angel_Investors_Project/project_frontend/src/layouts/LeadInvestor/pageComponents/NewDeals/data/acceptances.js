@@ -26,12 +26,12 @@ import SoftAvatar from "components/SoftAvatar";
 import SoftButton from "components/SoftButton";
 
 //images
-import logoXD from "assets/images/small-logos/logo-xd.svg";
-import logoAtlassian from "assets/images/small-logos/logo-atlassian.svg";
-import logoSlack from "assets/images/small-logos/logo-slack.svg";
-import logoSpotify from "assets/images/small-logos/logo-spotify.svg";
-import logoJira from "assets/images/small-logos/logo-jira.svg";
-import logoInvesion from "assets/images/small-logos/logo-invision.svg";
+import logoXD from "assets/images/users-images/Startup1.png";
+import logoAtlassian from "assets/images/users-images/Startup2.png";
+import logoSlack from "assets/images/users-images/Startup3.png";
+import logoSpotify from "assets/images/users-images/Startup4.png";
+import logoJira from "assets/images/users-images/Startup5.png";
+import logoInvesion from "assets/images/users-images/Startup6.png";
 
 const handlePage = () => {
   // this for view more
@@ -98,8 +98,6 @@ function CEO({ name }) {
           <DialogTitle>THE OFFER</DialogTitle>
           <DialogContent>
             <SoftTypography variant="caption" color="secondary">
-              This is a long message text box. You can put your offer details or
-              any other information you want to display here.
               {offerTEXT}
             </SoftTypography>
           </DialogContent>
@@ -227,9 +225,9 @@ function CEO({ name }) {
               <Grid item>
                 <SoftBox mb={2} mx={2}>
                   <SoftTypography component="label" variant="caption" fontWeight="bold">
-                    evaluation
+                    Valuation
                   </SoftTypography>
-                  <SoftInput type="text" name="evaluation" />
+                  <SoftInput type="text" name="Valuation" />
                 </SoftBox>
               </Grid>
 

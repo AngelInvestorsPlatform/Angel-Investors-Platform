@@ -23,10 +23,11 @@ import SoftTypography from "components/SoftTypography";
 import SoftAvatar from "components/SoftAvatar";
 
 // Images
-import team1 from "assets/images/team-1.jpg";
-import team2 from "assets/images/team-2.jpg";
-import team3 from "assets/images/team-3.jpg";
-import team4 from "assets/images/team-4.jpg";
+import team1 from "assets/images/users-images/team1.png";
+import team2 from "assets/images/users-images/team2.png";
+import team3 from "assets/images/users-images/team3.png";
+import team4 from "assets/images/users-images/team4.png";
+import team5 from "assets/images/users-images/team5.png";
 
 function Messages() {
   const messagesAvatarStyles = {

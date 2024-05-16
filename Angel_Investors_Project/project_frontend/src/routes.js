@@ -209,7 +209,7 @@ const routes = [
     key: "startup",
     route: "/startup",
     icon: <SpaceShip size="12px" />,
-    component: <StartUpHome />,
+    component: <StartUpProfile />,
     noCollapse: true,
   },
   {
@@ -218,7 +218,7 @@ const routes = [
     key: "StartUpHome",
     route: "/startup/StartUpHome",
     icon: <Document size="12px" />,
-    component: <StartUpHome />,
+    component: <StartUpProfile />,
     noCollapse: true,
   },
 
