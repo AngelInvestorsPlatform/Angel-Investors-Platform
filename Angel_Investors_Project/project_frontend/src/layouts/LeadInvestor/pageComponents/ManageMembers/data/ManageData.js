@@ -1,0 +1,173 @@
+/* eslint-disable react/prop-types */
+// Soft UI Dashboard React components
+import SoftBox from "components/SoftBox";
+import SoftTypography from "components/SoftTypography";
+import SoftAvatar from "components/SoftAvatar";
+import IconButton from "@mui/material/IconButton";
+import DeleteIcon from "@mui/icons-material/Delete";
+import SoftBadge from "components/SoftBadge";
+
+
+// Images
+import team1 from "assets/images/users-images/team1.png";
+import team2 from "assets/images/users-images/team2.png";
+import team3 from "assets/images/users-images/team3.png";
+import team4 from "assets/images/users-images/team4.png";
+import team5 from "assets/images/users-images/team5.png";
+import team5 from "assets/images/team5.jpg"
+function Investor({ image, I_name, email }) {
+  return (
+    <SoftBox display="flex" alignItems="center" px={1} py={0.5}>
+      <SoftBox mr={2}>
+        <SoftAvatar src={image} alt={I_name} size="sm" variant="rounded" />
+      </SoftBox>
+      <SoftBox display="flex" flexDirection="column">
+        <SoftTypography variant="caption" fontWeight="medium">
+          {I_name}
+        </SoftTypography>
+        <SoftTypography variant="caption" color="secondary">
+          {email}
+        </SoftTypography>
+      </SoftBox>
+    </SoftBox>
+  );
+}
+
+const manageTableData = {
+  columns: [
+    { name: "Investor Name", align: "left" },
+    { name: "Sector", align: "center" },
+    { name: "About", align: "center" },
+    { name: "Active Deals", align: "center" },
+    { name: "  ", align: "center" },
+  ],
+
+  rows: [
+    {
+      "Investor Name": (
+        <Investor image={team5} I_name="Abdullah Mohammed" email="AbdullahM@gmail.com" />
+      ),
+      Sector: (
+        <SoftBadge variant="gradient" badgeContent="E-commerce, AI" color="info" size="md"  /> 
+      ),
+      About: (
+        <SoftTypography
+          variant="caption"
+          color="secondary"
+          fontWeight="medium"
+          style={{ display: "block" }}
+        >investor</SoftTypography>
+      ),
+      "Active Deals": (
+        <SoftTypography variant="caption" color="secondary" fontWeight="medium">2 Deals</SoftTypography>
+      ),
+      "  ": (
+        <IconButton aria-label="delete" disabled color="primary">
+          <DeleteIcon />
+        </IconButton>
+      ),
+    },
+    {
+      "Investor Name": (
+        <Investor image={team1} I_name="Rei Levi" email="Rei.L@gmail.com" />
+      ),
+      Sector: (
+        <SoftBadge variant="gradient" badgeContent="LegalTech, Helathcare" color="info" size="md"  /> 
+      ),
+      About: (
+        <SoftTypography variant="caption" color="secondary" fontWeight="medium">investor</SoftTypography>
+      ),
+      "Active Deals": (
+        <SoftTypography variant="caption" color="secondary" fontWeight="medium">1 Deal</SoftTypography>
+      ),
+      "  ": (
+        <div>
+          <IconButton aria-label="delete" disabled color="primary">
+            <DeleteIcon />
+          </IconButton>
+        </div>
+      ),
+    },
+    {
+      "Investor Name": (
+        <Investor image={team2} I_name="Mohammed Khaled" email="Abdallah.M@hotmail.com" />
+      ),
+      Sector: (
+        <SoftBadge variant="gradient" badgeContent="Biotech, Education" color="info" size="md"  /> 
+      ),
+          
+      About: (
+        <SoftTypography variant="caption" color="secondary" fontWeight="medium">investor</SoftTypography>
+      ),
+      "Active Deals": (
+        <SoftTypography variant="caption" color="secondary" fontWeight="medium">3 Deals</SoftTypography>
+      ),
+      "  ": (
+        <IconButton aria-label="delete" disabled color="primary">
+          <DeleteIcon />
+        </IconButton>
+      ),
+    },
+    {
+      "Investor Name": (
+        <Investor image={team4} I_name="Someone A" email="SomeoneA@gmail.com" />
+      ),
+      Sector: (
+        <SoftBadge variant="gradient" badgeContent="Market, Information Technology" color="info" size="md"  /> 
+      ),
+          
+      About: (
+        <SoftTypography variant="caption" color="secondary" fontWeight="medium">investor</SoftTypography>
+      ),
+      "Active Deals": (
+        <SoftTypography variant="caption" color="secondary" fontWeight="medium">No Deals</SoftTypography>
+      ),
+      "  ": (
+        <IconButton aria-label="delete" disabled color="primary">
+          <DeleteIcon />
+        </IconButton>
+      ),
+    },
+    {
+      "Investor Name": (
+        <Investor image={team2} I_name="Mohammed" email="Mohammed@outlook.sa" />
+      ),
+      Sector: (
+        <SoftBadge variant="gradient" badgeContent="ICT, AI" color="info" size="md"  /> 
+      ),
+      About: (
+        <SoftTypography variant="caption" color="secondary" fontWeight="medium">investor</SoftTypography>
+      ),
+      "Active Deals": (
+        <SoftTypography variant="caption" color="secondary" fontWeight="medium">4 Deals</SoftTypography>
+      ),
+      "  ": (
+        <IconButton aria-label="delete" disabled color="primary">
+          <DeleteIcon />
+        </IconButton>
+      ),
+    },
+    {
+      "Investor Name": (
+        <Investor image={team3} I_name="Miriam Eric" email="miriam0E@gmail.com" />
+      ),
+      Sector: (
+        <SoftBadge variant="gradient" badgeContent="Finance, Market" color="info" size="md"  /> 
+      ),
+         
+      About: (
+        <SoftTypography variant="caption" color="secondary" fontWeight="medium">investor</SoftTypography>
+      ),
+      "Active Deals": (
+        <SoftTypography variant="caption" color="secondary" fontWeight="medium">1 Deal</SoftTypography>
+      ),
+      "  ": (
+        <IconButton aria-label="delete" disabled color="primary">
+          <DeleteIcon />
+        </IconButton>
+      ),
+    },
+  ],
+};
+
+export default manageTableData;

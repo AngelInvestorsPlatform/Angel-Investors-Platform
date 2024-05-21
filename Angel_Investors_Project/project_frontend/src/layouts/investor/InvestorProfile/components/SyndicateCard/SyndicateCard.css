@@ -1,0 +1,30 @@
+.syndicate-container {
+    display: flex;
+    overflow-x: hidden; /* Hide the horizontal scrollbar */
+    overflow-y: hidden; /* Optional: Hide the vertical scrollbar */
+    scroll-behavior: smooth;
+  }
+  
+  .syndicate-item {
+    flex: 0 0 auto;
+    padding: 0 18px;
+  }
+  
+  .scroll-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: transparent;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  
+  .left {
+    left: 0;
+  }
+  
+  .right {
+    right: 0;
+  }
+  
