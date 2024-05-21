@@ -49,7 +49,7 @@
 
 ## About The Project
 
-[![WarQ ScreenShot][QarQ-screenshot]](https://example.com)
+![WarQ ScreenShot][WarQ-screenshot]
 
 An angel investor platform is a valuable web tool for providing funding to startups with high potential that may not have access to traditional financing. Our platform seeks to form investment syndicates to encourage a wide range of investors to support startups. With our platform, angel investors and startups can conveniently connect and collaborate. Our goal is to make angel investing accessible and to promote investment in startups for innovation and growth.
 
@@ -161,4 +161,4 @@ Project Link: [ https://github.com/AngelInvestorsPlatform/Angel-Investors-Platfo
 [React-url]: https://reactjs.org/
 [Django]: https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=green
 [Django-url]: https://www.djangoproject.com/
-[QarQ-screenshot]: Angel_Investors_Project\images\yourDeals.png
+[WarQ-screenshot]: Angel_Investors_Project/images/yourDeals.png
